@@ -1,34 +1,34 @@
 package com.doback.E_rank.facade;
 
+import com.doback.E_rank.application.AmizadeApplication;
 import com.doback.E_rank.entity.Amizade;
 import com.doback.E_rank.repository.AmizadeRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class AmizadeFacade {
 
-    private final AmizadeRepository amizadeRepository;
+    private final AmizadeApplication amizadeApplication;
 
-    public AmizadeFacade(AmizadeRepository amizadeRepository) {
-        this.amizadeRepository = amizadeRepository;
+    public AmizadeFacade(AmizadeApplication amizadeApplication) {
+        this.amizadeApplication = amizadeApplication;
     }
 
     public List<Amizade> listarAmizades() {
-        return amizadeRepository.findAll();
+        return amizadeApplication.obterTodasAmizades();
     }
 
-    public Optional<Amizade> buscarAmizadePorId(Long id) {
-        return amizadeRepository.findById(id);
+    public Amizade buscarAmizadePorId(Long id) {
+        return amizadeApplication.obterAmizadePorId(id);
     }
 
-    public Amizade salvarAmizade(Amizade amizade) {
-        return amizadeRepository.save(amizade);
+    public void salvarAmizade(Amizade amizade) {
+        amizadeApplication.criarAmizade(amizade);
     }
 
     public void excluirAmizade(Long id) {
-        amizadeRepository.deleteById(id);
+        amizadeApplication.excluirAmizade(id);
     }
 }
