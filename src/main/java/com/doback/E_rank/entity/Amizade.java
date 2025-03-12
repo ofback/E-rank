@@ -1,65 +1,47 @@
 package com.doback.E_rank.entity;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
-
-@Entity
 public class Amizade {
+    private Long IdAmizade;
+    private Long IdUsuario1;
+    private Long IdUsuario2;
+    private Long Status;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAmizade;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario_1")
-    private Usuario usuario1;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario_2")
-    private Usuario usuario2;
-
-    private String status; // Ex: "pendente", "aceito", "bloqueado"
-
-    private LocalDateTime dataSolicitacao;
-
+    public Amizade(Long idAmizade, Long idUsuario1, Long idUsuario2, Long status) {
+        IdAmizade = idAmizade;
+        IdUsuario1 = idUsuario1;
+        IdUsuario2 = idUsuario2;
+        Status = status;
+    }
 
     public Long getIdAmizade() {
-        return idAmizade;
+        return IdAmizade;
     }
 
     public void setIdAmizade(Long idAmizade) {
-        this.idAmizade = idAmizade;
+        IdAmizade = idAmizade;
     }
 
-    public Usuario getUsuario1() {
-        return usuario1;
+    public Long getIdUsuario1() {
+        return IdUsuario1;
     }
 
-    public void setUsuario1(Usuario usuario1) {
-        this.usuario1 = usuario1;
+    public void setIdUsuario1(Long idUsuario1) {
+        IdUsuario1 = idUsuario1;
     }
 
-    public Usuario getUsuario2() {
-        return usuario2;
+    public Long getIdUsuario2() {
+        return IdUsuario2;
     }
 
-    public void setUsuario2(Usuario usuario2) {
-        this.usuario2 = usuario2;
+    public void setIdUsuario2(Long idUsuario2) {
+        IdUsuario2 = idUsuario2;
     }
 
-    public String getStatus() {
-        return status;
+    public Long getStatus() {
+        return Status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getDataSolicitacao() {
-        return dataSolicitacao;
-    }
-
-    public void setDataSolicitacao(LocalDateTime dataSolicitacao) {
-        this.dataSolicitacao = dataSolicitacao;
+    public void setStatus(Long status) {
+        Status = status;
     }
 }
