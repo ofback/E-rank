@@ -39,9 +39,5 @@ public class AmizadeController {
         amizadeFacade.excluirAmizade(id);
     }
 
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirAmizade(@PathVariable Long id) {
-      // implementar!!!!
-    }
+
 }
