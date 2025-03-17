@@ -27,7 +27,7 @@ public class DesafioApplication {
     }
 
     public void excluirDesafio(Long id) {
-        desafioRepository.;
+        desafioRepository.remover(id);
     }
 
 }
