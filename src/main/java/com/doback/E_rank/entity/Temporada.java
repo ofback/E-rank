@@ -1,17 +1,15 @@
 package com.doback.E_rank.entity;
 
 public class Temporada {
-    private Long IdTemporada;
-    private Long IdUsuario1;
-    private Long IdUsuario2;
-    private Long Status;
+    private Long idTemporada;
+    private String nome;
+    private String descricao;
 
 
-    public Temporada(Long idTemporada, Long idUsuario1, Long idUsuario2, Long status) {
-        IdTemporada=IdTemporada;
-        IdUsuario1 = idUsuario1;
-        IdUsuario2 = idUsuario2;
-        Status = status;
+    public Temporada(Long idTemporada, String nome, String descricao) {
+        this.idTemporada = idTemporada;
+        this.nome = nome;
+        this.descricao = descricao;
     }
 
     public static Temporada stream() {
@@ -22,39 +20,31 @@ public class Temporada {
     }
 
     public Long getIdTemporada() {
-        return IdTemporada;
+        return idTemporada;
     }
 
     public void setIdTemporada(Long idTemporada) {
-
+        this.idTemporada = idTemporada;
     }
 
     private Long IdTemporada() {
         return 0L;
     }
 
-    public Long getIdUsuario1() {
-        return IdUsuario1;
+    public String getNome() {
+        return nome;
     }
 
-    public void setIdUsuario1(Long idUsuario1) {
-        IdUsuario1 = idUsuario1;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Long getIdUsuario2() {
-        return IdUsuario2;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setIdUsuario2(Long idUsuario2) {
-        IdUsuario2 = idUsuario2;
-    }
-
-    public Long getStatus() {
-        return Status;
-    }
-
-    public void setStatus(Long status) {
-        Status = status;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public void add(Temporada temporada) {
