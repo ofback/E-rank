@@ -1,5 +1,6 @@
 package com.doback.E_rank.repository;
 
+import com.doback.E_rank.entity.Estatistica;
 import com.doback.E_rank.entity.Jogo;
 import org.springframework.stereotype.Repository;
 
@@ -32,9 +33,12 @@ public class JogoRepository {
         jogos.removeIf(p -> p.getIdJogo() == code);
     }
 
-    public void atualizar(long code, Jogo jogo){
-        Jogo jogoInMemory = this.buscarPorId(code);
-
-        jogoInMemory.setStatus(jogo.getStatus());
+    public void atualizar(Long id, Jogo novoJogo) {
+        Jogo jogoExistente = buscarPorId(id);
+        if (jogoExistente != null) {
+            jogoExistente.setNome(novoJogo.getNome());
+            jogoExistente.setDescricao(novoJogo.getDescricao());
+            jogoExistente.setGenero(novoJogo.getGenero());
+        }
     }
 }
