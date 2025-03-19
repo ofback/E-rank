@@ -1,47 +1,47 @@
 package com.doback.E_rank.entity;
 
 public class Jogo {
-    private Long IdJogo;
-    private Long IdUsuario1;
-    private Long IdUsuario2;
-    private Long Status;
+    private Long idJogo;
+    private String nome;
+    private String descricao;
+    private String genero;
 
-    public Jogo(Long idJogo, Long idUsuario1, Long idUsuario2, Long status) {
-        IdJogo = idJogo;
-        IdUsuario1 = idUsuario1;
-        IdUsuario2 = idUsuario2;
-        Status = status;
+    public Jogo(Long idJogo, String nome, String descricao, String genero) {
+        this.idJogo = idJogo;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.genero = genero;
     }
 
     public Long getIdJogo() {
-        return IdJogo;
+        return idJogo;
     }
 
     public void setIdJogo(Long idJogo) {
-        IdJogo = idJogo;
+        this.idJogo = idJogo;
     }
 
-    public Long getIdUsuario1() {
-        return IdUsuario1;
+    public String getNome() {
+        return nome;
     }
 
-    public void setIdUsuario1(Long idUsuario1) {
-        IdUsuario1 = idUsuario1;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Long getIdUsuario2() {
-        return IdUsuario2;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setIdUsuario2(Long idUsuario2) {
-        IdUsuario2 = idUsuario2;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public Long getStatus() {
-        return Status;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setStatus(Long status) {
-        Status = status;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 }
