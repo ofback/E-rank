@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Amizade;
+import com.doback.E_rank.entity.Estatistica;
 import com.doback.E_rank.entity.Temporada;
 import io.micrometer.common.KeyValues;
 import org.springframework.stereotype.Repository;
@@ -35,9 +35,11 @@ public class TemporadaRepository {
         temporadas.removeIf(p -> p.getIdTemporada() == code);
     }
 
-    public void atualizar(long code, Temporada temporada){
-        Temporada TemporadaInMemory = this.buscarPorId(code);
-
-        TemporadaInMemory.setStatus(temporada.getStatus());
+    public void atualizar(Long id, Temporada novaTemporada) {
+        Temporada temporadaExistente = buscarPorId(id);
+        if (temporadaExistente != null) {
+            temporadaExistente.setNome(novaTemporada.getNome());
+            temporadaExistente.setDescricao(novaTemporada.getDescricao());
+        }
     }
 }
