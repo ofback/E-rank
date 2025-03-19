@@ -1,47 +1,47 @@
 package com.doback.E_rank.entity;
 
 public class Times {
-    private Long IdTimes;
-    private Long IdUsuario1;
-    private Long IdUsuario2;
-    private Long Status;
+    private Long idTimes;
+    private String nome;
+    private String descricao;
+    private Long status;
 
-    public Times(Long idTimes, Long idUsuario1, Long idUsuario2, Long status) {
-        IdTimes = idTimes;
-        IdUsuario1 = idUsuario1;
-        IdUsuario2 = idUsuario2;
-        Status = status;
+    public Times(Long idTimes, String nome, String descricao, Long status) {
+        this.idTimes = idTimes;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.status = status;
     }
 
     public Long getIdTimes() {
-        return IdTimes;
+        return idTimes;
     }
 
-    public void setIdAmizade(Long idAmizade) {
-        IdTimes = idAmizade;
+    public void setIdTimes(Long idTimes) {
+        this.idTimes = idTimes;
     }
 
-    public Long getIdUsuario1() {
-        return IdUsuario1;
+    public String getNome() {
+        return nome;
     }
 
-    public void setIdUsuario1(Long idUsuario1) {
-        IdUsuario1 = idUsuario1;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Long getIdUsuario2() {
-        return IdUsuario2;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setIdUsuario2(Long idUsuario2) {
-        IdUsuario2 = idUsuario2;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Long getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(Long status) {
-        Status = status;
+        this.status = status;
     }
 }
