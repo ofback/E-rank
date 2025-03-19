@@ -1,57 +1,57 @@
 package com.doback.E_rank.entity;
 
 public class Estatistica {
-    private Long id;
-    private Long usuarioId;
-    private int pontos;
-    private int vitorias;
-    private int derrotas;
+    private Long idEstatistica;
+    private Long kill;
+    private int assistencia;
+    private int qtd_partida;
+    private int sts_provacao;
 
-    public Estatistica(Long id, Long usuarioId, int pontos, int vitorias, int derrotas) {
-        this.id = id;
-        this.usuarioId = usuarioId;
-        this.pontos = pontos;
-        this.vitorias = vitorias;
-        this.derrotas = derrotas;
+    public Estatistica(Long idEstatistica, Long kill, int assistencia, int qtd_partida, int sts_provacao) {
+        this.idEstatistica = idEstatistica;
+        this.kill = kill;
+        this.assistencia = assistencia;
+        this.qtd_partida = qtd_partida;
+        this.sts_provacao = sts_provacao;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdEstatistica() {
+        return idEstatistica;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEstatistica(Long idEstatistica) {
+        this.idEstatistica = idEstatistica;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Long getKill() {
+        return kill;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setKill(Long kill) {
+        this.kill = kill;
     }
 
-    public int getPontos() {
-        return pontos;
+    public int getAssistencia() {
+        return assistencia;
     }
 
-    public void setPontos(int pontos) {
-        this.pontos = pontos;
+    public void setAssistencia(int assistencia) {
+        this.assistencia = assistencia;
     }
 
-    public int getVitorias() {
-        return vitorias;
+    public int getQtd_partida() {
+        return qtd_partida;
     }
 
-    public void setVitorias(int vitorias) {
-        this.vitorias = vitorias;
+    public void setQtd_partida(int qtd_partida) {
+        this.qtd_partida = qtd_partida;
     }
 
-    public int getDerrotas() {
-        return derrotas;
+    public int getSts_provacao() {
+        return sts_provacao;
     }
 
-    public void setDerrotas(int derrotas) {
-        this.derrotas = derrotas;
+    public void setSts_provacao(int sts_provacao) {
+        this.sts_provacao = sts_provacao;
     }
 }
