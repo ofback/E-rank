@@ -1,9 +1,20 @@
 package com.doback.E_rank.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "jogos")
 public class Jogo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "idJogo")
     private Long idJogo;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "descricao")
     private String descricao;
+    @Column(name = "genero")
     private String genero;
 
     public Jogo(Long idJogo, String nome, String descricao, String genero) {
