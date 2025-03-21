@@ -1,30 +1,29 @@
 package com.doback.E_rank.facade;
 
-import com.doback.E_rank.application.DesafioApplication;
-import com.doback.E_rank.entity.Desafio;
-import com.doback.E_rank.repository.DesafioRepository;
+import com.doback.E_rank.application.DesafiosApplication;
+import com.doback.E_rank.entity.Desafios;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class DesafioFacade {
+public class DesafiosFacade {
 
-    private final DesafioApplication desafioApplication;
+    private final DesafiosApplication desafioApplication;
 
-    public DesafioFacade(DesafioApplication desafioApplication) {
+    public DesafiosFacade(DesafiosApplication desafioApplication) {
         this.desafioApplication = desafioApplication;
     }
 
-    public List<Desafio> listarDesafios() {
+    public List<Desafios> listarDesafios() {
         return desafioApplication.obterTodosDesafios();
     }
 
-    public Desafio buscarDesafioPorId(Long id) {
+    public Desafios buscarDesafioPorId(Long id) {
         return desafioApplication.obterDesafioPorId(id);
     }
 
-    public void salvarDesafio(Desafio desafio) {
+    public void salvarDesafio(Desafios desafio) {
         desafioApplication.criarDesafio(desafio);
     }
 

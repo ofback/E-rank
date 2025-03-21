@@ -1,20 +1,18 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Estatistica;
-import com.doback.E_rank.entity.Temporada;
-import io.micrometer.common.KeyValues;
+import com.doback.E_rank.entity.Temporadas;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TemporadaRepository {
-    private List<Temporada> temporadas = new ArrayList<>();
+public class TemporadasRepository {
+    private List<Temporadas> temporadas = new ArrayList<>();
 
 
-    public Temporada buscarPorId(long code) {
-        Temporada temporada = temporadas
+    public Temporadas buscarPorId(long code) {
+        Temporadas temporada = temporadas
                 .stream()
                 .filter(p -> p.getIdTemporada() == code)
                 .findFirst()
@@ -23,11 +21,11 @@ public class TemporadaRepository {
         return temporada;
     }
 
-    public List<Temporada> buscar(){
+    public List<Temporadas> buscar(){
         return temporadas;
     }
 
-    public void adicionar(Temporada temporada) {
+    public void adicionar(Temporadas temporada) {
         temporada.add(temporada);
     }
 
@@ -35,8 +33,8 @@ public class TemporadaRepository {
         temporadas.removeIf(p -> p.getIdTemporada() == code);
     }
 
-    public void atualizar(Long id, Temporada novaTemporada) {
-        Temporada temporadaExistente = buscarPorId(id);
+    public void atualizar(Long id, Temporadas novaTemporada) {
+        Temporadas temporadaExistente = buscarPorId(id);
         if (temporadaExistente != null) {
             temporadaExistente.setNome(novaTemporada.getNome());
             temporadaExistente.setDescricao(novaTemporada.getDescricao());
