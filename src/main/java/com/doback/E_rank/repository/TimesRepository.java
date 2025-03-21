@@ -1,11 +1,8 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Amizade;
-import com.doback.E_rank.entity.Estatistica;
 import com.doback.E_rank.entity.Times;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class TimesRepository {
     public Times buscarPorId(long code) {
         Times time = times
                 .stream()
-                .filter(p -> p.getIdTimes() == code)
+                .filter(p -> p.getTimes() == code)
                 .findFirst()
                 .get();
 
@@ -32,7 +29,7 @@ public class TimesRepository {
     }
 
     public void remover(long code){
-        times.removeIf(p -> p.getIdTimes() == code);
+        times.removeIf(p -> p.getTimes() == code);
     }
 
     public void atualizar(Long id, Times novoTime) {

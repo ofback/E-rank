@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name ="desafios")
 
-public class Desafio {
+public class Desafios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -18,14 +18,14 @@ public class Desafio {
     @Column(name = "status")
     private Long status;
 
-    public Desafio(Long idDesafio, Long idUsuario1, Long idUsuario2, Long status) {
+    public Desafios(Long idDesafio, Long idUsuario1, Long idUsuario2, Long status) {
         this.idDesafio = idDesafio;
         this.idUsuario1 = idUsuario1;
         this.idUsuario2 = idUsuario2;
         this.status = status;
     }
 
-    public Desafio() {
+    public Desafios() {
 
     }
 

@@ -1,24 +1,24 @@
 package com.doback.E_rank.entity;
 
-public class Amizade {
-    private Long IdAmizade;
+public class Usuarios {
+    private Long IdUsuario;
     private Long IdUsuario1;
     private Long IdUsuario2;
     private Long Status;
 
-    public Amizade(Long idAmizade, Long idUsuario1, Long idUsuario2, Long status) {
-        IdAmizade = idAmizade;
+    public Usuarios(Long idUsuario, Long idUsuario1, Long idUsuario2, Long status) {
+        IdUsuario = idUsuario;
         IdUsuario1 = idUsuario1;
         IdUsuario2 = idUsuario2;
         Status = status;
     }
 
-    public Long getIdAmizade() {
-        return IdAmizade;
+    public Long getIdUsuario() {
+        return IdUsuario;
     }
 
-    public void setIdAmizade(Long idAmizade) {
-        IdAmizade = idAmizade;
+    public void setIdUsuario(Long idUsuario) {
+        IdUsuario = IdUsuario;
     }
 
     public Long getIdUsuario1() {
