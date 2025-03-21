@@ -1,18 +1,18 @@
 package com.doback.E_rank.entity;
 
-public class Temporada {
+public class Temporadas {
     private Long idTemporada;
     private String nome;
     private String descricao;
 
 
-    public Temporada(Long idTemporada, String nome, String descricao) {
+    public Temporadas(Long idTemporada, String nome, String descricao) {
         this.idTemporada = idTemporada;
         this.nome = nome;
         this.descricao = descricao;
     }
 
-    public static Temporada stream() {
+    public static Temporadas stream() {
         return null;
     }
 
@@ -47,6 +47,6 @@ public class Temporada {
         this.descricao = descricao;
     }
 
-    public void add(Temporada temporada) {
+    public void add(Temporadas temporada) {
     }
 }

@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name ="estatísticas")
 
-public class Estatistica {
+public class Estatisticas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -21,7 +21,7 @@ public class Estatistica {
     @Column(name = "sts_provacao")
     private int sts_provacao;
 
-    public Estatistica(Long id_estatistica, Long kills, int assistencias, int qts_partidas, int sts_provacao) {
+    public Estatisticas(Long id_estatistica, Long kills, int assistencias, int qts_partidas, int sts_provacao) {
         this.id_estatistica = id_estatistica;
         this.kills = kills;
         this.assistencias = assistencias;
@@ -29,7 +29,7 @@ public class Estatistica {
         this.sts_provacao = sts_provacao;
     }
 
-    public Estatistica() {
+    public Estatisticas() {
 
     }
 

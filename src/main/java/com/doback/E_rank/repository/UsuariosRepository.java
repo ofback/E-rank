@@ -1,17 +1,17 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Usuario;
+import com.doback.E_rank.entity.Usuarios;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UsuarioRepository {
-    private List<Usuario> usuarios = new ArrayList<>();
+public class UsuariosRepository {
+    private List<Usuarios> usuarios = new ArrayList<>();
 
-    public Usuario buscarPorId(long code) {
-        Usuario usuario = usuarios
+    public Usuarios buscarPorId(long code) {
+        Usuarios usuario = usuarios
                 .stream()
                 .filter(p -> p.getIdUsuario() == code)
                 .findFirst()
@@ -20,11 +20,11 @@ public class UsuarioRepository {
         return usuario;
     }
 
-    public List<Usuario> buscar(){
+    public List<Usuarios> buscar(){
         return usuarios;
     }
 
-    public void adicionar(Usuario usuario) {
+    public void adicionar(Usuarios usuario) {
         usuarios.add(usuario);
     }
 
@@ -32,8 +32,8 @@ public class UsuarioRepository {
         usuarios.removeIf(p -> p.getIdUsuario() == code);
     }
 
-    public void atualizar(long code, Usuario Usuario){
-        Usuario usuarioInMemory = this.buscarPorId(code);
+    public void atualizar(long code, Usuarios Usuario){
+        Usuarios usuarioInMemory = this.buscarPorId(code);
 
         usuarioInMemory.setStatus(Usuario.getStatus());
     }

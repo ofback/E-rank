@@ -1,29 +1,28 @@
 package com.doback.E_rank.facade;
 
-import com.doback.E_rank.application.UsuarioApplication;
-import com.doback.E_rank.entity.Usuario;
-import com.doback.E_rank.repository.UsuarioRepository;
+import com.doback.E_rank.application.UsuariosApplication;
+import com.doback.E_rank.entity.Usuarios;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class UsuarioFacade {
-    private final UsuarioApplication usuarioApplication;
+public class UsuariosFacade {
+    private final UsuariosApplication usuarioApplication;
 
-    public UsuarioFacade(UsuarioApplication usuarioApplication) {
+    public UsuariosFacade(UsuariosApplication usuarioApplication) {
         this.usuarioApplication = usuarioApplication;
     }
 
-    public List<Usuario> listarUsuarios() {
+    public List<Usuarios> listarUsuarios() {
         return usuarioApplication.obterTodosUsuarios();
     }
 
-    public Usuario buscarUsuarioPorId(Long id) {
+    public Usuarios buscarUsuarioPorId(Long id) {
         return usuarioApplication.obterUsuarioPorId(id);
     }
 
-    public void salvarUsuario(Usuario usuario) {
+    public void salvarUsuario(Usuarios usuario) {
         usuarioApplication.criarUsuario(usuario);
     }
 

@@ -1,18 +1,17 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Estatistica;
-import com.doback.E_rank.entity.Jogo;
+import com.doback.E_rank.entity.Jogos;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class JogoRepository {
-    private List<Jogo> jogos = new ArrayList<>();
+public class JogosRepository {
+    private List<Jogos> jogos = new ArrayList<>();
 
-    public Jogo buscarPorId(long code) {
-        Jogo jogo = jogos
+    public Jogos buscarPorId(long code) {
+        Jogos jogo = jogos
                 .stream()
                 .filter(p -> p.getIdJogo() == code)
                 .findFirst()
@@ -21,11 +20,11 @@ public class JogoRepository {
         return jogo;
     }
 
-    public List<Jogo> buscar(){
+    public List<Jogos> buscar(){
         return jogos;
     }
 
-    public void adicionar(Jogo jogo) {
+    public void adicionar(Jogos jogo) {
         jogos.add(jogo);
     }
 
@@ -33,8 +32,8 @@ public class JogoRepository {
         jogos.removeIf(p -> p.getIdJogo() == code);
     }
 
-    public void atualizar(Long id, Jogo novoJogo) {
-        Jogo jogoExistente = buscarPorId(id);
+    public void atualizar(Long id, Jogos novoJogo) {
+        Jogos jogoExistente = buscarPorId(id);
         if (jogoExistente != null) {
             jogoExistente.setNome(novoJogo.getNome());
             jogoExistente.setDescricao(novoJogo.getDescricao());

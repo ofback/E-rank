@@ -1,5 +1,4 @@
 package com.doback.E_rank.facade;
-
 import com.doback.E_rank.application.TimesApplication;
 import com.doback.E_rank.entity.Times;
 import org.springframework.stereotype.Component;
@@ -28,5 +27,9 @@ public class TimesFacade {
 
     public void excluirTimes(Long id) {
         timesApplication.excluirTime(id);
+    }
+
+    public void atualizarTimes(Long id, Times times) {
+        timesApplication.atualizarTimes(id, times);
     }
 }

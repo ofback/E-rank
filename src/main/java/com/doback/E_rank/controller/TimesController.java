@@ -39,4 +39,9 @@ public class TimesController {
         timesFacade.excluirTimes(id);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void atualizarTimes(@PathVariable long id,@RequestBody Times times){
+        timesFacade.atualizarTimes(id, times);
+    }
 }

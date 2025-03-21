@@ -1,7 +1,7 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.entity.Desafio;
-import com.doback.E_rank.facade.DesafioFacade;
+import com.doback.E_rank.entity.Desafios;
+import com.doback.E_rank.facade.DesafiosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,26 +9,26 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/desafios")
-public class DesafioController {
-    private final DesafioFacade desafioFacade;
+public class DesafiosController {
+    private final DesafiosFacade desafioFacade;
 
-    public DesafioController(DesafioFacade desafioFacade) {
+    public DesafiosController(DesafiosFacade desafioFacade) {
         this.desafioFacade = desafioFacade;
     }
 
     @GetMapping
-    public List<Desafio> listarDesafios() {
+    public List<Desafios> listarDesafios() {
         return desafioFacade.listarDesafios();
     }
 
     @GetMapping("/{id}")
-    public Desafio obterDesafio(@PathVariable Long id) {
+    public Desafios obterDesafio(@PathVariable Long id) {
         return desafioFacade.buscarDesafioPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarDesafio(@RequestBody Desafio desafio) {
+    public void criarDesafio(@RequestBody Desafios desafio) {
         desafioFacade.salvarDesafio(desafio);
     }
 

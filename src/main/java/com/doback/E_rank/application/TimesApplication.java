@@ -1,6 +1,4 @@
 package com.doback.E_rank.application;
-
-
 import com.doback.E_rank.entity.Times;
 import com.doback.E_rank.repository.TimesRepository;
 import org.springframework.stereotype.Service;
@@ -31,5 +29,9 @@ public class TimesApplication {
     public void excluirTime(Long id) {
         timesRepository.remover(id);
     }
+    public void atualizarTimes(Long id, Times times) {
+        timesRepository.atualizar(id, times);
+    }
+
 
 }

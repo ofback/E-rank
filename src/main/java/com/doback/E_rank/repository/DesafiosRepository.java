@@ -1,17 +1,17 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Desafio;
+import com.doback.E_rank.entity.Desafios;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class DesafioRepository {
-    private List<Desafio> desafios = new ArrayList<>();
+public class DesafiosRepository {
+    private List<Desafios> desafios = new ArrayList<>();
 
-    public Desafio buscarPorId(long code) {
-        Desafio desafio = desafios
+    public Desafios buscarPorId(long code) {
+        Desafios desafio = desafios
                 .stream()
                 .filter(p -> p.getIdDesafio() == code)
                 .findFirst()
@@ -20,11 +20,11 @@ public class DesafioRepository {
         return desafio;
     }
 
-    public List<Desafio> buscar(){
+    public List<Desafios> buscar(){
         return desafios;
     }
 
-    public void adicionar(Desafio desafio) {
+    public void adicionar(Desafios desafio) {
         desafios.add(desafio);
     }
 
@@ -32,8 +32,8 @@ public class DesafioRepository {
         desafios.removeIf(p -> p.getIdDesafio() == code);
     }
 
-    public void atualizar(long code, Desafio desafio){
-        Desafio desafioInMemory = this.buscarPorId(code);
+    public void atualizar(long code, Desafios desafio){
+        Desafios desafioInMemory = this.buscarPorId(code);
 
         desafioInMemory.setStatus(desafio.getStatus());
     }
