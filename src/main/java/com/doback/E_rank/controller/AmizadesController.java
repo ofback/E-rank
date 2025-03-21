@@ -1,7 +1,8 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.entity.Amizade;
-import com.doback.E_rank.facade.AmizadeFacade;
+import com.doback.E_rank.entity.Amizades;
+import com.doback.E_rank.entity.Times;
+import com.doback.E_rank.facade.AmizadesFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,27 +10,27 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/amizades")
-public class AmizadeController {
+public class AmizadesController {
 
-    private final AmizadeFacade amizadeFacade;
+    private final AmizadesFacade amizadeFacade;
 
-    public AmizadeController(AmizadeFacade amizadeFacade) {
+    public AmizadesController(AmizadesFacade amizadeFacade) {
         this.amizadeFacade = amizadeFacade;
     }
 
     @GetMapping
-    public List<Amizade> listarAmizades() {
+    public List<Amizades> listarAmizades() {
         return amizadeFacade.listarAmizades();
     }
 
     @GetMapping("/{id}")
-    public Amizade obterAmizade(@PathVariable Long id) {
+    public Amizades obterAmizade(@PathVariable Long id) {
         return amizadeFacade.buscarAmizadePorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarAmizade(@RequestBody Amizade amizade) {
+    public void criarAmizade(@RequestBody Amizades amizade) {
         amizadeFacade.salvarAmizade(amizade);
     }
 
@@ -39,5 +40,10 @@ public class AmizadeController {
         amizadeFacade.excluirAmizade(id);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void atualizarAmizades(@PathVariable long id,@RequestBody Amizades amizades){
+        amizadeFacade.atualizarAmizades(id, amizades);
+    }
 
 }

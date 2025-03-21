@@ -1,28 +1,28 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.entity.Estatistica;
-import com.doback.E_rank.repository.EstatisticaRepository;
+import com.doback.E_rank.entity.Estatisticas;
+import com.doback.E_rank.repository.EstatisticasRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EstatisticaApplication {
-    private final EstatisticaRepository estatisticaRepository;
+public class EstatisticasApplication {
+    private final EstatisticasRepository estatisticaRepository;
 
-    public EstatisticaApplication(EstatisticaRepository estatisticaRepository) {
+    public EstatisticasApplication(EstatisticasRepository estatisticaRepository) {
         this.estatisticaRepository = estatisticaRepository;
     }
 
-    public List<Estatistica> obterTodas() {
+    public List<Estatisticas> obterTodas() {
         return estatisticaRepository.buscarTodos();
     }
 
-    public Estatistica obterPorId(Long id) {
+    public Estatisticas obterPorId(Long id) {
         return estatisticaRepository.buscarPorId(id);
     }
 
-    public void criar(Estatistica estatistica) {
+    public void criar(Estatisticas estatistica) {
         estatisticaRepository.salvar(estatistica);
     }
 
@@ -30,7 +30,7 @@ public class EstatisticaApplication {
         estatisticaRepository.remover(id);
     }
 
-    public void atualizar(Long id, Estatistica estatistica) {
+    public void atualizar(Long id, Estatisticas estatistica) {
         estatisticaRepository.atualizar(id, estatistica);
     }
 }

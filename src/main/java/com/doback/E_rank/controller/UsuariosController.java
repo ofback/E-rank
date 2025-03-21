@@ -1,7 +1,7 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.entity.Usuario;
-import com.doback.E_rank.facade.UsuarioFacade;
+import com.doback.E_rank.entity.Usuarios;
+import com.doback.E_rank.facade.UsuariosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,26 +9,26 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController {
-    private final UsuarioFacade usuarioFacade;
+public class UsuariosController {
+    private final UsuariosFacade usuarioFacade;
 
-    public UsuarioController(UsuarioFacade usuarioFacade) {
+    public UsuariosController(UsuariosFacade usuarioFacade) {
         this.usuarioFacade = usuarioFacade;
     }
 
     @GetMapping
-    public List<Usuario> listarUsuarios() {
+    public List<Usuarios> listarUsuarios() {
         return usuarioFacade.listarUsuarios();
     }
 
     @GetMapping("/{id}")
-    public Usuario obterUsuario(@PathVariable Long id) {
+    public Usuarios obterUsuario(@PathVariable Long id) {
         return usuarioFacade.buscarUsuarioPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarUsuario(@RequestBody Usuario usuario) {
+    public void criarUsuario(@RequestBody Usuarios usuario) {
         usuarioFacade.salvarUsuario(usuario);
     }
 

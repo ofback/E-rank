@@ -1,29 +1,29 @@
 package com.doback.E_rank.application;
 
 
-import com.doback.E_rank.entity.Usuario;
-import com.doback.E_rank.repository.UsuarioRepository;
+import com.doback.E_rank.entity.Usuarios;
+import com.doback.E_rank.repository.UsuariosRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UsuarioApplication {
-    private final UsuarioRepository usuarioRepository;
+public class UsuariosApplication {
+    private final UsuariosRepository usuarioRepository;
 
-    public UsuarioApplication(UsuarioRepository usuarioRepository) {
+    public UsuariosApplication(UsuariosRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<Usuario> obterTodosUsuarios() {
+    public List<Usuarios> obterTodosUsuarios() {
         return usuarioRepository.buscar();
     }
 
-    public Usuario obterUsuarioPorId(long id) {
+    public Usuarios obterUsuarioPorId(long id) {
         return usuarioRepository.buscarPorId(id);
     }
 
-    public void criarUsuario(Usuario usuario) {
+    public void criarUsuario(Usuarios usuario) {
         usuarioRepository.adicionar(usuario);
     }
 
