@@ -1,47 +1,59 @@
 package com.doback.E_rank.entity;
 
-public class Usuarios {
-    private Long IdUsuario;
-    private Long IdUsuario1;
-    private Long IdUsuario2;
-    private Long Status;
-
-    public Usuarios(Long idUsuario, Long idUsuario1, Long idUsuario2, Long status) {
-        IdUsuario = idUsuario;
-        IdUsuario1 = idUsuario1;
-        IdUsuario2 = idUsuario2;
-        Status = status;
+public class Usuario {
+    private Long id_usuario;
+    private char sts;
+    private String biografia;
+    private String nickname;    
+    private String email;
+    
+    public Usuario(Long id_usuario, char sts, String biografia, String nickname, String email) {
+        id_usuario = id_usuario;
+        sts = sts;
+        biografia = biografia;
+        nickname = nickname
+        email = email;
     }
 
-    public Long getIdUsuario() {
-        return IdUsuario;
+
+    public Long getid_usuario() {
+        return id_usuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        IdUsuario = IdUsuario;
+    public void setIdUsuario(Long id_usuario) {
+        id_usuario = id_usuario;
     }
 
-    public Long getIdUsuario1() {
-        return IdUsuario1;
+
+    public char getsts() {
+        return sts;
     }
 
-    public void setIdUsuario1(Long idUsuario1) {
-        IdUsuario1 = idUsuario1;
+    public void setsts(char sts) {
+        sts = sts;
     }
 
-    public Long getIdUsuario2() {
-        return IdUsuario2;
+
+    public String getbiografia(){
+        return biografia;
+    }
+    public void setbiografia(String biografia){
+        biografia = biografia;
     }
 
-    public void setIdUsuario2(Long idUsuario2) {
-        IdUsuario2 = idUsuario2;
+    
+    public String getnickname(){
+        return nickname;
+}
+    public void setnickname(String nickname){
+        nickname = nickname;
+    }
+    
+    public getemail(){
+        return email;
     }
 
-    public Long getStatus() {
-        return Status;
-    }
-
-    public void setStatus(Long status) {
-        Status = status;
+    public void setemail(String email){
+        email = email;
     }
 }
