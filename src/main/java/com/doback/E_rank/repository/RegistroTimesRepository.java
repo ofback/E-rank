@@ -1,5 +1,6 @@
 package com.doback.E_rank.repository;
 import com.doback.E_rank.entity.RegistroTimes;
+import com.doback.E_rank.facade.RegistroTimesFacade;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,8 @@ public class RegistroTimesRepository {
         return registroTimes;
     }
 
-    public void adicionar(RegistroTimes registroTimes) {
-        registroTimes.add(registroTimes);
+    public void adicionar(RegistroTimes registroTimess) {
+        registroTimes.add(registroTimess);
     }
 
     public void remover(long code){
