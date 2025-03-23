@@ -1,7 +1,6 @@
 package com.doback.E_rank.repository;
 
 import com.doback.E_rank.entity.Amizades;
-import com.doback.E_rank.entity.Estatisticas;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class AmizadesRepository {
     public Amizades buscarPorId(long code) {
         Amizades amizade = amizades
                 .stream()
-                .filter(p -> p.getAmizades() == code)
+                .filter(p -> p.getId_amizade() == code)
                 .findFirst()
                 .get();
 
@@ -30,15 +29,19 @@ public class AmizadesRepository {
     }
 
     public void remover(long code){
-        amizades.removeIf(p -> p.getAmizades() == code);
+        amizades.removeIf(p -> p.getId_amizade() == code);
     }
 
-    public void atualizar(Long id, Amizades novaAmizades) {
-        Amizades amizadesAntigas = buscarPorId(id);
-        if (amizadesAntigas != null) {
-            amizadesAntigas.setUsuario1(novaAmizades.getUsuario1());
-            amizadesAntigas.setUsuario2(novaAmizades.getUsuario2());
-            amizadesAntigas.setStatus(novaAmizades.getStatus());
+    public void atualizar(Long id, Amizades novaAmizade) {
+        Amizades amizadeAntiga = buscarPorId(id);
+
+        if (amizadeAntiga != null) {
+            amizadeAntiga.setId_usuario1(novaAmizade.getId_usuario1());
+            amizadeAntiga.setId_usuario2(novaAmizade.getId_usuario2());
+            amizadeAntiga.setSts(novaAmizade.getSts());
+            amizadeAntiga.setData_solicitacao(novaAmizade.getData_solicitacao());
+        } else {
+            System.out.println("Amizade com id " + id + " não encontrada.");
         }
     }
 }

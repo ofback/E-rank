@@ -2,6 +2,8 @@ package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 
 @Entity
 @Table(name = "amizades")
@@ -9,59 +11,68 @@ public class Amizades {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "amizades")
-    private Long amizades;
+    @Column(name = "id_amizade")
+    private Long id_amizade;
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "times")
-    private Long usuario1;
+    @Column(name = "id_usuario1")
+    private Long id_usuario1;
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "times")
-    private Long usuario2;
+    @Column(name = "id_usuario2")
+    private Long id_usuario2;
 
-    @Column(name = "status")
-    private Long status;
+    @Column(name = "sts")
+    private char sts;
+
+    @Column(name = "data_solicitacao")
+    private Date data_solicitacao;
 
 
-    public Amizades(Long idAmizade, Long idUsuario1, Long idUsuario2, Long status) {
-        amizades = idAmizade;
-        usuario1 = idUsuario1;
-        usuario2 = idUsuario2;
-        this.status = status;
+    public Amizades(Long id_amizade, Long id_usuario1, Long id_usuario2, char sts, Date data_solicitacao) {
+        this.id_amizade = id_amizade;
+        this.id_usuario1 = id_usuario1;
+        this.id_usuario2 = id_usuario2;
+        this.sts = sts;
+        this.data_solicitacao = data_solicitacao;
     }
 
-    public Long getAmizades() {
-        return amizades;
+    public Long getId_amizade() {
+        return id_amizade;
     }
 
-    public void setAmizades(Long amizades) {
-        this.amizades = amizades;
+    public void setId_amizade(Long id_amizade) {
+        this.id_amizade = id_amizade;
     }
 
-    public Long getUsuario1() {
-        return usuario1;
+    public Long getId_usuario1() {
+        return id_usuario1;
     }
 
-    public void setUsuario1(Long usuario1) {
-        this.usuario1 = usuario1;
+    public void setId_usuario1(Long id_usuario1) {
+        this.id_usuario1 = id_usuario1;
     }
 
-    public Long getUsuario2() {
-        return usuario2;
+    public Long getId_usuario2() {
+        return id_usuario2;
     }
 
-    public void setUsuario2(Long usuario2) {
-        this.usuario2 = usuario2;
+    public void setId_usuario2(Long id_usuario2) {
+        this.id_usuario2 = id_usuario2;
     }
 
-    public Long getStatus() {
-        return status;
+    public char getSts() {
+        return sts;
     }
 
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setSts(char sts) {
+        this.sts = sts;
+    }
+
+    public Date getData_solicitacao() {return data_solicitacao;
+    }
+
+    public void setData_solicitacao(Date data_solicitacao) {
+        this.data_solicitacao = data_solicitacao;
     }
 }

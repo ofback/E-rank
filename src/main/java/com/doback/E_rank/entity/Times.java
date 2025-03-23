@@ -8,8 +8,8 @@ import jakarta.persistence.*;
 public class Times {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "times")
-    private Long times;
+    @Column(name = "id_time")
+    private Long id_time;
 
     @Column(name = "nome")
     private String nome;
@@ -17,22 +17,22 @@ public class Times {
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "status")
-    private Long status;
+    @Column(name = "sts")
+    private char sts;
 
-    public Times(Long idTimes, String nome, String descricao, Long status) {
-        this.times = idTimes;
+    public Times(Long id_time, String nome, String descricao, char sts) {
+        this.id_time = id_time;
         this.nome = nome;
         this.descricao = descricao;
-        this.status = status;
+        this.sts = sts;
     }
 
-    public Long getTimes() {
-        return times;
+    public Long getId_time() {
+        return id_time;
     }
 
-    public void setTimes(Long times) {
-        this.times = times;
+    public void setId_time(Long id_time) {
+        this.id_time = id_time;
     }
 
     public String getNome() {
@@ -51,11 +51,11 @@ public class Times {
         this.descricao = descricao;
     }
 
-    public Long getStatus() {
-        return status;
+    public char getSts() {
+        return sts;
     }
 
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setSts(char sts) {
+        this.sts = sts;
     }
 }
