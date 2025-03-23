@@ -2,7 +2,6 @@ package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.AmizadeApplication;
 import com.doback.E_rank.entity.Amizade;
-import com.doback.E_rank.repository.AmizadeRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
