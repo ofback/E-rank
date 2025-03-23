@@ -15,8 +15,12 @@ public class EstatisticasRepository {
     }
 
     public Estatisticas buscarPorId(Long id) {
-        return estatisticas.stream().filter(e -> e.getId_estatistica().equals(id)).findFirst().orElse(null);
+        return estatisticas.stream()
+                .filter(e -> e.getId_estatistica().equals(id))
+                .findFirst()
+                .orElse(null);
     }
+
 
     public void salvar(Estatisticas estatistica) {
         estatisticas.add(estatistica);
@@ -25,12 +29,21 @@ public class EstatisticasRepository {
     public void remover(Long id) {
         estatisticas.removeIf(e -> e.getId_estatistica().equals(id));
     }
+
     public void atualizar(Long id, Estatisticas novaEstatistica) {
         Estatisticas estatisticaExistente = buscarPorId(id);
+
         if (estatisticaExistente != null) {
+            estatisticaExistente.setKills(novaEstatistica.getKills());
             estatisticaExistente.setAssistencias(novaEstatistica.getAssistencias());
             estatisticaExistente.setQts_partidas(novaEstatistica.getQts_partidas());
             estatisticaExistente.setSts_provacao(novaEstatistica.getSts_provacao());
+            estatisticaExistente.setVitorias(novaEstatistica.getVitorias());
+            estatisticaExistente.setDerrotas(novaEstatistica.getDerrotas());
+            estatisticaExistente.setRecordKills(novaEstatistica.getRecordKills());
+            estatisticaExistente.setHeadshots(novaEstatistica.getHeadshots());
+        } else {
+            System.out.println("Estatística com id " + id + " não encontrada.");
         }
     }
 }

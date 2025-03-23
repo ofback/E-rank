@@ -10,34 +10,35 @@ import java.util.List;
 public class TemporadasRepository {
     private List<Temporadas> temporadas = new ArrayList<>();
 
-
     public Temporadas buscarPorId(long code) {
-        Temporadas temporada = temporadas
-                .stream()
+        return temporadas.stream()
                 .filter(p -> p.getIdTemporada() == code)
                 .findFirst()
-                .get();
-
-        return temporada;
+                .orElse(null);
     }
 
-    public List<Temporadas> buscar(){
+    public List<Temporadas> buscar() {
         return temporadas;
     }
 
     public void adicionar(Temporadas temporada) {
-        temporada.add(temporada);
+        temporadas.add(temporada);
     }
 
-    public void remover(long code){
+    public void remover(long code) {
         temporadas.removeIf(p -> p.getIdTemporada() == code);
     }
 
     public void atualizar(Long id, Temporadas novaTemporada) {
         Temporadas temporadaExistente = buscarPorId(id);
+
         if (temporadaExistente != null) {
             temporadaExistente.setNome(novaTemporada.getNome());
             temporadaExistente.setDescricao(novaTemporada.getDescricao());
+            temporadaExistente.setData_inicio(novaTemporada.getData_inicio());
+            temporadaExistente.setData_fim(novaTemporada.getData_fim());
+        } else {
+            System.out.println("Temporada com id " + id + " não encontrada.");
         }
     }
 }
