@@ -46,4 +46,8 @@ public class RegistroTimes {
     public void setData_entrada(Date data_entrada) {
         this.data_entrada = data_entrada;
     }
+
+    public void add(RegistroTimes registroTimes) {
+
+    }
 }
