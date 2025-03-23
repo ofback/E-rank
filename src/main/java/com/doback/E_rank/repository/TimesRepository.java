@@ -2,7 +2,6 @@ package com.doback.E_rank.repository;
 
 import com.doback.E_rank.entity.Times;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
 
