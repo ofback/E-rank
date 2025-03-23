@@ -5,22 +5,20 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UsuariosRepository {
-    private List<Usuarios> usuarios = new ArrayList<>();
+    private final List<Usuarios> usuarios = new ArrayList<>();
 
     public Usuarios buscarPorId(long code) {
-        Usuarios usuario = usuarios
-                .stream()
-                .filter(p -> p.getIdUsuario() == code)
+        return usuarios.stream()
+                .filter(p -> p.getIdUsuario().equals(code))
                 .findFirst()
-                .get();
-
-        return usuario;
+                .orElse(null);
     }
 
-    public List<Usuarios> buscar(){
+    public List<Usuarios> buscar() {
         return usuarios;
     }
 
@@ -28,13 +26,21 @@ public class UsuariosRepository {
         usuarios.add(usuario);
     }
 
-    public void remover(long code){
-        usuarios.removeIf(p -> p.getIdUsuario() == code);
+    public void remover(long code) {
+        usuarios.removeIf(p -> p.getIdUsuario().equals(code));
     }
 
-    public void atualizar(long code, Usuarios Usuario){
+    public void atualizar(long code, Usuarios usuarioAtualizado) {
         Usuarios usuarioInMemory = this.buscarPorId(code);
 
-        usuarioInMemory.setStatus(Usuario.getStatus());
+        if (usuarioInMemory != null) {
+            usuarioInMemory.setSts(usuarioAtualizado.getSts());
+            usuarioInMemory.setBiografia(usuarioAtualizado.getBiografia());
+            usuarioInMemory.setNickname(usuarioAtualizado.getNickname());
+            usuarioInMemory.setEmail(usuarioAtualizado.getEmail());
+            usuarioInMemory.setSenha(usuarioAtualizado.getSenha());
+            usuarioInMemory.setDataCriacao(usuarioAtualizado.getDataCriacao());
+            usuarioInMemory.setNome(usuarioAtualizado.getNome());
+        }
     }
 }

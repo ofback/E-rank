@@ -20,18 +20,27 @@ public class Estatisticas {
     private int qts_partidas;
     @Column(name = "sts_provacao")
     private int sts_provacao;
+    @Column(name = "vitorias")
+    private int vitorias;
+    @Column(name = "derrotas")
+    private int derrotas;
+    @Column(name = "recordKills")
+    private int recordKills;
+    @Column(name = "headshots")
+    private int headshots;
 
-    public Estatisticas(Long id_estatistica, Long kills, int assistencias, int qts_partidas, int sts_provacao) {
+    public Estatisticas(Long id_estatistica, Long kills, int assistencias, int qts_partidas, int sts_provacao, int vitorias, int derrotas, int recordKills, int headshots) {
         this.id_estatistica = id_estatistica;
         this.kills = kills;
         this.assistencias = assistencias;
         this.qts_partidas = qts_partidas;
         this.sts_provacao = sts_provacao;
+        this.vitorias = vitorias;
+        this.derrotas = derrotas;
+        this.recordKills = recordKills;
+        this.headshots = headshots;
     }
 
-    public Estatisticas() {
-
-    }
 
     public Long getId_estatistica() {
         return id_estatistica;
@@ -71,5 +80,37 @@ public class Estatisticas {
 
     public void setSts_provacao(int sts_provacao) {
         this.sts_provacao = sts_provacao;
+    }
+
+    public int getVitorias() {
+        return vitorias;
+    }
+
+    public void setVitorias(int vitorias) {
+        this.vitorias = vitorias;
+    }
+
+    public int getRecordKills() {
+        return recordKills;
+    }
+
+    public void setRecordKills(int recordKills) {
+        this.recordKills = recordKills;
+    }
+
+    public int getHeadshots() {
+        return headshots;
+    }
+
+    public void setHeadshots(int headshots) {
+        this.headshots = headshots;
+    }
+
+    public int getDerrotas() {
+        return derrotas;
+    }
+
+    public void setDerrotas(int derrotas) {
+        this.derrotas = derrotas;
     }
 }
