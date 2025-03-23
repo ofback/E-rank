@@ -1,6 +1,4 @@
 package com.doback.E_rank.entity;
-
-
 import jakarta.persistence.*;
 
 @Entity
