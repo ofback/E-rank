@@ -2,6 +2,8 @@ package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name ="desafios")
 
@@ -10,54 +12,50 @@ public class Desafios {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "idDesafio")
-    private Long idDesafio;
+    private Long id_desafio;
     @Column(name = "idUsuario1")
-    private Long idUsuario1;
-    @Column(name = "idUsuario2")
-    private Long idUsuario2;
-    @Column(name = "status")
-    private Long status;
+    private Date data_desafio;
+    @Column(name = "resultado")
+    private String resultado;
+    @Column(name = "sts")
+    private char sts;
 
-    public Desafios(Long idDesafio, Long idUsuario1, Long idUsuario2, Long status) {
-        this.idDesafio = idDesafio;
-        this.idUsuario1 = idUsuario1;
-        this.idUsuario2 = idUsuario2;
-        this.status = status;
+    public Desafios(Long id_desafio, Date data_desafio, String resultado, char sts) {
+        this.id_desafio = id_desafio;
+        this.data_desafio = data_desafio;
+        this.resultado = resultado;
+        this.sts = sts;
     }
 
-    public Desafios() {
-
+    public Long getId_desafio() {
+        return id_desafio;
     }
 
-    public Long getIdDesafio() {
-        return idDesafio;
+    public void setId_desafio(Long id_desafio) {
+        this.id_desafio = id_desafio;
     }
 
-    public void setIdDesafio(Long idDesafio) {
-        this.idDesafio = idDesafio;
+    public Date getData_desafio() {
+        return data_desafio;
     }
 
-    public Long getIdUsuario1() {
-        return idUsuario1;
+    public void setData_desafio(Date data_desafio) {
+        this.data_desafio = data_desafio;
     }
 
-    public void setIdUsuario1(Long idUsuario1) {
-        this.idUsuario1 = idUsuario1;
+    public String getResultado() {
+        return resultado;
     }
 
-    public Long getIdUsuario2() {
-        return idUsuario2;
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
-    public void setIdUsuario2(Long idUsuario2) {
-        this.idUsuario2 = idUsuario2;
+    public char getSts() {
+        return sts;
     }
 
-    public Long getStatus() {
-        return status;
-    }
-
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setSts(char sts) {
+        this.sts = sts;
     }
 }

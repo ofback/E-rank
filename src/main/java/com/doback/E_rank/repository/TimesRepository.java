@@ -13,7 +13,7 @@ public class TimesRepository {
     public Times buscarPorId(long code) {
         Times time = times
                 .stream()
-                .filter(p -> p.getTimes() == code)
+                .filter(p -> p.getId_time() == code)
                 .findFirst()
                 .get();
 
@@ -29,7 +29,7 @@ public class TimesRepository {
     }
 
     public void remover(long code){
-        times.removeIf(p -> p.getTimes() == code);
+        times.removeIf(p -> p.getId_time() == code);
     }
 
     public void atualizar(Long id, Times novoTime) {
@@ -37,7 +37,7 @@ public class TimesRepository {
         if (timeExistente != null) {
             timeExistente.setNome(novoTime.getNome());
             timeExistente.setDescricao(novoTime.getDescricao());
-            timeExistente.setStatus(novoTime.getStatus());
+            timeExistente.setSts(novoTime.getSts());
         }
     }
 
