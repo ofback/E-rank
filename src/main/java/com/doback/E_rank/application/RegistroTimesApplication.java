@@ -1,5 +1,6 @@
 package com.doback.E_rank.application;
 import com.doback.E_rank.entity.RegistroTimes;
+import com.doback.E_rank.facade.RegistroTimesFacade;
 import com.doback.E_rank.repository.RegistroTimesRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;

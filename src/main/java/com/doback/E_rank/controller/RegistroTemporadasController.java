@@ -1,13 +1,14 @@
 package com.doback.E_rank.controller;
+
 import com.doback.E_rank.entity.RegistroTemporadas;
 import com.doback.E_rank.facade.RegistroTemporadasFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-
 @RestController
-@RequestMapping("/times")
+@RequestMapping("/registro-temporadas")
 public class RegistroTemporadasController {
 
     private final RegistroTemporadasFacade registroTemporadasFacade;
