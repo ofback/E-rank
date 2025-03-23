@@ -22,7 +22,7 @@ public class EstatisticasController {
     }
 
     @GetMapping("/{id}")
-    public Estatisticas obterEstatistica(@PathVariable Long id) {
+    public Estatisticas obterEstatistica(@PathVariable int id) {
         return estatisticaFacade.buscarEstatisticaPorId(id);
     }
 
@@ -34,13 +34,13 @@ public class EstatisticasController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirEstatistica(@PathVariable Long id) {
+    public void excluirEstatistica(@PathVariable int id) {
         estatisticaFacade.excluirEstatistica(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarEstatistica(@PathVariable Long id, @RequestBody Estatisticas estatistica) {
+    public void atualizarEstatistica(@PathVariable int id, @RequestBody Estatisticas estatistica) {
         estatisticaFacade.atualizarEstatistica(id, estatistica);
     }
 }
