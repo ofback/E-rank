@@ -22,7 +22,7 @@ public class DesafiosController {
     }
 
     @GetMapping("/{id}")
-    public Desafios obterDesafio(@PathVariable Long id) {
+    public Desafios obterDesafio(@PathVariable int id) {
         return desafioFacade.buscarDesafioPorId(id);
     }
 
@@ -34,7 +34,7 @@ public class DesafiosController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirDesafio(@PathVariable Long id) {
+    public void excluirDesafio(@PathVariable int id) {
         desafioFacade.excluirDesafio(id);
     }
 }
