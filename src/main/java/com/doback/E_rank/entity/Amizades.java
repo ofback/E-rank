@@ -14,11 +14,11 @@ public class Amizades {
     @Column(name = "id_amizade")
     private Long id_amizade;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "id_usuario1")
     private Long id_usuario1;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "id_usuario2")
     private Long id_usuario2;
 

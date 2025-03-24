@@ -1,7 +1,7 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.entity.Estatisticas;
-import com.doback.E_rank.repository.EstatisticasRepository;
+import com.doback.E_rank.interfaces.EstatisticasRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,22 +15,22 @@ public class EstatisticasApplication {
     }
 
     public List<Estatisticas> obterTodas() {
-        return estatisticaRepository.buscarTodos();
+        return estatisticaRepository.buscar();
     }
 
-    public Estatisticas obterPorId(Long id) {
-        return estatisticaRepository.buscarPorId(id);
+    public Estatisticas obterPorId(int id) {
+        return estatisticaRepository.searchByCode(id);
     }
 
     public void criar(Estatisticas estatistica) {
-        estatisticaRepository.salvar(estatistica);
+        estatisticaRepository.addEstatisticas(estatistica);
     }
 
-    public void excluir(Long id) {
-        estatisticaRepository.remover(id);
+    public void excluir(int id) {
+        estatisticaRepository.removeEstatisticas(id);
     }
 
-    public void atualizar(Long id, Estatisticas estatistica) {
-        estatisticaRepository.atualizar(id, estatistica);
+    public void atualizar(int id, Estatisticas estatistica) {
+        estatisticaRepository.updateEstatisticas(id, estatistica);
     }
 }
