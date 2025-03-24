@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Registro_temporadas")
+@Table(name = "registroTemporadas")
 public class RegistroTemporadas {
 
     @Id

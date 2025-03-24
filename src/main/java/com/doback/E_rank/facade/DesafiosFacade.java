@@ -19,7 +19,7 @@ public class DesafiosFacade {
         return desafioApplication.obterTodosDesafios();
     }
 
-    public Desafios buscarDesafioPorId(Long id) {
+    public Desafios buscarDesafioPorId(int id) {
         return desafioApplication.obterDesafioPorId(id);
     }
 
@@ -27,7 +27,7 @@ public class DesafiosFacade {
         desafioApplication.criarDesafio(desafio);
     }
 
-    public void excluirDesafio(Long id) {
+    public void excluirDesafio(int id) {
         desafioApplication.excluirDesafio(id);
     }
 }
