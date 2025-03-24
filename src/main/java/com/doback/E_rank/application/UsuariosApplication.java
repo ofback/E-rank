@@ -2,7 +2,7 @@ package com.doback.E_rank.application;
 
 
 import com.doback.E_rank.entity.Usuarios;
-import com.doback.E_rank.repository.UsuariosRepository;
+import com.doback.E_rank.interfaces.UsuariosRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +20,14 @@ public class UsuariosApplication {
     }
 
     public Usuarios obterUsuarioPorId(long id) {
-        return usuarioRepository.buscarPorId(id);
+        return usuarioRepository.searchByCode(id);
     }
 
     public void criarUsuario(Usuarios usuario) {
-        usuarioRepository.adicionar(usuario);
+        usuarioRepository.addUsuarios(usuario);
     }
 
-    public void excluirUsuario(Long id) {
-        usuarioRepository.remover(id);
+    public void excluirUsuario(long id) {
+        usuarioRepository.removeUsuarios(id);
     }
 }
