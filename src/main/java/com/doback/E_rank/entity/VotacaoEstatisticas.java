@@ -26,6 +26,10 @@ public class VotacaoEstatisticas {
         this.data_voto = data_voto;
     }
 
+    public VotacaoEstatisticas() {
+
+    }
+
     public Long getId_votacao_estatistica() {
         return id_votacao_estatistica;
     }

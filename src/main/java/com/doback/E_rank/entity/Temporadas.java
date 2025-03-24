@@ -35,6 +35,10 @@ public class Temporadas {
         this.data_fim = data_fim;
     }
 
+    public Temporadas() {
+
+    }
+
 
     public Long getIdTemporada() {
         return id_temporada;

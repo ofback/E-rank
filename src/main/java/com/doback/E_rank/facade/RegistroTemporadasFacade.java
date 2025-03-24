@@ -16,7 +16,7 @@ public class RegistroTemporadasFacade {
         return registroTemporadasApplication.obterTodosRegistrosTemporadas();
     }
 
-    public RegistroTemporadas buscarRegistroTemporadasPorId(Long id) {
+    public RegistroTemporadas buscarRegistroTemporadasPorId(int id) {
         return registroTemporadasApplication.obterRegistrosTemporadaPorId(id);
     }
 
@@ -24,7 +24,7 @@ public class RegistroTemporadasFacade {
         registroTemporadasApplication.criarRegistrosTemporada(registroTemporadas);
     }
 
-    public void excluirRegistroTemporadas(Long id) {
+    public void excluirRegistroTemporadas(int id) {
         registroTemporadasApplication.excluirRegistrosTemporada(id);
     }
 

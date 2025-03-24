@@ -23,6 +23,10 @@ public class RegistroTimes {
         this.data_entrada = data_entrada;
     }
 
+    public RegistroTimes() {
+
+    }
+
     public Long getId_registro_times() {
         return id_registro_times;
     }

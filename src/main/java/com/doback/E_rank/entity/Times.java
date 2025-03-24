@@ -25,6 +25,10 @@ public class Times {
         this.sts = sts;
     }
 
+    public Times() {
+
+    }
+
     public Long getId_time() {
         return id_time;
     }

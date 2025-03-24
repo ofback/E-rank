@@ -23,7 +23,7 @@ public class RegistroTemporadasController {
     }
 
     @GetMapping("/{id}")
-    public RegistroTemporadas obterRegistroTemporadasPorId(@PathVariable Long id) {
+    public RegistroTemporadas obterRegistroTemporadasPorId(@PathVariable int id) {
         return registroTemporadasFacade.buscarRegistroTemporadasPorId(id);
     }
 
@@ -35,7 +35,7 @@ public class RegistroTemporadasController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirRegistroTemporadas(@PathVariable Long id) {
+    public void excluirRegistroTemporadas(@PathVariable int id) {
         registroTemporadasFacade.excluirRegistroTemporadas(id);
     }
 

@@ -22,7 +22,7 @@ public class TemporadasController {
     }
 
     @GetMapping("/{id}")
-    public Temporadas obterTemporadas(@PathVariable Long id) {
+    public Temporadas obterTemporadas(@PathVariable int id) {
         return temporadaFacade.buscarTemporadaPorId(id);
     }
 

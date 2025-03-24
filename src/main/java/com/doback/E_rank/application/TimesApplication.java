@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 import com.doback.E_rank.entity.Times;
-import com.doback.E_rank.repository.TimesRepository;
+import com.doback.E_rank.interfaces.TimesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,19 +18,19 @@ public class TimesApplication {
         return timesRepository.buscar();
     }
 
-    public Times obterTimesPorId(long id) {
-        return timesRepository.buscarPorId(id);
+    public Times obterTimesPorId(int id) {
+        return timesRepository.searchByCode(id);
     }
 
     public void criarTime(Times times) {
-        timesRepository.adicionar(times);
+        timesRepository.addTimes(times);
     }
 
-    public void excluirTime(Long id) {
-        timesRepository.remover(id);
+    public void excluirTime(int id) {
+        timesRepository.removeTimes(id);
     }
-    public void atualizarTimes(Long id, Times times) {
-        timesRepository.atualizar(id, times);
+    public void atualizarTimes(int id, Times times) {
+        timesRepository.updateTimes(id, times);
     }
 
 

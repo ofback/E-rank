@@ -19,7 +19,7 @@ public class TemporadasFacade {
         return TemporadasApplication.obterTodasTemporada();
     }
 
-    public Temporadas buscarTemporadaPorId(Long id) {
+    public Temporadas buscarTemporadaPorId(int id) {
         return temporadaApplication.obterTemporadaPorId(id);
     }
 
@@ -27,7 +27,7 @@ public class TemporadasFacade {
         temporadaApplication.criarTemporada(temporada);
     }
 
-    public void excluirTemporada(Long id) {
+    public void excluirTemporada(long id) {
         temporadaApplication.excluirTemporada(id);
     }
 }

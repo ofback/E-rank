@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 import com.doback.E_rank.entity.Amizades;
-import com.doback.E_rank.repository.AmizadesRepository;
+import com.doback.E_rank.interfaces.AmizadesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,20 +18,20 @@ public class AmizadesApplication {
         return amizadeRepository.buscar();
     }
 
-    public Amizades obterAmizadePorId(long id) {
-        return amizadeRepository.buscarPorId(id);
+    public Amizades obterAmizadePorId(int id) {
+        return amizadeRepository.searchByCode(id);
     }
 
     public void criarAmizade(Amizades amizade) {
-        amizadeRepository.adicionar(amizade);
+        amizadeRepository.addAmizades(amizade);
     }
 
-    public void excluirAmizade(Long id) {
-        amizadeRepository.remover(id);
+    public void excluirAmizade(int id) {
+        amizadeRepository.removeAmizades(id);
     }
 
-    public void atualizarAmizades(Long id, Amizades amizades) {
-        amizadeRepository.atualizar(id, amizades);
+    public void atualizarAmizades(int id, Amizades amizades) {
+        amizadeRepository.updateAmizades(id, amizades);
     }
 
 

@@ -22,7 +22,7 @@ public class UsuariosController {
     }
 
     @GetMapping("/{id}")
-    public Usuarios obterUsuario(@PathVariable Long id) {
+    public Usuarios obterUsuario(@PathVariable int id) {
         return usuarioFacade.buscarUsuarioPorId(id);
     }
 
@@ -34,7 +34,7 @@ public class UsuariosController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirUsuario(@PathVariable Long id) {
+    public void excluirUsuario(@PathVariable int id) {
         usuarioFacade.excluirUsuario(id);
     }
 }
