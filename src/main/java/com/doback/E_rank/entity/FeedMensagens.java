@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Feed_mensagens")
+@Table(name = "feed_mensagens")
 public class FeedMensagens {
 
     @Id
