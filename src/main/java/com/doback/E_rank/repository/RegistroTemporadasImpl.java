@@ -1,6 +1,7 @@
 package com.doback.E_rank.repository;
 
 import com.doback.E_rank.entity.RegistroTemporadas;
+import com.doback.E_rank.interfaces.RegistroTemporadasRepository;
 import com.doback.E_rank.repository.jpa.RegistroTemporadasJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,13 +18,8 @@ public class RegistroTemporadasImpl implements RegistroTemporadasRepository {
     }
 
     @Override
-    public RegistroTemporadas searchByCode(long code) {
-        return this.registroTemporadasJpa.findById((int) code).orElse(null);
-    }
-
-    @Override
     public RegistroTemporadas searchByCode(int id) {
-        return null;
+        return this.registroTemporadasJpa.findById((int) id).orElse(null);
     }
 
     @Override
@@ -38,29 +34,21 @@ public class RegistroTemporadasImpl implements RegistroTemporadasRepository {
 
     @Override
     public void removeRegistroTemporadas(int id) {
+        this.registroTemporadasJpa.deleteById(id);
 
     }
 
     @Override
     public void updateRegistroTemporadas(int id, RegistroTemporadas registrotemporadas) {
-
-    }
-
-    @Override
-    public void removeRegistroTemporadas(long code) {
-        this.registroTemporadasJpa.deleteById(code);
-    }
-
-    @Override
-    public void updateRegistroTemporadas(long code, RegistroTemporadas registroTemporadas) {
-        RegistroTemporadas registroInDb = this.registroTemporadasJpa.findById(code).orElse(null);
+        RegistroTemporadas registroInDb = this.registroTemporadasJpa.findById(id).orElse(null);
         if (registroInDb != null) {
             this.registroTemporadasJpa.save(registroInDb);
-        }
     }
+
+}
 
     @Override
     public boolean estaVazio() {
-        return this.registroTemporadasJpa.count() == 0;
+        return false;
     }
 }

@@ -17,9 +17,10 @@ public class AmizadesRepositoryImpl implements AmizadesRepository {
         this.amizadesJpa = amizadesJpa;
     }
 
+
     @Override
-    public Amizades searchByCode(long code) {
-        return this.amizadesJpa.findById((int) code).orElse(null);
+    public Amizades searchByCode(int id) {
+        return this.amizadesJpa.findById((int) id).orElse(null);
     }
 
     @Override
@@ -33,13 +34,14 @@ public class AmizadesRepositoryImpl implements AmizadesRepository {
     }
 
     @Override
-    public void removeAmizades(long code) {
-        this.amizadesJpa.deleteById(code);
+    public void removeAmizades(int id) {
+        this.amizadesJpa.deleteById(id);
     }
 
     @Override
-    public void updateAmizades(long code, Amizades amizades) {
-        Amizades amizadeInDb = this.amizadesJpa.findById(code).orElse(null);
+    public void updateAmizades(int id, Amizades amizades) {
+        Amizades amizadeInDb = this.amizadesJpa.findById(id).orElse(null);
+
         if (amizadeInDb != null) {
             amizadeInDb.setId_usuario1(amizades.getId_usuario1());
             amizadeInDb.setId_usuario2(amizades.getId_usuario2());
@@ -48,6 +50,7 @@ public class AmizadesRepositoryImpl implements AmizadesRepository {
             this.amizadesJpa.save(amizadeInDb);
         }
     }
+
 
     @Override
     public boolean estaVazio() {
