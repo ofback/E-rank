@@ -1,4 +1,7 @@
 package com.doback.E_rank.repository.jpa;
 
-public interface AmizadesJpa {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.doback.E_rank.entity.Amizades;
+
+public interface AmizadesJpa extends JpaRepository<Amizades, Integer> {
 }
