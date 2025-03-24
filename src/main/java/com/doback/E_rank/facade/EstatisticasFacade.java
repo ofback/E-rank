@@ -18,7 +18,7 @@ public class EstatisticasFacade {
         return estatisticaApplication.obterTodas();
     }
 
-    public Estatisticas buscarEstatisticaPorId(Long id) {
+    public Estatisticas buscarEstatisticaPorId(int id) {
         return estatisticaApplication.obterPorId(id);
     }
 
@@ -26,11 +26,11 @@ public class EstatisticasFacade {
         estatisticaApplication.criar(estatistica);
     }
 
-    public void excluirEstatistica(Long id) {
+    public void excluirEstatistica(int id) {
         estatisticaApplication.excluir(id);
     }
 
-    public void atualizarEstatistica(Long id, Estatisticas estatistica) {
+    public void atualizarEstatistica(int id, Estatisticas estatistica) {
         estatisticaApplication.atualizar(id, estatistica);
     }
 }
