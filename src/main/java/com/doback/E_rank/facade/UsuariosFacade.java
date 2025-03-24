@@ -18,7 +18,7 @@ public class UsuariosFacade {
         return usuarioApplication.obterTodosUsuarios();
     }
 
-    public Usuarios buscarUsuarioPorId(Long id) {
+    public Usuarios buscarUsuarioPorId(int id) {
         return usuarioApplication.obterUsuarioPorId(id);
     }
 
@@ -26,7 +26,7 @@ public class UsuariosFacade {
         usuarioApplication.criarUsuario(usuario);
     }
 
-    public void excluirUsuario(Long id) {
+    public void excluirUsuario(int id) {
         usuarioApplication.excluirUsuario(id);
     }
 }
