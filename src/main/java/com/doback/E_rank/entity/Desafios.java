@@ -13,7 +13,7 @@ public class Desafios {
 
     @Column(name = "idDesafio")
     private Long id_desafio;
-    @Column(name = "idUsuario1")
+    @Column(name = "data_desafio")
     private Date data_desafio;
     @Column(name = "resultado")
     private String resultado;
