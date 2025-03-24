@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 public interface EstatisticasRepository {
     public Estatisticas searchByCode(int id);
     public List<Estatisticas> buscar();
