@@ -1,7 +1,7 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.entity.Temporadas;
-import com.doback.E_rank.repository.TemporadasRepository;
+import com.doback.E_rank.interfaces.TemporadasRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,25 +23,25 @@ public class TemporadasApplication {
         return TemporadaRepository.buscar();
     }
 
-    public Temporadas obterTemporadasporid(long id) {
+    public Temporadas obterTemporadasporid(int id) {
         TemporadasRepository temporadaRepository;
-        return TemporadaRepository.buscarPorId(id);
+        return TemporadaRepository.searchByCode(id);
     }
 
     public void criar(Temporadas temporada) {
-        TemporadaRepository.adicionar(temporada);
+        TemporadaRepository.addTemporadas(temporada);
     }
 
-    public void excluirAmizade(Long id) {
-        TemporadaRepository.remover(id);
+    public void excluirAmizade(int id) {
+        TemporadaRepository.removeTemporadas(id);
     }
 
     public void criarTemporada(Temporadas temporada) {
         
     }
 
-    public Temporadas obterTemporadaPorId(long id) {
-        return TemporadaRepository.buscarPorId(id);
+    public Temporadas obterTemporadaPorId(int id) {
+        return TemporadaRepository.searchByCode(id);
     }
 
     public void excluirTemporada(Long id) {

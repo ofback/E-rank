@@ -35,6 +35,10 @@ public class Amizades {
         this.data_solicitacao = data_solicitacao;
     }
 
+    public Amizades() {
+
+    }
+
     public Long getId_amizade() {
         return id_amizade;
     }

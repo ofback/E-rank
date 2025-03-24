@@ -16,7 +16,7 @@ public class RegistroTimesFacade {
         return registroTimesApplication.obterTodosRegistrosTime();
     }
 
-    public RegistroTimes buscarRegistroTimesPorId(Long id) {
+    public RegistroTimes buscarRegistroTimesPorId(int id) {
         return registroTimesApplication.obterRegistrosTime(id);
     }
 
@@ -24,11 +24,11 @@ public class RegistroTimesFacade {
         registroTimesApplication.criarRegistrosTime(registroTimes);
     }
 
-    public void excluirRegistroTimes(Long id) {
+    public void excluirRegistroTimes(int id) {
         registroTimesApplication.excluirRegistroTime(id);
     }
 
-    public void atualizarRegistroTimes(Long id, RegistroTimes times) {
+    public void atualizarRegistroTimes(int id, RegistroTimes times) {
         registroTimesApplication.atualizarRegistrosTime(id, times);
     }
 }

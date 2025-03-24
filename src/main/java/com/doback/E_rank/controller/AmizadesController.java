@@ -24,7 +24,7 @@ public class AmizadesController {
     }
 
     @GetMapping("/{id}")
-    public Amizades obterAmizade(@PathVariable Long id) {
+    public Amizades obterAmizade(@PathVariable int id) {
         return amizadeFacade.buscarAmizadePorId(id);
     }
 
@@ -36,13 +36,13 @@ public class AmizadesController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirAmizade(@PathVariable Long id) {
+    public void excluirAmizade(@PathVariable int id) {
         amizadeFacade.excluirAmizade(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarAmizades(@PathVariable long id,@RequestBody Amizades amizades){
+    public void atualizarAmizades(@PathVariable int id,@RequestBody Amizades amizades){
         amizadeFacade.atualizarAmizades(id, amizades);
     }
 

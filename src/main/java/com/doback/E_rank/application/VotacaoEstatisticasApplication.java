@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 import com.doback.E_rank.entity.VotacaoEstatisticas;
-import com.doback.E_rank.repository.VotacaoEstatisticasRepository;
+import com.doback.E_rank.interfaces.VotacaoEstatisticasRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,19 +18,19 @@ public class VotacaoEstatisticasApplication {
         return votacaoEstatisticasRepository.buscar();
     }
 
-    public VotacaoEstatisticas obterVotacaoEstatisticasPorId(long id) {
-        return votacaoEstatisticasRepository.buscarPorId(id);
+    public VotacaoEstatisticas obterVotacaoEstatisticasPorId(int id) {
+        return votacaoEstatisticasRepository.searchByCode(id);
     }
 
     public void criarVotacaoEstatisticas(VotacaoEstatisticas votacaoEstatisticas) {
-        votacaoEstatisticasRepository.adicionar(votacaoEstatisticas);
+        votacaoEstatisticasRepository.addVotacaoEstatisticas(votacaoEstatisticas);
     }
 
-    public void excluirVotacaoEstatisticas(Long id) {
-        votacaoEstatisticasRepository.remover(id);
+    public void excluirVotacaoEstatisticas(int id) {
+        votacaoEstatisticasRepository.removeVotacaoEstatisticas(id);
     }
 
-    public void atualizarVotacaoEstatisticas(Long id, VotacaoEstatisticas votacaoEstatisticas) {
-        votacaoEstatisticasRepository.atualizar(id, votacaoEstatisticas);
+    public void atualizarVotacaoEstatisticas(int id, VotacaoEstatisticas votacaoEstatisticas) {
+        votacaoEstatisticasRepository.updateVotacaoEstatisticas(id, votacaoEstatisticas);
     }
 }

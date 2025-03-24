@@ -1,7 +1,6 @@
 package com.doback.E_rank.application;
 import com.doback.E_rank.entity.RegistroTimes;
-import com.doback.E_rank.facade.RegistroTimesFacade;
-import com.doback.E_rank.repository.RegistroTimesRepository;
+import com.doback.E_rank.interfaces.RegistroTimesRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -18,19 +17,19 @@ public class RegistroTimesApplication {
         return registroTimesRepository.buscar();
     }
 
-    public RegistroTimes obterRegistrosTime(long id) {
-        return registroTimesRepository.buscarPorId(id);
+    public RegistroTimes obterRegistrosTime(int id) {
+        return registroTimesRepository.searchByCode(id);
     }
 
     public void criarRegistrosTime(RegistroTimes registroTimes) {
-        registroTimesRepository.adicionar(registroTimes);
+        registroTimesRepository.addRegistroTimes(registroTimes);
     }
 
-    public void excluirRegistroTime(Long id) {
-        registroTimesRepository.remover(id);
+    public void excluirRegistroTime(int id) {
+        registroTimesRepository.removeRegistroTimes(id);
     }
-    public void atualizarRegistrosTime(Long id, RegistroTimes registroTimes) {
-        registroTimesRepository.atualizar(id, registroTimes);
+    public void atualizarRegistrosTime(int id, RegistroTimes registroTimes) {
+        registroTimesRepository.updateRegistroTimes(id, registroTimes);
     }
 
 

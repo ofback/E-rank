@@ -35,6 +35,9 @@ public class FeedMensagens {
         this.data_envio = data_envio;
     }
 
+    public FeedMensagens() {
+    }
+
     public Long getId_feed_mensagens() {
         return id_feed_mensagens;
     }

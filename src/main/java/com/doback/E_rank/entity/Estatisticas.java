@@ -41,6 +41,10 @@ public class Estatisticas {
         this.headshots = headshots;
     }
 
+    public Estatisticas() {
+
+    }
+
 
     public Long getId_estatistica() {
         return id_estatistica;

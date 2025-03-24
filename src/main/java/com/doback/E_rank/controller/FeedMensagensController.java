@@ -22,7 +22,7 @@ public class FeedMensagensController {
     }
 
     @GetMapping("/{id}")
-    public FeedMensagens obterFeedMensagens(@PathVariable Long id) {
+    public FeedMensagens obterFeedMensagens(@PathVariable int id) {
         return feedMensagensFacade.buscarFeedMensagensPorId(id);
     }
 
@@ -34,13 +34,13 @@ public class FeedMensagensController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirFeedMensagens(@PathVariable Long id) {
+    public void excluirFeedMensagens(@PathVariable int id) {
         feedMensagensFacade.excluirFeedMensagens(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarFeedMensagens(@PathVariable Long id, @RequestBody FeedMensagens feedMensagens) {
+    public void atualizarFeedMensagens(@PathVariable int id, @RequestBody FeedMensagens feedMensagens) {
         feedMensagensFacade.atualizarFeedMensagens(id, feedMensagens);
     }
 }

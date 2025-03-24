@@ -27,6 +27,10 @@ public class Desafios {
         this.sts = sts;
     }
 
+    public Desafios() {
+
+    }
+
     public Long getId_desafio() {
         return id_desafio;
     }

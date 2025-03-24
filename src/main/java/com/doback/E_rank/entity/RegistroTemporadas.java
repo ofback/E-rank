@@ -17,6 +17,10 @@ public class RegistroTemporadas {
         this.id_registro_temporadas = id_registro_temporadas;
     }
 
+    public RegistroTemporadas() {
+
+    }
+
     public long getId_registro_temporadas() {
         return id_registro_temporadas;
     }

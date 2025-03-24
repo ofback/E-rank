@@ -45,6 +45,10 @@ public class Usuarios {
         this.nome = nome;
     }
 
+    public Usuarios() {
+
+    }
+
     public Long getIdUsuario() {
         return idUsuario;
     }

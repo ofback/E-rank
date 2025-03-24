@@ -25,6 +25,10 @@ public class Jogos {
         this.genero = genero;
     }
 
+    public Jogos() {
+
+    }
+
     public Long getIdJogo() {
         return idJogo;
     }
