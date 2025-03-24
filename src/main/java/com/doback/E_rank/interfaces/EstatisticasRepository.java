@@ -1,7 +1,6 @@
 package com.doback.E_rank.interfaces;
 
 import com.doback.E_rank.entity.Estatisticas;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
