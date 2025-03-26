@@ -1,9 +1,7 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
-
 
 @Entity
 @Table(name = "votacaoEstatisticas")
@@ -20,19 +18,19 @@ public class VotacaoEstatisticas {
     @Column(name = "data_voto")
     private Date data_voto;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_estatistica")
     private Estatisticas estatisticas;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
     private Usuarios usuarios;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_temporada")
     private Temporadas temporadas;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_jogo")
     private Jogos jogos;
 
@@ -43,7 +41,6 @@ public class VotacaoEstatisticas {
     }
 
     public VotacaoEstatisticas() {
-
     }
 
     public Long getId_votacao_estatistica() {
@@ -68,5 +65,37 @@ public class VotacaoEstatisticas {
 
     public void setData_voto(Date data_voto) {
         this.data_voto = data_voto;
+    }
+
+    public Estatisticas getEstatisticas() {
+        return estatisticas;
+    }
+
+    public void setEstatisticas(Estatisticas estatisticas) {
+        this.estatisticas = estatisticas;
+    }
+
+    public Usuarios getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Usuarios usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public Temporadas getTemporadas() {
+        return temporadas;
+    }
+
+    public void setTemporadas(Temporadas temporadas) {
+        this.temporadas = temporadas;
+    }
+
+    public Jogos getJogos() {
+        return jogos;
+    }
+
+    public void setJogos(Jogos jogos) {
+        this.jogos = jogos;
     }
 }

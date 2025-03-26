@@ -43,10 +43,10 @@ public class AmizadesRepositoryImpl implements AmizadesRepository {
         Amizades amizadeInDb = this.amizadesJpa.findById(id).orElse(null);
 
         if (amizadeInDb != null) {
-            amizadeInDb.setId_usuario1(amizades.getId_usuario1());
-            amizadeInDb.setId_usuario2(amizades.getId_usuario2());
+            amizadeInDb.setIdUsuario1(amizades.getIdUsuario1());
+            amizadeInDb.setIdUsuario2(amizades.getIdUsuario2());
             amizadeInDb.setSts(amizades.getSts());
-            amizadeInDb.setData_solicitacao(amizades.getData_solicitacao());
+            amizadeInDb.setDataSolicitacao(amizades.getDataSolicitacao());
             this.amizadesJpa.save(amizadeInDb);
         }
     }
