@@ -1,9 +1,7 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
-
 
 @Entity
 @Table(name = "amizades")
@@ -12,55 +10,61 @@ public class Amizades {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_amizade")
-    private Long id_amizade;
+    private Long idAmizade;
 
     @Column(name = "id_usuario1")
-    private Long id_usuario1;
+    private Long idUsuario1;
 
     @Column(name = "id_usuario2")
-    private Long id_usuario2;
+    private Long idUsuario2;
 
     @Column(name = "sts")
     private char sts;
 
     @Column(name = "data_solicitacao")
-    private Date data_solicitacao;
+    private Date dataSolicitacao;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario1", referencedColumnName = "id_usuario")
+    private Usuarios usuario1;
 
-    public Amizades(Long id_amizade, Long id_usuario1, Long id_usuario2, char sts, Date data_solicitacao) {
-        this.id_amizade = id_amizade;
-        this.id_usuario1 = id_usuario1;
-        this.id_usuario2 = id_usuario2;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario2", referencedColumnName = "id_usuario")
+    private Usuarios usuario2;
+
+    public Amizades(Long idAmizade, Long idUsuario1, Long idUsuario2, char sts, Date dataSolicitacao) {
+        this.idAmizade = idAmizade;
+        this.idUsuario1 = idUsuario1;
+        this.idUsuario2 = idUsuario2;
         this.sts = sts;
-        this.data_solicitacao = data_solicitacao;
+        this.dataSolicitacao = dataSolicitacao;
     }
 
     public Amizades() {
-
     }
 
-    public Long getId_amizade() {
-        return id_amizade;
+    public Long getIdAmizade() {
+        return idAmizade;
     }
 
-    public void setId_amizade(Long id_amizade) {
-        this.id_amizade = id_amizade;
+    public void setIdAmizade(Long idAmizade) {
+        this.idAmizade = idAmizade;
     }
 
-    public Long getId_usuario1() {
-        return id_usuario1;
+    public Long getIdUsuario1() {
+        return idUsuario1;
     }
 
-    public void setId_usuario1(Long id_usuario1) {
-        this.id_usuario1 = id_usuario1;
+    public void setIdUsuario1(Long idUsuario1) {
+        this.idUsuario1 = idUsuario1;
     }
 
-    public Long getId_usuario2() {
-        return id_usuario2;
+    public Long getIdUsuario2() {
+        return idUsuario2;
     }
 
-    public void setId_usuario2(Long id_usuario2) {
-        this.id_usuario2 = id_usuario2;
+    public void setIdUsuario2(Long idUsuario2) {
+        this.idUsuario2 = idUsuario2;
     }
 
     public char getSts() {
@@ -71,10 +75,11 @@ public class Amizades {
         this.sts = sts;
     }
 
-    public Date getData_solicitacao() {return data_solicitacao;
+    public Date getDataSolicitacao() {
+        return dataSolicitacao;
     }
 
-    public void setData_solicitacao(Date data_solicitacao) {
-        this.data_solicitacao = data_solicitacao;
+    public void setDataSolicitacao(Date dataSolicitacao) {
+        this.dataSolicitacao = dataSolicitacao;
     }
 }

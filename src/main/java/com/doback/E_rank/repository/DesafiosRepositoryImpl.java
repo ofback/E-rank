@@ -41,7 +41,7 @@ public class DesafiosRepositoryImpl implements DesafiosRepository {
     public void updateDesafios(int code, Desafios desafios) {
         Desafios desafiosInDb = this.desafiosJpa.findById(code).get();
 
-        desafiosInDb.setData_desafio(desafios.getData_desafio());
+        desafiosInDb.setDataDesafio(desafios.getDataDesafio());
         desafiosInDb.setResultado(desafios.getResultado());
         desafiosInDb.setSts(desafios.getSts());
 
