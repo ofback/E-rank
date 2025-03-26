@@ -1,15 +1,16 @@
 package com.doback.E_rank.entity;
+
 import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "feedMensagens")
+@Table(name = "feed_mensagens")
 public class FeedMensagens {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_feed_mensagens")
-    private Long id_feed_mensagens;
+    private Long idFeedMensagens;
 
     @Column(name = "atividade")
     private String atividade;
@@ -24,30 +25,33 @@ public class FeedMensagens {
     private char status;
 
     @Column(name = "data_envio")
-    private Date data_envio;
+    private Date dataEnvio;
+
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuarios usuarios;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    private Usuarios usuario;
 
-    public FeedMensagens(Long id_feed_mensagens, String atividade, String descricao, String mensagem, char status, Date data_envio) {
-        this.id_feed_mensagens = id_feed_mensagens;
+
+    public FeedMensagens(Long idFeedMensagens, String atividade, String descricao, String mensagem, char status, Date dataEnvio) {
+        this.idFeedMensagens = idFeedMensagens;
         this.atividade = atividade;
         this.descricao = descricao;
         this.mensagem = mensagem;
         this.status = status;
-        this.data_envio = data_envio;
+        this.dataEnvio = dataEnvio;
     }
 
     public FeedMensagens() {
     }
 
-    public Long getId_feed_mensagens() {
-        return id_feed_mensagens;
+
+    public Long getIdFeedMensagens() {
+        return idFeedMensagens;
     }
 
-    public void setId_feed_mensagens(Long id_feed_mensagens) {
-        this.id_feed_mensagens = id_feed_mensagens;
+    public void setIdFeedMensagens(Long idFeedMensagens) {
+        this.idFeedMensagens = idFeedMensagens;
     }
 
     public String getAtividade() {
@@ -82,13 +86,19 @@ public class FeedMensagens {
         this.status = status;
     }
 
-    public Date getData_envio() {
-        return data_envio;
+    public Date getDataEnvio() {
+        return dataEnvio;
     }
 
-    public void setData_envio(Date data_envio) {
-        this.data_envio = data_envio;
+    public void setDataEnvio(Date dataEnvio) {
+        this.dataEnvio = dataEnvio;
     }
 
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
 }
-

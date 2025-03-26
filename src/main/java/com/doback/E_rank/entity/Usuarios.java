@@ -2,10 +2,13 @@ package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuarios {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
@@ -33,6 +36,23 @@ public class Usuarios {
     @Column(name = "nome")
     private String nome;
 
+    @OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
+    private List<Amizades> amizades = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<FeedMensagens> feedMensagens = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<RegistroTimes> registroTimes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Estatisticas> estatisticas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Times> times = new ArrayList<>();
 
     public Usuarios(Long idUsuario, char sts, String biografia, String nickname, String email, String senha, Date dataCriacao, String nome) {
         this.idUsuario = idUsuario;
@@ -46,7 +66,6 @@ public class Usuarios {
     }
 
     public Usuarios() {
-
     }
 
     public Long getIdUsuario() {
@@ -111,5 +130,53 @@ public class Usuarios {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Amizades> getAmizades() {
+        return amizades;
+    }
+
+    public void setAmizades(List<Amizades> amizades) {
+        this.amizades = amizades;
+    }
+
+    public List<FeedMensagens> getFeedMensagens() {
+        return feedMensagens;
+    }
+
+    public void setFeedMensagens(List<FeedMensagens> feedMensagens) {
+        this.feedMensagens = feedMensagens;
+    }
+
+    public List<RegistroTimes> getRegistroTimes() {
+        return registroTimes;
+    }
+
+    public void setRegistroTimes(List<RegistroTimes> registroTimes) {
+        this.registroTimes = registroTimes;
+    }
+
+    public List<Estatisticas> getEstatisticas() {
+        return estatisticas;
+    }
+
+    public void setEstatisticas(List<Estatisticas> estatisticas) {
+        this.estatisticas = estatisticas;
+    }
+
+    public List<VotacaoEstatisticas> getVotacaoEstatisticas() {
+        return votacaoEstatisticas;
+    }
+
+    public void setVotacaoEstatisticas(List<VotacaoEstatisticas> votacaoEstatisticas) {
+        this.votacaoEstatisticas = votacaoEstatisticas;
+    }
+
+    public List<Times> getTimes() {
+        return times;
+    }
+
+    public void setTimes(List<Times> times) {
+        this.times = times;
     }
 }

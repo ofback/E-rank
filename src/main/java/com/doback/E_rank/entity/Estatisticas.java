@@ -1,40 +1,56 @@
 package com.doback.E_rank.entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name ="estatísticas")
-
+@Table(name = "estatisticas")
 public class Estatisticas {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_estatistica")
-    private Long id_estatistica;
-    @Column(name = "kilss")
+    private Long idEstatistica;
+
+    @Column(name = "kills")
     private Long kills;
+
     @Column(name = "assistencias")
     private int assistencias;
+
     @Column(name = "qts_partidas")
-    private int qts_partidas;
+    private int qtsPartidas;
+
     @Column(name = "sts_provacao")
-    private int sts_provacao;
+    private int stsProvacao;
+
     @Column(name = "vitorias")
     private int vitorias;
+
     @Column(name = "derrotas")
     private int derrotas;
+
     @Column(name = "recordKills")
     private int recordKills;
+
     @Column(name = "headshots")
     private int headshots;
 
-    public Estatisticas(Long id_estatistica, Long kills, int assistencias, int qts_partidas, int sts_provacao, int vitorias, int derrotas, int recordKills, int headshots) {
-        this.id_estatistica = id_estatistica;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario")
+    private Usuarios usuario;
+
+
+    @ManyToOne
+    @JoinColumn(name = "desafio_id", referencedColumnName = "id_desafio")
+    private Desafios desafio;
+
+    public Estatisticas(Long idEstatistica, Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots) {
+        this.idEstatistica = idEstatistica;
         this.kills = kills;
         this.assistencias = assistencias;
-        this.qts_partidas = qts_partidas;
-        this.sts_provacao = sts_provacao;
+        this.qtsPartidas = qtsPartidas;
+        this.stsProvacao = stsProvacao;
         this.vitorias = vitorias;
         this.derrotas = derrotas;
         this.recordKills = recordKills;
@@ -42,16 +58,15 @@ public class Estatisticas {
     }
 
     public Estatisticas() {
-
     }
 
 
-    public Long getId_estatistica() {
-        return id_estatistica;
+    public Long getIdEstatistica() {
+        return idEstatistica;
     }
 
-    public void setId_estatistica(Long id_estatistica) {
-        this.id_estatistica = id_estatistica;
+    public void setIdEstatistica(Long idEstatistica) {
+        this.idEstatistica = idEstatistica;
     }
 
     public Long getKills() {
@@ -70,20 +85,20 @@ public class Estatisticas {
         this.assistencias = assistencias;
     }
 
-    public int getQts_partidas() {
-        return qts_partidas;
+    public int getQtsPartidas() {
+        return qtsPartidas;
     }
 
-    public void setQts_partidas(int qts_partidas) {
-        this.qts_partidas = qts_partidas;
+    public void setQtsPartidas(int qtsPartidas) {
+        this.qtsPartidas = qtsPartidas;
     }
 
-    public int getSts_provacao() {
-        return sts_provacao;
+    public int getStsProvacao() {
+        return stsProvacao;
     }
 
-    public void setSts_provacao(int sts_provacao) {
-        this.sts_provacao = sts_provacao;
+    public void setStsProvacao(int stsProvacao) {
+        this.stsProvacao = stsProvacao;
     }
 
     public int getVitorias() {
@@ -116,5 +131,21 @@ public class Estatisticas {
 
     public void setDerrotas(int derrotas) {
         this.derrotas = derrotas;
+    }
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    public Desafios getDesafio() {
+        return desafio;
+    }
+
+    public void setDesafio(Desafios desafio) {
+        this.desafio = desafio;
     }
 }

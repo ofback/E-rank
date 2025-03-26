@@ -45,7 +45,7 @@ public class FeedMensagensRepositoryImpl implements FeedMensagensRepository {
             feedMensagensInDb.setAtividade(feedMensagens.getAtividade());
             feedMensagensInDb.setDescricao(feedMensagens.getDescricao());
             feedMensagensInDb.setMensagem(feedMensagens.getMensagem());
-            feedMensagensInDb.setData_envio(feedMensagens.getData_envio());
+            feedMensagensInDb.setDataEnvio(feedMensagens.getDataEnvio());
             feedMensagensInDb.setStatus(feedMensagens.getStatus());
 
             this.feedMensagensJpa.save(feedMensagensInDb);
