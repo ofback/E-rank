@@ -26,6 +26,10 @@ public class FeedMensagens {
     @Column(name = "data_envio")
     private Date data_envio;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuarios usuarios;
+
     public FeedMensagens(Long id_feed_mensagens, String atividade, String descricao, String mensagem, char status, Date data_envio) {
         this.id_feed_mensagens = id_feed_mensagens;
         this.atividade = atividade;
