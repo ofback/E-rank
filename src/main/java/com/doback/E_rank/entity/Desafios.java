@@ -9,7 +9,7 @@ public class Desafios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDesafio")
+    @Column(name = "id_desafio")
     private Long idDesafio;
 
     @Column(name = "data_desafio")
@@ -24,6 +24,10 @@ public class Desafios {
     @ManyToOne
     @JoinColumn(name = "id_amizade", referencedColumnName = "id_amizade")
     private Amizades amizade;
+
+    @ManyToOne
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id_jogo")
+    private Jogos jogo;
 
     public Desafios(Long idDesafio, Date dataDesafio, String resultado, char sts, Amizades amizade) {
         this.idDesafio = idDesafio;
@@ -74,5 +78,13 @@ public class Desafios {
 
     public void setAmizade(Amizades amizade) {
         this.amizade = amizade;
+    }
+
+    public Jogos getJogo() {
+        return jogo;
+    }
+
+    public void setJogo(Jogos jogo) {
+        this.jogo = jogo;
     }
 }

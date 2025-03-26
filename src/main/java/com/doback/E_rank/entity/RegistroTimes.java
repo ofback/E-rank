@@ -20,7 +20,7 @@ public class RegistroTimes {
 
     @ManyToOne
     @JoinColumn(name = "id_time", referencedColumnName = "id_time")
-    private Times time;
+    private Times times;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
@@ -30,7 +30,7 @@ public class RegistroTimes {
         this.id_registro_times = id_registro_times;
         this.cargo = cargo;
         this.data_entrada = data_entrada;
-        this.time = time;
+        this.times = time;
         this.usuario = usuario;
     }
 
@@ -61,19 +61,19 @@ public class RegistroTimes {
         this.data_entrada = data_entrada;
     }
 
-    public Times getTime() {
-        return time;
+    public Times getTimes() {
+        return times;
     }
 
-    public void setTime(Times time) {
-        this.time = time;
+    public void setTimes(Times times) {
+        this.times = times;
     }
 
-    public Usuarios getUsuario() {
+    public Usuarios getUsuarios() {
         return usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuarios(Usuarios usuario) {
         this.usuario = usuario;
     }
 

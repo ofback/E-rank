@@ -12,12 +12,6 @@ public class Amizades {
     @Column(name = "id_amizade")
     private Long idAmizade;
 
-    @Column(name = "id_usuario1")
-    private Long idUsuario1;
-
-    @Column(name = "id_usuario2")
-    private Long idUsuario2;
-
     @Column(name = "sts")
     private char sts;
 
@@ -34,8 +28,6 @@ public class Amizades {
 
     public Amizades(Long idAmizade, Long idUsuario1, Long idUsuario2, char sts, Date dataSolicitacao) {
         this.idAmizade = idAmizade;
-        this.idUsuario1 = idUsuario1;
-        this.idUsuario2 = idUsuario2;
         this.sts = sts;
         this.dataSolicitacao = dataSolicitacao;
     }
@@ -49,22 +41,6 @@ public class Amizades {
 
     public void setIdAmizade(Long idAmizade) {
         this.idAmizade = idAmizade;
-    }
-
-    public Long getIdUsuario1() {
-        return idUsuario1;
-    }
-
-    public void setIdUsuario1(Long idUsuario1) {
-        this.idUsuario1 = idUsuario1;
-    }
-
-    public Long getIdUsuario2() {
-        return idUsuario2;
-    }
-
-    public void setIdUsuario2(Long idUsuario2) {
-        this.idUsuario2 = idUsuario2;
     }
 
     public char getSts() {

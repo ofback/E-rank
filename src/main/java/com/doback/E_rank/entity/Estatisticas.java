@@ -40,6 +40,9 @@ public class Estatisticas {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario")
     private Usuarios usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id_jogo")
+    private Jogos jogos;
 
     @ManyToOne
     @JoinColumn(name = "desafio_id", referencedColumnName = "id_desafio")
@@ -139,6 +142,14 @@ public class Estatisticas {
 
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
+    }
+
+    public Jogos getJogos() {
+        return jogos;
+    }
+
+    public void setJogos(Jogos jogos) {
+        this.jogos = jogos;
     }
 
     public Desafios getDesafio() {
