@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/registro-times")
+@RequestMapping("/registroTimes")
 public class RegistroTimesController {
 
     private final RegistroTimesFacade registroTimesFacade;
