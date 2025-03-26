@@ -2,6 +2,7 @@ package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "temporadas")
@@ -26,6 +27,8 @@ public class Temporadas {
     @Temporal(TemporalType.DATE)
     private Date data_fim;
 
+    @OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
+    private List<Times> times;
 
     public Temporadas(Long id_temporada, String nome, String descricao, Date data_inicio, Date data_fim) {
         this.id_temporada = id_temporada;
@@ -36,9 +39,7 @@ public class Temporadas {
     }
 
     public Temporadas() {
-
     }
-
 
     public Long getIdTemporada() {
         return id_temporada;
@@ -78,5 +79,13 @@ public class Temporadas {
 
     public void setData_inicio(Date data_inicio) {
         this.data_inicio = data_inicio;
+    }
+
+    public List<Times> getTimes() {
+        return times;
+    }
+
+    public void setTimes(List<Times> times) {
+        this.times = times;
     }
 }

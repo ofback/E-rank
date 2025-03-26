@@ -1,13 +1,17 @@
 package com.doback.E_rank.entity;
+
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "times")
 public class Times {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_time")
-    private Long id_time;
+    private Long idTime;
 
     @Column(name = "nome")
     private String nome;
@@ -18,23 +22,34 @@ public class Times {
     @Column(name = "sts")
     private char sts;
 
-    public Times(Long id_time, String nome, String descricao, char sts) {
-        this.id_time = id_time;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    private Usuarios usuario;
+
+    @OneToMany(mappedBy = "times", cascade = CascadeType.ALL)
+    private List<RegistroTimes> registros = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "id_temporada", referencedColumnName = "id_temporada")
+    private Temporadas temporada;  // Relacionamento com Temporadas
+
+    public Times(Long idTime, String nome, String descricao, char sts, Usuarios usuario) {
+        this.idTime = idTime;
         this.nome = nome;
         this.descricao = descricao;
         this.sts = sts;
+        this.usuario = usuario;
     }
 
     public Times() {
-
     }
 
-    public Long getId_time() {
-        return id_time;
+    public Long getIdTime() {
+        return idTime;
     }
 
-    public void setId_time(Long id_time) {
-        this.id_time = id_time;
+    public void setIdTime(Long idTime) {
+        this.idTime = idTime;
     }
 
     public String getNome() {
@@ -59,5 +74,29 @@ public class Times {
 
     public void setSts(char sts) {
         this.sts = sts;
+    }
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<RegistroTimes> getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(List<RegistroTimes> registros) {
+        this.registros = registros;
+    }
+
+    public Temporadas getTemporada() {
+        return temporada;
+    }
+
+    public void setTemporada(Temporadas temporada) {
+        this.temporada = temporada;
     }
 }

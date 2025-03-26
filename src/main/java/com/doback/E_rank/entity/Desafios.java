@@ -1,50 +1,55 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
-@Table(name ="desafios")
-
+@Table(name = "desafios")
 public class Desafios {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "idDesafio")
-    private Long id_desafio;
+    private Long idDesafio;
+
     @Column(name = "data_desafio")
-    private Date data_desafio;
+    private Date dataDesafio;
+
     @Column(name = "resultado")
     private String resultado;
+
     @Column(name = "sts")
     private char sts;
 
-    public Desafios(Long id_desafio, Date data_desafio, String resultado, char sts) {
-        this.id_desafio = id_desafio;
-        this.data_desafio = data_desafio;
+    @ManyToOne
+    @JoinColumn(name = "id_amizade", referencedColumnName = "id_amizade")
+    private Amizades amizade;
+
+    public Desafios(Long idDesafio, Date dataDesafio, String resultado, char sts, Amizades amizade) {
+        this.idDesafio = idDesafio;
+        this.dataDesafio = dataDesafio;
         this.resultado = resultado;
         this.sts = sts;
+        this.amizade = amizade;
     }
 
     public Desafios() {
-
     }
 
-    public Long getId_desafio() {
-        return id_desafio;
+    public Long getIdDesafio() {
+        return idDesafio;
     }
 
-    public void setId_desafio(Long id_desafio) {
-        this.id_desafio = id_desafio;
+    public void setIdDesafio(Long idDesafio) {
+        this.idDesafio = idDesafio;
     }
 
-    public Date getData_desafio() {
-        return data_desafio;
+    public Date getDataDesafio() {
+        return dataDesafio;
     }
 
-    public void setData_desafio(Date data_desafio) {
-        this.data_desafio = data_desafio;
+    public void setDataDesafio(Date dataDesafio) {
+        this.dataDesafio = dataDesafio;
     }
 
     public String getResultado() {
@@ -61,5 +66,13 @@ public class Desafios {
 
     public void setSts(char sts) {
         this.sts = sts;
+    }
+
+    public Amizades getAmizade() {
+        return amizade;
+    }
+
+    public void setAmizade(Amizades amizade) {
+        this.amizade = amizade;
     }
 }

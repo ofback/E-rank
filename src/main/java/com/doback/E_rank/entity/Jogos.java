@@ -1,22 +1,28 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "jogos")
-
 public class Jogos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "idJogo")
+    @Column(name = "id_jogo")
     private Long idJogo;
+
     @Column(name = "nome")
     private String nome;
+
     @Column(name = "descricao")
     private String descricao;
+
     @Column(name = "genero")
     private String genero;
+
+    @OneToMany(mappedBy = "jogo", cascade = CascadeType.ALL)
+    private List<Estatisticas> estatisticas = new ArrayList<>();
 
     public Jogos(Long idJogo, String nome, String descricao, String genero) {
         this.idJogo = idJogo;
@@ -25,9 +31,7 @@ public class Jogos {
         this.genero = genero;
     }
 
-    public Jogos() {
-
-    }
+    public Jogos() {}
 
     public Long getIdJogo() {
         return idJogo;
@@ -59,5 +63,13 @@ public class Jogos {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public List<Estatisticas> getEstatisticas() {
+        return estatisticas;
+    }
+
+    public void setEstatisticas(List<Estatisticas> estatisticas) {
+        this.estatisticas = estatisticas;
     }
 }
