@@ -36,6 +36,14 @@ public class Usuarios {
     @Column(name = "nome")
     private String nome;
 
+    @ManyToMany
+    @JoinTable(
+            name = "usuarios_jogos",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_jogo")
+    )
+    private List<Jogos> jogos;
+
     @OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
     private List<Amizades> amizades = new ArrayList<>();
 
@@ -48,7 +56,7 @@ public class Usuarios {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Estatisticas> estatisticas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
     private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
@@ -130,6 +138,14 @@ public class Usuarios {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Jogos> getJogos() {
+        return jogos;
+    }
+
+    public void setJogos(List<Jogos> jogos) {
+        this.jogos = jogos;
     }
 
     public List<Amizades> getAmizades() {
