@@ -20,6 +20,22 @@ public class VotacaoEstatisticas {
     @Column(name = "data_voto")
     private Date data_voto;
 
+    @ManyToOne
+    @JoinColumn(name = "id_estatistica")
+    private Estatisticas estatisticas;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuarios usuarios;
+
+    @ManyToOne
+    @JoinColumn(name = "id_temporada")
+    private Temporadas temporadas;
+
+    @ManyToOne
+    @JoinColumn(name = "id_jogo")
+    private Jogos jogos;
+
     public VotacaoEstatisticas(Long id_votacao_estatistica, boolean voto, Date data_voto) {
         this.id_votacao_estatistica = id_votacao_estatistica;
         this.voto = voto;
