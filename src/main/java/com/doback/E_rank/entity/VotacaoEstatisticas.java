@@ -67,35 +67,36 @@ public class VotacaoEstatisticas {
         this.data_voto = data_voto;
     }
 
-    public Estatisticas getEstatisticas() {
-        return estatisticas;
-    }
+//    public Estatisticas getEstatisticas() {
+//        return estatisticas;
+//    }
+//
+//    public void setEstatisticas(Estatisticas estatisticas) {
+//        this.estatisticas = estatisticas;
+//    }
+//
+//    public Usuarios getUsuarios() {
+//        return usuarios;
+//    }
+//
+//    public void setUsuarios(Usuarios usuarios) {
+//        this.usuarios = usuarios;
+//    }
+//
+//    public Temporadas getTemporadas() {
+//        return temporadas;
+//    }
+//
+//    public void setTemporadas(Temporadas temporadas) {
+//        this.temporadas = temporadas;
+//    }
+//
+//    public Jogos getJogos() {
+//        return jogos;
+//    }
+//
+//    public void setJogos(Jogos jogos) {
+//        this.jogos = jogos;
+//    }
 
-    public void setEstatisticas(Estatisticas estatisticas) {
-        this.estatisticas = estatisticas;
-    }
-
-    public Usuarios getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public Temporadas getTemporadas() {
-        return temporadas;
-    }
-
-    public void setTemporadas(Temporadas temporadas) {
-        this.temporadas = temporadas;
-    }
-
-    public Jogos getJogos() {
-        return jogos;
-    }
-
-    public void setJogos(Jogos jogos) {
-        this.jogos = jogos;
-    }
 }

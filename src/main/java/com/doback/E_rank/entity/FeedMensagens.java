@@ -94,11 +94,12 @@ public class FeedMensagens {
         this.dataEnvio = dataEnvio;
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
-    }
+//    public Usuarios getUsuario() {
+//        return usuario;
+//    }
+//
+//    public void setUsuario(Usuarios usuario) {
+//        this.usuario = usuario;
+//    }
 
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
-    }
 }

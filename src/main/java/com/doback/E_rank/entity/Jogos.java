@@ -65,11 +65,12 @@ public class Jogos {
         this.genero = genero;
     }
 
-    public List<Estatisticas> getEstatisticas() {
-        return estatisticas;
-    }
+//    public List<Estatisticas> getEstatisticas() {
+//        return estatisticas;
+//    }
+//
+//    public void setEstatisticas(List<Estatisticas> estatisticas) {
+//        this.estatisticas = estatisticas;
+//    }
 
-    public void setEstatisticas(List<Estatisticas> estatisticas) {
-        this.estatisticas = estatisticas;
-    }
 }
