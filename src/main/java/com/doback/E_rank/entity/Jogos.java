@@ -21,7 +21,7 @@ public class Jogos {
     @Column(name = "genero")
     private String genero;
 
-    @OneToMany(mappedBy = "jogos", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Estatisticas> estatisticas = new ArrayList<>();
 
     public Jogos(Long idJogo, String nome, String descricao, String genero) {
