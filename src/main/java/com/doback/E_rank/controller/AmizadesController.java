@@ -1,7 +1,6 @@
 package com.doback.E_rank.controller;
 
 import com.doback.E_rank.entity.Amizades;
-import com.doback.E_rank.entity.Times;
 import com.doback.E_rank.facade.AmizadesFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

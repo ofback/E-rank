@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Temporadas")
+@RequestMapping("/temporadas")
 public class TemporadasController {
 
     private final TemporadasFacade temporadaFacade;
