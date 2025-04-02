@@ -136,27 +136,27 @@ public class Estatisticas {
         this.derrotas = derrotas;
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
-    }
-
-    public Jogos getJogos() {
-        return jogos;
-    }
-
-    public void setJogos(Jogos jogos) {
-        this.jogos = jogos;
-    }
-
-    public Desafios getDesafio() {
-        return desafio;
-    }
-
-    public void setDesafio(Desafios desafio) {
-        this.desafio = desafio;
-    }
+//    public Usuarios getUsuario() {
+//        return usuario;
+//    }
+//
+//    public void setUsuario(Usuarios usuario) {
+//        this.usuario = usuario;
+//    }
+//
+//    public Jogos getJogos() {
+//        return jogos;
+//    }
+//
+//    public void setJogos(Jogos jogos) {
+//        this.jogos = jogos;
+//    }
+//
+//    public Desafios getDesafio() {
+//        return desafio;
+//    }
+//
+//    public void setDesafio(Desafios desafio) {
+//        this.desafio = desafio;
+//    }
 }

@@ -26,7 +26,7 @@ public class Times {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     private Usuarios usuario;
 
-    @OneToMany(mappedBy = "times", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<RegistroTimes> registros = new ArrayList<>();
 
     @ManyToOne
@@ -76,27 +76,27 @@ public class Times {
         this.sts = sts;
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<RegistroTimes> getRegistros() {
-        return registros;
-    }
-
-    public void setRegistros(List<RegistroTimes> registros) {
-        this.registros = registros;
-    }
-
-    public Temporadas getTemporada() {
-        return temporada;
-    }
-
-    public void setTemporada(Temporadas temporada) {
-        this.temporada = temporada;
-    }
+//    public Usuarios getUsuario() {
+//        return usuario;
+//    }
+//
+//    public void setUsuario(Usuarios usuario) {
+//        this.usuario = usuario;
+//    }
+//
+//    public List<RegistroTimes> getRegistros() {
+//        return registros;
+//    }
+//
+//    public void setRegistros(List<RegistroTimes> registros) {
+//        this.registros = registros;
+//    }
+//
+//    public Temporadas getTemporada() {
+//        return temporada;
+//    }
+//
+//    public void setTemporada(Temporadas temporada) {
+//        this.temporada = temporada;
+//    }
 }

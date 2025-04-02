@@ -1,5 +1,6 @@
 package com.doback.E_rank.controller;
 
+import com.doback.E_rank.entity.Amizades;
 import com.doback.E_rank.entity.Usuarios;
 import com.doback.E_rank.facade.UsuariosFacade;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,11 @@ public class UsuariosController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirUsuario(@PathVariable int id) {
         usuarioFacade.excluirUsuario(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void atualizarUsuario(@PathVariable int id,@RequestBody Usuarios usuarios){
+        usuarioFacade.atualizarUsuarios(id, usuarios);
     }
 }
