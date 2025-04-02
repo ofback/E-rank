@@ -37,19 +37,19 @@ public class RegistroTemporadas {
         this.id_registro_temporadas = id_registro_temporadas;
     }
 
-    public Temporadas getTemporada() {
-        return temporada;
-    }
-
-    public void setTemporada(Temporadas temporada) {
-        this.temporada = temporada;
-    }
-
-    public Times getTime() {
-        return time;
-    }
-
-    public void setTime(Times time) {
-        this.time = time;
-    }
+//    public Temporadas getTemporada() {
+//        return temporada;
+//    }
+//
+//    public void setTemporada(Temporadas temporada) {
+//        this.temporada = temporada;
+//    }
+//
+//    public Times getTime() {
+//        return time;
+//    }
+//
+//    public void setTime(Times time) {
+//        this.time = time;
+//    }
 }

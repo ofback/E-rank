@@ -27,7 +27,7 @@ public class Temporadas {
     @Temporal(TemporalType.DATE)
     private Date data_fim;
 
-    @OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "temporada", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Times> times;
 
     public Temporadas(Long id_temporada, String nome, String descricao, Date data_inicio, Date data_fim) {
@@ -81,11 +81,11 @@ public class Temporadas {
         this.data_inicio = data_inicio;
     }
 
-    public List<Times> getTimes() {
-        return times;
-    }
-
-    public void setTimes(List<Times> times) {
-        this.times = times;
-    }
+//    public List<Times> getTimes() {
+//        return times;
+//    }
+//
+//    public void setTimes(List<Times> times) {
+//        this.times = times;
+//    }
 }

@@ -61,21 +61,21 @@ public class RegistroTimes {
         this.data_entrada = data_entrada;
     }
 
-    public Times getTimes() {
-        return times;
-    }
-
-    public void setTimes(Times times) {
-        this.times = times;
-    }
-
-    public Usuarios getUsuarios() {
-        return usuario;
-    }
-
-    public void setUsuarios(Usuarios usuario) {
-        this.usuario = usuario;
-    }
+//    public Times getTimes() {
+//        return times;
+//    }
+//
+//    public void setTimes(Times times) {
+//        this.times = times;
+//    }
+//
+//    public Usuarios getUsuarios() {
+//        return usuario;
+//    }
+//
+//    public void setUsuarios(Usuarios usuario) {
+//        this.usuario = usuario;
+//    }
 
     public void add(RegistroTimes registroTimes) {
     }

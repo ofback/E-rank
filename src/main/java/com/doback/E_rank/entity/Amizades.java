@@ -26,8 +26,10 @@ public class Amizades {
     @JoinColumn(name = "id_usuario2", referencedColumnName = "id_usuario")
     private Usuarios usuario2;
 
-    public Amizades(Long idAmizade, Long idUsuario1, Long idUsuario2, char sts, Date dataSolicitacao) {
+    public Amizades(Long idAmizade, Usuarios usuario1, Usuarios usuario2, char sts, Date dataSolicitacao) {
         this.idAmizade = idAmizade;
+        this.usuario1 = usuario1;
+        this.usuario2 = usuario2;
         this.sts = sts;
         this.dataSolicitacao = dataSolicitacao;
     }
@@ -58,4 +60,20 @@ public class Amizades {
     public void setDataSolicitacao(Date dataSolicitacao) {
         this.dataSolicitacao = dataSolicitacao;
     }
+
+//    public Usuarios getUsuario1() {
+//        return usuario1;
+//    }
+//
+//    public void setUsuario1(Usuarios usuario1) {
+//        this.usuario1 = usuario1;
+//    }
+//
+//    public Usuarios getUsuario2() {
+//        return usuario2;
+//    }
+//
+//    public void setUsuario2(Usuarios usuario2) {
+//        this.usuario2 = usuario2;
+//    }
 }

@@ -29,12 +29,13 @@ public class Desafios {
     @JoinColumn(name = "id_jogo", referencedColumnName = "id_jogo")
     private Jogos jogo;
 
-    public Desafios(Long idDesafio, Date dataDesafio, String resultado, char sts, Amizades amizade) {
+    public Desafios(Long idDesafio, Date dataDesafio, String resultado, char sts, Amizades amizade, Jogos jogo) {
         this.idDesafio = idDesafio;
         this.dataDesafio = dataDesafio;
         this.resultado = resultado;
         this.sts = sts;
         this.amizade = amizade;
+        this.jogo = jogo;
     }
 
     public Desafios() {
@@ -72,19 +73,19 @@ public class Desafios {
         this.sts = sts;
     }
 
-    public Amizades getAmizade() {
-        return amizade;
-    }
-
-    public void setAmizade(Amizades amizade) {
-        this.amizade = amizade;
-    }
-
-    public Jogos getJogo() {
-        return jogo;
-    }
-
-    public void setJogo(Jogos jogo) {
-        this.jogo = jogo;
-    }
+//    public Amizades getAmizade() {
+//        return amizade;
+//    }
+//
+//    public void setAmizade(Amizades amizade) {
+//        this.amizade = amizade;
+//    }
+//
+//    public Jogos getJogo() {
+//        return jogo;
+//    }
+//
+//    public void setJogo(Jogos jogo) {
+//        this.jogo = jogo;
+//    }
 }
