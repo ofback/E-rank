@@ -33,15 +33,14 @@ public class RegistroTimes {
     @Column(name = "id_usuarios")
     private int idUsuarios;
 
-    public RegistroTimes(Long id, String cargo, Date data_entrada, Times time, Usuarios usuario) {
-        this.id = id;
+    public RegistroTimes() {
+    }
+
+    public RegistroTimes(String cargo, Date data_entrada, Times time, Usuarios usuario) {
         this.cargo = cargo;
         this.data_entrada = data_entrada;
         this.times = time;
         this.usuario = usuario;
-    }
-
-    public RegistroTimes() {
     }
 
     public Long getId() {
