@@ -11,8 +11,8 @@ public class Usuarios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Long idUsuario;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "sts")
     private char sts;
@@ -62,8 +62,7 @@ public class Usuarios {
     @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Times> times = new ArrayList<>();
 
-    public Usuarios(Long idUsuario, char sts, String biografia, String nickname, String email, String senha, Date dataCriacao, String nome) {
-        this.idUsuario = idUsuario;
+    public Usuarios(char sts, String biografia, String nickname, String email, String senha, Date dataCriacao, String nome) {
         this.sts = sts;
         this.biografia = biografia;
         this.nickname = nickname;
@@ -76,13 +75,6 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     public char getSts() {
         return sts;
@@ -138,6 +130,14 @@ public class Usuarios {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 //    public List<Jogos> getJogos() {

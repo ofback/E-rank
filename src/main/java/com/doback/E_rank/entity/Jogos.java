@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Jogos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_jogo")
-    private Long idJogo;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -24,22 +24,13 @@ public class Jogos {
     @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Estatisticas> estatisticas = new ArrayList<>();
 
-    public Jogos(Long idJogo, String nome, String descricao, String genero) {
-        this.idJogo = idJogo;
+    public Jogos(String nome, String descricao, String genero) {
         this.nome = nome;
         this.descricao = descricao;
         this.genero = genero;
     }
 
     public Jogos() {}
-
-    public Long getIdJogo() {
-        return idJogo;
-    }
-
-    public void setIdJogo(Long idJogo) {
-        this.idJogo = idJogo;
-    }
 
     public String getNome() {
         return nome;
@@ -63,6 +54,14 @@ public class Jogos {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 //    public List<Estatisticas> getEstatisticas() {

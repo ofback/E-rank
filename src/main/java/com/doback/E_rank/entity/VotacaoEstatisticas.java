@@ -9,8 +9,8 @@ public class VotacaoEstatisticas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_votacao_estatisticas")
-    private Long id_votacao_estatistica;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "voto")
     private boolean voto;
@@ -34,21 +34,12 @@ public class VotacaoEstatisticas {
     @JoinColumn(name = "id_jogo")
     private Jogos jogos;
 
-    public VotacaoEstatisticas(Long id_votacao_estatistica, boolean voto, Date data_voto) {
-        this.id_votacao_estatistica = id_votacao_estatistica;
+    public VotacaoEstatisticas(boolean voto, Date data_voto) {
         this.voto = voto;
         this.data_voto = data_voto;
     }
 
     public VotacaoEstatisticas() {
-    }
-
-    public Long getId_votacao_estatistica() {
-        return id_votacao_estatistica;
-    }
-
-    public void setId_votacao_estatistica(Long id_votacao_estatistica) {
-        this.id_votacao_estatistica = id_votacao_estatistica;
     }
 
     public boolean isVoto() {
@@ -65,6 +56,14 @@ public class VotacaoEstatisticas {
 
     public void setData_voto(Date data_voto) {
         this.data_voto = data_voto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 //    public Estatisticas getEstatisticas() {
