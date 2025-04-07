@@ -42,8 +42,7 @@ public class Times {
 
 
 
-    public Times(Long id, String nome, String descricao, char sts, Usuarios usuario) {
-        this.id = id;
+    public Times(String nome, String descricao, char sts, Usuarios usuario) {
         this.nome = nome;
         this.descricao = descricao;
         this.sts = sts;
