@@ -22,21 +22,37 @@ public class VotacaoEstatisticas {
     @JoinColumn(name = "id_estatistica")
     private Estatisticas estatisticas;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario")
-    private Usuarios usuarios;
+    @Column(name = "id_estatistica")
+    private int idEstatistica;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_temporada")
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario;
+
+    @Column(name = "id_usuario")
+    private int idUsuario;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
     private Temporadas temporadas;
 
+    @Column(name = "id_temporada")
+    private int idTemporada;
+
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_jogo")
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
     private Jogos jogos;
 
-    public VotacaoEstatisticas(boolean voto, Date data_voto) {
+    @Column(name = "id_jogo")
+    private int idJogo;
+
+    public VotacaoEstatisticas(boolean voto, Date data_voto, Estatisticas estatisticas, Usuarios usuario, Temporadas temporadas, Jogos jogos) {
         this.voto = voto;
         this.data_voto = data_voto;
+        this.estatisticas = estatisticas;
+        this.usuario = usuario;
+        this.temporadas = temporadas;
+        this.jogos = jogos;
     }
 
     public VotacaoEstatisticas() {

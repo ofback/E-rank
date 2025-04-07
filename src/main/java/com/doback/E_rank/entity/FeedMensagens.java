@@ -28,7 +28,7 @@ public class FeedMensagens {
     private Date dataEnvio;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
@@ -36,13 +36,13 @@ public class FeedMensagens {
     private int idUsuario;
 
 
-    public FeedMensagens(String atividade, String descricao, String mensagem, char status, Date dataEnvio, int idUsuario) {
+    public FeedMensagens(String atividade, String descricao, String mensagem, char status, Date dataEnvio, Usuarios usuario) {
         this.atividade = atividade;
         this.descricao = descricao;
         this.mensagem = mensagem;
         this.status = status;
         this.dataEnvio = dataEnvio;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
     }
 
     public FeedMensagens() {

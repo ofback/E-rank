@@ -21,13 +21,19 @@ public class Desafios {
     @Column(name = "sts")
     private char sts;
 
-    @ManyToOne
-    @JoinColumn(name = "id_amizade", referencedColumnName = "id_amizade")
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_amizade", referencedColumnName = "id", insertable = false, updatable = false)
     private Amizades amizade;
 
-    @ManyToOne
-    @JoinColumn(name = "id_jogo", referencedColumnName = "id_jogo")
+    @Column(name = "id_amizade")
+    private int idAmizade;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id_jogo", insertable = false, updatable = false)
     private Jogos jogo;
+
+    @Column(name = "id_jogo")
+    private int idJogo;
 
     public Desafios( Date dataDesafio, String resultado, char sts, Amizades amizade, Jogos jogo) {
         this.dataDesafio = dataDesafio;
