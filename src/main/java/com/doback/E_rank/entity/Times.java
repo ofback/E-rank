@@ -22,7 +22,7 @@ public class Times {
     @Column(name = "sts")
     private char sts;
 
-    @ManyToOne(cascade = CascadeType.MERGE.PERSIST)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
@@ -33,7 +33,7 @@ public class Times {
     @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<RegistroTimes> registros = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.MERGE.PERSIST)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_temporadas", referencedColumnName = "id")
     private Temporadas temporada;
 
