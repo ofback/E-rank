@@ -18,7 +18,7 @@ public class RegistroTimes {
     @Column(name = "data_entrada")
     private Date data_entrada;
 
-    @ManyToOne(cascade = CascadeType.MERGE.PERSIST)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_times", referencedColumnName = "id")
     private Times times;
 
@@ -26,7 +26,7 @@ public class RegistroTimes {
     private int idTimes;
 
 
-    @ManyToOne(cascade = CascadeType.MERGE.PERSIST)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_usuarios", referencedColumnName = "id")
     private Usuarios usuario;
 
