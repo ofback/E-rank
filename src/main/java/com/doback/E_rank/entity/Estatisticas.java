@@ -36,30 +36,30 @@ public class Estatisticas {
     private int headshots;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
-    @Column(name = "id")
+    @Column(name = "id_usuario")
     private Long idUsuario;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
     private Jogos jogo;
 
-    @Column(name = "id")
+    @Column(name = "id_jogo")
     private Long idJogo;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_desafio", referencedColumnName = "id", insertable = false, updatable = false)
     private Desafios desafio;
 
-    @Column(name = "id")
+    @Column(name = "id_desafio")
     private Long idDesafio;
 
-    public Estatisticas( Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots) {
+    public Estatisticas( Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots, Jogos jogo, Desafios desafio, Usuarios usuario) {
         this.kills = kills;
         this.assistencias = assistencias;
         this.qtsPartidas = qtsPartidas;
@@ -68,6 +68,9 @@ public class Estatisticas {
         this.derrotas = derrotas;
         this.recordKills = recordKills;
         this.headshots = headshots;
+        this.jogo = jogo;
+        this.usuario = usuario;
+        this.desafio = desafio;
     }
 
     public Estatisticas() {

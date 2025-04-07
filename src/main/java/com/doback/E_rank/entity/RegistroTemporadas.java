@@ -12,19 +12,19 @@ public class RegistroTemporadas {
     private long id;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
     private Temporadas temporada;
 
-    @Column(name = "id")
+    @Column(name = "id_temporada")
     private long idTemporada;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_time", referencedColumnName = "id", insertable = false, updatable = false)
     private Times time;
 
-    @Column(name = "id")
+    @Column(name = "id_time")
     private long idTime;
 
 

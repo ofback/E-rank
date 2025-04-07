@@ -14,16 +14,16 @@ public class Amizades {
     private Long id;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario1", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario1;
 
-    @Column(name = "id")
+    @Column(name = "id_usuario1")
     private Long idUsuario1;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario2", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario2;
 
     @Column(name = "id_usuario2")
