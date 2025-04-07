@@ -9,8 +9,8 @@ public class RegistroTimes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_registro_times")
-    private Long id_registro_times;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "cargo")
     private String cargo;
@@ -18,16 +18,23 @@ public class RegistroTimes {
     @Column(name = "data_entrada")
     private Date data_entrada;
 
-    @ManyToOne
-    @JoinColumn(name = "id_time", referencedColumnName = "id_time")
+    @ManyToOne(cascade = CascadeType.MERGE.PERSIST)
+    @JoinColumn(name = "id_times", referencedColumnName = "id")
     private Times times;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @Column(name = "id_times")
+    private int idTimes;
+
+
+    @ManyToOne(cascade = CascadeType.MERGE.PERSIST)
+    @JoinColumn(name = "id_usuarios", referencedColumnName = "id")
     private Usuarios usuario;
 
-    public RegistroTimes(Long id_registro_times, String cargo, Date data_entrada, Times time, Usuarios usuario) {
-        this.id_registro_times = id_registro_times;
+    @Column(name = "id_usuarios")
+    private int idUsuarios;
+
+    public RegistroTimes(Long id, String cargo, Date data_entrada, Times time, Usuarios usuario) {
+        this.id = id;
         this.cargo = cargo;
         this.data_entrada = data_entrada;
         this.times = time;
@@ -37,12 +44,12 @@ public class RegistroTimes {
     public RegistroTimes() {
     }
 
-    public Long getId_registro_times() {
-        return id_registro_times;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_registro_times(Long id_registro_times) {
-        this.id_registro_times = id_registro_times;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCargo() {

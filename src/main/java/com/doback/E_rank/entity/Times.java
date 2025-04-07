@@ -10,8 +10,8 @@ public class Times {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_time")
-    private Long idTime;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -22,19 +22,28 @@ public class Times {
     @Column(name = "sts")
     private char sts;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @ManyToOne(cascade = CascadeType.MERGE.PERSIST)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
+
+    @Column(name = "id_usuario")
+    private int idUsuario;
+
 
     @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<RegistroTimes> registros = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "id_temporada", referencedColumnName = "id_temporada")
-    private Temporadas temporada;  // Relacionamento com Temporadas
+    @ManyToOne(cascade = CascadeType.MERGE.PERSIST)
+    @JoinColumn(name = "id_temporadas", referencedColumnName = "id")
+    private Temporadas temporada;
 
-    public Times(Long idTime, String nome, String descricao, char sts, Usuarios usuario) {
-        this.idTime = idTime;
+    @Column(name = "id_temporadas")
+    private int idTemporada;
+
+
+
+    public Times(Long id, String nome, String descricao, char sts, Usuarios usuario) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.sts = sts;
@@ -44,12 +53,12 @@ public class Times {
     public Times() {
     }
 
-    public Long getIdTime() {
-        return idTime;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdTime(Long idTime) {
-        this.idTime = idTime;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
