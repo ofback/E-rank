@@ -9,8 +9,8 @@ public class FeedMensagens {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_feed_mensagens")
-    private Long idFeedMensagens;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "atividade")
     private String atividade;
@@ -29,29 +29,23 @@ public class FeedMensagens {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
+    @Column(name = "id_usuario")
+    private int idUsuario;
 
-    public FeedMensagens(Long idFeedMensagens, String atividade, String descricao, String mensagem, char status, Date dataEnvio) {
-        this.idFeedMensagens = idFeedMensagens;
+
+    public FeedMensagens(String atividade, String descricao, String mensagem, char status, Date dataEnvio, int idUsuario) {
         this.atividade = atividade;
         this.descricao = descricao;
         this.mensagem = mensagem;
         this.status = status;
         this.dataEnvio = dataEnvio;
+        this.idUsuario = idUsuario;
     }
 
     public FeedMensagens() {
-    }
-
-
-    public Long getIdFeedMensagens() {
-        return idFeedMensagens;
-    }
-
-    public void setIdFeedMensagens(Long idFeedMensagens) {
-        this.idFeedMensagens = idFeedMensagens;
     }
 
     public String getAtividade() {
@@ -92,6 +86,22 @@ public class FeedMensagens {
 
     public void setDataEnvio(Date dataEnvio) {
         this.dataEnvio = dataEnvio;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 //    public Usuarios getUsuario() {
