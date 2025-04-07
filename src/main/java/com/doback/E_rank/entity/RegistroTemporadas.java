@@ -8,19 +8,27 @@ public class RegistroTemporadas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_registro_temporadas")
-    private long id_registro_temporadas;
+    @Column(name = "id")
+    private long id;
+
 
     @ManyToOne
-    @JoinColumn(name = "id_temporada", referencedColumnName = "id_temporada")
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private Temporadas temporada;
 
+    @Column(name = "id")
+    private long idTemporada;
+
+
     @ManyToOne
-    @JoinColumn(name = "id_time", referencedColumnName = "id_time")
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private Times time;
 
-    public RegistroTemporadas(long id_registro_temporadas, Temporadas temporada, Times time) {
-        this.id_registro_temporadas = id_registro_temporadas;
+    @Column(name = "id")
+    private long idTime;
+
+
+    public RegistroTemporadas( Temporadas temporada, Times time) {
         this.temporada = temporada;
         this.time = time;
     }
@@ -29,13 +37,14 @@ public class RegistroTemporadas {
 
     }
 
-    public long getId_registro_temporadas() {
-        return id_registro_temporadas;
+    public long getId() {
+        return id;
     }
 
-    public void setId_registro_temporadas(long id_registro_temporadas) {
-        this.id_registro_temporadas = id_registro_temporadas;
+    public void setId(long id) {
+        this.id = id;
     }
+
 
 //    public Temporadas getTemporada() {
 //        return temporada;

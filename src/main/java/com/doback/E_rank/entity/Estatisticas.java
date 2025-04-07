@@ -8,8 +8,8 @@ public class Estatisticas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_estatistica")
-    private Long idEstatistica;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "kills")
     private Long kills;
@@ -37,19 +37,29 @@ public class Estatisticas {
 
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario")
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_jogo", referencedColumnName = "id_jogo")
-    private Jogos jogos;
+    @Column(name = "id")
+    private Long idUsuario;
+
 
     @ManyToOne
-    @JoinColumn(name = "desafio_id", referencedColumnName = "id_desafio")
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Jogos jogo;
+
+    @Column(name = "id")
+    private Long idJogo;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     private Desafios desafio;
 
-    public Estatisticas(Long idEstatistica, Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots) {
-        this.idEstatistica = idEstatistica;
+    @Column(name = "id")
+    private Long idDesafio;
+
+    public Estatisticas( Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots) {
         this.kills = kills;
         this.assistencias = assistencias;
         this.qtsPartidas = qtsPartidas;
@@ -63,14 +73,6 @@ public class Estatisticas {
     public Estatisticas() {
     }
 
-
-    public Long getIdEstatistica() {
-        return idEstatistica;
-    }
-
-    public void setIdEstatistica(Long idEstatistica) {
-        this.idEstatistica = idEstatistica;
-    }
 
     public Long getKills() {
         return kills;
@@ -134,6 +136,14 @@ public class Estatisticas {
 
     public void setDerrotas(int derrotas) {
         this.derrotas = derrotas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 //    public Usuarios getUsuario() {
