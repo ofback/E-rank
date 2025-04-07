@@ -7,10 +7,27 @@ import java.util.Date;
 @Table(name = "amizades")
 public class Amizades {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_amizade")
-    private Long idAmizade;
+    @Column(name = "id")
+    private Long id;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario1;
+
+    @Column(name = "id")
+    private Long idUsuario1;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario2;
+
+    @Column(name = "id_usuario2")
+    private Long idUsuario2;
 
     @Column(name = "sts")
     private char sts;
@@ -18,16 +35,8 @@ public class Amizades {
     @Column(name = "data_solicitacao")
     private Date dataSolicitacao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario1", referencedColumnName = "id_usuario")
-    private Usuarios usuario1;
+    public Amizades( Usuarios usuario1, Usuarios usuario2, char sts, Date dataSolicitacao) {
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario2", referencedColumnName = "id_usuario")
-    private Usuarios usuario2;
-
-    public Amizades(Long idAmizade, Usuarios usuario1, Usuarios usuario2, char sts, Date dataSolicitacao) {
-        this.idAmizade = idAmizade;
         this.usuario1 = usuario1;
         this.usuario2 = usuario2;
         this.sts = sts;
@@ -37,13 +46,7 @@ public class Amizades {
     public Amizades() {
     }
 
-    public Long getIdAmizade() {
-        return idAmizade;
-    }
 
-    public void setIdAmizade(Long idAmizade) {
-        this.idAmizade = idAmizade;
-    }
 
     public char getSts() {
         return sts;
@@ -59,6 +62,14 @@ public class Amizades {
 
     public void setDataSolicitacao(Date dataSolicitacao) {
         this.dataSolicitacao = dataSolicitacao;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 //    public Usuarios getUsuario1() {
