@@ -11,7 +11,7 @@ public class RegistroTemporadas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "data")
     private Date data;
@@ -43,11 +43,11 @@ public class RegistroTemporadas {
 
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

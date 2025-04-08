@@ -14,25 +14,7 @@ public class Amizades {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
-
-
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_usuario1", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Usuarios usuario1;
-
-    @Column(name = "id_usuario1")
-    private Long idUsuario1;
-
-//    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<Desafios> desafios = new ArrayList<>();
-
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_usuario2", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Usuarios usuario2;
-
-    @Column(name = "id_usuario2")
-    private Long idUsuario2;
+    private int id;
 
     @Column(name = "sts")
     private char sts;
@@ -40,18 +22,34 @@ public class Amizades {
     @Column(name = "data_solicitacao")
     private Date dataSolicitacao;
 
-    public Amizades( /*Usuarios usuario1, Usuarios usuario2,*/ char sts, Date dataSolicitacao) {
+    //    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    //    private List<Desafios> desafios = new ArrayList<>();
 
-//        this.usuario1 = usuario1;
-//        this.usuario2 = usuario2;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario1", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario1;
+
+    @Column(name = "id_usuario1")
+    private int idUsuario1;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario2", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario2;
+
+    @Column(name = "id_usuario2")
+    private int idUsuario2;
+
+    public Amizades() {
+
+    }
+
+    public Amizades( Usuarios usuario1, Usuarios usuario2, char sts, Date dataSolicitacao) {
+
+        this.usuario1 = usuario1;
+        this.usuario2 = usuario2;
         this.sts = sts;
         this.dataSolicitacao = dataSolicitacao;
     }
-
-    public Amizades() {
-    }
-
-
 
     public char getSts() {
         return sts;
@@ -69,27 +67,28 @@ public class Amizades {
         this.dataSolicitacao = dataSolicitacao;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-//    public Usuarios getUsuario1() {
-//        return usuario1;
-//    }
-//
-//    public void setUsuario1(Usuarios usuario1) {
-//        this.usuario1 = usuario1;
-//    }
-//
-//    public Usuarios getUsuario2() {
-//        return usuario2;
-//    }
-//
-//    public void setUsuario2(Usuarios usuario2) {
-//        this.usuario2 = usuario2;
-//    }
+
+    public int getIdUsuario1() {
+        return idUsuario1;
+    }
+
+    public void setIdUsuario1(int idUsuario1) {
+        this.idUsuario1 = idUsuario1;
+    }
+
+    public int getIdUsuario2() {
+        return idUsuario2;
+    }
+
+    public void setIdUsuario2(int idUsuario2) {
+        this.idUsuario2 = idUsuario2;
+    }
 }

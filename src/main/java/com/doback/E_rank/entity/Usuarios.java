@@ -38,9 +38,12 @@ public class Usuarios {
 
     @OneToMany(mappedBy = "usuarios", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<UsuariosJogos> usuariosJogos = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "usuario1", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<Amizades> amizades = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario1", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Amizades> amizades1 = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario2", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Amizades> amizades2 = new ArrayList<>();
 //
 //    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    private List<FeedMensagens> feedMensagens = new ArrayList<>();

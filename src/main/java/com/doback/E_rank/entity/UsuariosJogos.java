@@ -11,7 +11,7 @@ public class UsuariosJogos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_usuarios", referencedColumnName = "id", insertable = false, updatable = false)
@@ -35,11 +35,11 @@ public class UsuariosJogos {
         this.jogos = jogos;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
