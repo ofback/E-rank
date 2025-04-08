@@ -22,6 +22,9 @@ public class Jogos {
     private String genero;
 
     @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Desafios> desafios = new ArrayList<>();
+
+    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Estatisticas> estatisticas = new ArrayList<>();
 
     public Jogos(String nome, String descricao, String genero) {

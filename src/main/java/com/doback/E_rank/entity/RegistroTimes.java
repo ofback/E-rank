@@ -6,7 +6,6 @@ import java.util.Date;
 @Entity
 @Table(name = "registroTimes")
 public class RegistroTimes {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,7 +18,7 @@ public class RegistroTimes {
     private Date data_entrada;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_times", referencedColumnName = "id")
+    @JoinColumn(name = "id_times", referencedColumnName = "id", insertable = false, updatable = false)
     private Times times;
 
     @Column(name = "id_times")
@@ -27,7 +26,7 @@ public class RegistroTimes {
 
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_usuarios", referencedColumnName = "id")
+    @JoinColumn(name = "id_usuarios", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
     @Column(name = "id_usuarios")
