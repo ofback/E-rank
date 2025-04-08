@@ -1,6 +1,8 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Temporadas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -27,8 +29,14 @@ public class Temporadas {
     @Temporal(TemporalType.DATE)
     private Date data_fim;
 
-    @OneToMany(mappedBy = "temporada", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Times> times;
+
+    @OneToMany(mappedBy = "temporada", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTemporadas> registroTemporadas  = new ArrayList<>();
 
     public Temporadas(String nome, String descricao, Date data_inicio, Date data_fim) {
         this.nome = nome;

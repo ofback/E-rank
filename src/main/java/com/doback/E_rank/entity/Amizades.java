@@ -1,7 +1,10 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "amizades")
@@ -21,6 +24,8 @@ public class Amizades {
     @Column(name = "id_usuario1")
     private Long idUsuario1;
 
+    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Desafios> desafios = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario2", referencedColumnName = "id", insertable = false, updatable = false)

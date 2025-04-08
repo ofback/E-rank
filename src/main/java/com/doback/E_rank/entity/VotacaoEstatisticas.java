@@ -1,7 +1,10 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "votacaoEstatisticas")
@@ -19,7 +22,7 @@ public class VotacaoEstatisticas {
     private Date data_voto;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_estatistica")
+    @JoinColumn(name = "id_estatistica", referencedColumnName = "id", insertable = false, updatable = false)
     private Estatisticas estatisticas;
 
     @Column(name = "id_estatistica")
@@ -39,20 +42,12 @@ public class VotacaoEstatisticas {
     @Column(name = "id_temporada")
     private int idTemporada;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
-    private Jogos jogos;
-
-    @Column(name = "id_jogo")
-    private int idJogo;
-
     public VotacaoEstatisticas(boolean voto, Date data_voto, Estatisticas estatisticas, Usuarios usuario, Temporadas temporadas, Jogos jogos) {
         this.voto = voto;
         this.data_voto = data_voto;
         this.estatisticas = estatisticas;
         this.usuario = usuario;
         this.temporadas = temporadas;
-        this.jogos = jogos;
     }
 
     public VotacaoEstatisticas() {
