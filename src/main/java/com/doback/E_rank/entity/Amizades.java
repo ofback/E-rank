@@ -17,19 +17,19 @@ public class Amizades {
     private Long id;
 
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario1", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario1;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_usuario1", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Usuarios usuario1;
 
     @Column(name = "id_usuario1")
     private Long idUsuario1;
 
-    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Desafios> desafios = new ArrayList<>();
+//    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    private List<Desafios> desafios = new ArrayList<>();
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario2", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario2;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_usuario2", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Usuarios usuario2;
 
     @Column(name = "id_usuario2")
     private Long idUsuario2;
@@ -40,10 +40,10 @@ public class Amizades {
     @Column(name = "data_solicitacao")
     private Date dataSolicitacao;
 
-    public Amizades( Usuarios usuario1, Usuarios usuario2, char sts, Date dataSolicitacao) {
+    public Amizades( /*Usuarios usuario1, Usuarios usuario2,*/ char sts, Date dataSolicitacao) {
 
-        this.usuario1 = usuario1;
-        this.usuario2 = usuario2;
+//        this.usuario1 = usuario1;
+//        this.usuario2 = usuario2;
         this.sts = sts;
         this.dataSolicitacao = dataSolicitacao;
     }

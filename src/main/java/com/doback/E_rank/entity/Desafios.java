@@ -24,29 +24,29 @@ public class Desafios {
     @Column(name = "sts")
     private char sts;
 
-    @OneToMany(mappedBy = "desafio", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Estatisticas> estatisticas = new ArrayList<>();
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_amizade", referencedColumnName = "id", insertable = false, updatable = false)
-    private Amizades amizade;
+//    @OneToMany(mappedBy = "desafio", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    private List<Estatisticas> estatisticas = new ArrayList<>();
+//
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_amizade", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Amizades amizade;
 
     @Column(name = "id_amizade")
     private int idAmizade;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
-    private Jogos jogos;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Jogos jogos;
 
     @Column(name = "id_jogo")
     private int idJogo;
 
-    public Desafios( Date dataDesafio, String resultado, char sts, Amizades amizade, Jogos jogos) {
+    public Desafios( Date dataDesafio, String resultado, char sts/*, Amizades amizade, Jogos jogos*/) {
         this.dataDesafio = dataDesafio;
         this.resultado = resultado;
         this.sts = sts;
-        this.amizade = amizade;
-        this.jogos = jogos;
+//        this.amizade = amizade;
+//        this.jogos = jogos;
     }
 
     public Desafios() {
