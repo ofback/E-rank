@@ -13,7 +13,7 @@ public class Temporadas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "nome")
     private String nome;
@@ -80,11 +80,11 @@ public class Temporadas {
         this.data_inicio = data_inicio;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -12,7 +12,7 @@ public class Estatisticas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "kills")
     private Long kills;
@@ -147,11 +147,11 @@ public class Estatisticas {
         this.derrotas = derrotas;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

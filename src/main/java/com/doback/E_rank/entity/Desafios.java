@@ -13,7 +13,7 @@ public class Desafios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "data_desafio")
     private Date dataDesafio;
@@ -77,11 +77,11 @@ public class Desafios {
         this.sts = sts;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
