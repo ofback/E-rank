@@ -41,31 +41,31 @@ public class Estatisticas {
 //    @OneToMany(mappedBy = "estatisticas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
 //
-//
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Usuarios usuario;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario;
 
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    private int idUsuario;
 
 
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Jogos jogos;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
+    private Jogos jogos;
 
     @Column(name = "id_jogo")
-    private Long idJogo;
+    private int idJogo;
 
 
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_desafio", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Desafios desafio;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_desafio", referencedColumnName = "id", insertable = false, updatable = false)
+    private Desafios desafio;
 
     @Column(name = "id_desafio")
-    private Long idDesafio;
+    private int idDesafio;
 
-    public Estatisticas( Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots/*, Jogos jogos, Desafios desafio, Usuarios usuario*/) {
+    public Estatisticas( Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots, Jogos jogos, Desafios desafio, Usuarios usuario) {
         this.kills = kills;
         this.assistencias = assistencias;
         this.qtsPartidas = qtsPartidas;
@@ -74,9 +74,9 @@ public class Estatisticas {
         this.derrotas = derrotas;
         this.recordKills = recordKills;
         this.headshots = headshots;
-//        this.jogos = jogos;
-//        this.usuario = usuario;
-//        this.desafio = desafio;
+        this.jogos = jogos;
+        this.usuario = usuario;
+        this.desafio = desafio;
     }
 
     public Estatisticas() {
@@ -155,27 +155,28 @@ public class Estatisticas {
         this.id = id;
     }
 
-//    public Usuarios getUsuario() {
-//        return usuario;
-//    }
-//
-//    public void setUsuario(Usuarios usuario) {
-//        this.usuario = usuario;
-//    }
-//
-//    public Jogos getJogos() {
-//        return jogos;
-//    }
-//
-//    public void setJogos(Jogos jogos) {
-//        this.jogos = jogos;
-//    }
-//
-//    public Desafios getDesafio() {
-//        return desafio;
-//    }
-//
-//    public void setDesafio(Desafios desafio) {
-//        this.desafio = desafio;
-//    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdJogo() {
+        return idJogo;
+    }
+
+    public void setIdJogo(int idJogo) {
+        this.idJogo = idJogo;
+    }
+
+    public int getIdDesafio() {
+        return idDesafio;
+    }
+
+    public void setIdDesafio(int idDesafio) {
+        this.idDesafio = idDesafio;
+    }
 }

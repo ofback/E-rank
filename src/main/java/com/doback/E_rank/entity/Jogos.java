@@ -24,11 +24,11 @@ public class Jogos {
     @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<UsuariosJogos> usuariosJogos = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<Desafios> desafios = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<Estatisticas> estatisticas = new ArrayList<>();
+    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Desafios> desafios = new ArrayList<>();
+
+    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Estatisticas> estatisticas = new ArrayList<>();
 
     public Jogos(String nome, String descricao, String genero) {
         this.nome = nome;

@@ -44,15 +44,15 @@ public class Usuarios {
 
     @OneToMany(mappedBy = "usuario2", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Amizades> amizades2 = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<FeedMensagens> feedMensagens = new ArrayList<>();
-//
+
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<FeedMensagens> feedMensagens = new ArrayList<>();
+
 //    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    private List<RegistroTimes> registroTimes = new ArrayList<>();
 //
-//    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<Estatisticas> estatisticas = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Estatisticas> estatisticas = new ArrayList<>();
 //
 //    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
