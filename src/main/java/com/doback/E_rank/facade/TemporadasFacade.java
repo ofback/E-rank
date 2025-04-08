@@ -16,7 +16,7 @@ public class TemporadasFacade {
     }
 
     public List<Temporadas> listarTemporadas() {
-        return TemporadasApplication.obterTodasTemporada();
+        return temporadaApplication.obterTodasTemporadas();
     }
 
     public Temporadas buscarTemporadaPorId(int id) {

@@ -28,7 +28,7 @@ public class TemporadasApplication {
         return TemporadaRepository.searchByCode(id);
     }
 
-    public void criar(Temporadas temporada) {
+    public void criarTemporada(Temporadas temporada) {
         TemporadaRepository.addTemporadas(temporada);
     }
 
@@ -36,9 +36,6 @@ public class TemporadasApplication {
         TemporadaRepository.removeTemporadas(id);
     }
 
-    public void criarTemporada(Temporadas temporada) {
-        
-    }
 
     public Temporadas obterTemporadaPorId(int id) {
         return TemporadaRepository.searchByCode(id);

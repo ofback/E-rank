@@ -17,25 +17,25 @@ public class RegistroTemporadas {
     private Date data;
 
 
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Temporadas temporada;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
+    private Temporadas temporada;
 
     @Column(name = "id_temporada")
-    private Long idTemporada;
+    private int idTemporada;
 
 
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_time", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Times time;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_time", referencedColumnName = "id", insertable = false, updatable = false)
+    private Times time;
 
     @Column(name = "id_time")
-    private Long idTime;
+    private int idTime;
 
 
-    public RegistroTemporadas(/* Temporadas temporada, Times time, */Date data) {
-//        this.temporada = temporada;
-//        this.time = time;
+    public RegistroTemporadas( Temporadas temporada, Times time, Date data) {
+        this.temporada = temporada;
+        this.time = time;
         this.data = data;
     }
 
@@ -51,20 +51,27 @@ public class RegistroTemporadas {
         this.id = id;
     }
 
+    public int getIdTime() {
+        return idTime;
+    }
 
-//    public Temporadas getTemporada() {
-//        return temporada;
-//    }
-//
-//    public void setTemporada(Temporadas temporada) {
-//        this.temporada = temporada;
-//    }
-//
-//    public Times getTime() {
-//        return time;
-//    }
-//
-//    public void setTime(Times time) {
-//        this.time = time;
-//    }
+    public void setIdTime(int idTime) {
+        this.idTime = idTime;
+    }
+
+    public int getIdTemporada() {
+        return idTemporada;
+    }
+
+    public void setIdTemporada(int idTemporada) {
+        this.idTemporada = idTemporada;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
 }

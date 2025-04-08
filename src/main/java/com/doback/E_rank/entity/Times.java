@@ -33,8 +33,8 @@ public class Times {
 //    @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    private List<RegistroTimes> registros = new ArrayList<>();
 //
-//    @OneToMany(mappedBy = "time", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<RegistroTemporadas> registroTemporadas = new ArrayList<>();
+    @OneToMany(mappedBy = "time", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTemporadas> registroTemporadas = new ArrayList<>();
 
 //    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    @JoinColumn(name = "id_temporadas", referencedColumnName = "id", insertable = false, updatable = false)
