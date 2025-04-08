@@ -17,17 +17,17 @@ public class RegistroTimes {
     @Column(name = "data_entrada")
     private Date data_entrada;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_times", referencedColumnName = "id", insertable = false, updatable = false)
-    private Times times;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    @JoinColumn(name = "id_times", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Times times;
 
     @Column(name = "id_times")
     private int idTimes;
 
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_usuarios", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    @JoinColumn(name = "id_usuarios", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Usuarios usuario;
 
     @Column(name = "id_usuarios")
     private int idUsuarios;
@@ -35,11 +35,11 @@ public class RegistroTimes {
     public RegistroTimes() {
     }
 
-    public RegistroTimes(String cargo, Date data_entrada, Times time, Usuarios usuario) {
+    public RegistroTimes(String cargo, Date data_entrada/*, Times time, Usuarios usuario*/) {
         this.cargo = cargo;
         this.data_entrada = data_entrada;
-        this.times = time;
-        this.usuario = usuario;
+//        this.times = time;
+//        this.usuario = usuario;
     }
 
     public Long getId() {

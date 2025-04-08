@@ -2,6 +2,8 @@ package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "registroTemporadas")
 public class RegistroTemporadas {
@@ -9,28 +11,32 @@ public class RegistroTemporadas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
+
+    @Column(name = "data")
+    private Date data;
 
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
-    private Temporadas temporada;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Temporadas temporada;
 
     @Column(name = "id_temporada")
-    private long idTemporada;
+    private Long idTemporada;
 
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_time", referencedColumnName = "id", insertable = false, updatable = false)
-    private Times time;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_time", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Times time;
 
     @Column(name = "id_time")
-    private long idTime;
+    private Long idTime;
 
 
-    public RegistroTemporadas( Temporadas temporada, Times time) {
-        this.temporada = temporada;
-        this.time = time;
+    public RegistroTemporadas(/* Temporadas temporada, Times time, */Date data) {
+//        this.temporada = temporada;
+//        this.time = time;
+        this.data = data;
     }
 
     public RegistroTemporadas() {

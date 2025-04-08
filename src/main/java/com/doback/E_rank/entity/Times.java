@@ -22,34 +22,34 @@ public class Times {
     @Column(name = "sts")
     private char sts;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Usuarios usuario;
 
     @Column(name = "id_usuario")
     private int idUsuario;
 
 
-    @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<RegistroTimes> registros = new ArrayList<>();
+//    @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    private List<RegistroTimes> registros = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "time", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    private List<RegistroTemporadas> registroTemporadas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "time", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<RegistroTemporadas> registroTemporadas = new ArrayList<>();
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_temporadas", referencedColumnName = "id", insertable = false, updatable = false)
-    private Temporadas temporadas;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    @JoinColumn(name = "id_temporadas", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Temporadas temporadas;
 
     @Column(name = "id_temporadas")
     private int idTemporada;
 
 
 
-    public Times(String nome, String descricao, char sts, Usuarios usuario) {
+    public Times(String nome, String descricao, char sts/*, Usuarios usuario*/) {
         this.nome = nome;
         this.descricao = descricao;
         this.sts = sts;
-        this.usuario = usuario;
+//        this.usuario = usuario;
     }
 
     public Times() {

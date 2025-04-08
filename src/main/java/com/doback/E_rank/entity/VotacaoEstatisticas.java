@@ -21,33 +21,33 @@ public class VotacaoEstatisticas {
     @Column(name = "data_voto")
     private Date data_voto;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_estatistica", referencedColumnName = "id", insertable = false, updatable = false)
-    private Estatisticas estatisticas;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_estatistica", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Estatisticas estatisticas;
 
     @Column(name = "id_estatistica")
     private int idEstatistica;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Usuarios usuario;
 
     @Column(name = "id_usuario")
     private int idUsuario;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
-    private Temporadas temporadas;
+//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Temporadas temporadas;
 
     @Column(name = "id_temporada")
     private int idTemporada;
 
-    public VotacaoEstatisticas(boolean voto, Date data_voto, Estatisticas estatisticas, Usuarios usuario, Temporadas temporadas, Jogos jogos) {
+    public VotacaoEstatisticas(boolean voto, Date data_voto/*, Estatisticas estatisticas, Usuarios usuario, Temporadas temporadas, Jogos jogos*/) {
         this.voto = voto;
         this.data_voto = data_voto;
-        this.estatisticas = estatisticas;
-        this.usuario = usuario;
-        this.temporadas = temporadas;
+//        this.estatisticas = estatisticas;
+//        this.usuario = usuario;
+//        this.temporadas = temporadas;
     }
 
     public VotacaoEstatisticas() {

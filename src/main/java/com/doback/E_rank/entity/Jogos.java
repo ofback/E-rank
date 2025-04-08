@@ -10,7 +10,7 @@ public class Jogos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "nome")
     private String nome;
@@ -22,10 +22,13 @@ public class Jogos {
     private String genero;
 
     @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Desafios> desafios = new ArrayList<>();
+    private List<UsuariosJogos> usuariosJogos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Estatisticas> estatisticas = new ArrayList<>();
+//    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    private List<Desafios> desafios = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    private List<Estatisticas> estatisticas = new ArrayList<>();
 
     public Jogos(String nome, String descricao, String genero) {
         this.nome = nome;
@@ -59,11 +62,11 @@ public class Jogos {
         this.genero = genero;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
