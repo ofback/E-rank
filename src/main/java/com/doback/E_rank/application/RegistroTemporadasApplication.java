@@ -1,5 +1,6 @@
 package com.doback.E_rank.application;
 
+import com.doback.E_rank.entity.Jogos;
 import com.doback.E_rank.entity.RegistroTemporadas;
 import com.doback.E_rank.interfaces.RegistroTemporadasRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,10 @@ public class RegistroTemporadasApplication {
 
     public void excluirRegistrosTemporada(int id) {
         registroTemporadasRepository.removeRegistroTemporadas(id);
+    }
+
+    public void atualizarRegistroTemporadas(int id, RegistroTemporadas registroTemporadas) {
+        registroTemporadasRepository.updateRegistroTemporadas(id, registroTemporadas);
     }
 
 }

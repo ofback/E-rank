@@ -21,33 +21,33 @@ public class VotacaoEstatisticas {
     @Column(name = "data_voto")
     private Date data_voto;
 
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_estatistica", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Estatisticas estatisticas;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_estatistica", referencedColumnName = "id", insertable = false, updatable = false)
+    private Estatisticas estatisticas;
 
     @Column(name = "id_estatistica")
     private int idEstatistica;
 
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Usuarios usuario;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario;
 
     @Column(name = "id_usuario")
     private int idUsuario;
 
-//    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
-//    private Temporadas temporadas;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
+    private Temporadas temporadas;
 
     @Column(name = "id_temporada")
     private int idTemporada;
 
-    public VotacaoEstatisticas(boolean voto, Date data_voto/*, Estatisticas estatisticas, Usuarios usuario, Temporadas temporadas, Jogos jogos*/) {
+    public VotacaoEstatisticas(boolean voto, Date data_voto, Estatisticas estatisticas, Usuarios usuario, Temporadas temporadas) {
         this.voto = voto;
         this.data_voto = data_voto;
-//        this.estatisticas = estatisticas;
-//        this.usuario = usuario;
-//        this.temporadas = temporadas;
+        this.estatisticas = estatisticas;
+        this.usuario = usuario;
+        this.temporadas = temporadas;
     }
 
     public VotacaoEstatisticas() {
@@ -77,36 +77,28 @@ public class VotacaoEstatisticas {
         this.id = id;
     }
 
-//    public Estatisticas getEstatisticas() {
-//        return estatisticas;
-//    }
-//
-//    public void setEstatisticas(Estatisticas estatisticas) {
-//        this.estatisticas = estatisticas;
-//    }
-//
-//    public Usuarios getUsuarios() {
-//        return usuarios;
-//    }
-//
-//    public void setUsuarios(Usuarios usuarios) {
-//        this.usuarios = usuarios;
-//    }
-//
-//    public Temporadas getTemporadas() {
-//        return temporadas;
-//    }
-//
-//    public void setTemporadas(Temporadas temporadas) {
-//        this.temporadas = temporadas;
-//    }
-//
-//    public Jogos getJogos() {
-//        return jogos;
-//    }
-//
-//    public void setJogos(Jogos jogos) {
-//        this.jogos = jogos;
-//    }
 
+    public int getIdEstatistica() {
+        return idEstatistica;
+    }
+
+    public void setIdEstatistica(int idEstatistica) {
+        this.idEstatistica = idEstatistica;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdTemporada() {
+        return idTemporada;
+    }
+
+    public void setIdTemporada(int idTemporada) {
+        this.idTemporada = idTemporada;
+    }
 }

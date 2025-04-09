@@ -22,8 +22,8 @@ public class Amizades {
     @Column(name = "data_solicitacao")
     private Date dataSolicitacao;
 
-    //    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    //    private List<Desafios> desafios = new ArrayList<>();
+    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Desafios> desafios = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario1", referencedColumnName = "id", insertable = false, updatable = false)

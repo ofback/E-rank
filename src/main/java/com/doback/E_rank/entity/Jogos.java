@@ -70,12 +70,4 @@ public class Jogos {
         this.id = id;
     }
 
-//    public List<Estatisticas> getEstatisticas() {
-//        return estatisticas;
-//    }
-//
-//    public void setEstatisticas(List<Estatisticas> estatisticas) {
-//        this.estatisticas = estatisticas;
-//    }
-
 }
