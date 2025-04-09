@@ -1,4 +1,5 @@
 package com.doback.E_rank.controller;
+import com.doback.E_rank.entity.RegistroTimes;
 import com.doback.E_rank.entity.Temporadas;
 import com.doback.E_rank.facade.TemporadasFacade;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,12 @@ public class TemporadasController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirTemporada(@PathVariable Long id) { temporadaFacade.excluirTemporada(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void atualizarTemporadas(@PathVariable int id, @RequestBody Temporadas temporadas) {
+        temporadaFacade.atualizarTemporadas(id, temporadas);
     }
 
 
