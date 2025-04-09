@@ -1,27 +1,77 @@
 package com.doback.E_rank.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "registroTemporadas")
 public class RegistroTemporadas {
 
     @Id
-    @Column(name = "id_registro_temporadas")
-    private long id_registro_temporadas;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-    public RegistroTemporadas(long id_registro_temporadas) {
-        this.id_registro_temporadas = id_registro_temporadas;
+    @Column(name = "data")
+    private Date data;
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
+    private Temporadas temporada;
+
+    @Column(name = "id_temporada")
+    private int idTemporada;
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_time", referencedColumnName = "id", insertable = false, updatable = false)
+    private Times time;
+
+    @Column(name = "id_time")
+    private int idTime;
+
+
+    public RegistroTemporadas( Temporadas temporada, Times time, Date data) {
+        this.temporada = temporada;
+        this.time = time;
+        this.data = data;
     }
 
-    public long getId_registro_temporadas() {
-        return id_registro_temporadas;
+    public RegistroTemporadas() {
+
     }
 
-    public void setId_registro_temporadas(long id_registro_temporadas) {
-        this.id_registro_temporadas = id_registro_temporadas;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdTime() {
+        return idTime;
+    }
+
+    public void setIdTime(int idTime) {
+        this.idTime = idTime;
+    }
+
+    public int getIdTemporada() {
+        return idTemporada;
+    }
+
+    public void setIdTemporada(int idTemporada) {
+        this.idTemporada = idTemporada;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
     }
 }

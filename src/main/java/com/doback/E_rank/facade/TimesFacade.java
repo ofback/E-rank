@@ -17,7 +17,7 @@ public class TimesFacade {
         return timesApplication.obterTodosTimes();
     }
 
-    public Times buscarTimesPorId(Long id) {
+    public Times buscarTimesPorId(int id) {
         return timesApplication.obterTimesPorId(id);
     }
 
@@ -25,11 +25,11 @@ public class TimesFacade {
         timesApplication.criarTime(times);
     }
 
-    public void excluirTimes(Long id) {
+    public void excluirTimes(int id) {
         timesApplication.excluirTime(id);
     }
 
-    public void atualizarTimes(Long id, Times times) {
+    public void atualizarTimes(int id, Times times) {
         timesApplication.atualizarTimes(id, times);
     }
 }

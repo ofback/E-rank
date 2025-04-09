@@ -1,13 +1,17 @@
 package com.doback.E_rank.entity;
+
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "times")
 public class Times {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_time")
-    private Long id_time;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "nome")
     private String nome;
@@ -18,19 +22,43 @@ public class Times {
     @Column(name = "sts")
     private char sts;
 
-    public Times(Long id_time, String nome, String descricao, char sts) {
-        this.id_time = id_time;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario;
+
+    @Column(name = "id_usuario")
+    private int idUsuario;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "id_temporadas", referencedColumnName = "id", insertable = false, updatable = false)
+    private Temporadas temporadas;
+
+    @Column(name = "id_temporadas")
+    private int idTemporada;
+
+    @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTimes> registroTimes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "time", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTemporadas> registroTemporadas = new ArrayList<>();
+
+    public Times(String nome, String descricao, char sts, Temporadas temporadas, Usuarios usuario) {
         this.nome = nome;
         this.descricao = descricao;
         this.sts = sts;
+        this.usuario = usuario;
+        this.temporadas = temporadas;
     }
 
-    public Long getId_time() {
-        return id_time;
+    public Times() {
     }
 
-    public void setId_time(Long id_time) {
-        this.id_time = id_time;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -55,5 +83,21 @@ public class Times {
 
     public void setSts(char sts) {
         this.sts = sts;
+    }
+
+    public int getIdTemporada() {
+        return idTemporada;
+    }
+
+    public void setIdTemporada(int idTemporada) {
+        this.idTemporada = idTemporada;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

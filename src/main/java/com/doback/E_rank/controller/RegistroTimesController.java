@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/registro-times")
+@RequestMapping("/registroTimes")
 public class RegistroTimesController {
 
     private final RegistroTimesFacade registroTimesFacade;
@@ -23,7 +23,7 @@ public class RegistroTimesController {
     }
 
     @GetMapping("/{id}")
-    public RegistroTimes obterRegistroTimesPorId(@PathVariable Long id) {
+    public RegistroTimes obterRegistroTimesPorId(@PathVariable int id) {
         return registroTimesFacade.buscarRegistroTimesPorId(id);
     }
 
@@ -35,13 +35,13 @@ public class RegistroTimesController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirRegistroTimes(@PathVariable Long id) {
+    public void excluirRegistroTimes(@PathVariable int id) {
         registroTimesFacade.excluirRegistroTimes(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarRegistroTimes(@PathVariable long id, @RequestBody RegistroTimes registroTimes) {
+    public void atualizarRegistroTimes(@PathVariable int id, @RequestBody RegistroTimes registroTimes) {
         registroTimesFacade.atualizarRegistroTimes(id, registroTimes);
     }
 }

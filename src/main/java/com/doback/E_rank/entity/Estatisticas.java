@@ -1,54 +1,87 @@
 package com.doback.E_rank.entity;
 
-
 import jakarta.persistence.*;
 
-@Entity
-@Table(name ="estatísticas")
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "estatisticas")
 public class Estatisticas {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-    @Column(name = "id_estatistica")
-    private Long id_estatistica;
-    @Column(name = "kilss")
+    @Column(name = "kills")
     private Long kills;
+
     @Column(name = "assistencias")
     private int assistencias;
+
     @Column(name = "qts_partidas")
-    private int qts_partidas;
+    private int qtsPartidas;
+
     @Column(name = "sts_provacao")
-    private int sts_provacao;
+    private int stsProvacao;
+
     @Column(name = "vitorias")
     private int vitorias;
+
     @Column(name = "derrotas")
     private int derrotas;
+
     @Column(name = "recordKills")
     private int recordKills;
+
     @Column(name = "headshots")
     private int headshots;
 
-    public Estatisticas(Long id_estatistica, Long kills, int assistencias, int qts_partidas, int sts_provacao, int vitorias, int derrotas, int recordKills, int headshots) {
-        this.id_estatistica = id_estatistica;
+    @OneToMany(mappedBy = "estatisticas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario;
+
+    @Column(name = "id_usuario")
+    private int idUsuario;
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
+    private Jogos jogos;
+
+    @Column(name = "id_jogo")
+    private int idJogo;
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_desafio", referencedColumnName = "id", insertable = false, updatable = false)
+    private Desafios desafio;
+
+    @Column(name = "id_desafio")
+    private int idDesafio;
+
+    public Estatisticas( Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots, Jogos jogos, Desafios desafio, Usuarios usuario) {
         this.kills = kills;
         this.assistencias = assistencias;
-        this.qts_partidas = qts_partidas;
-        this.sts_provacao = sts_provacao;
+        this.qtsPartidas = qtsPartidas;
+        this.stsProvacao = stsProvacao;
         this.vitorias = vitorias;
         this.derrotas = derrotas;
         this.recordKills = recordKills;
         this.headshots = headshots;
+        this.jogos = jogos;
+        this.usuario = usuario;
+        this.desafio = desafio;
     }
 
-
-    public Long getId_estatistica() {
-        return id_estatistica;
+    public Estatisticas() {
     }
 
-    public void setId_estatistica(Long id_estatistica) {
-        this.id_estatistica = id_estatistica;
-    }
 
     public Long getKills() {
         return kills;
@@ -66,20 +99,20 @@ public class Estatisticas {
         this.assistencias = assistencias;
     }
 
-    public int getQts_partidas() {
-        return qts_partidas;
+    public int getQtsPartidas() {
+        return qtsPartidas;
     }
 
-    public void setQts_partidas(int qts_partidas) {
-        this.qts_partidas = qts_partidas;
+    public void setQtsPartidas(int qtsPartidas) {
+        this.qtsPartidas = qtsPartidas;
     }
 
-    public int getSts_provacao() {
-        return sts_provacao;
+    public int getStsProvacao() {
+        return stsProvacao;
     }
 
-    public void setSts_provacao(int sts_provacao) {
-        this.sts_provacao = sts_provacao;
+    public void setStsProvacao(int stsProvacao) {
+        this.stsProvacao = stsProvacao;
     }
 
     public int getVitorias() {
@@ -112,5 +145,38 @@ public class Estatisticas {
 
     public void setDerrotas(int derrotas) {
         this.derrotas = derrotas;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdJogo() {
+        return idJogo;
+    }
+
+    public void setIdJogo(int idJogo) {
+        this.idJogo = idJogo;
+    }
+
+    public int getIdDesafio() {
+        return idDesafio;
+    }
+
+    public void setIdDesafio(int idDesafio) {
+        this.idDesafio = idDesafio;
     }
 }

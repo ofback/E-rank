@@ -22,7 +22,7 @@ public class TimesController {
         }
 
     @GetMapping("/{id}")
-    public Times obterTimes(@PathVariable Long id) {
+    public Times obterTimes(@PathVariable int id) {
             return timesFacade.buscarTimesPorId(id);
         }
 
@@ -34,13 +34,13 @@ public class TimesController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirTimes(@PathVariable Long id) {
+    public void excluirTimes(@PathVariable int id) {
         timesFacade.excluirTimes(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarTimes(@PathVariable long id,@RequestBody Times times){
+    public void atualizarTimes(@PathVariable int id,@RequestBody Times times){
         timesFacade.atualizarTimes(id, times);
     }
 }

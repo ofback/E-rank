@@ -1,6 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.DesafiosApplication;
+import com.doback.E_rank.entity.Amizades;
 import com.doback.E_rank.entity.Desafios;
 import org.springframework.stereotype.Component;
 
@@ -29,5 +30,9 @@ public class DesafiosFacade {
 
     public void excluirDesafio(int id) {
         desafioApplication.excluirDesafio(id);
+    }
+
+    public void atualizarDesafio(int id, Desafios desafios) {
+        desafioApplication.atualizarDesafio(id, desafios);
     }
 }

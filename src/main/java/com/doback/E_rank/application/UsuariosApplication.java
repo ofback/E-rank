@@ -1,6 +1,7 @@
 package com.doback.E_rank.application;
 
 
+import com.doback.E_rank.entity.Amizades;
 import com.doback.E_rank.entity.Usuarios;
 import com.doback.E_rank.interfaces.UsuariosRepository;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class UsuariosApplication {
 
     public void excluirUsuario(long id) {
         usuarioRepository.removeUsuarios(id);
+    }
+
+    public void atualizarUsuarios(int id, Usuarios usuarios) {
+        usuarioRepository.updateUsuarios((long) id, usuarios);
     }
 }
