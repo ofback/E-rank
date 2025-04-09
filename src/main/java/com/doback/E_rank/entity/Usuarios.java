@@ -48,17 +48,17 @@ public class Usuarios {
     @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<FeedMensagens> feedMensagens = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<RegistroTimes> registroTimes = new ArrayList<>();
-//
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTimes> registroTimes = new ArrayList<>();
+
     @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Estatisticas> estatisticas = new ArrayList<>();
 //
 //    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
 //
-//    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<Times> times = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Times> times = new ArrayList<>();
 
     public Usuarios(char sts, String biografia, String nickname, String email, String senha, Date dataCriacao, String nome) {
         this.sts = sts;
