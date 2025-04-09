@@ -1,5 +1,6 @@
 package com.doback.E_rank.controller;
 
+import com.doback.E_rank.entity.Amizades;
 import com.doback.E_rank.entity.Desafios;
 import com.doback.E_rank.facade.DesafiosFacade;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,11 @@ public class DesafiosController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirDesafio(@PathVariable int id) {
         desafioFacade.excluirDesafio(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void atualizarDesafios(@PathVariable int id,@RequestBody Desafios desafios){
+        desafioFacade.atualizarDesafio(id, desafios);
     }
 }
