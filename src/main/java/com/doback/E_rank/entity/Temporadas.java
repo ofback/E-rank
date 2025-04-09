@@ -31,9 +31,9 @@ public class Temporadas {
 
 //    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<Times> times;
+
+    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Times> times;
 
     @OneToMany(mappedBy = "temporada", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<RegistroTemporadas> registroTemporadas  = new ArrayList<>();
