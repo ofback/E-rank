@@ -28,9 +28,9 @@ public class RegistroTimesApplication {
     public void excluirRegistroTime(int id) {
         registroTimesRepository.removeRegistroTimes(id);
     }
+
     public void atualizarRegistrosTime(int id, RegistroTimes registroTimes) {
         registroTimesRepository.updateRegistroTimes(id, registroTimes);
     }
-
 
 }

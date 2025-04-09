@@ -11,8 +11,8 @@ public class Usuarios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Long idUsuario;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "sts")
     private char sts;
@@ -36,26 +36,31 @@ public class Usuarios {
     @Column(name = "nome")
     private String nome;
 
-    @OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
-    private List<Amizades> amizades = new ArrayList<>();
+    @OneToMany(mappedBy = "usuarios", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<UsuariosJogos> usuariosJogos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario1", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Amizades> amizades1 = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario2", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Amizades> amizades2 = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<FeedMensagens> feedMensagens = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<RegistroTimes> registroTimes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Estatisticas> estatisticas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Times> times = new ArrayList<>();
 
-    public Usuarios(Long idUsuario, char sts, String biografia, String nickname, String email, String senha, Date dataCriacao, String nome) {
-        this.idUsuario = idUsuario;
+    public Usuarios(char sts, String biografia, String nickname, String email, String senha, Date dataCriacao, String nome) {
         this.sts = sts;
         this.biografia = biografia;
         this.nickname = nickname;
@@ -68,13 +73,6 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     public char getSts() {
         return sts;
@@ -132,51 +130,67 @@ public class Usuarios {
         this.nome = nome;
     }
 
-    public List<Amizades> getAmizades() {
-        return amizades;
+    public int getId() {
+        return id;
     }
 
-    public void setAmizades(List<Amizades> amizades) {
-        this.amizades = amizades;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public List<FeedMensagens> getFeedMensagens() {
-        return feedMensagens;
-    }
-
-    public void setFeedMensagens(List<FeedMensagens> feedMensagens) {
-        this.feedMensagens = feedMensagens;
-    }
-
-    public List<RegistroTimes> getRegistroTimes() {
-        return registroTimes;
-    }
-
-    public void setRegistroTimes(List<RegistroTimes> registroTimes) {
-        this.registroTimes = registroTimes;
-    }
-
-    public List<Estatisticas> getEstatisticas() {
-        return estatisticas;
-    }
-
-    public void setEstatisticas(List<Estatisticas> estatisticas) {
-        this.estatisticas = estatisticas;
-    }
-
-    public List<VotacaoEstatisticas> getVotacaoEstatisticas() {
-        return votacaoEstatisticas;
-    }
-
-    public void setVotacaoEstatisticas(List<VotacaoEstatisticas> votacaoEstatisticas) {
-        this.votacaoEstatisticas = votacaoEstatisticas;
-    }
-
-    public List<Times> getTimes() {
-        return times;
-    }
-
-    public void setTimes(List<Times> times) {
-        this.times = times;
-    }
+//    public List<Jogos> getJogos() {
+//        return jogos;
+//    }
+//
+//    public void setJogos(List<Jogos> jogos) {
+//        this.jogos = jogos;
+//    }
+//
+//    public List<Amizades> getAmizades() {
+//        return amizades;
+//    }
+//
+//    public void setAmizades(List<Amizades> amizades) {
+//        this.amizades = amizades;
+//    }
+//
+//    public List<FeedMensagens> getFeedMensagens() {
+//        return feedMensagens;
+//    }
+//
+//    public void setFeedMensagens(List<FeedMensagens> feedMensagens) {
+//        this.feedMensagens = feedMensagens;
+//    }
+//
+//    public List<RegistroTimes> getRegistroTimes() {
+//        return registroTimes;
+//    }
+//
+//    public void setRegistroTimes(List<RegistroTimes> registroTimes) {
+//        this.registroTimes = registroTimes;
+//    }
+//
+//    public List<Estatisticas> getEstatisticas() {
+//        return estatisticas;
+//    }
+//
+//    public void setEstatisticas(List<Estatisticas> estatisticas) {
+//        this.estatisticas = estatisticas;
+//    }
+//
+//    public List<VotacaoEstatisticas> getVotacaoEstatisticas() {
+//        return votacaoEstatisticas;
+//    }
+//
+//    public void setVotacaoEstatisticas(List<VotacaoEstatisticas> votacaoEstatisticas) {
+//        this.votacaoEstatisticas = votacaoEstatisticas;
+//    }
+//
+//    public List<Times> getTimes() {
+//        return times;
+//    }
+//
+//    public void setTimes(List<Times> times) {
+//        this.times = times;
+//    }
 }

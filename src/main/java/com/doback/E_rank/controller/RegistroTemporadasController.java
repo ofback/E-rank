@@ -1,5 +1,6 @@
 package com.doback.E_rank.controller;
 
+import com.doback.E_rank.entity.Jogos;
 import com.doback.E_rank.entity.RegistroTemporadas;
 import com.doback.E_rank.facade.RegistroTemporadasFacade;
 import org.springframework.http.HttpStatus;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/registro-temporadas")
+@RequestMapping("/registroTemporadas")
 public class RegistroTemporadasController {
 
     private final RegistroTemporadasFacade registroTemporadasFacade;
@@ -37,6 +38,12 @@ public class RegistroTemporadasController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirRegistroTemporadas(@PathVariable int id) {
         registroTemporadasFacade.excluirRegistroTemporadas(id);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void atualizarRegistroTemporadas(@PathVariable int id, @RequestBody RegistroTemporadas registroTemporadas) {
+        registroTemporadasFacade.atualizarRegistroTemporadas(id, registroTemporadas);
     }
 
 }

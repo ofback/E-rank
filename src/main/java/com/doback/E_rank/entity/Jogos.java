@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Jogos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_jogo")
-    private Long idJogo;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "nome")
     private String nome;
@@ -21,25 +21,22 @@ public class Jogos {
     @Column(name = "genero")
     private String genero;
 
-    @OneToMany(mappedBy = "jogo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<UsuariosJogos> usuariosJogos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Desafios> desafios = new ArrayList<>();
+
+    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Estatisticas> estatisticas = new ArrayList<>();
 
-    public Jogos(Long idJogo, String nome, String descricao, String genero) {
-        this.idJogo = idJogo;
+    public Jogos(String nome, String descricao, String genero) {
         this.nome = nome;
         this.descricao = descricao;
         this.genero = genero;
     }
 
     public Jogos() {}
-
-    public Long getIdJogo() {
-        return idJogo;
-    }
-
-    public void setIdJogo(Long idJogo) {
-        this.idJogo = idJogo;
-    }
 
     public String getNome() {
         return nome;
@@ -65,11 +62,12 @@ public class Jogos {
         this.genero = genero;
     }
 
-    public List<Estatisticas> getEstatisticas() {
-        return estatisticas;
+    public int getId() {
+        return id;
     }
 
-    public void setEstatisticas(List<Estatisticas> estatisticas) {
-        this.estatisticas = estatisticas;
+    public void setId(int id) {
+        this.id = id;
     }
+
 }

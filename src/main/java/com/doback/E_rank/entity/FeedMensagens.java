@@ -9,8 +9,8 @@ public class FeedMensagens {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_feed_mensagens")
-    private Long idFeedMensagens;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "atividade")
     private String atividade;
@@ -28,30 +28,24 @@ public class FeedMensagens {
     private Date dataEnvio;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
+    @Column(name = "id_usuario")
+    private int idUsuario;
 
-    public FeedMensagens(Long idFeedMensagens, String atividade, String descricao, String mensagem, char status, Date dataEnvio) {
-        this.idFeedMensagens = idFeedMensagens;
+
+    public FeedMensagens(String atividade, String descricao, String mensagem, char status, Date dataEnvio, Usuarios usuario) {
         this.atividade = atividade;
         this.descricao = descricao;
         this.mensagem = mensagem;
         this.status = status;
         this.dataEnvio = dataEnvio;
+        this.usuario = usuario;
     }
 
     public FeedMensagens() {
-    }
-
-
-    public Long getIdFeedMensagens() {
-        return idFeedMensagens;
-    }
-
-    public void setIdFeedMensagens(Long idFeedMensagens) {
-        this.idFeedMensagens = idFeedMensagens;
     }
 
     public String getAtividade() {
@@ -94,11 +88,21 @@ public class FeedMensagens {
         this.dataEnvio = dataEnvio;
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 }

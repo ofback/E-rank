@@ -10,8 +10,8 @@ public class Times {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_time")
-    private Long idTime;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "nome")
     private String nome;
@@ -22,34 +22,43 @@ public class Times {
     @Column(name = "sts")
     private char sts;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
-    @OneToMany(mappedBy = "times", cascade = CascadeType.ALL)
-    private List<RegistroTimes> registros = new ArrayList<>();
+    @Column(name = "id_usuario")
+    private int idUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_temporada", referencedColumnName = "id_temporada")
-    private Temporadas temporada;  // Relacionamento com Temporadas
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "id_temporadas", referencedColumnName = "id", insertable = false, updatable = false)
+    private Temporadas temporadas;
 
-    public Times(Long idTime, String nome, String descricao, char sts, Usuarios usuario) {
-        this.idTime = idTime;
+    @Column(name = "id_temporadas")
+    private int idTemporada;
+
+    @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTimes> registroTimes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "time", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTemporadas> registroTemporadas = new ArrayList<>();
+
+    public Times(String nome, String descricao, char sts, Temporadas temporadas, Usuarios usuario) {
         this.nome = nome;
         this.descricao = descricao;
         this.sts = sts;
         this.usuario = usuario;
+        this.temporadas = temporadas;
     }
 
     public Times() {
     }
 
-    public Long getIdTime() {
-        return idTime;
+    public int getId() {
+        return id;
     }
 
-    public void setIdTime(Long idTime) {
-        this.idTime = idTime;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -76,27 +85,19 @@ public class Times {
         this.sts = sts;
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
+    public int getIdTemporada() {
+        return idTemporada;
     }
 
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
+    public void setIdTemporada(int idTemporada) {
+        this.idTemporada = idTemporada;
     }
 
-    public List<RegistroTimes> getRegistros() {
-        return registros;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setRegistros(List<RegistroTimes> registros) {
-        this.registros = registros;
-    }
-
-    public Temporadas getTemporada() {
-        return temporada;
-    }
-
-    public void setTemporada(Temporadas temporada) {
-        this.temporada = temporada;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

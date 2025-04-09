@@ -1,6 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.TemporadasApplication;
+import com.doback.E_rank.entity.RegistroTimes;
 import com.doback.E_rank.entity.Temporadas;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class TemporadasFacade {
     }
 
     public List<Temporadas> listarTemporadas() {
-        return TemporadasApplication.obterTodasTemporada();
+        return temporadaApplication.obterTodasTemporadas();
     }
 
     public Temporadas buscarTemporadaPorId(int id) {
@@ -29,5 +30,9 @@ public class TemporadasFacade {
 
     public void excluirTemporada(long id) {
         temporadaApplication.excluirTemporada(id);
+    }
+
+    public void atualizarTemporadas(int id, Temporadas temporadas) {
+        temporadaApplication.atualizarTemporadas(id, temporadas);
     }
 }

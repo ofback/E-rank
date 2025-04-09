@@ -2,14 +2,17 @@ package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "estatisticas")
 public class Estatisticas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_estatistica")
-    private Long idEstatistica;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "kills")
     private Long kills;
@@ -35,18 +38,34 @@ public class Estatisticas {
     @Column(name = "headshots")
     private int headshots;
 
+    @OneToMany(mappedBy = "estatisticas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario")
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
+    @Column(name = "id_usuario")
+    private int idUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "desafio_id", referencedColumnName = "id_desafio")
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
+    private Jogos jogos;
+
+    @Column(name = "id_jogo")
+    private int idJogo;
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_desafio", referencedColumnName = "id", insertable = false, updatable = false)
     private Desafios desafio;
 
-    public Estatisticas(Long idEstatistica, Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots) {
-        this.idEstatistica = idEstatistica;
+    @Column(name = "id_desafio")
+    private int idDesafio;
+
+    public Estatisticas( Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots, Jogos jogos, Desafios desafio, Usuarios usuario) {
         this.kills = kills;
         this.assistencias = assistencias;
         this.qtsPartidas = qtsPartidas;
@@ -55,19 +74,14 @@ public class Estatisticas {
         this.derrotas = derrotas;
         this.recordKills = recordKills;
         this.headshots = headshots;
+        this.jogos = jogos;
+        this.usuario = usuario;
+        this.desafio = desafio;
     }
 
     public Estatisticas() {
     }
 
-
-    public Long getIdEstatistica() {
-        return idEstatistica;
-    }
-
-    public void setIdEstatistica(Long idEstatistica) {
-        this.idEstatistica = idEstatistica;
-    }
 
     public Long getKills() {
         return kills;
@@ -133,19 +147,36 @@ public class Estatisticas {
         this.derrotas = derrotas;
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
+    public int getId() {
+        return id;
     }
 
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Desafios getDesafio() {
-        return desafio;
+
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setDesafio(Desafios desafio) {
-        this.desafio = desafio;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdJogo() {
+        return idJogo;
+    }
+
+    public void setIdJogo(int idJogo) {
+        this.idJogo = idJogo;
+    }
+
+    public int getIdDesafio() {
+        return idDesafio;
+    }
+
+    public void setIdDesafio(int idDesafio) {
+        this.idDesafio = idDesafio;
     }
 }

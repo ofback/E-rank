@@ -1,7 +1,10 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "desafios")
@@ -9,8 +12,8 @@ public class Desafios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDesafio")
-    private Long idDesafio;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "data_desafio")
     private Date dataDesafio;
@@ -21,28 +24,34 @@ public class Desafios {
     @Column(name = "sts")
     private char sts;
 
-    @ManyToOne
-    @JoinColumn(name = "id_amizade", referencedColumnName = "id_amizade")
+    @OneToMany(mappedBy = "desafio", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Estatisticas> estatisticas = new ArrayList<>();
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_amizade", referencedColumnName = "id", insertable = false, updatable = false)
     private Amizades amizade;
 
-    public Desafios(Long idDesafio, Date dataDesafio, String resultado, char sts, Amizades amizade) {
-        this.idDesafio = idDesafio;
+    @Column(name = "id_amizade")
+    private int idAmizade;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
+    private Jogos jogos;
+
+    @Column(name = "id_jogo")
+    private int idJogo;
+
+    public Desafios( Date dataDesafio, String resultado, char sts, Amizades amizade, Jogos jogos) {
         this.dataDesafio = dataDesafio;
         this.resultado = resultado;
         this.sts = sts;
         this.amizade = amizade;
+        this.jogos = jogos;
     }
 
     public Desafios() {
     }
 
-    public Long getIdDesafio() {
-        return idDesafio;
-    }
-
-    public void setIdDesafio(Long idDesafio) {
-        this.idDesafio = idDesafio;
-    }
 
     public Date getDataDesafio() {
         return dataDesafio;
@@ -68,11 +77,28 @@ public class Desafios {
         this.sts = sts;
     }
 
-    public Amizades getAmizade() {
-        return amizade;
+    public int getId() {
+        return id;
     }
 
-    public void setAmizade(Amizades amizade) {
-        this.amizade = amizade;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public int getIdAmizade() {
+        return idAmizade;
+    }
+
+    public void setIdAmizade(int idAmizade) {
+        this.idAmizade = idAmizade;
+    }
+
+    public int getIdJogo() {
+        return idJogo;
+    }
+
+    public void setIdJogo(int idJogo) {
+        this.idJogo = idJogo;
+    }
+
 }

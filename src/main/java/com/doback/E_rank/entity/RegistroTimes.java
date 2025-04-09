@@ -6,11 +6,10 @@ import java.util.Date;
 @Entity
 @Table(name = "registroTimes")
 public class RegistroTimes {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_registro_times")
-    private Long id_registro_times;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "cargo")
     private String cargo;
@@ -18,31 +17,37 @@ public class RegistroTimes {
     @Column(name = "data_entrada")
     private Date data_entrada;
 
-    @ManyToOne
-    @JoinColumn(name = "id_time", referencedColumnName = "id_time")
-    private Times time;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "id_times", referencedColumnName = "id", insertable = false, updatable = false)
+    private Times times;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @Column(name = "id_times")
+    private int idTimes;
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "id_usuarios", referencedColumnName = "id", insertable = false, updatable = false)
     private Usuarios usuario;
 
-    public RegistroTimes(Long id_registro_times, String cargo, Date data_entrada, Times time, Usuarios usuario) {
-        this.id_registro_times = id_registro_times;
-        this.cargo = cargo;
-        this.data_entrada = data_entrada;
-        this.time = time;
-        this.usuario = usuario;
-    }
+    @Column(name = "id_usuarios")
+    private int idUsuarios;
 
     public RegistroTimes() {
     }
 
-    public Long getId_registro_times() {
-        return id_registro_times;
+    public RegistroTimes(String cargo, Date data_entrada, Times time, Usuarios usuario) {
+        this.cargo = cargo;
+        this.data_entrada = data_entrada;
+        this.times = time;
+        this.usuario = usuario;
     }
 
-    public void setId_registro_times(Long id_registro_times) {
-        this.id_registro_times = id_registro_times;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCargo() {
@@ -61,22 +66,22 @@ public class RegistroTimes {
         this.data_entrada = data_entrada;
     }
 
-    public Times getTime() {
-        return time;
-    }
-
-    public void setTime(Times time) {
-        this.time = time;
-    }
-
-    public Usuarios getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
-    }
-
     public void add(RegistroTimes registroTimes) {
+    }
+
+    public int getIdTimes() {
+        return idTimes;
+    }
+
+    public void setIdTimes(int idTimes) {
+        this.idTimes = idTimes;
+    }
+
+    public int getIdUsuarios() {
+        return idUsuarios;
+    }
+
+    public void setIdUsuarios(int idUsuarios) {
+        this.idUsuarios = idUsuarios;
     }
 }
