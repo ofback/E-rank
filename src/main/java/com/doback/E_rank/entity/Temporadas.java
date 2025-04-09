@@ -29,8 +29,8 @@ public class Temporadas {
     @Temporal(TemporalType.DATE)
     private Date data_fim;
 
-//    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
+    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
 
     @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Times> times;
@@ -88,11 +88,4 @@ public class Temporadas {
         this.id = id;
     }
 
-//    public List<Times> getTimes() {
-//        return times;
-//    }
-//
-//    public void setTimes(List<Times> times) {
-//        this.times = times;
-//    }
 }
