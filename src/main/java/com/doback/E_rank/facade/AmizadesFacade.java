@@ -20,7 +20,7 @@ public class AmizadesFacade {
         return amizadeApplication.obterTodasAmizades();
     }
 
-    public Amizades buscarAmizadePorId(Long id) {
+    public Amizades buscarAmizadePorId(int id) {
         return amizadeApplication.obterAmizadePorId(id);
     }
 
@@ -28,11 +28,11 @@ public class AmizadesFacade {
         amizadeApplication.criarAmizade(amizade);
     }
 
-    public void excluirAmizade(Long id) {
+    public void excluirAmizade(int id) {
         amizadeApplication.excluirAmizade(id);
     }
 
-    public void atualizarAmizades(Long id, Amizades amizades) {
+    public void atualizarAmizades(int id, Amizades amizades) {
         amizadeApplication.atualizarAmizades(id, amizades);
     }
 }

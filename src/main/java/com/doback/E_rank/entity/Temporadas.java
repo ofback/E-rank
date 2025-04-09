@@ -1,7 +1,10 @@
 package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "temporadas")
@@ -9,8 +12,8 @@ public class Temporadas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_temporada")
-    private long id_temporada;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "nome")
     private String nome;
@@ -26,22 +29,23 @@ public class Temporadas {
     @Temporal(TemporalType.DATE)
     private Date data_fim;
 
+    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
 
-    public Temporadas(Long id_temporada, String nome, String descricao, Date data_inicio, Date data_fim) {
-        this.id_temporada = id_temporada;
+    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Times> times;
+
+    @OneToMany(mappedBy = "temporada", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTemporadas> registroTemporadas  = new ArrayList<>();
+
+    public Temporadas(String nome, String descricao, Date data_inicio, Date data_fim) {
         this.nome = nome;
         this.descricao = descricao;
         this.data_inicio = data_inicio;
         this.data_fim = data_fim;
     }
 
-
-    public Long getIdTemporada() {
-        return id_temporada;
-    }
-
-    public void setIdTemporada(Long idTemporada) {
-        this.id_temporada = idTemporada;
+    public Temporadas() {
     }
 
     public String getNome() {
@@ -75,4 +79,13 @@ public class Temporadas {
     public void setData_inicio(Date data_inicio) {
         this.data_inicio = data_inicio;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

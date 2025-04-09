@@ -2,63 +2,53 @@ package com.doback.E_rank.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
 @Table(name = "amizades")
 public class Amizades {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_amizade")
-    private Long id_amizade;
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario1")
-    private Long id_usuario1;
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario2")
-    private Long id_usuario2;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "sts")
     private char sts;
 
     @Column(name = "data_solicitacao")
-    private Date data_solicitacao;
+    private Date dataSolicitacao;
 
+    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Desafios> desafios = new ArrayList<>();
 
-    public Amizades(Long id_amizade, Long id_usuario1, Long id_usuario2, char sts, Date data_solicitacao) {
-        this.id_amizade = id_amizade;
-        this.id_usuario1 = id_usuario1;
-        this.id_usuario2 = id_usuario2;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario1", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario1;
+
+    @Column(name = "id_usuario1")
+    private int idUsuario1;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario2", referencedColumnName = "id", insertable = false, updatable = false)
+    private Usuarios usuario2;
+
+    @Column(name = "id_usuario2")
+    private int idUsuario2;
+
+    public Amizades() {
+
+    }
+
+    public Amizades( Usuarios usuario1, Usuarios usuario2, char sts, Date dataSolicitacao) {
+
+        this.usuario1 = usuario1;
+        this.usuario2 = usuario2;
         this.sts = sts;
-        this.data_solicitacao = data_solicitacao;
-    }
-
-    public Long getId_amizade() {
-        return id_amizade;
-    }
-
-    public void setId_amizade(Long id_amizade) {
-        this.id_amizade = id_amizade;
-    }
-
-    public Long getId_usuario1() {
-        return id_usuario1;
-    }
-
-    public void setId_usuario1(Long id_usuario1) {
-        this.id_usuario1 = id_usuario1;
-    }
-
-    public Long getId_usuario2() {
-        return id_usuario2;
-    }
-
-    public void setId_usuario2(Long id_usuario2) {
-        this.id_usuario2 = id_usuario2;
+        this.dataSolicitacao = dataSolicitacao;
     }
 
     public char getSts() {
@@ -69,10 +59,36 @@ public class Amizades {
         this.sts = sts;
     }
 
-    public Date getData_solicitacao() {return data_solicitacao;
+    public Date getDataSolicitacao() {
+        return dataSolicitacao;
     }
 
-    public void setData_solicitacao(Date data_solicitacao) {
-        this.data_solicitacao = data_solicitacao;
+    public void setDataSolicitacao(Date dataSolicitacao) {
+        this.dataSolicitacao = dataSolicitacao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public int getIdUsuario1() {
+        return idUsuario1;
+    }
+
+    public void setIdUsuario1(int idUsuario1) {
+        this.idUsuario1 = idUsuario1;
+    }
+
+    public int getIdUsuario2() {
+        return idUsuario2;
+    }
+
+    public void setIdUsuario2(int idUsuario2) {
+        this.idUsuario2 = idUsuario2;
     }
 }

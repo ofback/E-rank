@@ -22,7 +22,7 @@ public class VotacaoEstatisticasController {
     }
 
     @GetMapping("/{id}")
-    public VotacaoEstatisticas obterVotacaoEstatisticas(@PathVariable Long id) {
+    public VotacaoEstatisticas obterVotacaoEstatisticas(@PathVariable int id) {
         return votacaoEstatisticasFacade.buscarVotacaoEstatisticasPorId(id);
     }
 
@@ -34,13 +34,13 @@ public class VotacaoEstatisticasController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirVotacaoEstatisticas(@PathVariable Long id) {
+    public void excluirVotacaoEstatisticas(@PathVariable int id) {
         votacaoEstatisticasFacade.excluirVotacaoEstatisticas(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarVotacaoEstatisticas(@PathVariable Long id, @RequestBody VotacaoEstatisticas votacaoEstatisticas) {
+    public void atualizarVotacaoEstatisticas(@PathVariable int id, @RequestBody VotacaoEstatisticas votacaoEstatisticas) {
         votacaoEstatisticasFacade.atualizarVotacaoEstatisticas(id, votacaoEstatisticas);
     }
 }

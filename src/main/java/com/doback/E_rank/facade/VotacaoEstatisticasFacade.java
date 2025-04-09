@@ -17,7 +17,7 @@ public class VotacaoEstatisticasFacade {
         return votacaoEstatisticasApplication.obterTodosVotacaoEstatisticas();
     }
 
-    public VotacaoEstatisticas buscarVotacaoEstatisticasPorId(Long id) {
+    public VotacaoEstatisticas buscarVotacaoEstatisticasPorId(int id) {
         return votacaoEstatisticasApplication.obterVotacaoEstatisticasPorId(id);
     }
 
@@ -25,11 +25,11 @@ public class VotacaoEstatisticasFacade {
         votacaoEstatisticasApplication.criarVotacaoEstatisticas(votacaoEstatisticas);
     }
 
-    public void excluirVotacaoEstatisticas(Long id) {
+    public void excluirVotacaoEstatisticas(int id) {
         votacaoEstatisticasApplication.excluirVotacaoEstatisticas(id);
     }
 
-    public void atualizarVotacaoEstatisticas(Long id, VotacaoEstatisticas votacaoEstatisticas) {
+    public void atualizarVotacaoEstatisticas(int id, VotacaoEstatisticas votacaoEstatisticas) {
         votacaoEstatisticasApplication.atualizarVotacaoEstatisticas(id, votacaoEstatisticas);
     }
 }

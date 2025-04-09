@@ -22,7 +22,7 @@ public class JogosController {
     }
 
     @GetMapping("/{id}")
-    public Jogos obterJogo(@PathVariable Long id) {
+    public Jogos obterJogo(@PathVariable int id) {
         return jogoFacade.buscarJogoPorId(id);
     }
 
@@ -34,13 +34,13 @@ public class JogosController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirJogo(@PathVariable Long id) {
+    public void excluirJogo(@PathVariable int id) {
         jogoFacade.excluirJogo(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarJogos(@PathVariable Long id, @RequestBody Jogos jogos) {
+    public void atualizarJogos(@PathVariable int id, @RequestBody Jogos jogos) {
         jogoFacade.atualizarJogos(id, jogos);
     }
 }

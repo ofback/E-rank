@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuariosJpa extends JpaRepository<Usuarios, Long> {  // Usando Long como tipo do ID
+public interface UsuariosJpa extends JpaRepository<Usuarios, Long> {
 }

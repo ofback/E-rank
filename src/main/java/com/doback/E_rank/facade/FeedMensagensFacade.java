@@ -18,7 +18,7 @@ public class FeedMensagensFacade {
         return feedMensagensApplication.obterTodosFeedMensagens();
     }
 
-    public FeedMensagens buscarFeedMensagensPorId(Long id) {
+    public FeedMensagens buscarFeedMensagensPorId(int id) {
         return feedMensagensApplication.obterFeedMensagensPorId(id);
     }
 
@@ -26,11 +26,11 @@ public class FeedMensagensFacade {
         feedMensagensApplication.criarFeedMensagens(feedMensagens);
     }
 
-    public void excluirFeedMensagens(Long id) {
+    public void excluirFeedMensagens(int id) {
         feedMensagensApplication.excluirFeedMensagens(id);
     }
 
-    public void atualizarFeedMensagens(Long id, FeedMensagens feedMensagens) {
+    public void atualizarFeedMensagens(int id, FeedMensagens feedMensagens) {
         feedMensagensApplication.atualizarFeedMensagens(id, feedMensagens);
     }
 }

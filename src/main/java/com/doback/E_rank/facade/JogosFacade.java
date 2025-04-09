@@ -17,7 +17,7 @@ public class JogosFacade {
         return jogoApplication.obterTodosJogos();
     }
 
-    public Jogos buscarJogoPorId(Long id) {
+    public Jogos buscarJogoPorId(int id) {
         return jogoApplication.obterJogoPorId(id);
     }
 
@@ -25,11 +25,11 @@ public class JogosFacade {
         jogoApplication.criarJogo(jogo);
     }
 
-    public void excluirJogo(Long id) {
+    public void excluirJogo(int id) {
         jogoApplication.excluirJogo(id);
     }
 
-    public void atualizarJogos(Long id, Jogos jogos) {
+    public void atualizarJogos(int id, Jogos jogos) {
         jogoApplication.atualizarJogos(id, jogos);
     }
 }
