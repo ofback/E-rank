@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.entity.Temporadas;
+import com.doback.E_rank.models.Temporadas;
 
 import java.util.List;
 

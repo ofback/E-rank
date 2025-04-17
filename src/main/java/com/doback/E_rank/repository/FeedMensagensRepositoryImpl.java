@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.FeedMensagens;
+import com.doback.E_rank.models.FeedMensagens;
 import com.doback.E_rank.interfaces.FeedMensagensRepository;
 import com.doback.E_rank.repository.jpa.FeedMensagensJpa;
 import org.springframework.beans.factory.annotation.Autowired;

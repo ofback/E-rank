@@ -1,6 +1,6 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.entity.RegistroTimes;
+import com.doback.E_rank.models.RegistroTimes;
 import com.doback.E_rank.facade.RegistroTimesFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

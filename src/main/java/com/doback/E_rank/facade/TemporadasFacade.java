@@ -1,8 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.TemporadasApplication;
-import com.doback.E_rank.entity.RegistroTimes;
-import com.doback.E_rank.entity.Temporadas;
+import com.doback.E_rank.models.Temporadas;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.doback.E_rank.entity;
+package com.doback.E_rank.models;
 
 import jakarta.persistence.*;
 import java.util.Date;

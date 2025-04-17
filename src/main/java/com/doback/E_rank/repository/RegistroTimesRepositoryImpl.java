@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.RegistroTimes;
+import com.doback.E_rank.models.RegistroTimes;
 import com.doback.E_rank.interfaces.RegistroTimesRepository;
 import com.doback.E_rank.repository.jpa.RegistroTimesJpa;
 import org.springframework.beans.factory.annotation.Autowired;

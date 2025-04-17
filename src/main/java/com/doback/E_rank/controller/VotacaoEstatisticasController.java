@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.entity.VotacaoEstatisticas;
+import com.doback.E_rank.models.VotacaoEstatisticas;
 import com.doback.E_rank.facade.VotacaoEstatisticasFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,5 +1,5 @@
 package com.doback.E_rank.application;
-import com.doback.E_rank.entity.VotacaoEstatisticas;
+import com.doback.E_rank.models.VotacaoEstatisticas;
 import com.doback.E_rank.interfaces.VotacaoEstatisticasRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,6 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.entity.RegistroTimes;
-import com.doback.E_rank.entity.Temporadas;
+import com.doback.E_rank.models.Temporadas;
 import com.doback.E_rank.interfaces.TemporadasRepository;
 import org.springframework.stereotype.Service;
 

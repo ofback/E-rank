@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.entity.Estatisticas;
+import com.doback.E_rank.models.Estatisticas;
 
 import java.util.List;
 

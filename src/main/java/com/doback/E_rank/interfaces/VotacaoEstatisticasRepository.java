@@ -1,7 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.entity.VotacaoEstatisticas;
-import org.springframework.stereotype.Repository;
+import com.doback.E_rank.models.VotacaoEstatisticas;
 
 import java.util.List;
 

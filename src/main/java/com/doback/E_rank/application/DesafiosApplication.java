@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.entity.Desafios;
+import com.doback.E_rank.models.Desafios;
 import com.doback.E_rank.interfaces.DesafiosRepository; // Importando a interface correta
 import org.springframework.stereotype.Service;
 

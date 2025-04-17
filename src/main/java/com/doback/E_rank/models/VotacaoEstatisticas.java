@@ -1,10 +1,8 @@
-package com.doback.E_rank.entity;
+package com.doback.E_rank.models;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "votacaoEstatisticas")

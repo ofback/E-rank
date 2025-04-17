@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Usuarios;
+import com.doback.E_rank.models.Usuarios;
 import com.doback.E_rank.interfaces.UsuariosRepository;
 import com.doback.E_rank.repository.jpa.UsuariosJpa;
 import org.springframework.beans.factory.annotation.Autowired;

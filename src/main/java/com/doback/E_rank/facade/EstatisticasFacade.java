@@ -1,7 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.EstatisticasApplication;
-import com.doback.E_rank.entity.Estatisticas;
+import com.doback.E_rank.models.Estatisticas;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
