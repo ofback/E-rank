@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.entity.FeedMensagens;
+import com.doback.E_rank.models.FeedMensagens;
 import com.doback.E_rank.facade.FeedMensagensFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

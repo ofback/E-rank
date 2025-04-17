@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Temporadas;
+import com.doback.E_rank.models.Temporadas;
 import com.doback.E_rank.interfaces.TemporadasRepository;
 import com.doback.E_rank.repository.jpa.TemporadasJpa;
 import org.springframework.beans.factory.annotation.Autowired;

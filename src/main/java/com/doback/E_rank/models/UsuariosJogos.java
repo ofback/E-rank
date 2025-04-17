@@ -1,9 +1,6 @@
-package com.doback.E_rank.entity;
+package com.doback.E_rank.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.List;
-import java.util.ArrayList;
 
 @Entity
 @Table(name = "usuariosJogos")

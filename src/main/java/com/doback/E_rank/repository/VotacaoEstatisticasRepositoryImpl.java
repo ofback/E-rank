@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.VotacaoEstatisticas;
+import com.doback.E_rank.models.VotacaoEstatisticas;
 import com.doback.E_rank.interfaces.VotacaoEstatisticasRepository;
 import com.doback.E_rank.repository.jpa.VotacaoEstatisticasJpa;
 import org.springframework.beans.factory.annotation.Autowired;

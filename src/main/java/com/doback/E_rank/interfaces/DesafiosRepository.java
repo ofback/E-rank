@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.entity.Desafios;
+import com.doback.E_rank.models.Desafios;
 import java.util.List;
 
 public interface DesafiosRepository {

@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Amizades;
+import com.doback.E_rank.models.Amizades;
 import com.doback.E_rank.interfaces.AmizadesRepository;
 import com.doback.E_rank.repository.jpa.AmizadesJpa;
 import org.springframework.beans.factory.annotation.Autowired;

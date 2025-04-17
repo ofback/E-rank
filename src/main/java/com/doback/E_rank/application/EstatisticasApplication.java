@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.entity.Estatisticas;
+import com.doback.E_rank.models.Estatisticas;
 import com.doback.E_rank.interfaces.EstatisticasRepository;
 import org.springframework.stereotype.Service;
 

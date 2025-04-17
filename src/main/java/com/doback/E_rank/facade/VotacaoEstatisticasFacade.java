@@ -1,6 +1,6 @@
 package com.doback.E_rank.facade;
 import com.doback.E_rank.application.VotacaoEstatisticasApplication;
-import com.doback.E_rank.entity.VotacaoEstatisticas;
+import com.doback.E_rank.models.VotacaoEstatisticas;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

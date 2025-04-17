@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.entity.Jogos;
+import com.doback.E_rank.models.Jogos;
 import com.doback.E_rank.facade.JogosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Jogos;
+import com.doback.E_rank.models.Jogos;
 import com.doback.E_rank.interfaces.JogoRepository;
 import com.doback.E_rank.repository.jpa.JogoJpa;
 import org.springframework.beans.factory.annotation.Autowired;

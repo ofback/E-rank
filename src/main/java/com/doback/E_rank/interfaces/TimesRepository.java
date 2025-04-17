@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.entity.Times;
+import com.doback.E_rank.models.Times;
 
 import java.util.List;
 

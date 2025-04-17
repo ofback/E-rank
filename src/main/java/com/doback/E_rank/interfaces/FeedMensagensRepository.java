@@ -1,7 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.entity.FeedMensagens;
-import org.springframework.stereotype.Repository;
+import com.doback.E_rank.models.FeedMensagens;
 
 import java.util.List;
 

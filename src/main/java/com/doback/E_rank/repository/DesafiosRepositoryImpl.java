@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.entity.Desafios;
+import com.doback.E_rank.models.Desafios;
 import com.doback.E_rank.interfaces.DesafiosRepository;
 import com.doback.E_rank.repository.jpa.DesafiosJpa;
 import org.springframework.beans.factory.annotation.Autowired;

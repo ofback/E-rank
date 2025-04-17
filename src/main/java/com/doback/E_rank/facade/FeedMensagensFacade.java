@@ -1,6 +1,6 @@
 package com.doback.E_rank.facade;
 import com.doback.E_rank.application.FeedMensagensApplication;
-import com.doback.E_rank.entity.FeedMensagens;
+import com.doback.E_rank.models.FeedMensagens;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.entity.Usuarios;
+import com.doback.E_rank.models.Usuarios;
 import java.util.List;
 
 public interface UsuariosRepository {

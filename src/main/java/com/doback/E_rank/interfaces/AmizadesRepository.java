@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.entity.Amizades;
+import com.doback.E_rank.models.Amizades;
 
 import java.util.List;
 
