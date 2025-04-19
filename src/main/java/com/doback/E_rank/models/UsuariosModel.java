@@ -14,27 +14,35 @@ public class UsuariosModel {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "sts")
-    private char sts;
+    @Column(name = "nome")
+    private String nome;
 
-    @Column(name = "biografia")
-    private String biografia;
+    @Column(name = "cpf")
+    private String cpf;
 
-    @Column(name = "nickname")
-    private String nickname;
+    @Column(name = "data_nascimento")
+    private String dataNascimento;
 
     @Column(name = "email")
     private String email;
 
+    @Column(name = "nickname")
+    private String nickname;
+
     @Column(name = "senha")
     private String senha;
+
+    @Column(name = "biografia")
+    private String biografia;
+
+    @Column(name = "sts")
+    private char sts;
 
     @Column(name = "data_criacao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
 
-    @Column(name = "nome")
-    private String nome;
+
 
     @OneToMany(mappedBy = "usuariosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<UsuariosJogosModel> usuariosJogoModels = new ArrayList<>();
@@ -60,14 +68,16 @@ public class UsuariosModel {
     @OneToMany(mappedBy = "usuariosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<TimesModel> timesModels = new ArrayList<>();
 
-    public UsuariosModel(char sts, String biografia, String nickname, String email, String senha, Date dataCriacao, String nome) {
-        this.sts = sts;
-        this.biografia = biografia;
-        this.nickname = nickname;
-        this.email = email;
-        this.senha = senha;
-        this.dataCriacao = dataCriacao;
+    public UsuariosModel(String nome, String cpf, String dataNascimento, String email, String nickname, String senha, String biografia, char sts, Date dataCriacao) {
         this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.nickname = nickname;
+        this.senha = senha;
+        this.biografia = biografia;
+        this.sts = sts;
+        this.dataCriacao = dataCriacao;
     }
 
     public UsuariosModel() {
@@ -128,6 +138,22 @@ public class UsuariosModel {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public int getId() {
