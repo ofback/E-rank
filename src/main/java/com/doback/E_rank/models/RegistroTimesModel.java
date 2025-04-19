@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "registroTimes")
-public class RegistroTimes {
+public class RegistroTimesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,7 +19,7 @@ public class RegistroTimes {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_times", referencedColumnName = "id", insertable = false, updatable = false)
-    private Times times;
+    private TimesModel timesModel;
 
     @Column(name = "id_times")
     private int idTimes;
@@ -27,19 +27,19 @@ public class RegistroTimes {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_usuarios", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario;
+    private UsuariosModel usuariosModel;
 
     @Column(name = "id_usuarios")
     private int idUsuarios;
 
-    public RegistroTimes() {
+    public RegistroTimesModel() {
     }
 
-    public RegistroTimes(String cargo, Date data_entrada, Times time, Usuarios usuario) {
+    public RegistroTimesModel(String cargo, Date data_entrada, TimesModel time, UsuariosModel usuariosModel) {
         this.cargo = cargo;
         this.data_entrada = data_entrada;
-        this.times = time;
-        this.usuario = usuario;
+        this.timesModel = time;
+        this.usuariosModel = usuariosModel;
     }
 
     public int getId() {
@@ -66,7 +66,7 @@ public class RegistroTimes {
         this.data_entrada = data_entrada;
     }
 
-    public void add(RegistroTimes registroTimes) {
+    public void add(RegistroTimesModel registroTimesModel) {
     }
 
     public int getIdTimes() {

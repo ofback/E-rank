@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.Amizades;
+import com.doback.E_rank.models.AmizadesModel;
 import com.doback.E_rank.interfaces.AmizadesRepository;
 import com.doback.E_rank.repository.jpa.AmizadesJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +19,18 @@ public class AmizadesRepositoryImpl implements AmizadesRepository {
 
 
     @Override
-    public Amizades searchByCode(int id) {
+    public AmizadesModel searchByCode(int id) {
         return this.amizadesJpa.findById(id).get();
     }
 
     @Override
-    public List<Amizades> buscar() {
+    public List<AmizadesModel> buscar() {
         return this.amizadesJpa.findAll();
     }
 
     @Override
-    public void addAmizades(Amizades amizades) {
-        this.amizadesJpa.save(amizades);
+    public void addAmizades(AmizadesModel amizadesModel) {
+        this.amizadesJpa.save(amizadesModel);
     }
 
     @Override
@@ -39,12 +39,12 @@ public class AmizadesRepositoryImpl implements AmizadesRepository {
     }
 
     @Override
-    public void updateAmizades(int id, Amizades amizades) {
-        Amizades amizadeInDb = this.amizadesJpa.findById(id).orElse(null);
+    public void updateAmizades(int id, AmizadesModel amizadesModel) {
+        AmizadesModel amizadeInDb = this.amizadesJpa.findById(id).orElse(null);
 
         if (amizadeInDb != null) {
-            amizadeInDb.setSts(amizades.getSts());
-            amizadeInDb.setDataSolicitacao(amizades.getDataSolicitacao());
+            amizadeInDb.setSts(amizadesModel.getSts());
+            amizadeInDb.setDataSolicitacao(amizadesModel.getDataSolicitacao());
             this.amizadesJpa.save(amizadeInDb);
         }
     }

@@ -1,5 +1,5 @@
 package com.doback.E_rank.application;
-import com.doback.E_rank.models.Jogos;
+import com.doback.E_rank.models.JogosModel;
 import com.doback.E_rank.interfaces.JogoRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +13,15 @@ public class JogosApplication {
         this.jogoRepository = jogoRepository;
     }
 
-    public List<Jogos> obterTodosJogos() {
+    public List<JogosModel> obterTodosJogos() {
         return jogoRepository.buscar();
     }
 
-    public Jogos obterJogoPorId(int id) {
+    public JogosModel obterJogoPorId(int id) {
         return jogoRepository.searchByCode(id);
     }
 
-    public void criarJogo(Jogos jogo) {
+    public void criarJogo(JogosModel jogo) {
         jogoRepository.addJogos(jogo);
     }
 
@@ -29,7 +29,7 @@ public class JogosApplication {
         jogoRepository.removeJogos(id);
     }
 
-    public void atualizarJogos(int id, Jogos jogos) {
-        jogoRepository.updateJogos(id, jogos);
+    public void atualizarJogos(int id, JogosModel jogosModel) {
+        jogoRepository.updateJogos(id, jogosModel);
     }
 }

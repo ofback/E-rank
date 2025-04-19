@@ -1,7 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.AmizadesApplication;
-import com.doback.E_rank.models.Amizades;
+import com.doback.E_rank.models.AmizadesModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,15 +15,15 @@ public class AmizadesFacade {
         this.amizadeApplication = amizadeApplication;
     }
 
-    public List<Amizades> listarAmizades() {
+    public List<AmizadesModel> listarAmizades() {
         return amizadeApplication.obterTodasAmizades();
     }
 
-    public Amizades buscarAmizadePorId(int id) {
+    public AmizadesModel buscarAmizadePorId(int id) {
         return amizadeApplication.obterAmizadePorId(id);
     }
 
-    public void salvarAmizade(Amizades amizade) {
+    public void salvarAmizade(AmizadesModel amizade) {
         amizadeApplication.criarAmizade(amizade);
     }
 
@@ -31,7 +31,7 @@ public class AmizadesFacade {
         amizadeApplication.excluirAmizade(id);
     }
 
-    public void atualizarAmizades(int id, Amizades amizades) {
-        amizadeApplication.atualizarAmizades(id, amizades);
+    public void atualizarAmizades(int id, AmizadesModel amizadesModel) {
+        amizadeApplication.atualizarAmizades(id, amizadesModel);
     }
 }

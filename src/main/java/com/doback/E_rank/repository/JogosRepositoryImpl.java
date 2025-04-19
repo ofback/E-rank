@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.Jogos;
+import com.doback.E_rank.models.JogosModel;
 import com.doback.E_rank.interfaces.JogoRepository;
 import com.doback.E_rank.repository.jpa.JogoJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class JogosRepositoryImpl implements JogoRepository {
     }
 
     @Override
-    public Jogos searchByCode(int code) {
+    public JogosModel searchByCode(int code) {
         return this.jogoJpa.findById(code).get();
     }
 
     @Override
-    public List<Jogos> buscar() {
+    public List<JogosModel> buscar() {
         return this.jogoJpa.findAll();
     }
 
     @Override
-    public void addJogos(Jogos jogos) {
-        this.jogoJpa.save(jogos);
+    public void addJogos(JogosModel jogosModel) {
+        this.jogoJpa.save(jogosModel);
     }
 
     @Override
@@ -38,15 +38,15 @@ public class JogosRepositoryImpl implements JogoRepository {
     }
 
     @Override
-    public void updateJogos(int code, Jogos jogos) {
-        Jogos jogosInDb = this.jogoJpa.findById(code).get();
+    public void updateJogos(int code, JogosModel jogosModel) {
+        JogosModel jogosModelInDb = this.jogoJpa.findById(code).get();
 
-        if (jogosInDb != null) {
-            jogosInDb.setNome(jogos.getNome());
-            jogosInDb.setDescricao(jogos.getDescricao());
-            jogosInDb.setGenero(jogos.getGenero());
+        if (jogosModelInDb != null) {
+            jogosModelInDb.setNome(jogosModel.getNome());
+            jogosModelInDb.setDescricao(jogosModel.getDescricao());
+            jogosModelInDb.setGenero(jogosModel.getGenero());
 
-            this.jogoJpa.save(jogosInDb);
+            this.jogoJpa.save(jogosModelInDb);
         }
     }
 

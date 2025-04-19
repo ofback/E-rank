@@ -1,7 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.EstatisticasApplication;
-import com.doback.E_rank.models.Estatisticas;
+import com.doback.E_rank.models.EstatisticasModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,15 +14,15 @@ public class EstatisticasFacade {
         this.estatisticaApplication = estatisticaApplication;
     }
 
-    public List<Estatisticas> listarEstatisticas() {
+    public List<EstatisticasModel> listarEstatisticas() {
         return estatisticaApplication.obterTodas();
     }
 
-    public Estatisticas buscarEstatisticaPorId(int id) {
+    public EstatisticasModel buscarEstatisticaPorId(int id) {
         return estatisticaApplication.obterPorId(id);
     }
 
-    public void salvarEstatistica(Estatisticas estatistica) {
+    public void salvarEstatistica(EstatisticasModel estatistica) {
         estatisticaApplication.criar(estatistica);
     }
 
@@ -30,7 +30,7 @@ public class EstatisticasFacade {
         estatisticaApplication.excluir(id);
     }
 
-    public void atualizarEstatistica(int id, Estatisticas estatistica) {
+    public void atualizarEstatistica(int id, EstatisticasModel estatistica) {
         estatisticaApplication.atualizar(id, estatistica);
     }
 }

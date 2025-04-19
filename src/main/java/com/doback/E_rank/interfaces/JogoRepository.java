@@ -1,14 +1,14 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.Jogos;
+import com.doback.E_rank.models.JogosModel;
 
 import java.util.List;
 
 public interface JogoRepository {
-    public Jogos searchByCode(int id);
-    public List<Jogos> buscar();
-    public void addJogos(Jogos jogos);
+    public JogosModel searchByCode(int id);
+    public List<JogosModel> buscar();
+    public void addJogos(JogosModel jogosModel);
     public void removeJogos(int id);
-    public void updateJogos(int id, Jogos jogos);
+    public void updateJogos(int id, JogosModel jogosModel);
     public boolean estaVazio();
 }

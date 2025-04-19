@@ -1,14 +1,14 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.VotacaoEstatisticas;
+import com.doback.E_rank.models.VotacaoEstatisticasModel;
 
 import java.util.List;
 
 public interface VotacaoEstatisticasRepository {
-    public VotacaoEstatisticas searchByCode(int id);
-    public List<VotacaoEstatisticas> buscar();
-    public void addVotacaoEstatisticas(VotacaoEstatisticas votacaoEstatisticas);
+    public VotacaoEstatisticasModel searchByCode(int id);
+    public List<VotacaoEstatisticasModel> buscar();
+    public void addVotacaoEstatisticas(VotacaoEstatisticasModel votacaoEstatisticasModel);
     public void removeVotacaoEstatisticas(int id);
-    public void updateVotacaoEstatisticas(int id, VotacaoEstatisticas votacaoEstatisticas);
+    public void updateVotacaoEstatisticas(int id, VotacaoEstatisticasModel votacaoEstatisticasModel);
     public boolean estaVazio();
 }

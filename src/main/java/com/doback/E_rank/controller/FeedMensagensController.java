@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.models.FeedMensagens;
+import com.doback.E_rank.models.FeedMensagensModel;
 import com.doback.E_rank.facade.FeedMensagensFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,19 +17,19 @@ public class FeedMensagensController {
     }
 
     @GetMapping
-    public List<FeedMensagens> listaFeedMensagens() {
+    public List<FeedMensagensModel> listaFeedMensagens() {
         return feedMensagensFacade.listarFeedMensagens();
     }
 
     @GetMapping("/{id}")
-    public FeedMensagens obterFeedMensagens(@PathVariable int id) {
+    public FeedMensagensModel obterFeedMensagens(@PathVariable int id) {
         return feedMensagensFacade.buscarFeedMensagensPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarFeedMensagens(@RequestBody FeedMensagens feedMensagens) {
-        feedMensagensFacade.salvarFeedMensagens(feedMensagens);
+    public void criarFeedMensagens(@RequestBody FeedMensagensModel feedMensagensModel) {
+        feedMensagensFacade.salvarFeedMensagens(feedMensagensModel);
     }
 
     @DeleteMapping("/{id}")
@@ -40,7 +40,7 @@ public class FeedMensagensController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarFeedMensagens(@PathVariable int id, @RequestBody FeedMensagens feedMensagens) {
-        feedMensagensFacade.atualizarFeedMensagens(id, feedMensagens);
+    public void atualizarFeedMensagens(@PathVariable int id, @RequestBody FeedMensagensModel feedMensagensModel) {
+        feedMensagensFacade.atualizarFeedMensagens(id, feedMensagensModel);
     }
 }

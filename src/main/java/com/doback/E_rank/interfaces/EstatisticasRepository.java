@@ -1,15 +1,15 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.Estatisticas;
+import com.doback.E_rank.models.EstatisticasModel;
 
 import java.util.List;
 
 public interface EstatisticasRepository {
-    public Estatisticas searchByCode(int id);
-    public List<Estatisticas> buscar();
-    public void addEstatisticas(Estatisticas estatisticas);
+    public EstatisticasModel searchByCode(int id);
+    public List<EstatisticasModel> buscar();
+    public void addEstatisticas(EstatisticasModel estatisticasModel);
     public void removeEstatisticas(int id);
-    public void updateEstatisticas(int id, Estatisticas estatisticas);
+    public void updateEstatisticas(int id, EstatisticasModel estatisticasModel);
     public boolean estaVazio();
 
 }

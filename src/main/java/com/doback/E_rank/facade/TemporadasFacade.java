@@ -1,7 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.TemporadasApplication;
-import com.doback.E_rank.models.Temporadas;
+import com.doback.E_rank.models.TemporadasModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,15 +15,15 @@ public class TemporadasFacade {
         this.temporadaApplication = temporadaApplication;
     }
 
-    public List<Temporadas> listarTemporadas() {
+    public List<TemporadasModel> listarTemporadas() {
         return temporadaApplication.obterTodasTemporadas();
     }
 
-    public Temporadas buscarTemporadaPorId(int id) {
+    public TemporadasModel buscarTemporadaPorId(int id) {
         return temporadaApplication.obterTemporadaPorId(id);
     }
 
-    public void salvarTemporada(Temporadas temporada) {
+    public void salvarTemporada(TemporadasModel temporada) {
         temporadaApplication.criarTemporada(temporada);
     }
 
@@ -31,7 +31,7 @@ public class TemporadasFacade {
         temporadaApplication.excluirTemporada(id);
     }
 
-    public void atualizarTemporadas(int id, Temporadas temporadas) {
-        temporadaApplication.atualizarTemporadas(id, temporadas);
+    public void atualizarTemporadas(int id, TemporadasModel temporadasModel) {
+        temporadaApplication.atualizarTemporadas(id, temporadasModel);
     }
 }

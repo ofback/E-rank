@@ -1,6 +1,6 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.models.RegistroTemporadas;
+import com.doback.E_rank.models.RegistroTemporadasModel;
 import com.doback.E_rank.facade.RegistroTemporadasFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +18,19 @@ public class RegistroTemporadasController {
     }
 
     @GetMapping
-    public List<RegistroTemporadas> listarRegistroTemporadas() {
+    public List<RegistroTemporadasModel> listarRegistroTemporadas() {
         return registroTemporadasFacade.listarRegistroTemporadas();
     }
 
     @GetMapping("/{id}")
-    public RegistroTemporadas obterRegistroTemporadasPorId(@PathVariable int id) {
+    public RegistroTemporadasModel obterRegistroTemporadasPorId(@PathVariable int id) {
         return registroTemporadasFacade.buscarRegistroTemporadasPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarRegistroTemporadas(@RequestBody RegistroTemporadas registroTemporadas) {
-        registroTemporadasFacade.salvarRegistroTemporadas(registroTemporadas);
+    public void criarRegistroTemporadas(@RequestBody RegistroTemporadasModel registroTemporadasModel) {
+        registroTemporadasFacade.salvarRegistroTemporadas(registroTemporadasModel);
     }
 
     @DeleteMapping("/{id}")
@@ -41,8 +41,8 @@ public class RegistroTemporadasController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarRegistroTemporadas(@PathVariable int id, @RequestBody RegistroTemporadas registroTemporadas) {
-        registroTemporadasFacade.atualizarRegistroTemporadas(id, registroTemporadas);
+    public void atualizarRegistroTemporadas(@PathVariable int id, @RequestBody RegistroTemporadasModel registroTemporadasModel) {
+        registroTemporadasFacade.atualizarRegistroTemporadas(id, registroTemporadasModel);
     }
 
 }

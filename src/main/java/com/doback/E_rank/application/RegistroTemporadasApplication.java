@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.models.RegistroTemporadas;
+import com.doback.E_rank.models.RegistroTemporadasModel;
 import com.doback.E_rank.interfaces.RegistroTemporadasRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,24 +15,24 @@ public class RegistroTemporadasApplication {
         this.registroTemporadasRepository = registroTemporadasRepository;
     }
 
-    public List<RegistroTemporadas> obterTodosRegistrosTemporadas() {
+    public List<RegistroTemporadasModel> obterTodosRegistrosTemporadas() {
         return registroTemporadasRepository.buscar();
     }
 
-    public RegistroTemporadas obterRegistrosTemporadaPorId(int id) {
+    public RegistroTemporadasModel obterRegistrosTemporadaPorId(int id) {
         return registroTemporadasRepository.searchByCode(id);
     }
 
-    public void criarRegistrosTemporada(RegistroTemporadas registroTemporadas) {
-        registroTemporadasRepository.addRegistroTemporadas(registroTemporadas);
+    public void criarRegistrosTemporada(RegistroTemporadasModel registroTemporadasModel) {
+        registroTemporadasRepository.addRegistroTemporadas(registroTemporadasModel);
     }
 
     public void excluirRegistrosTemporada(int id) {
         registroTemporadasRepository.removeRegistroTemporadas(id);
     }
 
-    public void atualizarRegistroTemporadas(int id, RegistroTemporadas registroTemporadas) {
-        registroTemporadasRepository.updateRegistroTemporadas(id, registroTemporadas);
+    public void atualizarRegistroTemporadas(int id, RegistroTemporadasModel registroTemporadasModel) {
+        registroTemporadasRepository.updateRegistroTemporadas(id, registroTemporadasModel);
     }
 
 }

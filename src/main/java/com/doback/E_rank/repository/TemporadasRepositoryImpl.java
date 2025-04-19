@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.Temporadas;
+import com.doback.E_rank.models.TemporadasModel;
 import com.doback.E_rank.interfaces.TemporadasRepository;
 import com.doback.E_rank.repository.jpa.TemporadasJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class TemporadasRepositoryImpl implements TemporadasRepository {
     }
 
     @Override
-    public Temporadas searchByCode(int code) {
+    public TemporadasModel searchByCode(int code) {
         return this.temporadasJpa.findById(code).orElse(null);
     }
 
     @Override
-    public List<Temporadas> buscar() {
+    public List<TemporadasModel> buscar() {
         return this.temporadasJpa.findAll();
     }
 
     @Override
-    public void addTemporadas(Temporadas temporadas) {
-        this.temporadasJpa.save(temporadas);
+    public void addTemporadas(TemporadasModel temporadasModel) {
+        this.temporadasJpa.save(temporadasModel);
     }
 
     @Override
@@ -38,11 +38,11 @@ public class TemporadasRepositoryImpl implements TemporadasRepository {
     }
 
     @Override
-    public void updateTemporadas(int code, Temporadas temporadas) {
-        Temporadas temporadaInDb = this.temporadasJpa.findById(code).orElse(null);
+    public void updateTemporadas(int code, TemporadasModel temporadasModel) {
+        TemporadasModel temporadaInDb = this.temporadasJpa.findById(code).orElse(null);
         if (temporadaInDb != null) {
-            temporadaInDb.setData_inicio(temporadas.getData_inicio());
-            temporadaInDb.setData_fim(temporadas.getData_fim());
+            temporadaInDb.setData_inicio(temporadasModel.getData_inicio());
+            temporadaInDb.setData_fim(temporadasModel.getData_fim());
 
 
 

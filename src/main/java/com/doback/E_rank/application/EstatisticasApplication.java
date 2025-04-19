@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.models.Estatisticas;
+import com.doback.E_rank.models.EstatisticasModel;
 import com.doback.E_rank.interfaces.EstatisticasRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +14,15 @@ public class EstatisticasApplication {
         this.estatisticaRepository = estatisticaRepository;
     }
 
-    public List<Estatisticas> obterTodas() {
+    public List<EstatisticasModel> obterTodas() {
         return estatisticaRepository.buscar();
     }
 
-    public Estatisticas obterPorId(int id) {
+    public EstatisticasModel obterPorId(int id) {
         return estatisticaRepository.searchByCode(id);
     }
 
-    public void criar(Estatisticas estatistica) {
+    public void criar(EstatisticasModel estatistica) {
         estatisticaRepository.addEstatisticas(estatistica);
     }
 
@@ -30,7 +30,7 @@ public class EstatisticasApplication {
         estatisticaRepository.removeEstatisticas(id);
     }
 
-    public void atualizar(int id, Estatisticas estatistica) {
+    public void atualizar(int id, EstatisticasModel estatistica) {
         estatisticaRepository.updateEstatisticas(id, estatistica);
     }
 }

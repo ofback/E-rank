@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "registroTemporadas")
-public class RegistroTemporadas {
+public class RegistroTemporadasModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class RegistroTemporadas {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
-    private Temporadas temporada;
+    private TemporadasModel temporadasModel;
 
     @Column(name = "id_temporada")
     private int idTemporada;
@@ -27,19 +27,19 @@ public class RegistroTemporadas {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_time", referencedColumnName = "id", insertable = false, updatable = false)
-    private Times time;
+    private TimesModel timesModel;
 
     @Column(name = "id_time")
     private int idTime;
 
 
-    public RegistroTemporadas( Temporadas temporada, Times time, Date data) {
-        this.temporada = temporada;
-        this.time = time;
+    public RegistroTemporadasModel(TemporadasModel temporadasModel, TimesModel timesModel, Date data) {
+        this.temporadasModel = temporadasModel;
+        this.timesModel = timesModel;
         this.data = data;
     }
 
-    public RegistroTemporadas() {
+    public RegistroTemporadasModel() {
 
     }
 

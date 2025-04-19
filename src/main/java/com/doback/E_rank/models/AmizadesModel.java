@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "amizades")
-public class Amizades {
+public class AmizadesModel {
 
 
     @Id
@@ -22,31 +22,31 @@ public class Amizades {
     @Column(name = "data_solicitacao")
     private Date dataSolicitacao;
 
-    @OneToMany(mappedBy = "amizade", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Desafios> desafios = new ArrayList<>();
+    @OneToMany(mappedBy = "amizadesModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<DesafiosModel> desafiosModels = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario1", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario1;
+    private UsuariosModel usuariosModel1;
 
     @Column(name = "id_usuario1")
     private int idUsuario1;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario2", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario2;
+    private UsuariosModel usuariosModel2;
 
     @Column(name = "id_usuario2")
     private int idUsuario2;
 
-    public Amizades() {
+    public AmizadesModel() {
 
     }
 
-    public Amizades( Usuarios usuario1, Usuarios usuario2, char sts, Date dataSolicitacao) {
+    public AmizadesModel(UsuariosModel usuariosModel1, UsuariosModel usuariosModel2, char sts, Date dataSolicitacao) {
 
-        this.usuario1 = usuario1;
-        this.usuario2 = usuario2;
+        this.usuariosModel1 = usuariosModel1;
+        this.usuariosModel2 = usuariosModel2;
         this.sts = sts;
         this.dataSolicitacao = dataSolicitacao;
     }

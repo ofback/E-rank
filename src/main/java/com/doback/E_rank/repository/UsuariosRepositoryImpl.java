@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.Usuarios;
+import com.doback.E_rank.models.UsuariosModel;
 import com.doback.E_rank.interfaces.UsuariosRepository;
 import com.doback.E_rank.repository.jpa.UsuariosJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class UsuariosRepositoryImpl implements UsuariosRepository {
     }
 
     @Override
-    public Usuarios searchByCode(Long id) {
+    public UsuariosModel searchByCode(Long id) {
         return this.usuariosJpa.findById(id).orElse(null);  // Modificado para Long
     }
 
     @Override
-    public List<Usuarios> buscar() {
+    public List<UsuariosModel> buscar() {
         return this.usuariosJpa.findAll();
     }
 
     @Override
-    public void addUsuarios(Usuarios usuarios) {
-        this.usuariosJpa.save(usuarios);
+    public void addUsuarios(UsuariosModel usuariosModel) {
+        this.usuariosJpa.save(usuariosModel);
     }
 
     @Override
@@ -38,18 +38,18 @@ public class UsuariosRepositoryImpl implements UsuariosRepository {
     }
 
     @Override
-    public void updateUsuarios(Long id, Usuarios usuarios) {
-        Usuarios usuariosInDb = this.usuariosJpa.findById(id).orElse(null);
-        if (usuariosInDb != null) {
-            usuariosInDb.setSts(usuarios.getSts());
-            usuariosInDb.setBiografia(usuarios.getBiografia());
-            usuariosInDb.setNickname(usuarios.getNickname());
-            usuariosInDb.setEmail(usuarios.getEmail());
-            usuariosInDb.setSenha(usuarios.getSenha());
-            usuariosInDb.setDataCriacao(usuarios.getDataCriacao());
-            usuariosInDb.setNome(usuarios.getNome());
+    public void updateUsuarios(Long id, UsuariosModel usuariosModel) {
+        UsuariosModel usuariosModelInDb = this.usuariosJpa.findById(id).orElse(null);
+        if (usuariosModelInDb != null) {
+            usuariosModelInDb.setSts(usuariosModel.getSts());
+            usuariosModelInDb.setBiografia(usuariosModel.getBiografia());
+            usuariosModelInDb.setNickname(usuariosModel.getNickname());
+            usuariosModelInDb.setEmail(usuariosModel.getEmail());
+            usuariosModelInDb.setSenha(usuariosModel.getSenha());
+            usuariosModelInDb.setDataCriacao(usuariosModel.getDataCriacao());
+            usuariosModelInDb.setNome(usuariosModel.getNome());
 
-            this.usuariosJpa.save(usuariosInDb);
+            this.usuariosJpa.save(usuariosModelInDb);
         }
     }
 

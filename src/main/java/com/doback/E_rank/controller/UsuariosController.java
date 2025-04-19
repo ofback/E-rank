@@ -1,6 +1,6 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.models.Usuarios;
+import com.doback.E_rank.models.UsuariosModel;
 import com.doback.E_rank.facade.UsuariosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +17,18 @@ public class UsuariosController {
     }
 
     @GetMapping
-    public List<Usuarios> listarUsuarios() {
+    public List<UsuariosModel> listarUsuarios() {
         return usuarioFacade.listarUsuarios();
     }
 
     @GetMapping("/{id}")
-    public Usuarios obterUsuario(@PathVariable int id) {
+    public UsuariosModel obterUsuario(@PathVariable int id) {
         return usuarioFacade.buscarUsuarioPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarUsuario(@RequestBody Usuarios usuario) {
+    public void criarUsuario(@RequestBody UsuariosModel usuario) {
         usuarioFacade.salvarUsuario(usuario);
     }
 
@@ -40,7 +40,7 @@ public class UsuariosController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarUsuario(@PathVariable int id,@RequestBody Usuarios usuarios){
-        usuarioFacade.atualizarUsuarios(id, usuarios);
+    public void atualizarUsuario(@PathVariable int id,@RequestBody UsuariosModel usuariosModel){
+        usuarioFacade.atualizarUsuarios(id, usuariosModel);
     }
 }

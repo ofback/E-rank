@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.RegistroTimes;
+import com.doback.E_rank.models.RegistroTimesModel;
 import com.doback.E_rank.interfaces.RegistroTimesRepository;
 import com.doback.E_rank.repository.jpa.RegistroTimesJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class RegistroTimesRepositoryImpl implements RegistroTimesRepository {
     }
 
     @Override
-    public RegistroTimes searchByCode(int code) {
+    public RegistroTimesModel searchByCode(int code) {
         return this.registroTimesJpa.findById(code).get();
     }
 
     @Override
-    public List<RegistroTimes> buscar() {
+    public List<RegistroTimesModel> buscar() {
         return this.registroTimesJpa.findAll();
     }
 
     @Override
-    public void addRegistroTimes(RegistroTimes registroTimes) {
-        this.registroTimesJpa.save(registroTimes);
+    public void addRegistroTimes(RegistroTimesModel registroTimesModel) {
+        this.registroTimesJpa.save(registroTimesModel);
     }
 
     @Override
@@ -38,12 +38,12 @@ public class RegistroTimesRepositoryImpl implements RegistroTimesRepository {
     }
 
     @Override
-    public void updateRegistroTimes(int code, RegistroTimes registroTimes) {
-        RegistroTimes registroTimesExistente = this.registroTimesJpa.findById(code).get();
+    public void updateRegistroTimes(int code, RegistroTimesModel registroTimesModel) {
+        RegistroTimesModel registroTimesModelExistente = this.registroTimesJpa.findById(code).get();
 
-        registroTimesExistente.setCargo(registroTimes.getCargo());
+        registroTimesModelExistente.setCargo(registroTimesModel.getCargo());
 
-        this.registroTimesJpa.save(registroTimesExistente);
+        this.registroTimesJpa.save(registroTimesModelExistente);
     }
 
     @Override

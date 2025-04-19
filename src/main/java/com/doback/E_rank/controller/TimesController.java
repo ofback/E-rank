@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.models.Times;
+import com.doback.E_rank.models.TimesModel;
 import com.doback.E_rank.facade.TimesFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,19 +17,19 @@ public class TimesController {
         }
 
     @GetMapping
-    public List<Times> listarTimes() {
+    public List<TimesModel> listarTimes() {
             return timesFacade.listarTimes();
         }
 
     @GetMapping("/{id}")
-    public Times obterTimes(@PathVariable int id) {
+    public TimesModel obterTimes(@PathVariable int id) {
             return timesFacade.buscarTimesPorId(id);
         }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarTimes(@RequestBody Times times) {
-            timesFacade.salvarTimes(times);
+    public void criarTimes(@RequestBody TimesModel timesModel) {
+            timesFacade.salvarTimes(timesModel);
         }
 
     @DeleteMapping("/{id}")
@@ -40,7 +40,7 @@ public class TimesController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarTimes(@PathVariable int id,@RequestBody Times times){
-        timesFacade.atualizarTimes(id, times);
+    public void atualizarTimes(@PathVariable int id,@RequestBody TimesModel timesModel){
+        timesFacade.atualizarTimes(id, timesModel);
     }
 }

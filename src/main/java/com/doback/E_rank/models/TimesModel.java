@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "times")
-public class Times {
+public class TimesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,33 +24,33 @@ public class Times {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario;
+    private UsuariosModel usuariosModel;
 
     @Column(name = "id_usuario")
     private int idUsuario;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_temporadas", referencedColumnName = "id", insertable = false, updatable = false)
-    private Temporadas temporadas;
+    private TemporadasModel temporadasModel;
 
     @Column(name = "id_temporadas")
     private int idTemporada;
 
-    @OneToMany(mappedBy = "times", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<RegistroTimes> registroTimes = new ArrayList<>();
+    @OneToMany(mappedBy = "timesModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTimesModel> registroTimeModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "time", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<RegistroTemporadas> registroTemporadas = new ArrayList<>();
+    @OneToMany(mappedBy = "timesModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTemporadasModel> registroTemporadaModels = new ArrayList<>();
 
-    public Times(String nome, String descricao, char sts, Temporadas temporadas, Usuarios usuario) {
+    public TimesModel(String nome, String descricao, char sts, TemporadasModel temporadasModel, UsuariosModel usuariosModel) {
         this.nome = nome;
         this.descricao = descricao;
         this.sts = sts;
-        this.usuario = usuario;
-        this.temporadas = temporadas;
+        this.usuariosModel = usuariosModel;
+        this.temporadasModel = temporadasModel;
     }
 
-    public Times() {
+    public TimesModel() {
     }
 
     public int getId() {

@@ -1,6 +1,6 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.models.Desafios;
+import com.doback.E_rank.models.DesafiosModel;
 import com.doback.E_rank.facade.DesafiosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +17,18 @@ public class DesafiosController {
     }
 
     @GetMapping
-    public List<Desafios> listarDesafios() {
+    public List<DesafiosModel> listarDesafios() {
         return desafioFacade.listarDesafios();
     }
 
     @GetMapping("/{id}")
-    public Desafios obterDesafio(@PathVariable int id) {
+    public DesafiosModel obterDesafio(@PathVariable int id) {
         return desafioFacade.buscarDesafioPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarDesafio(@RequestBody Desafios desafio) {
+    public void criarDesafio(@RequestBody DesafiosModel desafio) {
         desafioFacade.salvarDesafio(desafio);
     }
 
@@ -40,7 +40,7 @@ public class DesafiosController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarDesafios(@PathVariable int id,@RequestBody Desafios desafios){
-        desafioFacade.atualizarDesafio(id, desafios);
+    public void atualizarDesafios(@PathVariable int id,@RequestBody DesafiosModel desafiosModel){
+        desafioFacade.atualizarDesafio(id, desafiosModel);
     }
 }

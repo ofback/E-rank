@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.models.VotacaoEstatisticas;
+import com.doback.E_rank.models.VotacaoEstatisticasModel;
 import com.doback.E_rank.facade.VotacaoEstatisticasFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,19 +17,19 @@ public class VotacaoEstatisticasController {
     }
 
     @GetMapping
-    public List<VotacaoEstatisticas> listaVotacaoEstatisticas() {
+    public List<VotacaoEstatisticasModel> listaVotacaoEstatisticas() {
         return votacaoEstatisticasFacade.listarVotacaoEstatisticas();
     }
 
     @GetMapping("/{id}")
-    public VotacaoEstatisticas obterVotacaoEstatisticas(@PathVariable int id) {
+    public VotacaoEstatisticasModel obterVotacaoEstatisticas(@PathVariable int id) {
         return votacaoEstatisticasFacade.buscarVotacaoEstatisticasPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarVotacaoEstatisticas(@RequestBody VotacaoEstatisticas votacaoEstatisticas) {
-        votacaoEstatisticasFacade.salvarVotacaoEstatisticas(votacaoEstatisticas);
+    public void criarVotacaoEstatisticas(@RequestBody VotacaoEstatisticasModel votacaoEstatisticasModel) {
+        votacaoEstatisticasFacade.salvarVotacaoEstatisticas(votacaoEstatisticasModel);
     }
 
     @DeleteMapping("/{id}")
@@ -40,7 +40,7 @@ public class VotacaoEstatisticasController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarVotacaoEstatisticas(@PathVariable int id, @RequestBody VotacaoEstatisticas votacaoEstatisticas) {
-        votacaoEstatisticasFacade.atualizarVotacaoEstatisticas(id, votacaoEstatisticas);
+    public void atualizarVotacaoEstatisticas(@PathVariable int id, @RequestBody VotacaoEstatisticasModel votacaoEstatisticasModel) {
+        votacaoEstatisticasFacade.atualizarVotacaoEstatisticas(id, votacaoEstatisticasModel);
     }
 }

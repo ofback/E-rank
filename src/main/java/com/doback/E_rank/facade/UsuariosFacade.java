@@ -1,7 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.UsuariosApplication;
-import com.doback.E_rank.models.Usuarios;
+import com.doback.E_rank.models.UsuariosModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,15 +14,15 @@ public class UsuariosFacade {
         this.usuarioApplication = usuarioApplication;
     }
 
-    public List<Usuarios> listarUsuarios() {
+    public List<UsuariosModel> listarUsuarios() {
         return usuarioApplication.obterTodosUsuarios();
     }
 
-    public Usuarios buscarUsuarioPorId(int id) {
+    public UsuariosModel buscarUsuarioPorId(int id) {
         return usuarioApplication.obterUsuarioPorId(id);
     }
 
-    public void salvarUsuario(Usuarios usuario) {
+    public void salvarUsuario(UsuariosModel usuario) {
         usuarioApplication.criarUsuario(usuario);
     }
 
@@ -30,7 +30,7 @@ public class UsuariosFacade {
         usuarioApplication.excluirUsuario(id);
     }
 
-    public void atualizarUsuarios(int id, Usuarios usuarios) {
-        usuarioApplication.atualizarUsuarios(id, usuarios);
+    public void atualizarUsuarios(int id, UsuariosModel usuariosModel) {
+        usuarioApplication.atualizarUsuarios(id, usuariosModel);
     }
 }
