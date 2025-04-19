@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.models.Jogos;
+import com.doback.E_rank.models.JogosModel;
 import com.doback.E_rank.facade.JogosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +17,18 @@ public class JogosController {
     }
 
     @GetMapping
-    public List<Jogos> listaJogos() {
+    public List<JogosModel> listaJogos() {
         return jogoFacade.listarJogos();
     }
 
     @GetMapping("/{id}")
-    public Jogos obterJogo(@PathVariable int id) {
+    public JogosModel obterJogo(@PathVariable int id) {
         return jogoFacade.buscarJogoPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarJogo(@RequestBody Jogos jogo) {
+    public void criarJogo(@RequestBody JogosModel jogo) {
         jogoFacade.salvarJogo(jogo);
     }
 
@@ -40,7 +40,7 @@ public class JogosController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarJogos(@PathVariable int id, @RequestBody Jogos jogos) {
-        jogoFacade.atualizarJogos(id, jogos);
+    public void atualizarJogos(@PathVariable int id, @RequestBody JogosModel jogosModel) {
+        jogoFacade.atualizarJogos(id, jogosModel);
     }
 }

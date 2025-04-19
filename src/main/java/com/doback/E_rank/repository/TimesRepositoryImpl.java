@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.Times;
+import com.doback.E_rank.models.TimesModel;
 import com.doback.E_rank.interfaces.TimesRepository;
 import com.doback.E_rank.repository.jpa.TimesJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class TimesRepositoryImpl implements TimesRepository {
     }
 
     @Override
-    public Times searchByCode(int code) {
+    public TimesModel searchByCode(int code) {
         return this.timesJpa.findById(code).get();
     }
 
     @Override
-    public List<Times> buscar() {
+    public List<TimesModel> buscar() {
         return this.timesJpa.findAll();
     }
 
     @Override
-    public void addTimes(Times times) {
-        this.timesJpa.save(times);
+    public void addTimes(TimesModel timesModel) {
+        this.timesJpa.save(timesModel);
     }
 
 
@@ -39,13 +39,13 @@ public class TimesRepositoryImpl implements TimesRepository {
     }
 
     @Override
-    public void updateTimes(int code, Times times) {
-        Times timesExistentes = this.timesJpa.findById(code).get();
+    public void updateTimes(int code, TimesModel timesModel) {
+        TimesModel timesModelExistentes = this.timesJpa.findById(code).get();
 
-        timesExistentes.setNome(times.getNome());
-        timesExistentes.setDescricao(times.getDescricao());
+        timesModelExistentes.setNome(timesModel.getNome());
+        timesModelExistentes.setDescricao(timesModel.getDescricao());
 
-        this.timesJpa.save(timesExistentes);
+        this.timesJpa.save(timesModelExistentes);
     }
 
     @Override

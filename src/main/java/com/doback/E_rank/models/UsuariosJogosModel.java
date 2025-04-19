@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuariosJogos")
-public class UsuariosJogos {
+public class UsuariosJogosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -12,24 +12,24 @@ public class UsuariosJogos {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_usuarios", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuarios;
+    private UsuariosModel usuariosModel;
 
     @Column(name = "id_usuarios")
     private int idUsuarios;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_jogos", referencedColumnName = "id", insertable = false, updatable = false)
-    private Jogos jogos;
+    private JogosModel jogosModel;
 
     @Column(name = "id_jogos")
     private int idJogos;
 
-    public UsuariosJogos() {
+    public UsuariosJogosModel() {
     }
 
-    public UsuariosJogos(Usuarios usuarios, Jogos jogos) {
-        this.usuarios = usuarios;
-        this.jogos = jogos;
+    public UsuariosJogosModel(UsuariosModel usuariosModel, JogosModel jogosModel) {
+        this.usuariosModel = usuariosModel;
+        this.jogosModel = jogosModel;
     }
 
     public int getId() {

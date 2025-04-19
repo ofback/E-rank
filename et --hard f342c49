@@ -16,10 +16,10 @@
 [33m6e4fffe[m[33m ([m[1;31morigin/Branch-Pedro[m[33m, [m[1;32mBranch-Pedro[m[33m)[m HEAD@{15}: rebase (finish): returning to refs/heads/Branch-Pedro
 [33m6e4fffe[m[33m ([m[1;31morigin/Branch-Pedro[m[33m, [m[1;32mBranch-Pedro[m[33m)[m HEAD@{16}: rebase (start): checkout origin/Branch-Pedro
 [33m90876ac[m HEAD@{17}: rebase (finish): returning to refs/heads/Branch-Pedro
-[33m90876ac[m HEAD@{18}: rebase (pick): correção entidade Amizades.java
+[33m90876ac[m HEAD@{18}: rebase (pick): correção entidade AmizadesModel.java
 [33mcb832dd[m HEAD@{19}: rebase (pick): Implementação JpaRepository na entidade Estatisticas
 [33md429dbe[m HEAD@{20}: rebase (start): checkout develop
-[33m6e4fffe[m[33m ([m[1;31morigin/Branch-Pedro[m[33m, [m[1;32mBranch-Pedro[m[33m)[m HEAD@{21}: commit: correção entidade Amizades.java
+[33m6e4fffe[m[33m ([m[1;31morigin/Branch-Pedro[m[33m, [m[1;32mBranch-Pedro[m[33m)[m HEAD@{21}: commit: correção entidade AmizadesModel.java
 [33m17b0ee4[m HEAD@{22}: checkout: moving from master to Branch-Pedro
 [33mf342c49[m HEAD@{23}: commit: remoção da classe teste.java no package entity
 [33m99a2563[m HEAD@{24}: checkout: moving from Branch-Pedro to master
@@ -52,11 +52,11 @@
 [33m847b533[m HEAD@{51}: checkout: moving from Branch-Pedro to develop
 [33medc68b2[m HEAD@{52}: rebase (finish): returning to refs/heads/Branch-Pedro
 [33medc68b2[m HEAD@{53}: rebase (start): checkout origin/Branch-Pedro
-[33me252094[m HEAD@{54}: commit (amend): adição das interfaces das entidades estatisticas e desafios
+[33me252094[m HEAD@{54}: commit (amend): adição das interfaces das entidades estatisticasModel e desafiosModel
 [33medc68b2[m HEAD@{55}: checkout: moving from Branch-Gabriel to Branch-Pedro
 [33m20f6d48[m[33m ([m[1;32mBranch-Gabriel[m[33m)[m HEAD@{56}: merge origin/Branch-Gabriel: Fast-forward
 [33ma145d0a[m HEAD@{57}: checkout: moving from Branch-Pedro to Branch-Gabriel
-[33medc68b2[m HEAD@{58}: commit: adição das interfaces das entidades estatisticas e desafios
+[33medc68b2[m HEAD@{58}: commit: adição das interfaces das entidades estatisticasModel e desafiosModel
 [33mc9c1823[m HEAD@{59}: checkout: moving from develop to Branch-Pedro
 [33m847b533[m HEAD@{60}: checkout: moving from Branch-Pedro to develop
 [33mc9c1823[m HEAD@{61}: checkout: moving from develop to Branch-Pedro

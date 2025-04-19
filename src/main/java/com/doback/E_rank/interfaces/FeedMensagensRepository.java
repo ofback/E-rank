@@ -1,15 +1,15 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.FeedMensagens;
+import com.doback.E_rank.models.FeedMensagensModel;
 
 import java.util.List;
 
 public interface FeedMensagensRepository {
-    public FeedMensagens searchByCode(int id);
-    public List<FeedMensagens> buscar();
-    public void addFeedMensagens(FeedMensagens feedMensagens);
+    public FeedMensagensModel searchByCode(int id);
+    public List<FeedMensagensModel> buscar();
+    public void addFeedMensagens(FeedMensagensModel feedMensagensModel);
     public void removeFeedMensagens(int id);
-    public void updateFeedMensagens(int id, FeedMensagens FeedMensagens);
+    public void updateFeedMensagens(int id, FeedMensagensModel FeedMensagensModel);
     public boolean estaVazio();
 
 }

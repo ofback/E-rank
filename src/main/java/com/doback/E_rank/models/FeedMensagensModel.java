@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "feed_mensagens")
-public class FeedMensagens {
+public class FeedMensagensModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,22 +30,22 @@ public class FeedMensagens {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario;
+    private UsuariosModel usuariosModel;
 
     @Column(name = "id_usuario")
     private int idUsuario;
 
 
-    public FeedMensagens(String atividade, String descricao, String mensagem, char status, Date dataEnvio, Usuarios usuario) {
+    public FeedMensagensModel(String atividade, String descricao, String mensagem, char status, Date dataEnvio, UsuariosModel usuariosModel) {
         this.atividade = atividade;
         this.descricao = descricao;
         this.mensagem = mensagem;
         this.status = status;
         this.dataEnvio = dataEnvio;
-        this.usuario = usuario;
+        this.usuariosModel = usuariosModel;
     }
 
-    public FeedMensagens() {
+    public FeedMensagensModel() {
     }
 
     public String getAtividade() {

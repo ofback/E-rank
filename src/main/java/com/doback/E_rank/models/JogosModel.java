@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "jogos")
-public class Jogos {
+public class JogosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,22 +21,22 @@ public class Jogos {
     @Column(name = "genero")
     private String genero;
 
-    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<UsuariosJogos> usuariosJogos = new ArrayList<>();
+    @OneToMany(mappedBy = "jogosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<UsuariosJogosModel> usuariosJogoModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Desafios> desafios = new ArrayList<>();
+    @OneToMany(mappedBy = "jogosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<DesafiosModel> desafiosModel = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jogos", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Estatisticas> estatisticas = new ArrayList<>();
+    @OneToMany(mappedBy = "jogosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<EstatisticasModel> estatisticasModels = new ArrayList<>();
 
-    public Jogos(String nome, String descricao, String genero) {
+    public JogosModel(String nome, String descricao, String genero) {
         this.nome = nome;
         this.descricao = descricao;
         this.genero = genero;
     }
 
-    public Jogos() {}
+    public JogosModel() {}
 
     public String getNome() {
         return nome;

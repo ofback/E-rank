@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.Estatisticas;
+import com.doback.E_rank.models.EstatisticasModel;
 import com.doback.E_rank.interfaces.EstatisticasRepository;
 import com.doback.E_rank.repository.jpa.EstatisticasJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +19,19 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
     }
 
     @Override
-    public Estatisticas searchByCode(int id) {
+    public EstatisticasModel searchByCode(int id) {
         return this.estatisticasJpa.findById(id).get();
 
     }
 
     @Override
-    public List<Estatisticas> buscar() {
+    public List<EstatisticasModel> buscar() {
         return this.estatisticasJpa.findAll();
     }
 
     @Override
-    public void addEstatisticas(Estatisticas estatisticas) {
-        this.estatisticasJpa.save(estatisticas);
+    public void addEstatisticas(EstatisticasModel estatisticasModel) {
+        this.estatisticasJpa.save(estatisticasModel);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
     }
 
     @Override
-    public void updateEstatisticas(int id, Estatisticas novaEstatistica) {
-        Estatisticas estatisticaInDb = this.estatisticasJpa.findById(id).get();
+    public void updateEstatisticas(int id, EstatisticasModel novaEstatistica) {
+        EstatisticasModel estatisticaInDb = this.estatisticasJpa.findById(id).get();
 
         estatisticaInDb.setKills(novaEstatistica.getKills());
         estatisticaInDb.setAssistencias(novaEstatistica.getAssistencias());

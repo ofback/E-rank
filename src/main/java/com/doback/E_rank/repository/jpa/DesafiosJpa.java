@@ -1,7 +1,7 @@
 package com.doback.E_rank.repository.jpa;
 
+import com.doback.E_rank.models.DesafiosModel;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.doback.E_rank.models.Desafios;
 
-public interface DesafiosJpa extends JpaRepository<Desafios, Integer> {
+public interface DesafiosJpa extends JpaRepository<DesafiosModel, Integer> {
 }

@@ -1,6 +1,6 @@
 package com.doback.E_rank.facade;
 import com.doback.E_rank.application.JogosApplication;
-import com.doback.E_rank.models.Jogos;
+import com.doback.E_rank.models.JogosModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,15 +13,15 @@ public class JogosFacade {
         this.jogoApplication = jogoApplication;
     }
 
-    public List<Jogos> listarJogos() {
+    public List<JogosModel> listarJogos() {
         return jogoApplication.obterTodosJogos();
     }
 
-    public Jogos buscarJogoPorId(int id) {
+    public JogosModel buscarJogoPorId(int id) {
         return jogoApplication.obterJogoPorId(id);
     }
 
-    public void salvarJogo(Jogos jogo) {
+    public void salvarJogo(JogosModel jogo) {
         jogoApplication.criarJogo(jogo);
     }
 
@@ -29,7 +29,7 @@ public class JogosFacade {
         jogoApplication.excluirJogo(id);
     }
 
-    public void atualizarJogos(int id, Jogos jogos) {
-        jogoApplication.atualizarJogos(id, jogos);
+    public void atualizarJogos(int id, JogosModel jogosModel) {
+        jogoApplication.atualizarJogos(id, jogosModel);
     }
 }

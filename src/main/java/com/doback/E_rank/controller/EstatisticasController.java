@@ -1,6 +1,6 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.models.Estatisticas;
+import com.doback.E_rank.models.EstatisticasModel;
 import com.doback.E_rank.facade.EstatisticasFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +17,18 @@ public class EstatisticasController {
     }
 
     @GetMapping
-    public List<Estatisticas> listarEstatisticas() {
+    public List<EstatisticasModel> listarEstatisticas() {
         return estatisticaFacade.listarEstatisticas();
     }
 
     @GetMapping("/{id}")
-    public Estatisticas obterEstatistica(@PathVariable int id) {
+    public EstatisticasModel obterEstatistica(@PathVariable int id) {
         return estatisticaFacade.buscarEstatisticaPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarEstatistica(@RequestBody Estatisticas estatistica) {
+    public void criarEstatistica(@RequestBody EstatisticasModel estatistica) {
         estatisticaFacade.salvarEstatistica(estatistica);
     }
 
@@ -40,7 +40,7 @@ public class EstatisticasController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarEstatistica(@PathVariable int id, @RequestBody Estatisticas estatistica) {
+    public void atualizarEstatistica(@PathVariable int id, @RequestBody EstatisticasModel estatistica) {
         estatisticaFacade.atualizarEstatistica(id, estatistica);
     }
 }

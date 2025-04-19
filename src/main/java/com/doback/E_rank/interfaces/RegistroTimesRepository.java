@@ -1,14 +1,14 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.RegistroTimes;
+import com.doback.E_rank.models.RegistroTimesModel;
 
 import java.util.List;
 
 public interface RegistroTimesRepository {
-    public RegistroTimes searchByCode(int code);
-    public List<RegistroTimes> buscar();
-    public void addRegistroTimes(RegistroTimes registroTimes);
+    public RegistroTimesModel searchByCode(int code);
+    public List<RegistroTimesModel> buscar();
+    public void addRegistroTimes(RegistroTimesModel registroTimesModel);
     public void removeRegistroTimes(int code);
-    public void updateRegistroTimes(int code, RegistroTimes registroTimes);
+    public void updateRegistroTimes(int code, RegistroTimesModel registroTimesModel);
     public boolean estaVazio();
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "temporadas")
-public class Temporadas {
+public class TemporadasModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,23 +29,23 @@ public class Temporadas {
     @Temporal(TemporalType.DATE)
     private Date data_fim;
 
-    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
+    @OneToMany(mappedBy = "temporadasModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<VotacaoEstatisticasModel> votacaoEstatisticaModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "temporadas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<Times> times;
+    @OneToMany(mappedBy = "temporadasModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<TimesModel> times;
 
-    @OneToMany(mappedBy = "temporada", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<RegistroTemporadas> registroTemporadas  = new ArrayList<>();
+    @OneToMany(mappedBy = "temporadasModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<RegistroTemporadasModel> registroTemporadaModels = new ArrayList<>();
 
-    public Temporadas(String nome, String descricao, Date data_inicio, Date data_fim) {
+    public TemporadasModel(String nome, String descricao, Date data_inicio, Date data_fim) {
         this.nome = nome;
         this.descricao = descricao;
         this.data_inicio = data_inicio;
         this.data_fim = data_fim;
     }
 
-    public Temporadas() {
+    public TemporadasModel() {
     }
 
     public String getNome() {

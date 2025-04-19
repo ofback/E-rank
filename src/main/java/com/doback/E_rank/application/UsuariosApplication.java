@@ -1,7 +1,7 @@
 package com.doback.E_rank.application;
 
 
-import com.doback.E_rank.models.Usuarios;
+import com.doback.E_rank.models.UsuariosModel;
 import com.doback.E_rank.interfaces.UsuariosRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ public class UsuariosApplication {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<Usuarios> obterTodosUsuarios() {
+    public List<UsuariosModel> obterTodosUsuarios() {
         return usuarioRepository.buscar();
     }
 
-    public Usuarios obterUsuarioPorId(long id) {
+    public UsuariosModel obterUsuarioPorId(long id) {
         return usuarioRepository.searchByCode(id);
     }
 
-    public void criarUsuario(Usuarios usuario) {
+    public void criarUsuario(UsuariosModel usuario) {
         usuarioRepository.addUsuarios(usuario);
     }
 
@@ -31,7 +31,7 @@ public class UsuariosApplication {
         usuarioRepository.removeUsuarios(id);
     }
 
-    public void atualizarUsuarios(int id, Usuarios usuarios) {
-        usuarioRepository.updateUsuarios((long) id, usuarios);
+    public void atualizarUsuarios(int id, UsuariosModel usuariosModel) {
+        usuarioRepository.updateUsuarios((long) id, usuariosModel);
     }
 }

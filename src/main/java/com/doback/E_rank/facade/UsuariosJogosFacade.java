@@ -1,7 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.UsuariosJogosApplication;
-import com.doback.E_rank.models.UsuariosJogos;
+import com.doback.E_rank.models.UsuariosJogosModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,23 +15,23 @@ public class UsuariosJogosFacade {
         this.usuariosJogosApplication = usuariosJogosApplication;
     }
 
-    public List<UsuariosJogos> listarUsuariosJogos() {
+    public List<UsuariosJogosModel> listarUsuariosJogos() {
         return usuariosJogosApplication.obterTodosUsuariosJogos();
     }
 
-    public UsuariosJogos buscarUsuariosJogosPorId(int id) {
+    public UsuariosJogosModel buscarUsuariosJogosPorId(int id) {
         return usuariosJogosApplication.obterUsuariosJogosPorId(id);
     }
 
-    public void salvarUsuariosJogos(UsuariosJogos usuariosJogos) {
-        usuariosJogosApplication.criarUsuariosJogos(usuariosJogos);
+    public void salvarUsuariosJogos(UsuariosJogosModel usuariosJogosModel) {
+        usuariosJogosApplication.criarUsuariosJogos(usuariosJogosModel);
     }
 
     public void excluirUsuariosJogos(int id) {
         usuariosJogosApplication.excluirUsuariosJogos(id);
     }
 
-    public void atualizarUsuariosJogos(int id, UsuariosJogos usuariosJogos) {
-        usuariosJogosApplication.atualizarUsuariosJogos(id, usuariosJogos);
+    public void atualizarUsuariosJogos(int id, UsuariosJogosModel usuariosJogosModel) {
+        usuariosJogosApplication.atualizarUsuariosJogos(id, usuariosJogosModel);
     }
 }

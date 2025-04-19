@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.FeedMensagens;
+import com.doback.E_rank.models.FeedMensagensModel;
 import com.doback.E_rank.interfaces.FeedMensagensRepository;
 import com.doback.E_rank.repository.jpa.FeedMensagensJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class FeedMensagensRepositoryImpl implements FeedMensagensRepository {
     }
 
     @Override
-    public FeedMensagens searchByCode(int code) {
+    public FeedMensagensModel searchByCode(int code) {
         return this.feedMensagensJpa.findById(code).get();
     }
 
     @Override
-    public List<FeedMensagens> buscar() {
+    public List<FeedMensagensModel> buscar() {
         return this.feedMensagensJpa.findAll();
     }
 
     @Override
-    public void addFeedMensagens(FeedMensagens feedMensagens) {
-        this.feedMensagensJpa.save(feedMensagens);
+    public void addFeedMensagens(FeedMensagensModel feedMensagensModel) {
+        this.feedMensagensJpa.save(feedMensagensModel);
     }
 
     @Override
@@ -38,17 +38,17 @@ public class FeedMensagensRepositoryImpl implements FeedMensagensRepository {
     }
 
     @Override
-    public void updateFeedMensagens(int code, FeedMensagens feedMensagens) {
-        FeedMensagens feedMensagensInDb = this.feedMensagensJpa.findById(code).get();
+    public void updateFeedMensagens(int code, FeedMensagensModel feedMensagensModel) {
+        FeedMensagensModel feedMensagensModelInDb = this.feedMensagensJpa.findById(code).get();
 
-        if (feedMensagensInDb != null) {
-            feedMensagensInDb.setAtividade(feedMensagens.getAtividade());
-            feedMensagensInDb.setDescricao(feedMensagens.getDescricao());
-            feedMensagensInDb.setMensagem(feedMensagens.getMensagem());
-            feedMensagensInDb.setDataEnvio(feedMensagens.getDataEnvio());
-            feedMensagensInDb.setStatus(feedMensagens.getStatus());
+        if (feedMensagensModelInDb != null) {
+            feedMensagensModelInDb.setAtividade(feedMensagensModel.getAtividade());
+            feedMensagensModelInDb.setDescricao(feedMensagensModel.getDescricao());
+            feedMensagensModelInDb.setMensagem(feedMensagensModel.getMensagem());
+            feedMensagensModelInDb.setDataEnvio(feedMensagensModel.getDataEnvio());
+            feedMensagensModelInDb.setStatus(feedMensagensModel.getStatus());
 
-            this.feedMensagensJpa.save(feedMensagensInDb);
+            this.feedMensagensJpa.save(feedMensagensModelInDb);
         }
     }
 

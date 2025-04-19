@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "votacaoEstatisticas")
-public class VotacaoEstatisticas {
+public class VotacaoEstatisticasModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,34 +21,34 @@ public class VotacaoEstatisticas {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_estatistica", referencedColumnName = "id", insertable = false, updatable = false)
-    private Estatisticas estatisticas;
+    private EstatisticasModel estatisticasModel;
 
     @Column(name = "id_estatistica")
     private int idEstatistica;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario;
+    private UsuariosModel usuariosModel;
 
     @Column(name = "id_usuario")
     private int idUsuario;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_temporada", referencedColumnName = "id", insertable = false, updatable = false)
-    private Temporadas temporadas;
+    private TemporadasModel temporadasModel;
 
     @Column(name = "id_temporada")
     private int idTemporada;
 
-    public VotacaoEstatisticas(boolean voto, Date data_voto, Estatisticas estatisticas, Usuarios usuario, Temporadas temporadas) {
+    public VotacaoEstatisticasModel(boolean voto, Date data_voto, EstatisticasModel estatisticasModel, UsuariosModel usuariosModel, TemporadasModel temporadasModel) {
         this.voto = voto;
         this.data_voto = data_voto;
-        this.estatisticas = estatisticas;
-        this.usuario = usuario;
-        this.temporadas = temporadas;
+        this.estatisticasModel = estatisticasModel;
+        this.usuariosModel = usuariosModel;
+        this.temporadasModel = temporadasModel;
     }
 
-    public VotacaoEstatisticas() {
+    public VotacaoEstatisticasModel() {
     }
 
     public boolean isVoto() {

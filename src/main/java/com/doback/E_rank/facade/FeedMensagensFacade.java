@@ -1,6 +1,6 @@
 package com.doback.E_rank.facade;
 import com.doback.E_rank.application.FeedMensagensApplication;
-import com.doback.E_rank.models.FeedMensagens;
+import com.doback.E_rank.models.FeedMensagensModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,23 +14,23 @@ public class FeedMensagensFacade {
         this.feedMensagensApplication = feedMensagensApplication;
     }
 
-    public List<FeedMensagens> listarFeedMensagens() {
+    public List<FeedMensagensModel> listarFeedMensagens() {
         return feedMensagensApplication.obterTodosFeedMensagens();
     }
 
-    public FeedMensagens buscarFeedMensagensPorId(int id) {
+    public FeedMensagensModel buscarFeedMensagensPorId(int id) {
         return feedMensagensApplication.obterFeedMensagensPorId(id);
     }
 
-    public void salvarFeedMensagens(FeedMensagens feedMensagens) {
-        feedMensagensApplication.criarFeedMensagens(feedMensagens);
+    public void salvarFeedMensagens(FeedMensagensModel feedMensagensModel) {
+        feedMensagensApplication.criarFeedMensagens(feedMensagensModel);
     }
 
     public void excluirFeedMensagens(int id) {
         feedMensagensApplication.excluirFeedMensagens(id);
     }
 
-    public void atualizarFeedMensagens(int id, FeedMensagens feedMensagens) {
-        feedMensagensApplication.atualizarFeedMensagens(id, feedMensagens);
+    public void atualizarFeedMensagens(int id, FeedMensagensModel feedMensagensModel) {
+        feedMensagensApplication.atualizarFeedMensagens(id, feedMensagensModel);
     }
 }

@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.Desafios;
+import com.doback.E_rank.models.DesafiosModel;
 import com.doback.E_rank.interfaces.DesafiosRepository;
 import com.doback.E_rank.repository.jpa.DesafiosJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class DesafiosRepositoryImpl implements DesafiosRepository {
     }
 
     @Override
-    public Desafios searchByCode(int code) {
+    public DesafiosModel searchByCode(int code) {
         return this.desafiosJpa.findById(code).get();
     }
 
     @Override
-    public List<Desafios> buscar() {
+    public List<DesafiosModel> buscar() {
         return this.desafiosJpa.findAll();
     }
 
     @Override
-    public void addDesafios(Desafios desafios) {
-        this.desafiosJpa.save(desafios);
+    public void addDesafios(DesafiosModel desafiosModel) {
+        this.desafiosJpa.save(desafiosModel);
     }
 
     @Override
@@ -38,14 +38,14 @@ public class DesafiosRepositoryImpl implements DesafiosRepository {
     }
 
     @Override
-    public void updateDesafios(int code, Desafios desafios) {
-        Desafios desafiosInDb = this.desafiosJpa.findById(code).get();
+    public void updateDesafios(int code, DesafiosModel desafiosModel) {
+        DesafiosModel desafiosModelInDb = this.desafiosJpa.findById(code).get();
 
-        desafiosInDb.setDataDesafio(desafios.getDataDesafio());
-        desafiosInDb.setResultado(desafios.getResultado());
-        desafiosInDb.setSts(desafios.getSts());
+        desafiosModelInDb.setDataDesafio(desafiosModel.getDataDesafio());
+        desafiosModelInDb.setResultado(desafiosModel.getResultado());
+        desafiosModelInDb.setSts(desafiosModel.getSts());
 
-        this.desafiosJpa.save(desafiosInDb);
+        this.desafiosJpa.save(desafiosModelInDb);
     }
 
     @Override

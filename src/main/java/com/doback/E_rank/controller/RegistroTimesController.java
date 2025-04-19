@@ -1,6 +1,6 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.models.RegistroTimes;
+import com.doback.E_rank.models.RegistroTimesModel;
 import com.doback.E_rank.facade.RegistroTimesFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +18,19 @@ public class RegistroTimesController {
     }
 
     @GetMapping
-    public List<RegistroTimes> listarRegistroTimes() {
+    public List<RegistroTimesModel> listarRegistroTimes() {
         return registroTimesFacade.listarRegistroTimes();
     }
 
     @GetMapping("/{id}")
-    public RegistroTimes obterRegistroTimesPorId(@PathVariable int id) {
+    public RegistroTimesModel obterRegistroTimesPorId(@PathVariable int id) {
         return registroTimesFacade.buscarRegistroTimesPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarRegistroTimes(@RequestBody RegistroTimes registroTimes) {
-        registroTimesFacade.salvarRegistroTimes(registroTimes);
+    public void criarRegistroTimes(@RequestBody RegistroTimesModel registroTimesModel) {
+        registroTimesFacade.salvarRegistroTimes(registroTimesModel);
     }
 
     @DeleteMapping("/{id}")
@@ -41,7 +41,7 @@ public class RegistroTimesController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarRegistroTimes(@PathVariable int id, @RequestBody RegistroTimes registroTimes) {
-        registroTimesFacade.atualizarRegistroTimes(id, registroTimes);
+    public void atualizarRegistroTimes(@PathVariable int id, @RequestBody RegistroTimesModel registroTimesModel) {
+        registroTimesFacade.atualizarRegistroTimes(id, registroTimesModel);
     }
 }

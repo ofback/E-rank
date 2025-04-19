@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.models.UsuariosJogos;
+import com.doback.E_rank.models.UsuariosJogosModel;
 import com.doback.E_rank.interfaces.UsuariosJogosRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +14,23 @@ public class UsuariosJogosApplication {
         this.usuariosJogosRepository = usuariosJogosRepository;
     }
 
-    public List<UsuariosJogos> obterTodosUsuariosJogos() {
+    public List<UsuariosJogosModel> obterTodosUsuariosJogos() {
         return usuariosJogosRepository.buscar();
     }
 
-    public UsuariosJogos obterUsuariosJogosPorId(int id) {
+    public UsuariosJogosModel obterUsuariosJogosPorId(int id) {
         return usuariosJogosRepository.searchByCode(id);
     }
 
-    public void criarUsuariosJogos(UsuariosJogos usuariosJogos) {
-        usuariosJogosRepository.addUsuariosJogos(usuariosJogos);
+    public void criarUsuariosJogos(UsuariosJogosModel usuariosJogosModel) {
+        usuariosJogosRepository.addUsuariosJogos(usuariosJogosModel);
     }
 
     public void excluirUsuariosJogos(int id) {
         usuariosJogosRepository.removeUsuariosJogos(id);
     }
 
-    public void atualizarUsuariosJogos(int id, UsuariosJogos usuariosJogos) {
-        usuariosJogosRepository.updateUsuariosJogos(id, usuariosJogos);
+    public void atualizarUsuariosJogos(int id, UsuariosJogosModel usuariosJogosModel) {
+        usuariosJogosRepository.updateUsuariosJogos(id, usuariosJogosModel);
     }
 }

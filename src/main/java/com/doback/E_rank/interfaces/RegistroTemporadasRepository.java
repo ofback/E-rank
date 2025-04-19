@@ -1,16 +1,16 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.RegistroTemporadas;
+import com.doback.E_rank.models.RegistroTemporadasModel;
 
 
 import java.util.List;
 
 public interface RegistroTemporadasRepository {
-    public RegistroTemporadas searchByCode(int id);
-    public List<RegistroTemporadas> buscar();
-    public void addRegistroTemporadas(RegistroTemporadas registrotemporadas);
+    public RegistroTemporadasModel searchByCode(int id);
+    public List<RegistroTemporadasModel> buscar();
+    public void addRegistroTemporadas(RegistroTemporadasModel registrotemporadas);
     public void removeRegistroTemporadas(int id);
-    public void updateRegistroTemporadas(int id, RegistroTemporadas registrotemporadas);
+    public void updateRegistroTemporadas(int id, RegistroTemporadasModel registrotemporadas);
     public boolean estaVazio();
 
 

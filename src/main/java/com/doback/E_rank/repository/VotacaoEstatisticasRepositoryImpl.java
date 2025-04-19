@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.VotacaoEstatisticas;
+import com.doback.E_rank.models.VotacaoEstatisticasModel;
 import com.doback.E_rank.interfaces.VotacaoEstatisticasRepository;
 import com.doback.E_rank.repository.jpa.VotacaoEstatisticasJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ public class VotacaoEstatisticasRepositoryImpl implements VotacaoEstatisticasRep
     }
 
     @Override
-    public VotacaoEstatisticas searchByCode(int code) {
+    public VotacaoEstatisticasModel searchByCode(int code) {
         return this.votacaoEstatisticasJpa.findById(code).get();
     }
 
     @Override
-    public List<VotacaoEstatisticas> buscar() {
+    public List<VotacaoEstatisticasModel> buscar() {
         return this.votacaoEstatisticasJpa.findAll();
     }
 
     @Override
-    public void addVotacaoEstatisticas(VotacaoEstatisticas votacaoEstatisticas) {
-        this.votacaoEstatisticasJpa.save(votacaoEstatisticas);
+    public void addVotacaoEstatisticas(VotacaoEstatisticasModel votacaoEstatisticasModel) {
+        this.votacaoEstatisticasJpa.save(votacaoEstatisticasModel);
     }
 
     @Override
@@ -38,14 +38,14 @@ public class VotacaoEstatisticasRepositoryImpl implements VotacaoEstatisticasRep
     }
 
     @Override
-    public void updateVotacaoEstatisticas(int code, VotacaoEstatisticas votacaoEstatisticas) {
-        VotacaoEstatisticas votacaoEstatisticasInDb = this.votacaoEstatisticasJpa.findById(code).get();
+    public void updateVotacaoEstatisticas(int code, VotacaoEstatisticasModel votacaoEstatisticasModel) {
+        VotacaoEstatisticasModel votacaoEstatisticasModelInDb = this.votacaoEstatisticasJpa.findById(code).get();
 
-        if (votacaoEstatisticasInDb != null) {
-            votacaoEstatisticasInDb.setData_voto(votacaoEstatisticas.getData_voto());
-            votacaoEstatisticasInDb.setVoto(votacaoEstatisticas.isVoto());
+        if (votacaoEstatisticasModelInDb != null) {
+            votacaoEstatisticasModelInDb.setData_voto(votacaoEstatisticasModel.getData_voto());
+            votacaoEstatisticasModelInDb.setVoto(votacaoEstatisticasModel.isVoto());
 
-            this.votacaoEstatisticasJpa.save(votacaoEstatisticasInDb);
+            this.votacaoEstatisticasJpa.save(votacaoEstatisticasModelInDb);
         }
     }
 

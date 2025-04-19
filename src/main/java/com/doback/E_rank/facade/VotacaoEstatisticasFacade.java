@@ -1,6 +1,6 @@
 package com.doback.E_rank.facade;
 import com.doback.E_rank.application.VotacaoEstatisticasApplication;
-import com.doback.E_rank.models.VotacaoEstatisticas;
+import com.doback.E_rank.models.VotacaoEstatisticasModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,23 +13,23 @@ public class VotacaoEstatisticasFacade {
         this.votacaoEstatisticasApplication = votacaoEstatisticasApplication;
     }
 
-    public List<VotacaoEstatisticas> listarVotacaoEstatisticas() {
+    public List<VotacaoEstatisticasModel> listarVotacaoEstatisticas() {
         return votacaoEstatisticasApplication.obterTodosVotacaoEstatisticas();
     }
 
-    public VotacaoEstatisticas buscarVotacaoEstatisticasPorId(int id) {
+    public VotacaoEstatisticasModel buscarVotacaoEstatisticasPorId(int id) {
         return votacaoEstatisticasApplication.obterVotacaoEstatisticasPorId(id);
     }
 
-    public void salvarVotacaoEstatisticas(VotacaoEstatisticas votacaoEstatisticas) {
-        votacaoEstatisticasApplication.criarVotacaoEstatisticas(votacaoEstatisticas);
+    public void salvarVotacaoEstatisticas(VotacaoEstatisticasModel votacaoEstatisticasModel) {
+        votacaoEstatisticasApplication.criarVotacaoEstatisticas(votacaoEstatisticasModel);
     }
 
     public void excluirVotacaoEstatisticas(int id) {
         votacaoEstatisticasApplication.excluirVotacaoEstatisticas(id);
     }
 
-    public void atualizarVotacaoEstatisticas(int id, VotacaoEstatisticas votacaoEstatisticas) {
-        votacaoEstatisticasApplication.atualizarVotacaoEstatisticas(id, votacaoEstatisticas);
+    public void atualizarVotacaoEstatisticas(int id, VotacaoEstatisticasModel votacaoEstatisticasModel) {
+        votacaoEstatisticasApplication.atualizarVotacaoEstatisticas(id, votacaoEstatisticasModel);
     }
 }

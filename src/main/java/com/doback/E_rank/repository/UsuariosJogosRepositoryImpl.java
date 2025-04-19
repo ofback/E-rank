@@ -1,6 +1,6 @@
 package com.doback.E_rank.repository;
 
-import com.doback.E_rank.models.UsuariosJogos;
+import com.doback.E_rank.models.UsuariosJogosModel;
 import com.doback.E_rank.interfaces.UsuariosJogosRepository;
 import com.doback.E_rank.repository.jpa.UsuariosJogosJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +19,18 @@ public class UsuariosJogosRepositoryImpl implements UsuariosJogosRepository {
     }
 
     @Override
-    public UsuariosJogos searchByCode(int code) {
+    public UsuariosJogosModel searchByCode(int code) {
         return this.usuariosJogosJpa.findById(code).get();
     }
 
     @Override
-    public List<UsuariosJogos> buscar() {
+    public List<UsuariosJogosModel> buscar() {
         return this.usuariosJogosJpa.findAll();
     }
 
     @Override
-    public void addUsuariosJogos(UsuariosJogos usuariosJogos) {
-        this.usuariosJogosJpa.save(usuariosJogos);
+    public void addUsuariosJogos(UsuariosJogosModel usuariosJogosModel) {
+        this.usuariosJogosJpa.save(usuariosJogosModel);
     }
 
     @Override
@@ -39,14 +39,14 @@ public class UsuariosJogosRepositoryImpl implements UsuariosJogosRepository {
     }
 
     @Override
-    public void updateUsuariosJogos(int code, UsuariosJogos usuariosJogos) {
-        UsuariosJogos usuariosJogosInDb = this.usuariosJogosJpa.findById(code).get();
+    public void updateUsuariosJogos(int code, UsuariosJogosModel usuariosJogosModel) {
+        UsuariosJogosModel usuariosJogosModelInDb = this.usuariosJogosJpa.findById(code).get();
 
-        if (usuariosJogosInDb != null) {
-            usuariosJogosInDb.setIdUsuarios(usuariosJogos.getIdUsuarios());
-            usuariosJogos.setIdJogos(usuariosJogos.getIdJogos());
+        if (usuariosJogosModelInDb != null) {
+            usuariosJogosModelInDb.setIdUsuarios(usuariosJogosModel.getIdUsuarios());
+            usuariosJogosModel.setIdJogos(usuariosJogosModel.getIdJogos());
 
-            this.usuariosJogosJpa.save(usuariosJogos);
+            this.usuariosJogosJpa.save(usuariosJogosModel);
         }
     }
     @Override

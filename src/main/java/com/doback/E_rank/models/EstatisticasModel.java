@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "estatisticas")
-public class Estatisticas {
+public class EstatisticasModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,13 +38,13 @@ public class Estatisticas {
     @Column(name = "headshots")
     private int headshots;
 
-    @OneToMany(mappedBy = "estatisticas", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<VotacaoEstatisticas> votacaoEstatisticas = new ArrayList<>();
+    @OneToMany(mappedBy = "estatisticasModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<VotacaoEstatisticasModel> votacaoEstatisticaModels = new ArrayList<>();
 
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
-    private Usuarios usuario;
+    private UsuariosModel usuariosModel;
 
     @Column(name = "id_usuario")
     private int idUsuario;
@@ -52,7 +52,7 @@ public class Estatisticas {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
-    private Jogos jogos;
+    private JogosModel jogosModel;
 
     @Column(name = "id_jogo")
     private int idJogo;
@@ -60,12 +60,12 @@ public class Estatisticas {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_desafio", referencedColumnName = "id", insertable = false, updatable = false)
-    private Desafios desafio;
+    private DesafiosModel desafiosModel;
 
     @Column(name = "id_desafio")
     private int idDesafio;
 
-    public Estatisticas( Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots, Jogos jogos, Desafios desafio, Usuarios usuario) {
+    public EstatisticasModel(Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots, JogosModel jogosModel, DesafiosModel desafiosModel, UsuariosModel usuariosModel) {
         this.kills = kills;
         this.assistencias = assistencias;
         this.qtsPartidas = qtsPartidas;
@@ -74,12 +74,12 @@ public class Estatisticas {
         this.derrotas = derrotas;
         this.recordKills = recordKills;
         this.headshots = headshots;
-        this.jogos = jogos;
-        this.usuario = usuario;
-        this.desafio = desafio;
+        this.jogosModel = jogosModel;
+        this.usuariosModel = usuariosModel;
+        this.desafiosModel = desafiosModel;
     }
 
-    public Estatisticas() {
+    public EstatisticasModel() {
     }
 
 

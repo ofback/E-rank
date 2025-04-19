@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.models.Temporadas;
+import com.doback.E_rank.models.TemporadasModel;
 import com.doback.E_rank.facade.TemporadasFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +17,18 @@ public class TemporadasController {
     }
 
     @GetMapping
-    public List<Temporadas> listarTemporadas() {
+    public List<TemporadasModel> listarTemporadas() {
         return temporadaFacade.listarTemporadas();
     }
 
     @GetMapping("/{id}")
-    public Temporadas obterTemporadas(@PathVariable int id) {
+    public TemporadasModel obterTemporadas(@PathVariable int id) {
         return temporadaFacade.buscarTemporadaPorId(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarTemporada(@RequestBody Temporadas temporada) {
+    public void criarTemporada(@RequestBody TemporadasModel temporada) {
         temporadaFacade.salvarTemporada(temporada);
     }
 
@@ -39,8 +39,8 @@ public class TemporadasController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarTemporadas(@PathVariable int id, @RequestBody Temporadas temporadas) {
-        temporadaFacade.atualizarTemporadas(id, temporadas);
+    public void atualizarTemporadas(@PathVariable int id, @RequestBody TemporadasModel temporadasModel) {
+        temporadaFacade.atualizarTemporadas(id, temporadasModel);
     }
 
 
