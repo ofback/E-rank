@@ -1,5 +1,6 @@
 package com.doback.E_rank.application;
 
+import com.doback.E_rank.entity.Estatisticas;
 import com.doback.E_rank.models.EstatisticasModel;
 import com.doback.E_rank.interfaces.EstatisticasRepository;
 import org.springframework.stereotype.Service;
@@ -22,15 +23,49 @@ public class EstatisticasApplication {
         return estatisticaRepository.searchByCode(id);
     }
 
-    public void criar(EstatisticasModel estatistica) {
-        estatisticaRepository.addEstatisticas(estatistica);
+    public void criar(EstatisticasModel estatisticaModel) {
+        Estatisticas estatisticaEntidade = new Estatisticas(
+                estatisticaModel.getKills(),
+                estatisticaModel.getAssistencias(),
+                estatisticaModel.getQtsPartidas(),
+                estatisticaModel.getStsProvacao(),
+                estatisticaModel.getVitorias(),
+                estatisticaModel.getDerrotas(),
+                estatisticaModel.getRecordKills(),
+                estatisticaModel.getHeadshots()
+        );
+
+
+        String erros = estatisticaEntidade.getErrosValidacao();
+        if (!erros.isEmpty()) {
+            throw new IllegalArgumentException(erros);
+        }
+
+        estatisticaRepository.addEstatisticas(estatisticaModel);
     }
 
     public void excluir(int id) {
         estatisticaRepository.removeEstatisticas(id);
     }
 
-    public void atualizar(int id, EstatisticasModel estatistica) {
-        estatisticaRepository.updateEstatisticas(id, estatistica);
+    public void atualizar(int id, EstatisticasModel estatisticaModel) {
+        Estatisticas estatisticaEntidade = new Estatisticas(
+                estatisticaModel.getKills(),
+                estatisticaModel.getAssistencias(),
+                estatisticaModel.getQtsPartidas(),
+                estatisticaModel.getStsProvacao(),
+                estatisticaModel.getVitorias(),
+                estatisticaModel.getDerrotas(),
+                estatisticaModel.getRecordKills(),
+                estatisticaModel.getHeadshots()
+        );
+
+
+        String erros = estatisticaEntidade.getErrosValidacao();
+        if (!erros.isEmpty()) {
+            throw new IllegalArgumentException(erros);
+        }
+
+        estatisticaRepository.updateEstatisticas(id, estatisticaModel);
     }
 }
