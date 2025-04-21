@@ -1,4 +1,5 @@
 package com.doback.E_rank.application;
+import com.doback.E_rank.entity.Amizades;
 import com.doback.E_rank.models.AmizadesModel;
 import com.doback.E_rank.interfaces.AmizadesRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class AmizadesApplication {
         return amizadeRepository.searchByCode(id);
     }
 
-    public void criarAmizade(AmizadesModel amizade) {
+    public void criarAmizade(Amizades amizade) {
         amizadeRepository.addAmizades(amizade);
     }
 

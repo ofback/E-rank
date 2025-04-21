@@ -48,7 +48,7 @@ public class TemporadasModel {
     public TemporadasModel() {
     }
 
-    public String getNome() {
+    public static String getNome() {
         return nome;
     }
 
@@ -56,7 +56,7 @@ public class TemporadasModel {
         this.nome = nome;
     }
 
-    public String getDescricao() {
+    public static String getDescricao() {
         return descricao;
     }
 
@@ -64,7 +64,7 @@ public class TemporadasModel {
         this.descricao = descricao;
     }
 
-    public Date getData_fim() {
+    public static Date getData_fim() {
         return data_fim;
     }
 
@@ -72,7 +72,7 @@ public class TemporadasModel {
         this.data_fim = data_fim;
     }
 
-    public Date getData_inicio() {
+    public static Date getData_inicio() {
         return data_inicio;
     }
 

@@ -1,10 +1,17 @@
 package com.doback.E_rank.interfaces;
 
+import com.doback.E_rank.entity.Temporadas;
 import com.doback.E_rank.models.TemporadasModel;
 
 import java.util.List;
 
 public interface TemporadasRepository {
+    static void save(Temporadas temporada) {
+    }
+
+    static void addTemporadas(Temporadas temporada) {
+    }
+
     public TemporadasModel searchByCode(int id);
     public List<TemporadasModel> buscar();
     public void addTemporadas(TemporadasModel temporadasModel);
