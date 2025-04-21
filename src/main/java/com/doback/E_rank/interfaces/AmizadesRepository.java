@@ -12,6 +12,4 @@ public interface AmizadesRepository {
     public void removeAmizades(int id);
     public void updateAmizades(int id, AmizadesModel AmizadesModel);
     public boolean estaVazio();
-
-    void addAmizades(Amizades amizade);
 }

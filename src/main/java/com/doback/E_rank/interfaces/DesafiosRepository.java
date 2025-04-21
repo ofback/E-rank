@@ -12,6 +12,4 @@ public interface DesafiosRepository {
     public void removeDesafios(int code);
     public void updateDesafios(int code, DesafiosModel desafiosModel);
     public boolean estaVazio();
-
-    void addDesafios(Desafios desafio);
 }
