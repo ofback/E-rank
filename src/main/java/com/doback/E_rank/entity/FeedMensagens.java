@@ -8,12 +8,12 @@ public class FeedMensagens {
     private String descricao;
     private String mensagem;
     private char status;
-    private Date dataEnvio;
+    private String dataEnvio;
     private int idUsuario;
 
     public FeedMensagens() {}
 
-    public FeedMensagens(String atividade, String descricao, String mensagem, char status, Date dataEnvio, int idUsuario) {
+    public FeedMensagens(String atividade, String descricao, String mensagem, char status, String dataEnvio, int idUsuario) {
         this.atividade = atividade;
         this.descricao = descricao;
         this.mensagem = mensagem;
@@ -27,7 +27,7 @@ public class FeedMensagens {
                 && descricao != null && descricao.length() >= 10
                 && mensagem != null && !mensagem.trim().isEmpty()
                 && (status == 'A' || status == 'I')
-                && dataEnvio != null && !dataEnvio.after(new Date())
+                && dataEnvio != null && !dataEnvio.trim().isEmpty()
                 && idUsuario > 0;
     }
 
@@ -39,7 +39,7 @@ public class FeedMensagens {
         if (mensagem == null || mensagem.trim().isEmpty()) erros.append("Mensagem não pode ser vazia. ");
         if (status != 'A' && status != 'I') erros.append("Status deve ser 'A' (ativo) ou 'I' (inativo). ");
         if (dataEnvio == null) erros.append("Data de envio é obrigatória. ");
-        else if (dataEnvio.after(new Date())) erros.append("Data de envio não pode estar no futuro. ");
+        else if (dataEnvio.trim().isEmpty()) erros.append("Data de envio não pode estar no futuro. ");
         if (idUsuario <= 0) erros.append("Id do usuário deve ser maior que zero. ");
 
         return erros.toString().trim();
@@ -59,8 +59,8 @@ public class FeedMensagens {
     public char getStatus() { return status; }
     public void setStatus(char status) { this.status = status; }
 
-    public Date getDataEnvio() { return dataEnvio; }
-    public void setDataEnvio(Date dataEnvio) { this.dataEnvio = dataEnvio; }
+    public String getDataEnvio() { return dataEnvio; }
+    public void setDataEnvio(String dataEnvio) { this.dataEnvio = dataEnvio; }
 
     public int getIdUsuario() { return idUsuario; }
     public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
