@@ -3,9 +3,9 @@ package com.doback.E_rank.entity;
 public class Estatisticas {
 
     private int id;
-    private Long kills;
+    private int kills;
     private int assistencias;
-    private int qtsPartidas;
+    private int qtdPartidas;
     private int stsProvacao;
     private int vitorias;
     private int derrotas;
@@ -16,10 +16,10 @@ public class Estatisticas {
     private int idJogo;
     private int idDesafio;
 
-    public Estatisticas(Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots) {
+    public Estatisticas(int kills, int assistencias, int qtdPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots) {
         this.kills = kills;
         this.assistencias = assistencias;
-        this.qtsPartidas = qtsPartidas;
+        this.qtdPartidas = qtdPartidas;
         this.stsProvacao = stsProvacao;
         this.vitorias = vitorias;
         this.derrotas = derrotas;
@@ -35,11 +35,11 @@ public class Estatisticas {
         this.id = id;
     }
 
-    public Long getKills() {
+    public int getKills() {
         return kills;
     }
 
-    public void setKills(Long kills) {
+    public void setKills(int kills) {
         this.kills = kills;
     }
 
@@ -52,11 +52,11 @@ public class Estatisticas {
     }
 
     public int getQtsPartidas() {
-        return qtsPartidas;
+        return qtdPartidas;
     }
 
     public void setQtsPartidas(int qtsPartidas) {
-        this.qtsPartidas = qtsPartidas;
+        this.qtdPartidas = qtsPartidas;
     }
 
     public int getStsProvacao() {
@@ -124,27 +124,27 @@ public class Estatisticas {
     }
 
     public boolean validarEstatisticas() {
-        return kills != null && kills >= 0 &&
+        return  kills >= 0 &&
                 assistencias >= 0 &&
-                qtsPartidas >= 0 &&
+                qtdPartidas >= 0 &&
                 stsProvacao >= 0 &&
                 vitorias >= 0 &&
                 derrotas >= 0 &&
                 recordKills >= 0 &&
                 headshots >= 0 &&
-                (vitorias + derrotas <= qtsPartidas) &&
+                (vitorias + derrotas <= qtdPartidas) &&
                 (recordKills >= kills);
     }
 
     public String getErrosValidacao() {
         StringBuilder erros = new StringBuilder();
 
-        if (kills == null || kills < 0) erros.append("Kills não pode ser nulo ou negativo.\n");
+        if (kills < 0) erros.append("Kills não pode ser nulo ou negativo.\n");
         if (assistencias < 0) erros.append("Assistências não pode ser negativa.\n");
-        if (qtsPartidas < 0) erros.append("Quantidade de partidas não pode ser negativa.\n");
+        if (qtdPartidas < 0) erros.append("Quantidade de partidas não pode ser negativa.\n");
         if (vitorias < 0) erros.append("Vitórias não pode ser negativa.\n");
         if (derrotas < 0) erros.append("Derrotas não pode ser negativa.\n");
-        if (vitorias + derrotas > qtsPartidas) erros.append("Vitórias + Derrotas não pode ser maior que o total de partidas.\n");
+        if (vitorias + derrotas > qtdPartidas) erros.append("Vitórias + Derrotas não pode ser maior que o total de partidas.\n");
         if (recordKills < kills) erros.append("Recorde de kills não pode ser menor que total de kills.\n");
         if (headshots < 0) erros.append("Headshots não pode ser negativo.\n");
 
