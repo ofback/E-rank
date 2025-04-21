@@ -23,8 +23,8 @@ public class AmizadesApplication {
         return amizadeRepository.searchByCode(id);
     }
 
-    public void criarAmizade(Amizades amizade) {
-        amizadeRepository.addAmizades(amizade);
+    public void criarAmizade(AmizadesModel amizadesModel) {
+        amizadeRepository.addAmizades(amizadesModel);
     }
 
     public void excluirAmizade(int id) {
@@ -34,6 +34,4 @@ public class AmizadesApplication {
     public void atualizarAmizades(int id, AmizadesModel amizadesModel) {
         amizadeRepository.updateAmizades(id, amizadesModel);
     }
-
-
 }

@@ -24,7 +24,7 @@ public class DesafiosFacade {
         return desafioApplication.obterDesafioPorId(id);
     }
 
-    public void salvarDesafio(Desafios desafio) {
+    public void salvarDesafio(DesafiosModel desafio) {
         desafioApplication.criarDesafio(desafio);
     }
 

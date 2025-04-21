@@ -23,8 +23,8 @@ public class DesafiosApplication {
         return desafioRepository.searchByCode(id);
     }
 
-    public void criarDesafio(Desafios desafio) {
-        desafioRepository.addDesafios(desafio);
+    public void criarDesafio(DesafiosModel desafiosModel) {
+        desafioRepository.addDesafios(desafiosModel);
     }
 
     public void excluirDesafio(int id) {
