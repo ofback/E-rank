@@ -32,35 +32,13 @@ public class TimesApplication {
 
 
     public void criarTime(TimesModel timesModel) {
-        Times timeEntidade = new Times(
-                timesModel.getNome(),
-                timesModel.getDescricao(),
-                timesModel.getSts(),
-                timesModel.getIdTemporada(),
-                timesModel.getIdUsuario()
-        );
-
-        if (!timeEntidade.validarTime()) {
-            throw new IllegalArgumentException("Validação do time falhou: " + timeEntidade.getErrosValidacao());
-        }
-
+        validar(timesModel);
         timesRepository.addTimes(timesModel);
     }
 
 
     public void atualizarTimes(int id, TimesModel timesModel) {
-        Times timeEntidade = new Times(
-                timesModel.getNome(),
-                timesModel.getDescricao(),
-                timesModel.getSts(),
-                timesModel.getIdTemporada(),
-                timesModel.getIdUsuario()
-        );
-
-        if (!timeEntidade.validarTime()) {
-            throw new IllegalArgumentException("Validação do time falhou: " + timeEntidade.getErrosValidacao());
-        }
-
+        validar(timesModel);
         timesRepository.updateTimes(id, timesModel);
     }
 
@@ -68,6 +46,22 @@ public class TimesApplication {
     public void excluirTime(int id) {
         TimesModel timesModel = obterTimesPorId(id);
         timesRepository.removeTimes(timesModel.getId());
+    }
+
+    private Times validar(TimesModel timesModel){
+        Times times = new Times(
+            timesModel.getNome(),
+            timesModel.getDescricao(),
+            timesModel.getSts(),
+            timesModel.getIdTemporada(),
+            timesModel.getIdUsuario()
+        );
+
+        if (!times.validarTime()) {
+            throw new IllegalArgumentException("Validação do time falhou: " + times.getErrosValidacao());
+        }
+
+        return times;
     }
 
 
