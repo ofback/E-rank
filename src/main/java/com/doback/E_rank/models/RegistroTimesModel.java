@@ -42,6 +42,13 @@ public class RegistroTimesModel {
         this.usuariosModel = usuariosModel;
     }
 
+    public RegistroTimesModel(String cargo, Date dataEntrada, int idTimes, int idUsuarios) {
+        this.cargo = cargo;
+        this.data_entrada = dataEntrada;
+        this.idTimes = idTimes;
+        this.idUsuarios = idUsuarios;
+    }
+
     public int getId() {
         return id;
     }

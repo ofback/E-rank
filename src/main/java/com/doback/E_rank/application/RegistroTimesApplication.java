@@ -1,4 +1,5 @@
 package com.doback.E_rank.application;
+import com.doback.E_rank.entity.RegistroTimes;
 import com.doback.E_rank.models.RegistroTimesModel;
 import com.doback.E_rank.interfaces.RegistroTimesRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,19 @@ public class RegistroTimesApplication {
     }
 
     public void criarRegistrosTime(RegistroTimesModel registroTimesModel) {
-        registroTimesRepository.addRegistroTimes(registroTimesModel);
+        RegistroTimes registroTimesEntidade = new RegistroTimes(
+                registroTimesModel.getCargo(),
+                registroTimesModel.getData_entrada(),
+                registroTimesModel.getIdTimes(),
+                registroTimesModel.getIdUsuarios()
+        );
+        if (registroTimesEntidade.validarRegistroTimes()) {
+            registroTimesRepository.addRegistroTimes(registroTimesModel);
+        } else {
+            throw new IllegalArgumentException("Validação do registroTimes falhou: " + registroTimesEntidade.getErrosValidacao());
+        }
+
+
     }
 
     public void excluirRegistroTime(int id) {
@@ -30,7 +43,17 @@ public class RegistroTimesApplication {
     }
 
     public void atualizarRegistrosTime(int id, RegistroTimesModel registroTimesModel) {
-        registroTimesRepository.updateRegistroTimes(id, registroTimesModel);
+        RegistroTimes registroTimesEntidade = new RegistroTimes(
+                registroTimesModel.getCargo(),
+                registroTimesModel.getData_entrada(),
+                registroTimesModel.getIdTimes(),
+                registroTimesModel.getIdUsuarios()
+        );
+        if (registroTimesEntidade.validarRegistroTimes()) {
+            registroTimesRepository.addRegistroTimes(registroTimesModel);
+        } else {
+            throw new IllegalArgumentException("Validação do registroTimes falhou: " + registroTimesEntidade.getErrosValidacao());
+        }
     }
 
 }
