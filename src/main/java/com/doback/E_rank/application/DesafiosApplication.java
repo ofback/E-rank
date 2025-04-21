@@ -1,5 +1,6 @@
 package com.doback.E_rank.application;
 
+import com.doback.E_rank.entity.Desafios;
 import com.doback.E_rank.models.DesafiosModel;
 import com.doback.E_rank.interfaces.DesafiosRepository; // Importando a interface correta
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class DesafiosApplication {
         return desafioRepository.searchByCode(id);
     }
 
-    public void criarDesafio(DesafiosModel desafio) {
+    public void criarDesafio(Desafios desafio) {
         desafioRepository.addDesafios(desafio);
     }
 
@@ -31,6 +32,6 @@ public class DesafiosApplication {
     }
 
     public void atualizarDesafio(int id, DesafiosModel desafio) {
-        desafioRepository.updateDesafios(id, desafio); // Adicionado método de atualização
+        desafioRepository.updateDesafios(id, desafio);
     }
 }
