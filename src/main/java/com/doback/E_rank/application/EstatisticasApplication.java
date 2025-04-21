@@ -27,7 +27,7 @@ public class EstatisticasApplication {
         Estatisticas estatisticaEntidade = new Estatisticas(
                 estatisticaModel.getKills(),
                 estatisticaModel.getAssistencias(),
-                estatisticaModel.getQtsPartidas(),
+                estatisticaModel.getQtdPartidas(),
                 estatisticaModel.getStsProvacao(),
                 estatisticaModel.getVitorias(),
                 estatisticaModel.getDerrotas(),
@@ -52,7 +52,7 @@ public class EstatisticasApplication {
         Estatisticas estatisticaEntidade = new Estatisticas(
                 estatisticaModel.getKills(),
                 estatisticaModel.getAssistencias(),
-                estatisticaModel.getQtsPartidas(),
+                estatisticaModel.getQtdPartidas(),
                 estatisticaModel.getStsProvacao(),
                 estatisticaModel.getVitorias(),
                 estatisticaModel.getDerrotas(),
