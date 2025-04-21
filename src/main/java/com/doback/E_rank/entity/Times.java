@@ -106,19 +106,19 @@ public class Times {
         StringBuilder erros = new StringBuilder();
 
         if (nome == null || nome.trim().isEmpty())
-            erros.append(" O campo 'Nome do time' está vazio. Por favor, informe um nome válido.\n");
+            erros.append(" O campo 'Nome do time' está vazio. Por favor, informe um nome válido. ");
 
         if (descricao == null || descricao.length() < 10)
-            erros.append(" A 'Descrição do time' deve conter no mínimo 10 caracteres para ser considerada válida.\n");
+            erros.append(" A 'Descrição do time' deve conter no mínimo 10 caracteres para ser considerada válida. ");
 
         if (sts != 'A' && sts != 'I')
-            erros.append(" O campo 'Status' está incorreto. Use 'A' para ativo ou 'I' para inativo.\n");
+            erros.append(" O campo 'Status' está incorreto. Use 'A' para ativo ou 'I' para inativo. ");
 
         if (idTemporada <= 0)
-            erros.append(" O 'ID da temporada' deve ser um número positivo maior que zero.\n");
+            erros.append(" O 'ID da temporada' deve ser um número positivo maior que zero. ");
 
         if (idUsuario <= 0)
-            erros.append(" O 'ID do usuário' responsável pelo time deve ser um número positivo.\n");
+            erros.append(" O 'ID do usuário' responsável pelo time deve ser um número positivo. ");
 
         return erros.toString().trim();
     }
