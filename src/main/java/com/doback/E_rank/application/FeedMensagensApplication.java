@@ -29,20 +29,8 @@ public class FeedMensagensApplication {
     }
 
     public void criarFeedMensagens(FeedMensagensModel model) {
-        FeedMensagens feed = new FeedMensagens(
-                model.getAtividade(),
-                model.getDescricao(),
-                model.getMensagem(),
-                model.getStatus(),
-                model.getDataEnvio(),
-                model.getIdUsuario()
-        );
-
-        if (feed.validarMensagem()) {
-            feedMensagensRepository.addFeedMensagens(model);
-        } else {
-            throw new IllegalArgumentException("Validação da mensagem falhou: " + feed.getErrosValidacao());
-        }
+        validar(model);
+        feedMensagensRepository.addFeedMensagens(model);
     }
 
     public void excluirFeedMensagens(int id) {
@@ -51,21 +39,25 @@ public class FeedMensagensApplication {
     }
 
     public void atualizarFeedMensagens(int id, FeedMensagensModel model) {
-        FeedMensagensModel existente = obterFeedMensagensPorId(id);
+        /*FeedMensagensModel existente = obterFeedMensagensPorId(id);*/
+        validar(model);
+        feedMensagensRepository.updateFeedMensagens(id, model);
+    }
 
-        FeedMensagens feed = new FeedMensagens(
-                model.getAtividade(),
-                model.getDescricao(),
-                model.getMensagem(),
-                model.getStatus(),
-                model.getDataEnvio(),
-                model.getIdUsuario()
+    private FeedMensagens validar (FeedMensagensModel feedMensagensModel){
+        FeedMensagens feedMensagens = new FeedMensagens(
+                feedMensagensModel.getAtividade(),
+                feedMensagensModel.getDescricao(),
+                feedMensagensModel.getMensagem(),
+                feedMensagensModel.getStatus(),
+                feedMensagensModel.getDataEnvio(),
+                feedMensagensModel.getIdUsuario()
         );
 
-        if (feed.validarMensagem()) {
-            feedMensagensRepository.updateFeedMensagens(id, model);
-        } else {
-            throw new IllegalArgumentException("Validação da mensagem falhou: " + feed.getErrosValidacao());
+        if (!feedMensagens.validarMensagem()) {
+            throw new IllegalArgumentException("Validação da mensagem falhou: " + feedMensagens.getErrosValidacao());
         }
+
+        return feedMensagens;
     }
 }

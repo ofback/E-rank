@@ -139,14 +139,14 @@ public class Estatisticas {
     public String getErrosValidacao() {
         StringBuilder erros = new StringBuilder();
 
-        if (kills < 0) erros.append("Kills não pode ser nulo ou negativo.\n");
-        if (assistencias < 0) erros.append("Assistências não pode ser negativa.\n");
-        if (qtdPartidas < 0) erros.append("Quantidade de partidas não pode ser negativa.\n");
-        if (vitorias < 0) erros.append("Vitórias não pode ser negativa.\n");
-        if (derrotas < 0) erros.append("Derrotas não pode ser negativa.\n");
-        if (vitorias + derrotas > qtdPartidas) erros.append("Vitórias + Derrotas não pode ser maior que o total de partidas.\n");
-        if (recordKills < kills) erros.append("Recorde de kills não pode ser menor que total de kills.\n");
-        if (headshots < 0) erros.append("Headshots não pode ser negativo.\n");
+        if (kills < 0) erros.append("Kills não pode ser negativo. ");
+        if (assistencias < 0) erros.append("Assistências não pode ser negativa. ");
+        if (qtdPartidas <= 0) erros.append("Quantidade de partidas não pode ser menor ou igual a 0(zero). ");
+        if (vitorias < 0) erros.append("Vitórias não pode ser negativa. ");
+        if (derrotas < 0) erros.append("Derrotas não pode ser negativa. ");
+        if (vitorias + derrotas > qtdPartidas) erros.append("Vitórias + Derrotas não pode ser maior que o total de partidas. ");
+        if (recordKills < kills) erros.append("Recorde de kills não pode ser menor que total de kills. ");
+        if (headshots < 0) erros.append("Headshots não pode ser negativo. ");
 
         return erros.toString().trim();
     }
