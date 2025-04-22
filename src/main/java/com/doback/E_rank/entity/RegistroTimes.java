@@ -9,7 +9,7 @@ public class RegistroTimes {
 
     private String cargo;
 
-    private Date data_entrada;
+    private String data_entrada;
 
     private int idTimes;
 
@@ -18,7 +18,7 @@ public class RegistroTimes {
     public RegistroTimes() {
     }
 
-    public RegistroTimes(String cargo, Date data_entrada, int idTimes, int idUsuarios) {
+    public RegistroTimes(String cargo, String data_entrada, int idTimes, int idUsuarios) {
         this.cargo = cargo;
         this.data_entrada = data_entrada;
         this.idTimes = idTimes;
@@ -41,11 +41,11 @@ public class RegistroTimes {
         this.cargo = cargo;
     }
 
-    public Date getData_entrada() {
+    public String getData_entrada() {
         return data_entrada;
     }
 
-    public void setData_entrada(Date data_entrada) {
+    public void setData_entrada(String data_entrada) {
         this.data_entrada = data_entrada;
     }
 
@@ -66,9 +66,9 @@ public class RegistroTimes {
     }
 
     public boolean validarRegistroTimes() {
-        return cargo != null &&
+        return  cargo != null &&
                 !cargo.trim().isEmpty() &&
-                data_entrada != null &&
+                data_entrada != null && !data_entrada.trim().isEmpty() &&
                 idTimes > 0 &&
                 idUsuarios > 0;
     }

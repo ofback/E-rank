@@ -23,17 +23,8 @@ public class JogosApplication {
     }
 
     public void criarJogo(JogosModel jogosModel) {
-        Jogos jogosEntidade = new Jogos(
-                jogosModel.getNome(),
-                jogosModel.getDescricao(),
-                jogosModel.getGenero()
-        );
-        if (jogosEntidade.validarJogo()) {
-            jogoRepository.addJogos(jogosModel);
-        } else {
-            throw new IllegalArgumentException("Validação do jogo falhou: " + jogosEntidade.getErrosValidacao());
-        }
-
+        validar(jogosModel);
+        jogoRepository.addJogos(jogosModel);
     }
 
     public void excluirJogo(int id) {
@@ -41,15 +32,19 @@ public class JogosApplication {
     }
 
     public void atualizarJogos(int id, JogosModel jogosModel) {
+        validar(jogosModel);
+        jogoRepository.updateJogos(id, jogosModel);
+    }
+
+    private Jogos validar(JogosModel jogosModel){
         Jogos jogosEntidade = new Jogos(
                 jogosModel.getNome(),
                 jogosModel.getDescricao(),
                 jogosModel.getGenero()
         );
-        if (jogosEntidade.validarJogo()) {
-            jogoRepository.addJogos(jogosModel);
-        } else {
+        if (!jogosEntidade.validarJogo()) {
             throw new IllegalArgumentException("Validação do jogo falhou: " + jogosEntidade.getErrosValidacao());
         }
+        return jogosEntidade;
     }
 }

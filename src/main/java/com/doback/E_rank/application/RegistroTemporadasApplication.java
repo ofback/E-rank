@@ -25,16 +25,8 @@ public class RegistroTemporadasApplication {
     }
 
     public void criarRegistrosTemporada(RegistroTemporadasModel registroTemporadasModel) {
-        RegistroTemporadas registroTemporadasEntidade = new RegistroTemporadas(
-                registroTemporadasModel.getData(),
-                registroTemporadasModel.getIdTemporada(),
-                registroTemporadasModel.getIdTime()
-        );
-        if (registroTemporadasEntidade.validarRegistroTemporadas()) {
-            registroTemporadasRepository.addRegistroTemporadas(registroTemporadasModel);
-        } else {
-            throw new IllegalArgumentException("Validação do registroTemporadas falhou: " + registroTemporadasEntidade.getErrosValidacao());
-        }
+        validar(registroTemporadasModel);
+        registroTemporadasRepository.addRegistroTemporadas(registroTemporadasModel);
     }
 
     public void excluirRegistrosTemporada(int id) {
@@ -42,16 +34,21 @@ public class RegistroTemporadasApplication {
     }
 
     public void atualizarRegistroTemporadas(int id, RegistroTemporadasModel registroTemporadasModel) {
+        validar(registroTemporadasModel);
+        registroTemporadasRepository.updateRegistroTemporadas(id, registroTemporadasModel);
+    }
+
+    private RegistroTemporadas validar (RegistroTemporadasModel registroTemporadasModel){
         RegistroTemporadas registroTemporadasEntidade = new RegistroTemporadas(
                 registroTemporadasModel.getData(),
                 registroTemporadasModel.getIdTemporada(),
                 registroTemporadasModel.getIdTime()
         );
-        if (registroTemporadasEntidade.validarRegistroTemporadas()) {
-            registroTemporadasRepository.addRegistroTemporadas(registroTemporadasModel);
-        } else {
+        if (!registroTemporadasEntidade.validarRegistroTemporadas()) {
             throw new IllegalArgumentException("Validação do registroTemporadas falhou: " + registroTemporadasEntidade.getErrosValidacao());
         }
+
+        return registroTemporadasEntidade;
     }
 
 }

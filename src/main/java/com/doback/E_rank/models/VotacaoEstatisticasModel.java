@@ -75,7 +75,6 @@ public class VotacaoEstatisticasModel {
         this.id = id;
     }
 
-
     public int getIdEstatistica() {
         return idEstatistica;
     }

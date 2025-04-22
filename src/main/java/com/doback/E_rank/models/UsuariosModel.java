@@ -42,8 +42,6 @@ public class UsuariosModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
 
-
-
     @OneToMany(mappedBy = "usuariosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<UsuariosJogosModel> usuariosJogoModels = new ArrayList<>();
 

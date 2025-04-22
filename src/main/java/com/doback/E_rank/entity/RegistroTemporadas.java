@@ -7,15 +7,13 @@ import java.util.Date;
 public class RegistroTemporadas {
     private int id;
 
-    private Date data;
-
+    private String data;
 
     private int idTemporada;
 
-
     private int idTime;
 
-    public RegistroTemporadas(Date data, int idTemporada, int idTime) {
+    public RegistroTemporadas(String data, int idTemporada, int idTime) {
         this.data = data;
         this.idTemporada = idTemporada;
         this.idTime = idTime;
@@ -49,17 +47,18 @@ public class RegistroTemporadas {
         this.idTemporada = idTemporada;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
     public boolean validarRegistroTemporadas() {
         LocalDate hoje = LocalDate.now();
-        return data != null &&
+        return  data != null &&
+                !data.trim().isEmpty() &&
                 idTemporada > 0 &&
                 idTime > 0;
     }
