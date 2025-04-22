@@ -15,7 +15,7 @@ public class RegistroTimesModel {
     private String cargo;
 
     @Column(name = "data_entrada")
-    private Date data_entrada;
+    private String data_entrada;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_times", referencedColumnName = "id", insertable = false, updatable = false)
@@ -35,14 +35,14 @@ public class RegistroTimesModel {
     public RegistroTimesModel() {
     }
 
-    public RegistroTimesModel(String cargo, Date data_entrada, TimesModel time, UsuariosModel usuariosModel) {
+    public RegistroTimesModel(String cargo, String data_entrada, TimesModel time, UsuariosModel usuariosModel) {
         this.cargo = cargo;
         this.data_entrada = data_entrada;
         this.timesModel = time;
         this.usuariosModel = usuariosModel;
     }
 
-    public RegistroTimesModel(String cargo, Date dataEntrada, int idTimes, int idUsuarios) {
+    public RegistroTimesModel(String cargo, String dataEntrada, int idTimes, int idUsuarios) {
         this.cargo = cargo;
         this.data_entrada = dataEntrada;
         this.idTimes = idTimes;
@@ -65,11 +65,11 @@ public class RegistroTimesModel {
         this.cargo = cargo;
     }
 
-    public Date getData_entrada() {
+    public String getData_entrada() {
         return data_entrada;
     }
 
-    public void setData_entrada(Date data_entrada) {
+    public void setData_entrada(String data_entrada) {
         this.data_entrada = data_entrada;
     }
 

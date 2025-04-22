@@ -14,7 +14,7 @@ public class RegistroTemporadasModel {
     private int id;
 
     @Column(name = "data")
-    private Date data;
+    private String data;
 
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
@@ -33,7 +33,7 @@ public class RegistroTemporadasModel {
     private int idTime;
 
 
-    public RegistroTemporadasModel(TemporadasModel temporadasModel, TimesModel timesModel, Date data) {
+    public RegistroTemporadasModel(TemporadasModel temporadasModel, TimesModel timesModel, String data) {
         this.temporadasModel = temporadasModel;
         this.timesModel = timesModel;
         this.data = data;
@@ -67,11 +67,11 @@ public class RegistroTemporadasModel {
         this.idTemporada = idTemporada;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 }
