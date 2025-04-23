@@ -15,6 +15,7 @@ public class Amizades {
     public Amizades() {
 
     }
+
     public Amizades(int idUsuario1, int idUsuario2, char status, String dataSolicitacao) {
         this.idUsuario1 = idUsuario1;
         this.idUsuario2 = idUsuario2;
