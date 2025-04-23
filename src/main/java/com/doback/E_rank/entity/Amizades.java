@@ -68,7 +68,7 @@ public class Amizades {
                 idUsuario2 > 0 &&
                 idUsuario1 != idUsuario2 &&
                 (status == 'A' || status == 'I') &&
-                && dataSolicitacao != null && !dataSolicitacao.trim().isEmpty();
+                dataSolicitacao != null && !dataSolicitacao.trim().isEmpty();
     }
 
     public String getErrosValidacao() {
