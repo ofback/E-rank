@@ -1,107 +1,111 @@
 package com.doback.E_rank.entity;
 
+import com.doback.E_rank.models.AmizadesModel;
+import com.doback.E_rank.models.EstatisticasModel;
+import com.doback.E_rank.models.JogosModel;
+import jakarta.persistence.*;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class Desafios {
 
-
     private int id;
-    private String nome;
-    private String descricao;
-    private int pontos;
-    private boolean punitivo;
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
 
-    public Desafios() {}
+    private String dataDesafio;
 
-    public Desafios(String nome, String descricao, int pontos, boolean punitivo, LocalDate dataInicio, LocalDate dataFim) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.pontos = pontos;
-        this.punitivo = punitivo;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+    private String resultado;
+
+    private char sts;
+
+    private int idAmizade;
+
+    private int idJogo;
+
+    public Desafios(String dataDesafio, String resultado, char sts, int idAmizade, int idJogo) {
+        this.dataDesafio = dataDesafio;
+        this.resultado = resultado;
+        this.sts = sts;
+        this.idAmizade =idAmizade;
+        this.idJogo = idJogo;
+    }
+
+    public Desafios() {
     }
 
 
+    public String getDataDesafio() {
+        return dataDesafio;
+    }
 
-    public int getId() { return id; }
+    public void setDataDesafio(String dataDesafio) {
+        this.dataDesafio = dataDesafio;
+    }
 
-    public void setId(int id) { this.id = id; }
+    public String getResultado() {
+        return resultado;
+    }
 
-    public String getNome() { return nome; }
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
 
-    public void setNome(String nome) { this.nome = nome; }
+    public char getSts() {
+        return sts;
+    }
 
-    public String getDescricao() { return descricao; }
+    public void setSts(char sts) {
+        this.sts = sts;
+    }
 
-    public void setDescricao(String descricao) { this.descricao = descricao; }
+    public int getId() {
+        return id;
+    }
 
-    public int getPontos() { return pontos; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public void setPontos(int pontos) { this.pontos = pontos; }
+    public int getIdAmizade() {
+        return idAmizade;
+    }
 
-    public boolean isPunitivo() { return punitivo; }
+    public void setIdAmizade(int idAmizade) {
+        this.idAmizade = idAmizade;
+    }
 
-    public void setPunitivo(boolean punitivo) { this.punitivo = punitivo; }
+    public int getIdJogo() {
+        return idJogo;
+    }
 
-    public LocalDate getDataInicio() { return dataInicio; }
-
-    public void setDataInicio(LocalDate dataInicio) { this.dataInicio = dataInicio; }
-
-    public LocalDate getDataFim() { return dataFim; }
-
-    public void setDataFim(LocalDate dataFim) { this.dataFim = dataFim; }
+    public void setIdJogo(int idJogo) {
+        this.idJogo = idJogo;
+    }
 
 
     public boolean validarDesafio() {
-        return getErrosValidacao().isEmpty();
+        return dataDesafio != null && !dataDesafio.trim().isEmpty() &&
+                resultado != null && !resultado.trim().isEmpty() &&
+                (resultado == "Vitoria" || resultado == "Derrota") &&
+                (sts == 'A' || sts == 'I') &&
+                idAmizade > 0 &&
+                idJogo > 0;
     }
 
     public String getErrosValidacao() {
         StringBuilder erros = new StringBuilder();
 
-        List<String> palavrasProibidas = Arrays.asList("teste", "null", "desconhecido");
-        long duracao = dataInicio != null && dataFim != null ? ChronoUnit.DAYS.between(dataInicio, dataFim) : -1;
-
-
-        if (nome == null) {
-            erros.append("Nome não pode ser nulo.\n");
-        }
-
-
-        if (descricao == null || descricao.trim().length() < 10) {
-            erros.append("Descrição deve ter no mínimo 10 caracteres.\n");
-        } else {
-            for (String proibida : palavrasProibidas) {
-                if (descricao.toLowerCase().contains(proibida)) {
-                    erros.append("Descrição contém palavra proibida: ").append(proibida).append("\n");
-                }
-            }
-        }
-
-
-        if (!punitivo && pontos < 0) {
-            erros.append("Somente desafios punitivos podem ter pontos negativos.\n");
-        }
-
-
-        if (dataInicio == null || dataFim == null) {
-            erros.append("Data de início e fim não podem ser nulas.\n");
-        } else {
-            if (dataInicio.getDayOfWeek() == DayOfWeek.SATURDAY || dataInicio.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                erros.append("Desafios não podem começar no fim de semana.\n");
-            }
-
-            if (duracao < 2 || duracao > 30) {
-                erros.append("Desafio deve durar entre 2 e 30 dias.\n");
-            }
-        }
+        if (dataDesafio == null || dataDesafio.trim().isEmpty()) erros.append("Data do desafio não pode estar vazia. ");
+        if (resultado == null || resultado.trim().isEmpty()) erros.append("Resultado não pode ser vazio. ");
+        if (resultado != "Vitoria" && resultado != "Derrota") erros.append("Resultado deve ser 'Vitoria' ou 'Derrota'. ");
+        if (sts != 'A' && sts != 'I') erros.append("Status deve ser 'A' (ativo) ou 'I' (inativo). ");
+        if (idAmizade <= 0) erros.append("Id da amizade deve ser maior que zero. ");
+        if (idJogo <= 0) erros.append("Id do jogo deve ser maior que zero. ");
 
         return erros.toString().trim();
     }

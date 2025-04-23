@@ -29,23 +29,10 @@ public class TemporadasApplication {
         return TemporadaRepository.searchByCode(id);
     }
 
-    public void criarTemporada(TemporadasModel model) {
-        Temporadas temporada = new Temporadas(
-                model.getNome(),
-                model.getDescricao(),
-                model.getData_inicio(),
-                model.getData_fim()
-        );
-
-
-        if (temporada.validarTemporada()) {
-            TemporadasRepository.addTemporadas(temporada);
-            System.out.println("Temporada criada com sucesso.");
-        } else {
-            System.out.println("Erro ao criar temporada:\n" + temporada.getErrosValidacao());
-        }
+    public void criarTemporada(TemporadasModel temporadasModel) {
+        validar(temporadasModel);
+        TemporadaRepository.addTemporadas(temporadasModel);
     }
-
 
     public void excluirAmizade(int id) {
         TemporadaRepository.removeTemporadas(id);
@@ -60,6 +47,23 @@ public class TemporadasApplication {
     }
 
     public void atualizarTemporadas(int id, TemporadasModel temporadasModel) {
+        validar(temporadasModel);
         TemporadaRepository.updateTemporadas(id, temporadasModel);
+    }
+
+    private Temporadas validar(TemporadasModel temporadasModel){
+        Temporadas temporada = new Temporadas(
+                temporadasModel.getNome(),
+                temporadasModel.getDescricao(),
+                temporadasModel.getData_inicio(),
+                temporadasModel.getData_fim()
+        );
+
+
+        if (!temporada.validarTemporada()) {
+            System.out.println("Erro ao criar temporada: " + temporada.getErrosValidacao());
+        }
+
+        return temporada;
     }
 }
