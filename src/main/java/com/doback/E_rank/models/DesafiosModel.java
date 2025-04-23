@@ -16,7 +16,7 @@ public class DesafiosModel {
     private int id;
 
     @Column(name = "data_desafio")
-    private Date dataDesafio;
+    private String dataDesafio;
 
     @Column(name = "resultado")
     private String resultado;
@@ -41,7 +41,7 @@ public class DesafiosModel {
     @Column(name = "id_jogo")
     private int idJogo;
 
-    public DesafiosModel(Date dataDesafio, String resultado, char sts, AmizadesModel amizadesModel, JogosModel jogosModel) {
+    public DesafiosModel(String dataDesafio, String resultado, char sts, AmizadesModel amizadesModel, JogosModel jogosModel) {
         this.dataDesafio = dataDesafio;
         this.resultado = resultado;
         this.sts = sts;
@@ -53,11 +53,11 @@ public class DesafiosModel {
     }
 
 
-    public Date getDataDesafio() {
+    public String getDataDesafio() {
         return dataDesafio;
     }
 
-    public void setDataDesafio(Date dataDesafio) {
+    public void setDataDesafio(String dataDesafio) {
         this.dataDesafio = dataDesafio;
     }
 

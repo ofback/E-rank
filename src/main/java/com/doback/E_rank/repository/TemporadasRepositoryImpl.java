@@ -41,10 +41,10 @@ public class TemporadasRepositoryImpl implements TemporadasRepository {
     public void updateTemporadas(int code, TemporadasModel temporadasModel) {
         TemporadasModel temporadaInDb = this.temporadasJpa.findById(code).orElse(null);
         if (temporadaInDb != null) {
+            temporadaInDb.setNome(temporadasModel.getNome());
+            temporadaInDb.setDescricao(temporadasModel.getDescricao());
             temporadaInDb.setData_inicio(temporadasModel.getData_inicio());
             temporadaInDb.setData_fim(temporadasModel.getData_fim());
-
-
 
             this.temporadasJpa.save(temporadaInDb);
         }

@@ -24,6 +24,7 @@ public class AmizadesApplication {
     }
 
     public void criarAmizade(AmizadesModel amizadesModel) {
+        validar(amizadesModel);
         amizadeRepository.addAmizades(amizadesModel);
     }
 
@@ -32,6 +33,22 @@ public class AmizadesApplication {
     }
 
     public void atualizarAmizades(int id, AmizadesModel amizadesModel) {
+        validar(amizadesModel);
         amizadeRepository.updateAmizades(id, amizadesModel);
+    }
+
+    private Amizades validar(AmizadesModel amizadesModel){
+        Amizades amizades = new Amizades(
+                amizadesModel.getIdUsuario1(),
+                amizadesModel.getIdUsuario2(),
+                amizadesModel.getStatus(),
+                amizadesModel.getDataSolicitacao()
+        );
+
+        if(!amizades.validarAmizades()){
+            throw new IllegalArgumentException("Validação da amizade falhou: " + amizades.getErrosValidacao());
+        }
+
+        return amizades;
     }
 }

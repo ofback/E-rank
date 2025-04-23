@@ -17,10 +17,10 @@ public class AmizadesModel {
     private int id;
 
     @Column(name = "sts")
-    private char sts;
+    private char status;
 
     @Column(name = "data_solicitacao")
-    private Date dataSolicitacao;
+    private String dataSolicitacao;
 
     @OneToMany(mappedBy = "amizadesModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<DesafiosModel> desafiosModels = new ArrayList<>();
@@ -43,27 +43,27 @@ public class AmizadesModel {
 
     }
 
-    public AmizadesModel(UsuariosModel usuariosModel1, UsuariosModel usuariosModel2, char sts, Date dataSolicitacao) {
+    public AmizadesModel(UsuariosModel usuariosModel1, UsuariosModel usuariosModel2, char status, String dataSolicitacao) {
 
         this.usuariosModel1 = usuariosModel1;
         this.usuariosModel2 = usuariosModel2;
-        this.sts = sts;
+        this.status = status;
         this.dataSolicitacao = dataSolicitacao;
     }
 
-    public char getSts() {
-        return sts;
+    public char getStatus() {
+        return status;
     }
 
-    public void setSts(char sts) {
-        this.sts = sts;
+    public void setStatus(char status) {
+        this.status = status;
     }
 
-    public Date getDataSolicitacao() {
+    public String getDataSolicitacao() {
         return dataSolicitacao;
     }
 
-    public void setDataSolicitacao(Date dataSolicitacao) {
+    public void setDataSolicitacao(String dataSolicitacao) {
         this.dataSolicitacao = dataSolicitacao;
     }
 
