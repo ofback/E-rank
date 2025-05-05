@@ -1,6 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.DesafiosApplication;
+import com.doback.E_rank.entity.Desafios;
 import com.doback.E_rank.models.DesafiosModel;
 import org.springframework.stereotype.Component;
 

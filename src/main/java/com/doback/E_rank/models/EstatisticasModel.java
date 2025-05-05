@@ -15,13 +15,13 @@ public class EstatisticasModel {
     private int id;
 
     @Column(name = "kills")
-    private Long kills;
+    private int kills;
 
     @Column(name = "assistencias")
     private int assistencias;
 
     @Column(name = "qts_partidas")
-    private int qtsPartidas;
+    private int qtdPartidas;
 
     @Column(name = "sts_provacao")
     private int stsProvacao;
@@ -65,10 +65,10 @@ public class EstatisticasModel {
     @Column(name = "id_desafio")
     private int idDesafio;
 
-    public EstatisticasModel(Long kills, int assistencias, int qtsPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots, JogosModel jogosModel, DesafiosModel desafiosModel, UsuariosModel usuariosModel) {
+    public EstatisticasModel(int kills, int assistencias, int qtdPartidas, int stsProvacao, int vitorias, int derrotas, int recordKills, int headshots, JogosModel jogosModel, DesafiosModel desafiosModel, UsuariosModel usuariosModel) {
         this.kills = kills;
         this.assistencias = assistencias;
-        this.qtsPartidas = qtsPartidas;
+        this.qtdPartidas = qtdPartidas;
         this.stsProvacao = stsProvacao;
         this.vitorias = vitorias;
         this.derrotas = derrotas;
@@ -83,11 +83,11 @@ public class EstatisticasModel {
     }
 
 
-    public Long getKills() {
+    public int getKills() {
         return kills;
     }
 
-    public void setKills(Long kills) {
+    public void setKills(int kills) {
         this.kills = kills;
     }
 
@@ -99,12 +99,12 @@ public class EstatisticasModel {
         this.assistencias = assistencias;
     }
 
-    public int getQtsPartidas() {
-        return qtsPartidas;
+    public int getQtdPartidas() {
+        return qtdPartidas;
     }
 
-    public void setQtsPartidas(int qtsPartidas) {
-        this.qtsPartidas = qtsPartidas;
+    public void setQtdPartidas(int qtdPartidas) {
+        this.qtdPartidas = qtdPartidas;
     }
 
     public int getStsProvacao() {

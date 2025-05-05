@@ -1,5 +1,6 @@
 package com.doback.E_rank.application;
 
+import com.doback.E_rank.entity.Temporadas;
 import com.doback.E_rank.models.TemporadasModel;
 import com.doback.E_rank.interfaces.TemporadasRepository;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,9 @@ public class TemporadasApplication {
         return TemporadaRepository.searchByCode(id);
     }
 
-    public void criarTemporada(TemporadasModel temporada) {
-        TemporadaRepository.addTemporadas(temporada);
+    public void criarTemporada(TemporadasModel temporadasModel) {
+        validar(temporadasModel);
+        TemporadaRepository.addTemporadas(temporadasModel);
     }
 
     public void excluirAmizade(int id) {
@@ -45,6 +47,23 @@ public class TemporadasApplication {
     }
 
     public void atualizarTemporadas(int id, TemporadasModel temporadasModel) {
+        validar(temporadasModel);
         TemporadaRepository.updateTemporadas(id, temporadasModel);
+    }
+
+    private Temporadas validar(TemporadasModel temporadasModel){
+        Temporadas temporada = new Temporadas(
+                temporadasModel.getNome(),
+                temporadasModel.getDescricao(),
+                temporadasModel.getData_inicio(),
+                temporadasModel.getData_fim()
+        );
+
+
+        if (!temporada.validarTemporada()) {
+            System.out.println("Erro ao criar temporada: " + temporada.getErrosValidacao());
+        }
+
+        return temporada;
     }
 }

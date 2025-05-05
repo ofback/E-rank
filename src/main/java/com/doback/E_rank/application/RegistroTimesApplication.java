@@ -1,4 +1,5 @@
 package com.doback.E_rank.application;
+import com.doback.E_rank.entity.RegistroTimes;
 import com.doback.E_rank.models.RegistroTimesModel;
 import com.doback.E_rank.interfaces.RegistroTimesRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class RegistroTimesApplication {
     }
 
     public void criarRegistrosTime(RegistroTimesModel registroTimesModel) {
+        validar(registroTimesModel);
         registroTimesRepository.addRegistroTimes(registroTimesModel);
     }
 
@@ -30,7 +32,22 @@ public class RegistroTimesApplication {
     }
 
     public void atualizarRegistrosTime(int id, RegistroTimesModel registroTimesModel) {
+        validar(registroTimesModel);
         registroTimesRepository.updateRegistroTimes(id, registroTimesModel);
+    }
+
+    private RegistroTimes validar (RegistroTimesModel registroTimesModel){
+        RegistroTimes registroTimesEntidade = new RegistroTimes(
+                registroTimesModel.getCargo(),
+                registroTimesModel.getData_entrada(),
+                registroTimesModel.getIdTimes(),
+                registroTimesModel.getIdUsuarios()
+        );
+        if (!registroTimesEntidade.validarRegistroTimes()) {
+            throw new IllegalArgumentException("Validação do registroTimes falhou: " + registroTimesEntidade.getErrosValidacao());
+        }
+
+        return registroTimesEntidade;
     }
 
 }

@@ -25,7 +25,7 @@ public class FeedMensagensModel {
     private char status;
 
     @Column(name = "data_envio")
-    private Date dataEnvio;
+    private String dataEnvio;
 
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
@@ -36,7 +36,7 @@ public class FeedMensagensModel {
     private int idUsuario;
 
 
-    public FeedMensagensModel(String atividade, String descricao, String mensagem, char status, Date dataEnvio, UsuariosModel usuariosModel) {
+    public FeedMensagensModel(String atividade, String descricao, String mensagem, char status, String dataEnvio, UsuariosModel usuariosModel) {
         this.atividade = atividade;
         this.descricao = descricao;
         this.mensagem = mensagem;
@@ -80,11 +80,11 @@ public class FeedMensagensModel {
         this.status = status;
     }
 
-    public Date getDataEnvio() {
+    public String getDataEnvio() {
         return dataEnvio;
     }
 
-    public void setDataEnvio(Date dataEnvio) {
+    public void setDataEnvio(String dataEnvio) {
         this.dataEnvio = dataEnvio;
     }
 

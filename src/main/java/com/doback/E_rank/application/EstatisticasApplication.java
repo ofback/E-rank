@@ -1,7 +1,10 @@
 package com.doback.E_rank.application;
 
+import com.doback.E_rank.entity.Estatisticas;
+import com.doback.E_rank.entity.Times;
 import com.doback.E_rank.models.EstatisticasModel;
 import com.doback.E_rank.interfaces.EstatisticasRepository;
+import com.doback.E_rank.models.TimesModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,15 +25,36 @@ public class EstatisticasApplication {
         return estatisticaRepository.searchByCode(id);
     }
 
-    public void criar(EstatisticasModel estatistica) {
-        estatisticaRepository.addEstatisticas(estatistica);
+    public void criar(EstatisticasModel estatisticaModel) {
+        validar(estatisticaModel);
+        estatisticaRepository.addEstatisticas(estatisticaModel);
     }
 
     public void excluir(int id) {
         estatisticaRepository.removeEstatisticas(id);
     }
 
-    public void atualizar(int id, EstatisticasModel estatistica) {
-        estatisticaRepository.updateEstatisticas(id, estatistica);
+    public void atualizar(int id, EstatisticasModel estatisticaModel) {
+        validar(estatisticaModel);
+        estatisticaRepository.updateEstatisticas(id, estatisticaModel);
+    }
+
+    private Estatisticas validar(EstatisticasModel estatisticaModel){
+        Estatisticas estatisticas = new Estatisticas(
+                estatisticaModel.getKills(),
+                estatisticaModel.getAssistencias(),
+                estatisticaModel.getQtdPartidas(),
+                estatisticaModel.getStsProvacao(),
+                estatisticaModel.getVitorias(),
+                estatisticaModel.getDerrotas(),
+                estatisticaModel.getRecordKills(),
+                estatisticaModel.getHeadshots()
+        );
+
+        if (!estatisticas.validarEstatisticas()) {
+            throw new IllegalArgumentException("Validação de estatistica falhou: " + estatisticas.getErrosValidacao());
+        }
+
+        return estatisticas;
     }
 }
