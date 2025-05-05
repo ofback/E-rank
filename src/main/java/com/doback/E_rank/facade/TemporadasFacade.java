@@ -27,7 +27,7 @@ public class TemporadasFacade {
         temporadaApplication.criarTemporada(temporada);
     }
 
-    public void excluirTemporada(long id) {
+    public void excluirTemporada(int id) {
         temporadaApplication.excluirTemporada(id);
     }
 
