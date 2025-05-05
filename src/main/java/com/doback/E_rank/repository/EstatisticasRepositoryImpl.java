@@ -45,7 +45,7 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
         estatisticaInDb.setKills(novaEstatistica.getKills());
         estatisticaInDb.setAssistencias(novaEstatistica.getAssistencias());
-        estatisticaInDb.setQtsPartidas(novaEstatistica.getQtsPartidas());
+        estatisticaInDb.setQtdPartidas(novaEstatistica.getQtdPartidas());
         estatisticaInDb.setStsProvacao(novaEstatistica.getStsProvacao());
         estatisticaInDb.setVitorias(novaEstatistica.getVitorias());
         estatisticaInDb.setDerrotas(novaEstatistica.getDerrotas());

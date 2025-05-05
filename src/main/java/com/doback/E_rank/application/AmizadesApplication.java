@@ -1,4 +1,5 @@
 package com.doback.E_rank.application;
+import com.doback.E_rank.entity.Amizades;
 import com.doback.E_rank.models.AmizadesModel;
 import com.doback.E_rank.interfaces.AmizadesRepository;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,9 @@ public class AmizadesApplication {
         return amizadeRepository.searchByCode(id);
     }
 
-    public void criarAmizade(AmizadesModel amizade) {
-        amizadeRepository.addAmizades(amizade);
+    public void criarAmizade(AmizadesModel amizadesModel) {
+        validar(amizadesModel);
+        amizadeRepository.addAmizades(amizadesModel);
     }
 
     public void excluirAmizade(int id) {
@@ -31,8 +33,22 @@ public class AmizadesApplication {
     }
 
     public void atualizarAmizades(int id, AmizadesModel amizadesModel) {
+        validar(amizadesModel);
         amizadeRepository.updateAmizades(id, amizadesModel);
     }
 
+    private Amizades validar(AmizadesModel amizadesModel){
+        Amizades amizades = new Amizades(
+                amizadesModel.getIdUsuario1(),
+                amizadesModel.getIdUsuario2(),
+                amizadesModel.getStatus(),
+                amizadesModel.getDataSolicitacao()
+        );
 
+        if(!amizades.validarAmizades()){
+            throw new IllegalArgumentException("Validação da amizade falhou: " + amizades.getErrosValidacao());
+        }
+
+        return amizades;
+    }
 }

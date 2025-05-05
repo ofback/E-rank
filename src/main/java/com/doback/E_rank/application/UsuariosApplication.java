@@ -37,7 +37,6 @@ public class UsuariosApplication {
                 usuariosModel.getDataCriacao()
         );
 
-        // Validações de regra de negócio
         if (!usuarioEntidade.validarCPF()) {
             throw new IllegalArgumentException("CPF inválido.");
         }

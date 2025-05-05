@@ -43,7 +43,7 @@ public class AmizadesRepositoryImpl implements AmizadesRepository {
         AmizadesModel amizadeInDb = this.amizadesJpa.findById(id).orElse(null);
 
         if (amizadeInDb != null) {
-            amizadeInDb.setSts(amizadesModel.getSts());
+            amizadeInDb.setStatus(amizadesModel.getStatus());
             amizadeInDb.setDataSolicitacao(amizadesModel.getDataSolicitacao());
             this.amizadesJpa.save(amizadeInDb);
         }

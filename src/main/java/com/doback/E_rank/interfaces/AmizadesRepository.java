@@ -1,5 +1,6 @@
 package com.doback.E_rank.interfaces;
 
+import com.doback.E_rank.entity.Amizades;
 import com.doback.E_rank.models.AmizadesModel;
 
 import java.util.List;
@@ -11,5 +12,4 @@ public interface AmizadesRepository {
     public void removeAmizades(int id);
     public void updateAmizades(int id, AmizadesModel AmizadesModel);
     public boolean estaVazio();
-
 }
