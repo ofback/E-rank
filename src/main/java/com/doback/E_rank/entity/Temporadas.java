@@ -1,7 +1,6 @@
 package com.doback.E_rank.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Temporadas {
 
@@ -11,15 +10,12 @@ public class Temporadas {
     private LocalDate dataInicio;
     private LocalDate dataFim;
 
-    public Temporadas(String nome, String descricao, Date dataInicio, Date dataFim) {}
-
     public Temporadas(String nome, String descricao, LocalDate dataInicio, LocalDate dataFim) {
         this.nome = nome;
         this.descricao = descricao;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
     }
-
 
     public int getId() {
         return id;
@@ -61,14 +57,13 @@ public class Temporadas {
         this.dataFim = dataFim;
     }
 
-
     public boolean validarTemporada() {
         LocalDate hoje = LocalDate.now();
 
         return nome != null && !nome.trim().isEmpty()
                 && descricao != null && !descricao.trim().isEmpty()
                 && dataInicio != null && !dataInicio.isBefore(hoje)
-                && dataFim != null && dataFim.isAfter(dataInicio);
+                && dataFim != null && !dataFim.isBefore(dataInicio);
     }
 
     public String getErrosValidacao() {
@@ -76,23 +71,25 @@ public class Temporadas {
         LocalDate hoje = LocalDate.now();
 
         if (nome == null || nome.trim().isEmpty()) {
-            erros.append("Nome não pode estar vazio.\n");
+            erros.append("Nome não pode estar vazio.");
         }
 
         if (descricao == null || descricao.trim().isEmpty()) {
-            erros.append("Descrição não pode estar vazia.\n");
+            erros.append("Descrição não pode estar vazia.");
         }
 
         if (dataInicio == null) {
-            erros.append("Data de início não pode ser nula.\n");
-        } else if (dataInicio.isBefore(hoje)) {
-            erros.append("Data de início deve ser hoje ou no futuro.\n");
+            erros.append("Data de início não pode ser nula.");
+        }
+        if (dataInicio != null && dataInicio.isBefore(hoje)) {
+            erros.append("Data de início deve ser hoje ou no futuro.");
         }
 
         if (dataFim == null) {
-            erros.append("Data de fim não pode ser nula.\n");
-        } else if (dataInicio != null && !dataFim.isAfter(dataInicio)) {
-            erros.append("Data de fim deve ser após a data de início.\n");
+            erros.append("Data de fim não pode ser nula.");
+        }
+        if (dataInicio != null && dataFim != null && dataFim.isBefore(dataInicio)) {
+            erros.append("Data de fim deve ser após a data de início.");
         }
 
         return erros.toString().trim();

@@ -34,7 +34,7 @@ public class TemporadasController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirTemporada(@PathVariable Long id) { temporadaFacade.excluirTemporada(id);
+    public void excluirTemporada(@PathVariable int id) { temporadaFacade.excluirTemporada(id);
     }
 
     @PutMapping("/{id}")
