@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.entity.FeedMensagens;
+import com.doback.E_rank.entity.FeedEventos;
 import com.doback.E_rank.models.FeedMensagensModel;
 import com.doback.E_rank.interfaces.FeedMensagensRepository;
 import org.springframework.stereotype.Service;
@@ -44,8 +44,8 @@ public class FeedMensagensApplication {
         feedMensagensRepository.updateFeedMensagens(id, model);
     }
 
-    private FeedMensagens validar (FeedMensagensModel feedMensagensModel){
-        FeedMensagens feedMensagens = new FeedMensagens(
+    private FeedEventos validar (FeedMensagensModel feedMensagensModel){
+        FeedEventos feedEventos = new FeedEventos(
                 feedMensagensModel.getAtividade(),
                 feedMensagensModel.getDescricao(),
                 feedMensagensModel.getMensagem(),
@@ -54,10 +54,10 @@ public class FeedMensagensApplication {
                 feedMensagensModel.getIdUsuario()
         );
 
-        if (!feedMensagens.validarMensagem()) {
-            throw new IllegalArgumentException("Validação da mensagem falhou: " + feedMensagens.getErrosValidacao());
+        if (!feedEventos.validarMensagem()) {
+            throw new IllegalArgumentException("Validação da mensagem falhou: " + feedEventos.getErrosValidacao());
         }
 
-        return feedMensagens;
+        return feedEventos;
     }
 }
