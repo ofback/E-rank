@@ -20,7 +20,7 @@ public class AmizadesRepositoryImpl implements AmizadesRepository {
 
     @Override
     public AmizadesModel searchByCode(int id) {
-        return this.amizadesJpa.findById(id).get();
+        return this.amizadesJpa.findById(id).orElse(null);
     }
 
     @Override

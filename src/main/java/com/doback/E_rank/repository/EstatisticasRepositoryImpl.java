@@ -21,7 +21,6 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
     @Override
     public EstatisticasModel searchByCode(int id) {
         return this.estatisticasJpa.findById(id).get();
-
     }
 
     @Override

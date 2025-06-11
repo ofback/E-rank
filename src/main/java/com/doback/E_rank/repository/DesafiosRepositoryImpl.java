@@ -50,6 +50,6 @@ public class DesafiosRepositoryImpl implements DesafiosRepository {
 
     @Override
     public boolean estaVazio() {
-        return false;
+        return this.desafiosJpa.count() == 0;
     }
 }

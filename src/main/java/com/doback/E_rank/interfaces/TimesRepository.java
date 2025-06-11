@@ -12,3 +12,4 @@ public interface TimesRepository {
     public void updateTimes(int code, TimesModel timesModel);
     public boolean estaVazio();
 }
+

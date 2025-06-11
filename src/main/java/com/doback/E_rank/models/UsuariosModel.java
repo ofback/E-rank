@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
@@ -65,6 +67,10 @@ public class UsuariosModel {
 
     @OneToMany(mappedBy = "usuariosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<TimesModel> timesModels = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuarios_papeis", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
+    private Set<PapelModel> papeis = new HashSet<>();
 
     public UsuariosModel(String nome, String cpf, String dataNascimento, String email, String nickname, String senha, String biografia, char sts, Date dataCriacao) {
         this.nome = nome;
@@ -162,59 +168,13 @@ public class UsuariosModel {
         this.id = id;
     }
 
-//    public List<JogosModel> getJogos() {
-//        return jogos;
-//    }
-//
-//    public void setJogos(List<JogosModel> jogos) {
-//        this.jogos = jogos;
-//    }
-//
-//    public List<AmizadesModel> getAmizades() {
-//        return amizades;
-//    }
-//
-//    public void setAmizades(List<AmizadesModel> amizades) {
-//        this.amizades = amizades;
-//    }
-//
-//    public List<FeedMensagensModel> getFeedMensagens() {
-//        return feedMensagenModels;
-//    }
-//
-//    public void setFeedMensagens(List<FeedMensagensModel> feedMensagenModels) {
-//        this.feedMensagenModels = feedMensagenModels;
-//    }
-//
-//    public List<RegistroTimesModel> getRegistroTimes() {
-//        return registroTimeModels;
-//    }
-//
-//    public void setRegistroTimes(List<RegistroTimesModel> registroTimeModels) {
-//        this.registroTimeModels = registroTimeModels;
-//    }
-//
-//    public List<EstatisticasModel> getEstatisticas() {
-//        return estatisticas;
-//    }
-//
-//    public void setEstatisticas(List<EstatisticasModel> estatisticas) {
-//        this.estatisticas = estatisticas;
-//    }
-//
-//    public List<VotacaoEstatisticasModel> getVotacaoEstatisticas() {
-//        return votacaoEstatisticaModels;
-//    }
-//
-//    public void setVotacaoEstatisticas(List<VotacaoEstatisticasModel> votacaoEstatisticaModels) {
-//        this.votacaoEstatisticaModels = votacaoEstatisticaModels;
-//    }
-//
-//    public List<TimesModel> getTimes() {
-//        return times;
-//    }
-//
-//    public void setTimes(List<TimesModel> times) {
-//        this.times = times;
-//    }
+    public Set<PapelModel> getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(Set<PapelModel> papeis) {
+        this.papeis = papeis;
+    }
 }
+
+
