@@ -5,3 +5,4 @@ import com.doback.E_rank.models.TemporadasModel;
 
 public interface TemporadasJpa extends JpaRepository<TemporadasModel, Integer> {
 }
+

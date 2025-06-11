@@ -1,10 +1,8 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.entity.Desafios;
-import com.doback.E_rank.entity.FeedMensagens;
 import com.doback.E_rank.models.DesafiosModel;
 import com.doback.E_rank.interfaces.DesafiosRepository; // Importando a interface correta
-import com.doback.E_rank.models.FeedMensagensModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

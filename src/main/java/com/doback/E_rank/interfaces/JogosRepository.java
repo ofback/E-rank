@@ -4,7 +4,7 @@ import com.doback.E_rank.models.JogosModel;
 
 import java.util.List;
 
-public interface JogoRepository {
+public interface JogosRepository {
     public JogosModel searchByCode(int id);
     public List<JogosModel> buscar();
     public void addJogos(JogosModel jogosModel);
@@ -12,3 +12,4 @@ public interface JogoRepository {
     public void updateJogos(int id, JogosModel jogosModel);
     public boolean estaVazio();
 }
+

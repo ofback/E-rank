@@ -1,8 +1,6 @@
 package com.doback.E_rank.entity;
 
-import java.util.Date;
-
-public class FeedMensagens {
+public class FeedEventos {
 
     private String atividade;
     private String descricao;
@@ -11,9 +9,9 @@ public class FeedMensagens {
     private String dataEnvio;
     private int idUsuario;
 
-    public FeedMensagens() {}
+    public FeedEventos() {}
 
-    public FeedMensagens(String atividade, String descricao, String mensagem, char status, String dataEnvio, int idUsuario) {
+    public FeedEventos(String atividade, String descricao, String mensagem, char status, String dataEnvio, int idUsuario) {
         this.atividade = atividade;
         this.descricao = descricao;
         this.mensagem = mensagem;
