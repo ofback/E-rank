@@ -1,6 +1,6 @@
 package com.doback.E_rank.facade;
 import com.doback.E_rank.application.JogosApplication;
-import com.doback.E_rank.models.JogosModel;
+import com.doback.E_rank.infrastructure.models.JogosModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

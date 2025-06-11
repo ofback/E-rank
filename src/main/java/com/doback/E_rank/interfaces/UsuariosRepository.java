@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.UsuariosModel;
+import com.doback.E_rank.infrastructure.models.UsuariosModel;
 import java.util.List;
 import java.util.Optional;
 
