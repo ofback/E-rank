@@ -1,29 +1,24 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.interfaces.Notificacao;
+import com.doback.E_rank.interfaces.NotificacaoFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 public class NotificacaoApplication {
 
-    private final Map<String, Notificacao> notificacaoStrategies;
+    private final NotificacaoFactory notificacaoFactory;
 
-    // O Spring vai injetar automaticamente um Mapa com todos os beans do tipo "Notificacao".
-    // A chave do mapa será o nome do bean que definimos ("email", "push", "sistema").
-    // O valor será a instância do próprio bean.
-    public NotificacaoApplication(Map<String, Notificacao> notificacaoStrategies) {
-        this.notificacaoStrategies = notificacaoStrategies;
+    // Recebemos a FÁBRICA via injeção de dependência
+    public NotificacaoApplication(NotificacaoFactory notificacaoFactory) {
+        this.notificacaoFactory = notificacaoFactory;
     }
 
     public void enviarNotificacao(String tipo, String mensagem, String destinatario) {
-        Notificacao notificacao = notificacaoStrategies.get(tipo.toLowerCase());
+        // 1. Usamos a fábrica para criar o objeto de notificação
+        Notificacao notificacao = notificacaoFactory.criarNotificacao(tipo);
 
-        if (notificacao == null) {
-            throw new IllegalArgumentException("Tipo de notificação desconhecido ou não implementado: " + tipo);
-        }
-
+        // 2. Usamos o objeto criado
         notificacao.enviar(mensagem, destinatario);
     }
 }
