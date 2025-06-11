@@ -22,6 +22,7 @@ public class UsuariosFacade {
         return usuarioApplication.obterUsuarioPorId(id);
     }
 
+    // O nome do método aqui é 'salvarUsuario', ele chama 'criarUsuario' na camada de aplicação. Está correto.
     public void salvarUsuario(UsuariosModel usuario) {
         usuarioApplication.criarUsuario(usuario);
     }

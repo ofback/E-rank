@@ -48,6 +48,6 @@ public class RegistroTimesRepositoryImpl implements RegistroTimesRepository {
 
     @Override
     public boolean estaVazio() {
-        return false;
+        return this.registroTimesJpa.count() == 0;
     }
 }

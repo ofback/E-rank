@@ -92,3 +92,4 @@ public class RegistroTimesModel {
         this.idUsuarios = idUsuarios;
     }
 }
+

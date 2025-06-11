@@ -92,3 +92,4 @@ public class AmizadesModel {
         this.idUsuario2 = idUsuario2;
     }
 }
+

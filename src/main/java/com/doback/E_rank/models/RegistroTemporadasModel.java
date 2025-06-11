@@ -75,3 +75,4 @@ public class RegistroTemporadasModel {
         this.data = data;
     }
 }
+

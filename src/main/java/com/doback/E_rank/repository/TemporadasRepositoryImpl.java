@@ -55,3 +55,4 @@ public class TemporadasRepositoryImpl implements TemporadasRepository {
         return this.temporadasJpa.count() == 0;
     }
 }
+

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UsuariosRepositoryImpl implements UsuariosRepository {
@@ -56,5 +57,10 @@ public class UsuariosRepositoryImpl implements UsuariosRepository {
     @Override
     public boolean estaVazio() {
         return this.usuariosJpa.count() == 0;
+    }
+
+    @Override
+    public Optional<UsuariosModel> findByEmail(String email) {
+        return this.usuariosJpa.findByEmail(email);
     }
 }
