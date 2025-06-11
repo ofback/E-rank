@@ -1,7 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.UsuariosApplication;
-import com.doback.E_rank.models.UsuariosModel;
+import com.doback.E_rank.infrastructure.models.UsuariosModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

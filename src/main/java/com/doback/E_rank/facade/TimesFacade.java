@@ -1,6 +1,6 @@
 package com.doback.E_rank.facade;
 import com.doback.E_rank.application.TimesApplication;
-import com.doback.E_rank.models.TimesModel;
+import com.doback.E_rank.infrastructure.models.TimesModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

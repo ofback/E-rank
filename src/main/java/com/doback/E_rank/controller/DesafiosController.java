@@ -1,6 +1,6 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.models.DesafiosModel;
+import com.doback.E_rank.infrastructure.models.DesafiosModel;
 import com.doback.E_rank.facade.DesafiosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

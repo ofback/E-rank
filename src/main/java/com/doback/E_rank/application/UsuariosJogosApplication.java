@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 
-import com.doback.E_rank.models.UsuariosJogosModel;
+import com.doback.E_rank.infrastructure.models.UsuariosJogosModel;
 import com.doback.E_rank.interfaces.UsuariosJogosRepository;
 import org.springframework.stereotype.Service;
 

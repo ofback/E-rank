@@ -1,7 +1,7 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.entity.Times;
-import com.doback.E_rank.models.TimesModel;
+import com.doback.E_rank.infrastructure.models.TimesModel;
 import com.doback.E_rank.interfaces.TimesRepository;
 import org.springframework.stereotype.Service;
 

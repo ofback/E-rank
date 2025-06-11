@@ -1,18 +1,5 @@
 package com.doback.E_rank.entity;
 
-import com.doback.E_rank.models.AmizadesModel;
-import com.doback.E_rank.models.EstatisticasModel;
-import com.doback.E_rank.models.JogosModel;
-import jakarta.persistence.*;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 public class Desafios {
 
     private int id;
