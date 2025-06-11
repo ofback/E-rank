@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import com.doback.E_rank.models.RegistroTimesModel;
-import com.doback.E_rank.models.RegistroTemporadasModel;
+import com.doback.E_rank.infrastructure.models.RegistroTimesModel;
+import com.doback.E_rank.infrastructure.models.RegistroTemporadasModel;
 
 public class Times {
 

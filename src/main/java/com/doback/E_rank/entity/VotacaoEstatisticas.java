@@ -1,10 +1,9 @@
 package com.doback.E_rank.entity;
 
-import com.doback.E_rank.models.EstatisticasModel;
-import com.doback.E_rank.models.TemporadasModel;
-import com.doback.E_rank.models.UsuariosModel;
+import com.doback.E_rank.infrastructure.models.EstatisticasModel;
+import com.doback.E_rank.infrastructure.models.TemporadasModel;
+import com.doback.E_rank.infrastructure.models.UsuariosModel;
 
-import java.sql.*;
 import java.util.Date;
 
 public class VotacaoEstatisticas {

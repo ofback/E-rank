@@ -1,6 +1,6 @@
 package com.doback.E_rank.application;
 import com.doback.E_rank.entity.Amizades;
-import com.doback.E_rank.models.AmizadesModel;
+import com.doback.E_rank.infrastructure.models.AmizadesModel;
 import com.doback.E_rank.interfaces.AmizadesRepository;
 import org.springframework.stereotype.Service;
 

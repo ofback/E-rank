@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.FeedMensagensModel;
+import com.doback.E_rank.infrastructure.models.FeedMensagensModel;
 
 import java.util.List;
 
