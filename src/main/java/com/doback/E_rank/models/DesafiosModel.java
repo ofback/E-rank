@@ -100,5 +100,5 @@ public class DesafiosModel {
     public void setIdJogo(int idJogo) {
         this.idJogo = idJogo;
     }
-
 }
+

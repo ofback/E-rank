@@ -87,5 +87,5 @@ public class TemporadasModel {
     public void setId(int id) {
         this.id = id;
     }
-
 }
+

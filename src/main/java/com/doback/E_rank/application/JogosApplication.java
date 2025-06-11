@@ -1,39 +1,39 @@
 package com.doback.E_rank.application;
 import com.doback.E_rank.entity.Jogos;
 import com.doback.E_rank.models.JogosModel;
-import com.doback.E_rank.interfaces.JogoRepository;
+import com.doback.E_rank.interfaces.JogosRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class JogosApplication {
-    private final JogoRepository jogoRepository;
+    private final JogosRepository jogosRepository;
 
-    public JogosApplication(JogoRepository jogoRepository) {
-        this.jogoRepository = jogoRepository;
+    public JogosApplication(JogosRepository jogosRepository) {
+        this.jogosRepository = jogosRepository;
     }
 
     public List<JogosModel> obterTodosJogos() {
-        return jogoRepository.buscar();
+        return jogosRepository.buscar();
     }
 
     public JogosModel obterJogoPorId(int id) {
-        return jogoRepository.searchByCode(id);
+        return jogosRepository.searchByCode(id);
     }
 
     public void criarJogo(JogosModel jogosModel) {
         validar(jogosModel);
-        jogoRepository.addJogos(jogosModel);
+        jogosRepository.addJogos(jogosModel);
     }
 
     public void excluirJogo(int id) {
-        jogoRepository.removeJogos(id);
+        jogosRepository.removeJogos(id);
     }
 
     public void atualizarJogos(int id, JogosModel jogosModel) {
         validar(jogosModel);
-        jogoRepository.updateJogos(id, jogosModel);
+        jogosRepository.updateJogos(id, jogosModel);
     }
 
     private Jogos validar(JogosModel jogosModel){

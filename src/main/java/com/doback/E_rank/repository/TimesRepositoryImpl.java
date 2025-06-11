@@ -19,7 +19,7 @@ public class TimesRepositoryImpl implements TimesRepository {
 
     @Override
     public TimesModel searchByCode(int code) {
-        return this.timesJpa.findById(code).get();
+        return this.timesJpa.findById(code).orElse(null);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TimesRepositoryImpl implements TimesRepository {
 
     @Override
     public void updateTimes(int code, TimesModel timesModel) {
-        TimesModel timesModelExistentes = this.timesJpa.findById(code).get();
+        TimesModel timesModelExistentes = this.timesJpa.findById(code).orElse(null);
 
         timesModelExistentes.setNome(timesModel.getNome());
         timesModelExistentes.setDescricao(timesModel.getDescricao());
@@ -50,6 +50,6 @@ public class TimesRepositoryImpl implements TimesRepository {
 
     @Override
     public boolean estaVazio() {
-        return false;
+        return this.timesJpa.count() == 0;
     }
 }

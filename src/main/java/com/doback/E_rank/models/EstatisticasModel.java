@@ -180,3 +180,4 @@ public class EstatisticasModel {
         this.idDesafio = idDesafio;
     }
 }
+

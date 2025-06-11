@@ -55,5 +55,4 @@ public class UsuariosJogosModel {
     public void setIdJogos(int idJogos) {
         this.idJogos = idJogos;
     }
-
 }

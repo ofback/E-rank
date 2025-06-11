@@ -49,6 +49,6 @@ public class RegistroTemporadasImpl implements RegistroTemporadasRepository {
 
     @Override
     public boolean estaVazio() {
-        return false;
+        return this.registroTemporadasJpa.count() == 0;
     }
 }
