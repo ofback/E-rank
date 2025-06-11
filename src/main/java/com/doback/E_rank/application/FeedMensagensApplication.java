@@ -1,7 +1,7 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.entity.FeedEventos;
-import com.doback.E_rank.models.FeedMensagensModel;
+import com.doback.E_rank.infrastructure.models.FeedMensagensModel;
 import com.doback.E_rank.interfaces.FeedMensagensRepository;
 import org.springframework.stereotype.Service;
 

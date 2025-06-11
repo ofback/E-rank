@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.VotacaoEstatisticasModel;
+import com.doback.E_rank.infrastructure.models.VotacaoEstatisticasModel;
 
 import java.util.List;
 

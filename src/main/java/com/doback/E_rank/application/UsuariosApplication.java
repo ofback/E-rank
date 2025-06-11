@@ -3,8 +3,8 @@ package com.doback.E_rank.application;
 import com.doback.E_rank.entity.Usuarios;
 import com.doback.E_rank.interfaces.PapelRepository;
 import com.doback.E_rank.interfaces.UsuariosRepository;
-import com.doback.E_rank.models.PapelModel;
-import com.doback.E_rank.models.UsuariosModel;
+import com.doback.E_rank.infrastructure.models.PapelModel;
+import com.doback.E_rank.infrastructure.models.UsuariosModel;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

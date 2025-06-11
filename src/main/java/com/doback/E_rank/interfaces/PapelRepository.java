@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.PapelModel;
+import com.doback.E_rank.infrastructure.models.PapelModel;
 
 public interface PapelRepository {
     PapelModel findByNome(String nome);

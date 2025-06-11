@@ -1,5 +1,5 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.models.TimesModel;
+import com.doback.E_rank.infrastructure.models.TimesModel;
 import com.doback.E_rank.facade.TimesFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

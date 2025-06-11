@@ -1,6 +1,6 @@
 package com.doback.E_rank.interfaces;
 
-import com.doback.E_rank.models.RegistroTimesModel;
+import com.doback.E_rank.infrastructure.models.RegistroTimesModel;
 
 import java.util.List;
 

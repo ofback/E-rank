@@ -1,10 +1,8 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.entity.Estatisticas;
-import com.doback.E_rank.entity.Times;
-import com.doback.E_rank.models.EstatisticasModel;
+import com.doback.E_rank.infrastructure.models.EstatisticasModel;
 import com.doback.E_rank.interfaces.EstatisticasRepository;
-import com.doback.E_rank.models.TimesModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
