@@ -22,21 +22,16 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Bean que ensina o Spring Security a buscar os usuários no SEU banco de dados
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-        // Query para buscar um usuário pelo email.
-        // O Spring Security espera as colunas: username, password, enabled
         jdbcUserDetailsManager.setUsersByUsernameQuery("""
             SELECT email, senha, CASE WHEN sts = 'A' THEN true ELSE false END as enabled
             FROM usuarios
             WHERE email = ?
         """);
 
-        // Query para buscar os papéis (authorities) de um usuário pelo email.
-        // O Spring Security espera as colunas: username, authority
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("""
             SELECT u.email, p.nome
             FROM usuarios u
@@ -48,42 +43,29 @@ public class SecurityConfig {
         return jdbcUserDetailsManager;
     }
 
-    // Bean que define a cadeia de filtros de segurança (quais endpoints proteger e como)
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                 configurer
-                        // == ACESSO PÚBLICO ==
-                        // Qualquer pessoa pode se cadastrar. Esta é a ÚNICA rota de usuário que é pública.
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
-
-                        // == ACESSO DE ADMINISTRADOR ==
                         .requestMatchers("/temporadas/**").hasRole("ADMIN")
-                        // Apenas admins podem ver a lista de TODOS os usuários.
                         .requestMatchers(HttpMethod.GET, "/usuarios").hasRole("ADMIN")
-                        // Apenas admins podem deletar um usuário.
                         .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
-
-                        // == ACESSO DE USUÁRIO LOGADO (USER) ==
-                        // Um usuário logado pode ver o perfil de outro ou atualizar o seu.
                         .requestMatchers(HttpMethod.GET, "/usuarios/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/usuarios/**").authenticated()
-
-                        // Regras para as outras entidades (times, amizades, etc.)
                         .requestMatchers("/times/**").authenticated()
                         .requestMatchers("/amizades/**").authenticated()
                         .requestMatchers("/desafios/**").authenticated()
                         .requestMatchers("/estatisticas/**").authenticated()
-                        .requestMatchers("/votacoes/**").authenticated()
+                        .requestMatchers("/votacaoEstatisticas/**").authenticated() // Corrigido
+                        .requestMatchers("/rankings/**").authenticated() // Novo endpoint
 
-                        // Qualquer outra requisição que não foi mencionada acima precisa de autenticação.
                         .anyRequest().authenticated()
         );
 
-        // Habilita a autenticação via Basic Auth
+
         http.httpBasic(Customizer.withDefaults());
 
-        // Desabilita o CSRF
         http.csrf(csrf -> csrf.disable());
 
         return http.build();

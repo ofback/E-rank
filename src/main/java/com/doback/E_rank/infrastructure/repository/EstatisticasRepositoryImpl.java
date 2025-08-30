@@ -58,4 +58,14 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
     public boolean estaVazio() {
         return this.estatisticasJpa.count() == 0;
     }
+
+    @Override
+    public List<EstatisticasModel> findAprovadasPorJogo(int jogoId) {
+        return estatisticasJpa.findByIdJogoAndStsProvacao(jogoId, 1); // 1 = Aprovado
+    }
+
+    @Override
+    public List<EstatisticasModel> findAprovadasPorUsuario(int usuarioId) {
+        return estatisticasJpa.findByIdUsuarioAndStsProvacao(usuarioId, 1); // 1 = Aprovado
+    }
 }
