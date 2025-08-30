@@ -12,4 +12,7 @@ public interface EstatisticasRepository {
     public void updateEstatisticas(int id, EstatisticasModel estatisticasModel);
     public boolean estaVazio();
 
+    List<EstatisticasModel> findAprovadasPorJogo(int jogoId);
+    List<EstatisticasModel> findAprovadasPorUsuario(int usuarioId);
+
 }

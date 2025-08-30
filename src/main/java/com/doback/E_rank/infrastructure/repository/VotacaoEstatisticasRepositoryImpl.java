@@ -1,8 +1,8 @@
 package com.doback.E_rank.infrastructure.repository;
 
 import com.doback.E_rank.infrastructure.models.VotacaoEstatisticasModel;
-import com.doback.E_rank.interfaces.VotacaoEstatisticasRepository;
 import com.doback.E_rank.infrastructure.repository.jpa.VotacaoEstatisticasJpa;
+import com.doback.E_rank.interfaces.VotacaoEstatisticasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +19,7 @@ public class VotacaoEstatisticasRepositoryImpl implements VotacaoEstatisticasRep
 
     @Override
     public VotacaoEstatisticasModel searchByCode(int code) {
-        return this.votacaoEstatisticasJpa.findById(code).get();
+        return this.votacaoEstatisticasJpa.findById(code).orElse(null);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class VotacaoEstatisticasRepositoryImpl implements VotacaoEstatisticasRep
 
     @Override
     public void updateVotacaoEstatisticas(int code, VotacaoEstatisticasModel votacaoEstatisticasModel) {
-        VotacaoEstatisticasModel votacaoEstatisticasModelInDb = this.votacaoEstatisticasJpa.findById(code).get();
+        VotacaoEstatisticasModel votacaoEstatisticasModelInDb = this.votacaoEstatisticasJpa.findById(code).orElse(null);
 
         if (votacaoEstatisticasModelInDb != null) {
             votacaoEstatisticasModelInDb.setData_voto(votacaoEstatisticasModel.getData_voto());
@@ -53,4 +53,11 @@ public class VotacaoEstatisticasRepositoryImpl implements VotacaoEstatisticasRep
     public boolean estaVazio() {
         return this.votacaoEstatisticasJpa.count() == 0;
     }
+
+    @Override
+
+    public long countVotesForEstatistica(int idEstatistica){
+        return votacaoEstatisticasJpa.countByIdEstatistica(idEstatistica);
+    }
 }
+

@@ -1,6 +1,9 @@
 package com.doback.E_rank.application;
+
 import com.doback.E_rank.entity.VotacaoEstatisticas;
+import com.doback.E_rank.infrastructure.models.EstatisticasModel;
 import com.doback.E_rank.infrastructure.models.VotacaoEstatisticasModel;
+import com.doback.E_rank.interfaces.EstatisticasRepository;
 import com.doback.E_rank.interfaces.VotacaoEstatisticasRepository;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +11,15 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-
 public class VotacaoEstatisticasApplication {
     private final VotacaoEstatisticasRepository votacaoEstatisticasRepository;
+    private final EstatisticasRepository estatisticasRepository;
+    private static final int VOTOS_PARA_APROVACAO = 3;
 
-    public VotacaoEstatisticasApplication(VotacaoEstatisticasRepository votacaoEstatisticasRepository) {
+
+    public VotacaoEstatisticasApplication(VotacaoEstatisticasRepository votacaoEstatisticasRepository, EstatisticasRepository estatisticasRepository) {
         this.votacaoEstatisticasRepository = votacaoEstatisticasRepository;
+        this.estatisticasRepository = estatisticasRepository;
     }
 
     public List<VotacaoEstatisticasModel> obterTodosVotacaoEstatisticas() {
@@ -41,8 +47,32 @@ public class VotacaoEstatisticasApplication {
 
         votacaoEstatisticasModel.setData_voto(new Date());
 
-
         votacaoEstatisticasRepository.addVotacaoEstatisticas(votacaoEstatisticasModel);
+
+
+        verificarEAtualizarStatusEstatistica(estatisticaId);
+    }
+
+
+    private void verificarEAtualizarStatusEstatistica(int estatisticaId) {
+
+        long totalVotos = votacaoEstatisticasRepository.countVotesForEstatistica(estatisticaId);
+
+        if (totalVotos >= VOTOS_PARA_APROVACAO) {
+
+            EstatisticasModel estatistica = estatisticasRepository.searchByCode(estatisticaId);
+            if (estatistica == null) {
+
+                throw new IllegalStateException("Estatística com ID " + estatisticaId + " não encontrada para aprovação.");
+            }
+
+
+            if (estatistica.getStsProvacao() != 1) {
+                estatistica.setStsProvacao(1);
+                estatisticasRepository.updateEstatisticas(estatisticaId, estatistica);
+
+            }
+        }
     }
 
     public void excluirVotacaoEstatisticas(int id) {
@@ -53,3 +83,4 @@ public class VotacaoEstatisticasApplication {
         votacaoEstatisticasRepository.updateVotacaoEstatisticas(id, votacaoEstatisticasModel);
     }
 }
+

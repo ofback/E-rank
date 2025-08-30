@@ -11,4 +11,6 @@ public interface VotacaoEstatisticasRepository {
     public void removeVotacaoEstatisticas(int id);
     public void updateVotacaoEstatisticas(int id, VotacaoEstatisticasModel votacaoEstatisticasModel);
     public boolean estaVazio();
+    long countVotesForEstatistica(int idEstatistica);
+
 }
