@@ -1,17 +1,22 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.dto.CreateTeamDTO;
+import com.doback.E_rank.dto.MyTeamDTO;
 import com.doback.E_rank.entity.Times;
 import com.doback.E_rank.infrastructure.models.RegistroTimesModel;
 import com.doback.E_rank.infrastructure.models.TemporadasModel;
 import com.doback.E_rank.infrastructure.models.TimesModel;
+import com.doback.E_rank.infrastructure.repository.jpa.RegistroTimesJpa;
 import com.doback.E_rank.interfaces.RegistroTimesRepository;
 import com.doback.E_rank.interfaces.TemporadasRepository;
 import com.doback.E_rank.interfaces.TimesRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TimesApplication {
@@ -19,14 +24,16 @@ public class TimesApplication {
     private final TimesRepository timesRepository;
     private final TemporadasRepository temporadasRepository;
     private final RegistroTimesRepository registroTimesRepository;
+    private final RegistroTimesJpa registroTimesJpa; // Nova dependência
 
-    public TimesApplication(TimesRepository timesRepository, TemporadasRepository temporadasRepository, RegistroTimesRepository registroTimesRepository) {
+    public TimesApplication(TimesRepository timesRepository, TemporadasRepository temporadasRepository, RegistroTimesRepository registroTimesRepository, RegistroTimesJpa registroTimesJpa) {
         this.timesRepository = timesRepository;
         this.temporadasRepository = temporadasRepository;
         this.registroTimesRepository = registroTimesRepository;
+        this.registroTimesJpa = registroTimesJpa;
     }
 
-    // --- MÉTODOS CRUD QUE ESTAVAM FALTANDO ---
+    // --- MÉTODOS CRUD ADICIONADOS ---
     public List<TimesModel> obterTodosTimes() {
         return timesRepository.buscar();
     }
@@ -43,7 +50,7 @@ public class TimesApplication {
         validar(timesModel);
         timesRepository.updateTimes(id, timesModel);
     }
-    // --- FIM DOS MÉTODOS FALTANTES ---
+    // --- FIM DOS MÉTODOS ADICIONADOS ---
 
     @Transactional
     public void criarTime(CreateTeamDTO teamDTO, int creatorId) {
@@ -60,34 +67,40 @@ public class TimesApplication {
         validar(timesModel);
         timesRepository.addTimes(timesModel); // Salva o time para obter o ID gerado
 
-        // 1. Adiciona o criador como 'Dono' do time
+        String dataEntrada = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
         RegistroTimesModel creatorRegistration = new RegistroTimesModel();
         creatorRegistration.setIdTimes(timesModel.getId());
         creatorRegistration.setIdUsuarios(creatorId);
         creatorRegistration.setCargo("Dono");
-
-        // Verifique o tipo do campo 'status' no seu RegistroTimesModel.
-        // Se for 'char', use a linha abaixo.
-        // creatorRegistration.setStatus('A');
-
-        // Se for 'String', como no arquivo que você enviou, use esta:
-        // creatorRegistration.setStatus("A");
-
+        creatorRegistration.setStatus("A"); // 'A' de Aceito
+        creatorRegistration.setData_entrada(dataEntrada);
         registroTimesRepository.addRegistroTimes(creatorRegistration);
 
-        // 2. Envia convites para os membros selecionados
         if (teamDTO.getMemberIds() != null) {
             for (Integer memberId : teamDTO.getMemberIds()) {
                 RegistroTimesModel memberInvitation = new RegistroTimesModel();
                 memberInvitation.setIdTimes(timesModel.getId());
                 memberInvitation.setIdUsuarios(memberId);
                 memberInvitation.setCargo("Membro");
-                // Da mesma forma, ajuste o status para 'P' ou "P" conforme o tipo do campo
-                // memberInvitation.setStatus("P");
+                memberInvitation.setStatus("P"); // 'P' de Pendente
+                memberInvitation.setData_entrada(dataEntrada);
                 registroTimesRepository.addRegistroTimes(memberInvitation);
             }
         }
     }
+
+    public List<MyTeamDTO> obterTimesDoUsuario(int userId) {
+        return registroTimesJpa.findByIdUsuarios(userId).stream()
+                .map(registro -> new MyTeamDTO(
+                        registro.getIdTimes(),
+                        registro.getTimesModel().getNome(),
+                        registro.getCargo(),
+                        registro.getStatus()
+                ))
+                .collect(Collectors.toList());
+    }
+
 
     private void validar(TimesModel timesModel) {
         Times timesEntidade = new Times(

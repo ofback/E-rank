@@ -3,11 +3,11 @@ package com.doback.E_rank.infrastructure.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "registroTimes")
+@Table(name = "registro_time") // Corrigido para corresponder ao seu DER
 public class RegistroTimesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id_registro_time") // Corrigido para corresponder ao seu DER
     private int id;
 
     @Column(name = "cargo")
@@ -19,37 +19,25 @@ public class RegistroTimesModel {
     @Column(name = "data_entrada")
     private String data_entrada;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_times", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Times_id_time", referencedColumnName = "id_time", insertable = false, updatable = false) // Corrigido
     private TimesModel timesModel;
 
-    @Column(name = "id_times")
+    @Column(name = "Times_id_time") // Corrigido
     private int idTimes;
 
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_usuarios", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Usuarios_id_usuario", referencedColumnName = "id_usuario", insertable = false, updatable = false) // Corrigido
     private UsuariosModel usuariosModel;
 
-    @Column(name = "id_usuarios")
+    @Column(name = "Usuarios_id_usuario") // Corrigido
     private int idUsuarios;
 
     public RegistroTimesModel() {
     }
 
-    public RegistroTimesModel(String cargo, String data_entrada, TimesModel time, UsuariosModel usuariosModel) {
-        this.cargo = cargo;
-        this.data_entrada = data_entrada;
-        this.timesModel = time;
-        this.usuariosModel = usuariosModel;
-    }
-
-    public RegistroTimesModel(String cargo, String dataEntrada, int idTimes, int idUsuarios) {
-        this.cargo = cargo;
-        this.data_entrada = dataEntrada;
-        this.idTimes = idTimes;
-        this.idUsuarios = idUsuarios;
-    }
+    // --- GETTERS E SETTERS COMPLETOS ---
 
     public int getId() {
         return id;
@@ -67,6 +55,14 @@ public class RegistroTimesModel {
         this.cargo = cargo;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getData_entrada() {
         return data_entrada;
     }
@@ -75,7 +71,12 @@ public class RegistroTimesModel {
         this.data_entrada = data_entrada;
     }
 
-    public void add(RegistroTimesModel registroTimesModel) {
+    public TimesModel getTimesModel() {
+        return timesModel;
+    }
+
+    public void setTimesModel(TimesModel timesModel) {
+        this.timesModel = timesModel;
     }
 
     public int getIdTimes() {
@@ -84,6 +85,14 @@ public class RegistroTimesModel {
 
     public void setIdTimes(int idTimes) {
         this.idTimes = idTimes;
+    }
+
+    public UsuariosModel getUsuariosModel() {
+        return usuariosModel;
+    }
+
+    public void setUsuariosModel(UsuariosModel usuariosModel) {
+        this.usuariosModel = usuariosModel;
     }
 
     public int getIdUsuarios() {
