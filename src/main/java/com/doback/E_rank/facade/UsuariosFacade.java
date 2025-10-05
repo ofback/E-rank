@@ -34,4 +34,7 @@ public class UsuariosFacade {
     public void atualizarUsuarios(int id, UsuariosModel usuariosModel) {
         usuarioApplication.atualizarUsuarios(id, usuariosModel);
     }
+    public UsuariosModel buscarUsuarioPorEmail(String email) {
+        return usuarioApplication.obterUsuarioPorEmail(email);
+    }
 }

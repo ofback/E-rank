@@ -4,6 +4,8 @@ import com.doback.E_rank.infrastructure.models.UsuariosModel;
 import com.doback.E_rank.facade.UsuariosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -24,6 +26,13 @@ public class UsuariosController {
     @GetMapping("/{id}")
     public UsuariosModel obterUsuario(@PathVariable int id) {
         return usuarioFacade.buscarUsuarioPorId(id);
+    }
+
+    @GetMapping("/me")
+    public UsuariosModel getUsuarioLogado() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return usuarioFacade.buscarUsuarioPorEmail(email);
     }
 
     @PostMapping

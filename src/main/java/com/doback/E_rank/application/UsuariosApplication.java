@@ -92,4 +92,9 @@ public class UsuariosApplication {
         // a nova senha também precisará ser criptografada aqui.
         usuarioRepository.updateUsuarios((long) id, usuariosModel);
     }
+
+    public UsuariosModel obterUsuarioPorEmail(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o email: " + email));
+    }
 }
