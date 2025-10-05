@@ -17,7 +17,7 @@ public class AmizadesFacade {
         this.amizadeApplication = amizadeApplication;
     }
 
-    // Métodos existentes que não mudaram
+    // --- Métodos que não mudam ---
     public List<AmizadesModel> listarAmizades() {
         return amizadeApplication.obterTodasAmizades();
     }
@@ -30,15 +30,14 @@ public class AmizadesFacade {
         amizadeApplication.criarAmizade(idRemetente, idDestinatario);
     }
 
-    public void excluirAmizade(int id) {
-        amizadeApplication.excluirAmizade(id);
+    public void excluirAmizade(int idAmizade, int idUsuarioLogado) {
+        amizadeApplication.excluirAmizade(idAmizade, idUsuarioLogado);
     }
 
     public void aceitarAmizade(int idAmizade, int idUsuarioLogado) {
         amizadeApplication.aceitarAmizade(idAmizade, idUsuarioLogado);
     }
 
-    // Métodos atualizados com os novos tipos de retorno (DTOs)
     public List<FriendDTO> listarAmigos(int idUsuarioLogado) {
         return amizadeApplication.listarAmigos(idUsuarioLogado);
     }
