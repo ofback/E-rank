@@ -1,5 +1,6 @@
 package com.doback.E_rank.facade;
 import com.doback.E_rank.application.TimesApplication;
+import com.doback.E_rank.dto.CreateTeamDTO;
 import com.doback.E_rank.infrastructure.models.TimesModel;
 import org.springframework.stereotype.Component;
 
@@ -21,14 +22,14 @@ public class TimesFacade {
         return timesApplication.obterTimesPorId(id);
     }
 
-    public void salvarTimes(TimesModel timesModel) {
-        timesApplication.criarTime(timesModel);
+
+    public void salvarTimes(CreateTeamDTO teamDTO, int creatorId) {
+        timesApplication.criarTime(teamDTO, creatorId);
     }
 
     public void excluirTimes(int id) {
         timesApplication.excluirTime(id);
     }
-
     public void atualizarTimes(int id, TimesModel timesModel) {
         timesApplication.atualizarTimes(id, timesModel);
     }
