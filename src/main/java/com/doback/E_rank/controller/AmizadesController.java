@@ -1,6 +1,8 @@
 package com.doback.E_rank.controller;
 
+import com.doback.E_rank.dto.FriendDTO;
 import com.doback.E_rank.dto.FriendRequestDTO;
+import com.doback.E_rank.dto.PendingRequestDTO;
 import com.doback.E_rank.facade.AmizadesFacade;
 import com.doback.E_rank.facade.UsuariosFacade;
 import com.doback.E_rank.infrastructure.models.AmizadesModel;
@@ -32,8 +34,9 @@ public class AmizadesController {
     public AmizadesModel obterAmizade(@PathVariable int id) {
         return amizadeFacade.buscarAmizadePorId(id);
     }
+
     @GetMapping("/meus-amigos")
-    public List<AmizadesModel> getMeusAmigos() {
+    public List<FriendDTO> getMeusAmigos() { // TIPO DE RETORNO CORRIGIDO
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         var usuario = usuarioFacade.buscarUsuarioPorEmail(email);
@@ -41,7 +44,7 @@ public class AmizadesController {
     }
 
     @GetMapping("/convites")
-    public List<AmizadesModel> getConvitesPendentes() {
+    public List<PendingRequestDTO> getConvitesPendentes() { // TIPO DE RETORNO CORRIGIDO
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         var usuario = usuarioFacade.buscarUsuarioPorEmail(email);
@@ -51,14 +54,9 @@ public class AmizadesController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void criarAmizade(@RequestBody FriendRequestDTO friendRequest) {
-        // Pega o email do usuário logado
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String emailRemetente = authentication.getName();
-
-        // Busca o objeto completo do usuário para obter o ID
         var remetente = usuarioFacade.buscarUsuarioPorEmail(emailRemetente);
-
-        // Chama o facade com os IDs corretos
         amizadeFacade.salvarAmizade(remetente.getId(), friendRequest.getIdUsuario2());
     }
 
@@ -73,5 +71,5 @@ public class AmizadesController {
     public void atualizarAmizades(@PathVariable int id, @RequestBody AmizadesModel amizadesModel) {
         amizadeFacade.atualizarAmizades(id, amizadesModel);
     }
-
 }
+

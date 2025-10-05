@@ -1,6 +1,8 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.AmizadesApplication;
+import com.doback.E_rank.dto.FriendDTO;
+import com.doback.E_rank.dto.PendingRequestDTO;
 import com.doback.E_rank.infrastructure.models.AmizadesModel;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,7 @@ public class AmizadesFacade {
         this.amizadeApplication = amizadeApplication;
     }
 
+    // Métodos existentes que não mudaram
     public List<AmizadesModel> listarAmizades() {
         return amizadeApplication.obterTodasAmizades();
     }
@@ -34,12 +37,13 @@ public class AmizadesFacade {
     public void atualizarAmizades(int id, AmizadesModel amizadesModel) {
         amizadeApplication.atualizarAmizades(id, amizadesModel);
     }
-    public List<AmizadesModel> listarAmigos(int idUsuarioLogado) {
+
+    // Métodos atualizados com os novos tipos de retorno (DTOs)
+    public List<FriendDTO> listarAmigos(int idUsuarioLogado) {
         return amizadeApplication.listarAmigos(idUsuarioLogado);
     }
 
-    // NOVO MÉTODO
-    public List<AmizadesModel> listarConvitesPendentes(int idUsuarioLogado) {
+    public List<PendingRequestDTO> listarConvitesPendentes(int idUsuarioLogado) {
         return amizadeApplication.listarConvitesPendentes(idUsuarioLogado);
     }
 }
