@@ -32,6 +32,21 @@ public class AmizadesController {
     public AmizadesModel obterAmizade(@PathVariable int id) {
         return amizadeFacade.buscarAmizadePorId(id);
     }
+    @GetMapping("/meus-amigos")
+    public List<AmizadesModel> getMeusAmigos() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        var usuario = usuarioFacade.buscarUsuarioPorEmail(email);
+        return amizadeFacade.listarAmigos(usuario.getId());
+    }
+
+    @GetMapping("/convites")
+    public List<AmizadesModel> getConvitesPendentes() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        var usuario = usuarioFacade.buscarUsuarioPorEmail(email);
+        return amizadeFacade.listarConvitesPendentes(usuario.getId());
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
