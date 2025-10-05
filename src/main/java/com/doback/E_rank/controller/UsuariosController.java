@@ -6,6 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import com.doback.E_rank.dto.UpdateProfileDTO;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -51,5 +55,12 @@ public class UsuariosController {
     @ResponseStatus(HttpStatus.OK)
     public void atualizarUsuario(@PathVariable int id,@RequestBody UsuariosModel usuariosModel){
         usuarioFacade.atualizarUsuarios(id, usuariosModel);
+    }
+    @PutMapping("/me")
+    public ResponseEntity<Void> atualizarUsuarioLogado(@RequestBody UpdateProfileDTO profileDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        usuarioFacade.atualizarPerfil(email, profileDTO);
+        return ResponseEntity.ok().build(); // Retorna 200 OK
     }
 }

@@ -7,6 +7,7 @@ import com.doback.E_rank.infrastructure.models.PapelModel;
 import com.doback.E_rank.infrastructure.models.UsuariosModel;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.doback.E_rank.dto.UpdateProfileDTO;
 
 import java.util.List;
 import java.util.Set;
@@ -96,5 +97,15 @@ public class UsuariosApplication {
     public UsuariosModel obterUsuarioPorEmail(String email) {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o email: " + email));
+    }
+    public void atualizarPerfil(String email, UpdateProfileDTO profileDTO) {
+        UsuariosModel usuarioExistente = obterUsuarioPorEmail(email); // Reutiliza o método que já temos
+
+        // Atualiza apenas os campos permitidos
+        usuarioExistente.setNickname(profileDTO.getNickname());
+        usuarioExistente.setBiografia(profileDTO.getBiografia());
+
+        // Salva as alterações
+        usuarioRepository.updateUsuarios( (long) usuarioExistente.getId(), usuarioExistente);
     }
 }
