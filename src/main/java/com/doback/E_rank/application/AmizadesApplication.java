@@ -21,10 +21,7 @@ public class AmizadesApplication {
     private final AmizadesJpa amizadesJpa;
     private final UsuariosRepository usuariosRepository;
 
-    public AmizadesApplication(AmizadesRepository amizadeRepository,
-                               NotificacaoApplication notificacaoApplication,
-                               AmizadesJpa amizadesJpa,
-                               UsuariosRepository usuariosRepository) {
+    public AmizadesApplication(AmizadesRepository amizadeRepository, NotificacaoApplication notificacaoApplication, AmizadesJpa amizadesJpa, UsuariosRepository usuariosRepository) {
         this.amizadeRepository = amizadeRepository;
         this.notificacaoApplication = notificacaoApplication;
         this.amizadesJpa = amizadesJpa;
@@ -56,9 +53,24 @@ public class AmizadesApplication {
         amizadeRepository.removeAmizades(id);
     }
 
-    public void atualizarAmizades(int id, AmizadesModel amizadesModel) {
-        validar(amizadesModel);
-        amizadeRepository.updateAmizades(id, amizadesModel);
+    public void aceitarAmizade(int idAmizade, int idUsuarioLogado) {
+        AmizadesModel amizade = amizadeRepository.searchByCode(idAmizade);
+        if (amizade == null) {
+            throw new IllegalArgumentException("Amizade não encontrada.");
+        }
+
+        // REGRA DE SEGURANÇA: Apenas o destinatário do convite pode aceitá-lo.
+        if (amizade.getIdUsuario2() != idUsuarioLogado) {
+            throw new IllegalStateException("Acesso negado. Você não pode aceitar este convite.");
+        }
+
+        amizade.setStatus('A'); // Muda o status para Aceito
+        amizadeRepository.updateAmizades(idAmizade, amizade);
+
+        // Notifica o usuário que enviou o convite
+        String mensagem = "Seu pedido de amizade foi aceito!";
+        String destinatario = "usuario_id:" + amizade.getIdUsuario1();
+        notificacaoApplication.enviarNotificacao("sistema", mensagem, destinatario);
     }
 
     public List<FriendDTO> listarAmigos(int idUsuarioLogado) {
@@ -82,15 +94,10 @@ public class AmizadesApplication {
         }).filter(java.util.Objects::nonNull).collect(Collectors.toList());
     }
 
-    private Amizades validar(AmizadesModel amizadesModel){
-        Amizades amizades = new Amizades(
-                amizadesModel.getIdUsuario1(),
-                amizadesModel.getIdUsuario2(),
-                amizadesModel.getStatus(),
-                amizadesModel.getDataSolicitacao()
-        );
+    private Amizades validar(AmizadesModel amizadesModel) {
+        Amizades amizades = new Amizades(amizadesModel.getIdUsuario1(), amizadesModel.getIdUsuario2(), amizadesModel.getStatus(), amizadesModel.getDataSolicitacao());
 
-        if(!amizades.validarAmizades()){
+        if (!amizades.validarAmizades()) {
             throw new IllegalArgumentException("Validação da amizade falhou: " + amizades.getErrosValidacao());
         }
         return amizades;

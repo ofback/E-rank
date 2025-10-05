@@ -34,8 +34,8 @@ public class AmizadesFacade {
         amizadeApplication.excluirAmizade(id);
     }
 
-    public void atualizarAmizades(int id, AmizadesModel amizadesModel) {
-        amizadeApplication.atualizarAmizades(id, amizadesModel);
+    public void aceitarAmizade(int idAmizade, int idUsuarioLogado) {
+        amizadeApplication.aceitarAmizade(idAmizade, idUsuarioLogado);
     }
 
     // Métodos atualizados com os novos tipos de retorno (DTOs)

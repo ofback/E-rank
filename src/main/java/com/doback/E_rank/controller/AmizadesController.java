@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import com.doback.E_rank.dto.UpdateFriendshipStatusDTO;
+import org.springframework.http.ResponseEntity;
+
 
 import java.util.List;
 
@@ -68,8 +71,16 @@ public class AmizadesController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarAmizades(@PathVariable int id, @RequestBody AmizadesModel amizadesModel) {
-        amizadeFacade.atualizarAmizades(id, amizadesModel);
+    public void responderAmizade(@PathVariable int id, @RequestBody UpdateFriendshipStatusDTO statusDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        var usuario = usuarioFacade.buscarUsuarioPorEmail(email);
+
+        if (statusDTO.getStatus() == 'A') {
+            amizadeFacade.aceitarAmizade(id, usuario.getId());
+        } else {
+            throw new IllegalArgumentException("Ação não suportada.");
+        }
     }
 }
 
