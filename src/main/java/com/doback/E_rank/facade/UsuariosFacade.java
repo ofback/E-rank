@@ -3,6 +3,7 @@ package com.doback.E_rank.facade;
 import com.doback.E_rank.application.UsuariosApplication;
 import com.doback.E_rank.infrastructure.models.UsuariosModel;
 import org.springframework.stereotype.Component;
+import com.doback.E_rank.dto.UpdateProfileDTO;
 
 import java.util.List;
 
@@ -22,7 +23,6 @@ public class UsuariosFacade {
         return usuarioApplication.obterUsuarioPorId(id);
     }
 
-    // O nome do método aqui é 'salvarUsuario', ele chama 'criarUsuario' na camada de aplicação. Está correto.
     public void salvarUsuario(UsuariosModel usuario) {
         usuarioApplication.criarUsuario(usuario);
     }
@@ -36,5 +36,8 @@ public class UsuariosFacade {
     }
     public UsuariosModel buscarUsuarioPorEmail(String email) {
         return usuarioApplication.obterUsuarioPorEmail(email);
+    }
+    public void atualizarPerfil(String email, UpdateProfileDTO profileDTO) {
+        usuarioApplication.atualizarPerfil(email, profileDTO);
     }
 }
