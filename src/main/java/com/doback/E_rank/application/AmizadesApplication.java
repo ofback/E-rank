@@ -28,13 +28,20 @@ public class AmizadesApplication {
         return amizadeRepository.searchByCode(id);
     }
 
-    public void criarAmizade(AmizadesModel amizadesModel) {
+    public void criarAmizade(int idRemetente, int idDestinatario) {
+        AmizadesModel amizadesModel = new AmizadesModel();
+        amizadesModel.setIdUsuario1(idRemetente);
+        amizadesModel.setIdUsuario2(idDestinatario);
+        amizadesModel.setStatus('P'); // 'P' de Pendente
+        amizadesModel.setDataSolicitacao(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
+
+        // A validação agora acontece com os dados corretos
         validar(amizadesModel);
 
         amizadeRepository.addAmizades(amizadesModel);
 
-        String mensagem = "Você recebeu um novo pedido de amizade do usuário " + amizadesModel.getIdUsuario1();
-        String destinatario = "usuario_id:" + amizadesModel.getIdUsuario2(); // Exemplo de identificador
+        String mensagem = "Você recebeu um novo pedido de amizade.";
+        String destinatario = "usuario_id:" + idDestinatario;
         notificacaoApplication.enviarNotificacao("sistema", mensagem, destinatario);
     }
 

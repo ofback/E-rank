@@ -23,8 +23,8 @@ public class AmizadesFacade {
         return amizadeApplication.obterAmizadePorId(id);
     }
 
-    public void salvarAmizade(AmizadesModel amizade) {
-        amizadeApplication.criarAmizade(amizade);
+    public void salvarAmizade(int idRemetente, int idDestinatario) {
+        amizadeApplication.criarAmizade(idRemetente, idDestinatario);
     }
 
     public void excluirAmizade(int id) {
