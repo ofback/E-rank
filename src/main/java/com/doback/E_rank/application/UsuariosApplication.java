@@ -108,4 +108,8 @@ public class UsuariosApplication {
         // Salva as alterações
         usuarioRepository.updateUsuarios( (long) usuarioExistente.getId(), usuarioExistente);
     }
+
+    public List<UsuariosModel> obterUsuariosPorNickname(String nickname) {
+        return usuarioRepository.findByNickname(nickname);
+    }
 }

@@ -10,6 +10,8 @@ import com.doback.E_rank.dto.UpdateProfileDTO;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -22,6 +24,14 @@ public class UsuariosController {
         this.usuarioFacade = usuarioFacade;
     }
 
+
+    @GetMapping
+    public List<UsuariosModel> listarUsuarios(@RequestParam Optional<String> nickname) {
+        if (nickname.isPresent()) {
+            return usuarioFacade.listarUsuariosPorNickname(nickname.get());
+        }
+        return usuarioFacade.listarUsuarios();
+    }
     @GetMapping
     public List<UsuariosModel> listarUsuarios() {
         return usuarioFacade.listarUsuarios();

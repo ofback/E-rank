@@ -63,4 +63,9 @@ public class UsuariosRepositoryImpl implements UsuariosRepository {
     public Optional<UsuariosModel> findByEmail(String email) {
         return this.usuariosJpa.findByEmail(email);
     }
+
+    @Override
+    public List<UsuariosModel> findByNickname(String nickname) {
+        return this.usuariosJpa.findByNicknameContainingIgnoreCase(nickname);
+    }
 }

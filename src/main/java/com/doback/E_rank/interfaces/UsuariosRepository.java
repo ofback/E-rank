@@ -18,4 +18,6 @@ public interface UsuariosRepository {
     public boolean estaVazio();
 
     Optional<UsuariosModel> findByEmail(String email);
+
+    List<UsuariosModel> findByNickname(String nickname);
 }
