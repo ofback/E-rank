@@ -13,6 +13,9 @@ public class RegistroTimesModel {
     @Column(name = "cargo")
     private String cargo;
 
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "data_entrada")
     private String data_entrada;
 
