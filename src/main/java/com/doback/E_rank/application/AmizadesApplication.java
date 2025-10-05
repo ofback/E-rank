@@ -49,8 +49,18 @@ public class AmizadesApplication {
         notificacaoApplication.enviarNotificacao("sistema", mensagem, destinatario);
     }
 
-    public void excluirAmizade(int id) {
-        amizadeRepository.removeAmizades(id);
+    public void excluirAmizade(int idAmizade, int idUsuarioLogado) {
+        AmizadesModel amizade = amizadeRepository.searchByCode(idAmizade);
+        if (amizade == null) {
+            throw new IllegalArgumentException("Amizade não encontrada.");
+        }
+
+        // REGRA DE SEGURANÇA: Apenas um dos dois usuários envolvidos pode excluir.
+        if (amizade.getIdUsuario1() != idUsuarioLogado && amizade.getIdUsuario2() != idUsuarioLogado) {
+            throw new IllegalStateException("Acesso negado. Você não tem permissão para remover esta amizade.");
+        }
+
+        amizadeRepository.removeAmizades(idAmizade);
     }
 
     public void aceitarAmizade(int idAmizade, int idUsuarioLogado) {
