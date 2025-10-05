@@ -34,4 +34,12 @@ public class AmizadesFacade {
     public void atualizarAmizades(int id, AmizadesModel amizadesModel) {
         amizadeApplication.atualizarAmizades(id, amizadesModel);
     }
+    public List<AmizadesModel> listarAmigos(int idUsuarioLogado) {
+        return amizadeApplication.listarAmigos(idUsuarioLogado);
+    }
+
+    // NOVO MÉTODO
+    public List<AmizadesModel> listarConvitesPendentes(int idUsuarioLogado) {
+        return amizadeApplication.listarConvitesPendentes(idUsuarioLogado);
+    }
 }
