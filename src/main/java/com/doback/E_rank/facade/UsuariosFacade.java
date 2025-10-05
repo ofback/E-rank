@@ -40,4 +40,7 @@ public class UsuariosFacade {
     public void atualizarPerfil(String email, UpdateProfileDTO profileDTO) {
         usuarioApplication.atualizarPerfil(email, profileDTO);
     }
+    public List<UsuariosModel> listarUsuariosPorNickname(String nickname) {
+        return usuarioApplication.obterUsuariosPorNickname(nickname);
+    }
 }
