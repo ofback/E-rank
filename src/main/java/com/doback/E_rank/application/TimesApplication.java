@@ -3,6 +3,7 @@ package com.doback.E_rank.application;
 import com.doback.E_rank.dto.CreateTeamDTO;
 import com.doback.E_rank.dto.MyTeamDTO;
 import com.doback.E_rank.entity.Times;
+import com.doback.E_rank.exceptions.ResourceNotFoundException;
 import com.doback.E_rank.infrastructure.models.RegistroTimesModel;
 import com.doback.E_rank.infrastructure.models.TemporadasModel;
 import com.doback.E_rank.infrastructure.models.TimesModel;
@@ -24,7 +25,7 @@ public class TimesApplication {
     private final TimesRepository timesRepository;
     private final TemporadasRepository temporadasRepository;
     private final RegistroTimesRepository registroTimesRepository;
-    private final RegistroTimesJpa registroTimesJpa; // Nova dependência
+    private final RegistroTimesJpa registroTimesJpa;
 
     public TimesApplication(TimesRepository timesRepository, TemporadasRepository temporadasRepository, RegistroTimesRepository registroTimesRepository, RegistroTimesJpa registroTimesJpa) {
         this.timesRepository = timesRepository;
@@ -101,6 +102,19 @@ public class TimesApplication {
                 .collect(Collectors.toList());
     }
 
+    // Adicionado para RF07
+    @Transactional
+    public void leaveTeam(int teamId, int userId) {
+        RegistroTimesModel registration = registroTimesJpa.findByIdTimesAndIdUsuarios(teamId, userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Membro com ID " + userId + " não encontrado no time com ID " + teamId));
+
+        if ("Dono".equalsIgnoreCase(registration.getCargo())) {
+            throw new IllegalArgumentException("O Dono não pode abandonar o time. Transfira a propriedade ou delete o time.");
+        }
+
+        registroTimesJpa.delete(registration);
+    }
+
 
     private void validar(TimesModel timesModel) {
         Times timesEntidade = new Times(
@@ -116,4 +130,3 @@ public class TimesApplication {
         }
     }
 }
-
