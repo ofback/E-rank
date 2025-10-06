@@ -58,6 +58,12 @@ public class TimesController {
         timesFacade.excluirTimes(id);
     }
 
+    @DeleteMapping("/{teamId}/members/{userId}")
+    public ResponseEntity<Void> leaveTeam(@PathVariable Long teamId, @PathVariable Long userId) {
+        timesApplication.leaveTeam(teamId, userId);
+        return ResponseEntity.noContent().build();
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void atualizarTimes(@PathVariable int id, @RequestBody TimesModel timesModel) {
