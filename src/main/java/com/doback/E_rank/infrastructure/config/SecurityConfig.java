@@ -6,11 +6,13 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -27,18 +29,18 @@ public class SecurityConfig {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
         jdbcUserDetailsManager.setUsersByUsernameQuery("""
-            SELECT email, senha, CASE WHEN sts = 'A' THEN true ELSE false END as enabled
-            FROM usuarios
-            WHERE email = ?
-        """);
+                    SELECT email, senha, CASE WHEN sts = 'A' THEN true ELSE false END as enabled
+                    FROM usuarios
+                    WHERE email = ?
+                """);
 
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("""
-            SELECT u.email, p.nome
-            FROM usuarios u
-            INNER JOIN usuarios_papeis up ON u.id = up.usuario_id
-            INNER JOIN papeis p ON up.papel_id = p.id
-            WHERE u.email = ?
-        """);
+                    SELECT u.email, p.nome
+                    FROM usuarios u
+                    INNER JOIN usuarios_papeis up ON u.id = up.usuario_id
+                    INNER JOIN papeis p ON up.papel_id = p.id
+                    WHERE u.email = ?
+                """);
 
         return jdbcUserDetailsManager;
     }
@@ -64,10 +66,16 @@ public class SecurityConfig {
         );
 
 
-        http.httpBasic(Customizer.withDefaults());
-
         http.csrf(csrf -> csrf.disable());
-
+        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.addFilter(new JwtAuthenticationFilter(authenticationManager()));
+        http.addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.authorizeHttpRequests(configurer ->
+                configurer
+                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .anyRequest().authenticated()
+        );
         return http.build();
     }
 }
