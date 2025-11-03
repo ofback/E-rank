@@ -20,15 +20,14 @@ public class RegistroTimesModel {
     private String data_entrada;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Times_id_time", referencedColumnName = "id_time", insertable = false, updatable = false) // Corrigido
+    @JoinColumn(name = "Times_id_time", referencedColumnName = "id", insertable = false, updatable = false) // Corrigido
     private TimesModel timesModel;
 
     @Column(name = "Times_id_time") // Corrigido
     private int idTimes;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Usuarios_id_usuario", referencedColumnName = "id_usuario", insertable = false, updatable = false) // Corrigido
+    @JoinColumn(name = "Usuarios_id_usuario", referencedColumnName = "id", insertable = false, updatable = false) // Corrigido
     private UsuariosModel usuariosModel;
 
     @Column(name = "Usuarios_id_usuario") // Corrigido
