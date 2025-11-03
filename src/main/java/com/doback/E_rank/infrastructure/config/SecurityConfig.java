@@ -18,6 +18,11 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import java.util.Arrays;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 import javax.sql.DataSource;
 
@@ -27,13 +32,10 @@ public class SecurityConfig {
 
     // Injeções para os novos filtros
     private final JwtTokenUtil jwtTokenUtil;
-    private final UserDetailsManager userDetailsManager;
-    private final UsuariosJpa usuariosJpa;
 
-    public SecurityConfig(JwtTokenUtil jwtTokenUtil, UserDetailsManager userDetailsManager, UsuariosJpa usuariosJpa) {
+
+    public SecurityConfig(JwtTokenUtil jwtTokenUtil) {
         this.jwtTokenUtil = jwtTokenUtil;
-        this.userDetailsManager = userDetailsManager;
-        this.usuariosJpa = usuariosJpa;
     }
 
     @Bean
@@ -69,7 +71,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager, UserDetailsManager userDetailsManager, UsuariosJpa usuariosJpa) throws Exception {
+
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         // 1. Desabilitar CSRF (comum em APIs stateless)
         http.csrf(csrf -> csrf.disable());
@@ -106,8 +110,29 @@ public class SecurityConfig {
         http.addFilter(new JwtAuthenticationFilter(authenticationManager, jwtTokenUtil, usuariosJpa));
 
         // Adiciona o filtro de autorização (para todas as outras rotas)
+        // (Esta linha também usa os parâmetros passados para o método)
         http.addFilterBefore(new JwtAuthorizationFilter(jwtTokenUtil, userDetailsManager), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // Permite requisições da origem do seu front-end
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost", "http://127.0.0.1"));
+
+        // Permite os métodos HTTP
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
+
+        // Permite todos os cabeçalhos (incluindo 'Authorization' para o JWT)
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+
+        // Permite credenciais (cookies, se houver)
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration); // Aplica para todas as rotas
+        return source;
     }
 }
