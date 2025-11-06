@@ -30,10 +30,6 @@ public class UsuariosController {
         }
         return usuarioFacade.listarUsuarios();
     }
-    @GetMapping
-    public List<UsuariosModel> listarUsuarios() {
-        return usuarioFacade.listarUsuarios();
-    }
 
     @GetMapping("/{id}")
     public UsuariosModel obterUsuario(@PathVariable int id) {
