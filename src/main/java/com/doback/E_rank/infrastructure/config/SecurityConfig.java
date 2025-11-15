@@ -87,9 +87,7 @@ public class SecurityConfig {
         // 4. Configurar as permissões de rotas (authorizeHttpRequests)
         http.authorizeHttpRequests(configurer ->
                 configurer
-                        // --- CORREÇÃO CRÍTICA ADICIONADA AQUI ---
                         // Permite TODAS as requisições 'OPTIONS' (preflight de CORS)
-                        // sem exigir autenticação.
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // Permite cadastro e login sem autenticação
@@ -98,7 +96,11 @@ public class SecurityConfig {
 
                         // Protege as rotas de admin
                         .requestMatchers("/temporadas/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/usuarios").hasRole("ADMIN")
+
+                        // --- CORREÇÃO AQUI ---
+                        // Permite que usuários LOGADOS (não apenas admins) busquem outros usuários.
+                        .requestMatchers(HttpMethod.GET, "/usuarios").authenticated()
+
                         .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
 
                         // Exige autenticação para todo o resto
@@ -127,11 +129,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Permite requisições de qualquer origem.
-        // Para produção, mude para a URL do seu app (ex: "http://localhost:12345")
-        // Como você está testando de http://localhost:56358, poderia colocar essa URL
-        // Mas '*' ou "http://localhost:56358" ou "http://localhost:12345" (se for a porta do flutter web)
-        // O ideal é usar a URL específica do seu front-end web.
+
+        // Mantive sua configuração de CORS que já funcionava
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:56358", "http://localhost:12345", "*"));
 
 
