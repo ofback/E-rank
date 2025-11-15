@@ -67,7 +67,8 @@ public class Amizades {
         return  idUsuario1 > 0 &&
                 idUsuario2 > 0 &&
                 idUsuario1 != idUsuario2 &&
-                (status == 'A' || status == 'I') &&
+                // --- CORREÇÃO AQUI: Permitir status 'P' (Pendente) ---
+                (status == 'A' || status == 'I' || status == 'P') &&
                 dataSolicitacao != null && !dataSolicitacao.trim().isEmpty();
     }
 
@@ -86,13 +87,15 @@ public class Amizades {
             erros.append("Solicitante e receptor não podem ser o mesmo usuário. ");
         }
 
-        if (status != 'A' && status != 'I') {
-            erros.append("Status deve ser 'A' (ativo) ou 'I' (inativo). ");
-        }
-        if (dataSolicitacao == null){
-            erros.append("Data de envio é obrigatória. ");
+        // --- CORREÇÃO AQUI: Permitir status 'P' (Pendente) ---
+        if (status != 'A' && status != 'I' && status != 'P') {
+            erros.append("Status deve ser 'A' (ativo), 'I' (inativo) ou 'P' (pendente). ");
         }
 
-        return erros.toString().trim();
+        if (dataSolicitacao == null || dataSolicitacao.trim().isEmpty()) {
+            erros.append("Data de solicitação não pode ser nula ou vazia. ");
+        }
+
+        return erros.toString();
     }
 }
