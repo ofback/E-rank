@@ -135,7 +135,7 @@ public class SecurityConfig {
 
 
         // Permite os métodos HTTP mais comuns
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"));
 
         // Permite todos os cabeçalhos (importante para o "Authorization" do JWT)
         configuration.setAllowedHeaders(Arrays.asList("*"));
