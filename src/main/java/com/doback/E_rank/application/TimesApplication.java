@@ -12,7 +12,7 @@ import com.doback.E_rank.interfaces.RegistroTimesRepository;
 import com.doback.E_rank.interfaces.TemporadasRepository;
 import com.doback.E_rank.interfaces.TimesRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional; // Importe o Transactional
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -74,7 +74,7 @@ public class TimesApplication {
         creatorRegistration.setIdTimes(timesModel.getId());
         creatorRegistration.setIdUsuarios(creatorId);
         creatorRegistration.setCargo("Dono");
-        creatorRegistration.setStatus("A"); // 'A' de Aceito
+        creatorRegistration.setStatus("A");
         creatorRegistration.setData_entrada(dataEntrada);
         registroTimesRepository.addRegistroTimes(creatorRegistration);
 
@@ -84,22 +84,54 @@ public class TimesApplication {
                 memberInvitation.setIdTimes(timesModel.getId());
                 memberInvitation.setIdUsuarios(memberId);
                 memberInvitation.setCargo("Membro");
-                memberInvitation.setStatus("P"); // 'P' de Pendente
+                memberInvitation.setStatus("P");
                 memberInvitation.setData_entrada(dataEntrada);
                 registroTimesRepository.addRegistroTimes(memberInvitation);
             }
         }
     }
 
+
+    @Transactional(readOnly = true)
     public List<MyTeamDTO> obterTimesDoUsuario(int userId) {
-        return registroTimesJpa.findByIdUsuarios(userId).stream()
-                .map(registro -> new MyTeamDTO(
-                        registro.getIdTimes(),
-                        registro.getTimesModel().getNome(),
-                        registro.getCargo(),
-                        registro.getStatus()
-                ))
+
+        System.out.println("--- [DEBUG] INICIANDO obterTimesDoUsuario PARA USUÁRIO: " + userId + " ---");
+
+        List<MyTeamDTO> timesMapeados = registroTimesJpa.findByIdUsuarios(userId).stream()
+                .peek(registro -> {
+                    // Log 1: O que o banco retornou
+                    // CORREÇÃO: Usando .getId() ao invés de .getIdRegistroTime()
+                    System.out.println("[DEBUG] Processando registro ID: " + registro.getId());
+
+                    // Log 2: O TimesModel está nulo?
+                    if (registro.getTimesModel() == null) {
+                        // CORREÇÃO: Usando .getId()
+                        System.out.println("[DEBUG] ERRO: registro.getTimesModel() está NULO para o registro ID: " + registro.getId());
+                    } else {
+                        // Log 3: O Nome do time está nulo?
+                        if (registro.getTimesModel().getNome() == null) {
+                            System.out.println("[DEBUG] ERRO: registro.getTimesModel().getNome() está NULO para o Time ID: " + registro.getTimesModel().getId());
+                        }
+                    }
+                })
+                // Filtro 1: Garante que o time associado não é nulo
+                .filter(registro -> registro.getTimesModel() != null)
+                // Filtro 2: Garante que o NOME do time também não é nulo
+                .filter(registro -> registro.getTimesModel().getNome() != null)
+                .map(registro -> {
+                    // Log 4: O que estamos mapeando
+                    System.out.println("[DEBUG] Mapeando Time: " + registro.getTimesModel().getNome() + " (Cargo: " + registro.getCargo() + ")");
+                    return new MyTeamDTO(
+                            registro.getIdTimes(),
+                            registro.getTimesModel().getNome(), // Isto agora é 100% seguro
+                            registro.getCargo(),
+                            registro.getStatus()
+                    );
+                })
                 .collect(Collectors.toList());
+
+        System.out.println("--- [DEBUG] FINALIZANDO obterTimesDoUsuario. Times encontrados: " + timesMapeados.size() + " ---");
+        return timesMapeados;
     }
 
     // Adicionado para RF07
