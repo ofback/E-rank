@@ -67,7 +67,7 @@ public class DataInitializer implements CommandLineRunner {
             UsuariosModel adminUser = new UsuariosModel();
             adminUser.setEmail("admin@erank.com");
             adminUser.setSenha(passwordEncoder.encode("admin123"));
-            adminUser.setNome("Administrador");
+           adminUser.setNome("Administrador");
             adminUser.setNickname("admin");
             adminUser.setSts('A');
             adminUser.setPapeis(Set.of(adminRole, userRole));

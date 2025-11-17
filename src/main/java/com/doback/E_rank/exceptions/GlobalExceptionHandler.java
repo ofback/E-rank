@@ -19,6 +19,9 @@ public class GlobalExceptionHandler {
         body.put("status", HttpStatus.BAD_REQUEST.value());
         body.put("error", "Bad Request");
         body.put("message", ex.getMessage());
+
+        System.out.println("=== ERRO 400 (Bad Request) Capturado: " + ex.getMessage() + " ===");
+
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
@@ -29,6 +32,9 @@ public class GlobalExceptionHandler {
         body.put("status", HttpStatus.NOT_FOUND.value());
         body.put("error", "Not Found");
         body.put("message", ex.getMessage());
+
+        System.out.println("=== ERRO 404 (Not Found) Capturado: " + ex.getMessage() + " ===");
+
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 }
