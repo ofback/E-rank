@@ -19,9 +19,6 @@ public class TimesController {
 
     private final TimesFacade timesFacade;
     private final UsuariosFacade usuarioFacade;
-
-    // Application não é mais estritamente necessária aqui se tudo passar pela Facade,
-    // mas mantive para compatibilidade caso queira usar.
     private final TimesApplication timesApplication;
 
     public TimesController(TimesFacade timesFacade, UsuariosFacade usuarioFacade, TimesApplication timesApplication) {
@@ -63,22 +60,33 @@ public class TimesController {
         timesFacade.atualizarTimes(id, timesModel);
     }
 
-    // --- NOVOS ENDPOINTS RF08 ---
+    // --- GESTÃO DE MEMBROS ---
 
-    // 1. Listar Membros
     @GetMapping("/{id}/members")
     public ResponseEntity<List<TeamMemberDTO>> listarMembros(@PathVariable int id) {
         return ResponseEntity.ok(timesFacade.listarMembros(id));
     }
 
-    // 2. Adicionar Membro
     @PostMapping("/{id}/members")
     public ResponseEntity<Void> adicionarMembro(@PathVariable int id, @RequestBody AddMemberDTO dto) {
         timesFacade.adicionarMembro(id, dto.getUserId());
         return ResponseEntity.ok().build();
     }
 
-    // 3. Alterar Cargo (Ex: Tornar ViceLider)
+    // Aceitar Convite
+    @PostMapping("/{id}/invites/accept")
+    public ResponseEntity<Void> aceitarConvite(@PathVariable int id) {
+        timesFacade.responderConvite(id, getUsuarioLogadoId(), true);
+        return ResponseEntity.ok().build();
+    }
+
+    // Recusar Convite
+    @PostMapping("/{id}/invites/decline")
+    public ResponseEntity<Void> recusarConvite(@PathVariable int id) {
+        timesFacade.responderConvite(id, getUsuarioLogadoId(), false);
+        return ResponseEntity.noContent().build();
+    }
+
     @PatchMapping("/{id}/members/{userId}/role")
     public ResponseEntity<Void> alterarCargo(@PathVariable int id,
                                              @PathVariable int userId,
@@ -87,17 +95,12 @@ public class TimesController {
         return ResponseEntity.ok().build();
     }
 
-    // 4. Remover Membro (Expulsar ou Sair)
-    // Atualiza o antigo endpoint para permitir expulsão se for Dono/Vice
     @DeleteMapping("/{teamId}/members/{userId}")
     public ResponseEntity<Void> removeMember(@PathVariable int teamId, @PathVariable int userId) {
-        // A lógica de permissão foi movida para dentro da Application
-        // Passamos o ID de quem está chamando a API para validação
         timesFacade.removerMembro(teamId, userId, getUsuarioLogadoId());
         return ResponseEntity.noContent().build();
     }
 
-    // --- Helper Privado ---
     private int getUsuarioLogadoId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
