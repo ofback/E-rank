@@ -1,17 +1,18 @@
 package com.doback.E_rank.controller;
 
+import com.doback.E_rank.dto.CreateUsuarioDTO;
+import com.doback.E_rank.dto.UpdateProfileDTO;
+import com.doback.E_rank.dto.UsuarioResponseDTO;
 import com.doback.E_rank.infrastructure.models.UsuariosModel;
 import com.doback.E_rank.facade.UsuariosFacade;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import com.doback.E_rank.dto.UpdateProfileDTO;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestParam;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -22,31 +23,31 @@ public class UsuariosController {
         this.usuarioFacade = usuarioFacade;
     }
 
-
     @GetMapping
-    public List<UsuariosModel> listarUsuarios(@RequestParam Optional<String> nickname) {
+    public ResponseEntity<List<UsuarioResponseDTO>> listarUsuarios(@RequestParam Optional<String> nickname) {
         if (nickname.isPresent()) {
-            return usuarioFacade.listarUsuariosPorNickname(nickname.get());
+            return ResponseEntity.ok(usuarioFacade.listarUsuariosPorNickname(nickname.get()));
         }
-        return usuarioFacade.listarUsuarios();
+        return ResponseEntity.ok(usuarioFacade.listarUsuarios());
     }
 
     @GetMapping("/{id}")
-    public UsuariosModel obterUsuario(@PathVariable int id) {
-        return usuarioFacade.buscarUsuarioPorId(id);
+    public ResponseEntity<UsuarioResponseDTO> obterUsuario(@PathVariable int id) {
+        return ResponseEntity.ok(usuarioFacade.buscarUsuarioPorId(id));
     }
 
     @GetMapping("/me")
-    public UsuariosModel getUsuarioLogado() {
+    public ResponseEntity<UsuarioResponseDTO> getUsuarioLogado() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
-        return usuarioFacade.buscarUsuarioPorEmail(email);
+        return ResponseEntity.ok(usuarioFacade.buscarUsuarioPorEmail(email));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarUsuario(@RequestBody UsuariosModel usuario) {
-        usuarioFacade.salvarUsuario(usuario);
+    public void criarUsuario(@RequestBody CreateUsuarioDTO usuarioDTO) {
+        // Recebe DTO Seguro
+        usuarioFacade.salvarUsuario(usuarioDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -57,14 +58,15 @@ public class UsuariosController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarUsuario(@PathVariable int id,@RequestBody UsuariosModel usuariosModel){
+    public void atualizarUsuario(@PathVariable int id, @RequestBody UsuariosModel usuariosModel){
         usuarioFacade.atualizarUsuarios(id, usuariosModel);
     }
+
     @PutMapping("/me")
     public ResponseEntity<Void> atualizarUsuarioLogado(@RequestBody UpdateProfileDTO profileDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         usuarioFacade.atualizarPerfil(email, profileDTO);
-        return ResponseEntity.ok().build(); // Retorna 200 OK
+        return ResponseEntity.ok().build();
     }
 }
