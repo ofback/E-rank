@@ -1,7 +1,6 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.TimesApplication;
-import com.doback.E_rank.dto.AddMemberDTO;
 import com.doback.E_rank.dto.CreateTeamDTO;
 import com.doback.E_rank.dto.MyTeamDTO;
 import com.doback.E_rank.dto.TeamMemberDTO;
@@ -18,7 +17,6 @@ public class TimesFacade {
         this.timesApplication = timesApplication;
     }
 
-    // --- MÉTODOS CRUD BÁSICOS ---
     public List<TimesModel> listarTimes() {
         return timesApplication.obterTodosTimes();
     }
@@ -43,13 +41,17 @@ public class TimesFacade {
         return timesApplication.obterTimesDoUsuario(userId);
     }
 
-    // --- NOVOS MÉTODOS RF08 ---
+    // --- RF08 ---
     public List<TeamMemberDTO> listarMembros(int timeId) {
         return timesApplication.listarMembros(timeId);
     }
 
     public void adicionarMembro(int timeId, int usuarioId) {
         timesApplication.adicionarMembro(timeId, usuarioId);
+    }
+
+    public void responderConvite(int timeId, int userId, boolean aceitar) {
+        timesApplication.responderConvite(timeId, userId, aceitar);
     }
 
     public void alterarCargo(int timeId, int targetUserId, String novoCargo, int requesterId) {
