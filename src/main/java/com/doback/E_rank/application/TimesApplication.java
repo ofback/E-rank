@@ -2,6 +2,7 @@ package com.doback.E_rank.application;
 
 import com.doback.E_rank.dto.CreateTeamDTO;
 import com.doback.E_rank.dto.MyTeamDTO;
+import com.doback.E_rank.dto.TeamMemberDTO;
 import com.doback.E_rank.entity.Times;
 import com.doback.E_rank.exceptions.ResourceNotFoundException;
 import com.doback.E_rank.infrastructure.models.RegistroTimesModel;
@@ -12,7 +13,7 @@ import com.doback.E_rank.interfaces.RegistroTimesRepository;
 import com.doback.E_rank.interfaces.TemporadasRepository;
 import com.doback.E_rank.interfaces.TimesRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // Importe o Transactional
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,7 +35,6 @@ public class TimesApplication {
         this.registroTimesJpa = registroTimesJpa;
     }
 
-    // --- MÉTODOS CRUD ADICIONADOS ---
     public List<TimesModel> obterTodosTimes() {
         return timesRepository.buscar();
     }
@@ -51,7 +51,6 @@ public class TimesApplication {
         validar(timesModel);
         timesRepository.updateTimes(id, timesModel);
     }
-    // --- FIM DOS MÉTODOS ADICIONADOS ---
 
     @Transactional
     public void criarTime(CreateTeamDTO teamDTO, int creatorId) {
@@ -66,7 +65,7 @@ public class TimesApplication {
         timesModel.setSts('A');
 
         validar(timesModel);
-        timesRepository.addTimes(timesModel); // Salva o time para obter o ID gerado
+        timesRepository.addTimes(timesModel);
 
         String dataEntrada = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
@@ -91,62 +90,115 @@ public class TimesApplication {
         }
     }
 
-
     @Transactional(readOnly = true)
     public List<MyTeamDTO> obterTimesDoUsuario(int userId) {
-
-        System.out.println("--- [DEBUG] INICIANDO obterTimesDoUsuario PARA USUÁRIO: " + userId + " ---");
-
-        List<MyTeamDTO> timesMapeados = registroTimesJpa.findByIdUsuarios(userId).stream()
-                .peek(registro -> {
-                    // Log 1: O que o banco retornou
-                    // CORREÇÃO: Usando .getId() ao invés de .getIdRegistroTime()
-                    System.out.println("[DEBUG] Processando registro ID: " + registro.getId());
-
-                    // Log 2: O TimesModel está nulo?
-                    if (registro.getTimesModel() == null) {
-                        // CORREÇÃO: Usando .getId()
-                        System.out.println("[DEBUG] ERRO: registro.getTimesModel() está NULO para o registro ID: " + registro.getId());
-                    } else {
-                        // Log 3: O Nome do time está nulo?
-                        if (registro.getTimesModel().getNome() == null) {
-                            System.out.println("[DEBUG] ERRO: registro.getTimesModel().getNome() está NULO para o Time ID: " + registro.getTimesModel().getId());
-                        }
-                    }
-                })
-                // Filtro 1: Garante que o time associado não é nulo
+        return registroTimesJpa.findByIdUsuarios(userId).stream()
                 .filter(registro -> registro.getTimesModel() != null)
-                // Filtro 2: Garante que o NOME do time também não é nulo
                 .filter(registro -> registro.getTimesModel().getNome() != null)
-                .map(registro -> {
-                    // Log 4: O que estamos mapeando
-                    System.out.println("[DEBUG] Mapeando Time: " + registro.getTimesModel().getNome() + " (Cargo: " + registro.getCargo() + ")");
-                    return new MyTeamDTO(
-                            registro.getIdTimes(),
-                            registro.getTimesModel().getNome(), // Isto agora é 100% seguro
-                            registro.getCargo(),
-                            registro.getStatus()
-                    );
-                })
+                .map(registro -> new MyTeamDTO(
+                        registro.getIdTimes(),
+                        registro.getTimesModel().getNome(),
+                        registro.getCargo(),
+                        registro.getStatus()
+                ))
                 .collect(Collectors.toList());
-
-        System.out.println("--- [DEBUG] FINALIZANDO obterTimesDoUsuario. Times encontrados: " + timesMapeados.size() + " ---");
-        return timesMapeados;
     }
 
-    // Adicionado para RF07
-    @Transactional
-    public void leaveTeam(int teamId, int userId) {
-        RegistroTimesModel registration = registroTimesJpa.findByIdTimesAndIdUsuarios(teamId, userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Membro com ID " + userId + " não encontrado no time com ID " + teamId));
+    // --- NOVAS FUNCIONALIDADES (RF08) ---
 
-        if ("Dono".equalsIgnoreCase(registration.getCargo())) {
-            throw new IllegalArgumentException("O Dono não pode abandonar o time. Transfira a propriedade ou delete o time.");
+    // 1. Listar Membros
+    public List<TeamMemberDTO> listarMembros(int timeId) {
+        return registroTimesJpa.findByIdTimes(timeId).stream()
+                .map(reg -> new TeamMemberDTO(
+                        reg.getUsuariosModel().getId(),
+                        reg.getUsuariosModel().getNickname(),
+                        reg.getCargo(),
+                        reg.getData_entrada()
+                ))
+                .collect(Collectors.toList());
+    }
+
+    // 2. Adicionar Membro (Pós-criação)
+    @Transactional
+    public void adicionarMembro(int timeId, int usuarioId) {
+        if (registroTimesJpa.findByIdTimesAndIdUsuarios(timeId, usuarioId).isPresent()) {
+            throw new IllegalArgumentException("Usuário já está no time.");
         }
 
-        registroTimesJpa.delete(registration);
+        RegistroTimesModel novoMembro = new RegistroTimesModel();
+        novoMembro.setIdTimes(timeId);
+        novoMembro.setIdUsuarios(usuarioId);
+        novoMembro.setCargo("Membro");
+        novoMembro.setStatus("A");
+        novoMembro.setData_entrada(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
+        registroTimesRepository.addRegistroTimes(novoMembro);
     }
 
+    // 3. Alterar Cargo (Ex: Membro -> ViceLider)
+    @Transactional
+    public void alterarCargo(int timeId, int targetUserId, String novoCargo, int requesterId) {
+        RegistroTimesModel requester = registroTimesJpa.findByIdTimesAndIdUsuarios(timeId, requesterId)
+                .orElseThrow(() -> new ResourceNotFoundException("Você não faz parte deste time."));
+
+        // Apenas Dono pode promover
+        if (!"Dono".equalsIgnoreCase(requester.getCargo())) {
+            throw new IllegalStateException("Apenas o Dono pode alterar cargos.");
+        }
+
+        RegistroTimesModel target = registroTimesJpa.findByIdTimesAndIdUsuarios(timeId, targetUserId)
+                .orElseThrow(() -> new ResourceNotFoundException("Membro alvo não encontrado."));
+
+        if ("Dono".equalsIgnoreCase(target.getCargo())) {
+            throw new IllegalArgumentException("O cargo do Dono não pode ser alterado.");
+        }
+
+        target.setCargo(novoCargo);
+        registroTimesJpa.save(target);
+    }
+
+    // 4. Remover Membro (Substitui e expande o antigo leaveTeam)
+    @Transactional
+    public void gerenciarSaidaMembro(int timeId, int targetUserId, int requesterId) {
+        RegistroTimesModel requester = registroTimesJpa.findByIdTimesAndIdUsuarios(timeId, requesterId)
+                .orElseThrow(() -> new ResourceNotFoundException("Solicitante não encontrado no time."));
+
+        RegistroTimesModel target = registroTimesJpa.findByIdTimesAndIdUsuarios(timeId, targetUserId)
+                .orElseThrow(() -> new ResourceNotFoundException("Membro alvo não encontrado."));
+
+        // Caso 1: Sair do time (Auto-remoção)
+        if (requesterId == targetUserId) {
+            if ("Dono".equalsIgnoreCase(target.getCargo())) {
+                throw new IllegalStateException("O Dono não pode sair. Transfira a liderança ou delete o time.");
+            }
+            registroTimesJpa.delete(target);
+            return;
+        }
+
+        // Caso 2: Expulsão (Kick)
+        boolean isRequesterBoss = "Dono".equalsIgnoreCase(requester.getCargo()) || "ViceLider".equalsIgnoreCase(requester.getCargo());
+
+        if (!isRequesterBoss) {
+            throw new IllegalStateException("Você não tem permissão para remover membros.");
+        }
+
+        if ("Dono".equalsIgnoreCase(target.getCargo())) {
+            throw new IllegalStateException("Ninguém pode expulsar o Dono.");
+        }
+
+        // Opcional: Vice não expulsa Vice
+        if ("ViceLider".equalsIgnoreCase(requester.getCargo()) && "ViceLider".equalsIgnoreCase(target.getCargo())) {
+            throw new IllegalStateException("Vice-Líder não pode expulsar outro Vice-Líder.");
+        }
+
+        registroTimesJpa.delete(target);
+    }
+
+    // Mantido por compatibilidade, mas delegando para a nova lógica
+    @Transactional
+    public void leaveTeam(int teamId, int userId) {
+        gerenciarSaidaMembro(teamId, userId, userId);
+    }
 
     private void validar(TimesModel timesModel) {
         Times timesEntidade = new Times(
