@@ -1,8 +1,10 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.TimesApplication;
+import com.doback.E_rank.dto.AddMemberDTO;
 import com.doback.E_rank.dto.CreateTeamDTO;
 import com.doback.E_rank.dto.MyTeamDTO;
+import com.doback.E_rank.dto.TeamMemberDTO;
 import com.doback.E_rank.infrastructure.models.TimesModel;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +35,6 @@ public class TimesFacade {
         timesApplication.atualizarTimes(id, timesModel);
     }
 
-
     public void salvarTimes(CreateTeamDTO teamDTO, int creatorId) {
         timesApplication.criarTime(teamDTO, creatorId);
     }
@@ -41,5 +42,21 @@ public class TimesFacade {
     public List<MyTeamDTO> listarTimesDoUsuario(int userId) {
         return timesApplication.obterTimesDoUsuario(userId);
     }
-}
 
+    // --- NOVOS MÉTODOS RF08 ---
+    public List<TeamMemberDTO> listarMembros(int timeId) {
+        return timesApplication.listarMembros(timeId);
+    }
+
+    public void adicionarMembro(int timeId, int usuarioId) {
+        timesApplication.adicionarMembro(timeId, usuarioId);
+    }
+
+    public void alterarCargo(int timeId, int targetUserId, String novoCargo, int requesterId) {
+        timesApplication.alterarCargo(timeId, targetUserId, novoCargo, requesterId);
+    }
+
+    public void removerMembro(int timeId, int targetUserId, int requesterId) {
+        timesApplication.gerenciarSaidaMembro(timeId, targetUserId, requesterId);
+    }
+}
