@@ -1,99 +1,33 @@
+// E-rank/src/main/java/com/doback/E_rank/entity/Desafios.java
 package com.doback.E_rank.entity;
 
+import java.time.LocalDateTime;
+
 public class Desafios {
-
     private int id;
+    private int desafianteId; // Quem enviou
+    private int desafiadoId;  // Quem recebeu
+    private String status;    // P (Pendente), A (Aceito), R (Recusado), C (Concluido)
+    private LocalDateTime dataHora;
 
-    private String dataDesafio;
+    public Desafios() {}
 
-    private String resultado;
-
-    private char sts;
-
-    private int idAmizade;
-
-    private int idJogo;
-
-    public Desafios(String dataDesafio, String resultado, char sts, int idAmizade, int idJogo) {
-        this.dataDesafio = dataDesafio;
-        this.resultado = resultado;
-        this.sts = sts;
-        this.idAmizade =idAmizade;
-        this.idJogo = idJogo;
+    public Desafios(int desafianteId, int desafiadoId, String status, LocalDateTime dataHora) {
+        this.desafianteId = desafianteId;
+        this.desafiadoId = desafiadoId;
+        this.status = status;
+        this.dataHora = dataHora;
     }
 
-    public Desafios() {
-    }
-
-
-    public String getDataDesafio() {
-        return dataDesafio;
-    }
-
-    public void setDataDesafio(String dataDesafio) {
-        this.dataDesafio = dataDesafio;
-    }
-
-    public String getResultado() {
-        return resultado;
-    }
-
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
-    }
-
-    public char getSts() {
-        return sts;
-    }
-
-    public void setSts(char sts) {
-        this.sts = sts;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIdAmizade() {
-        return idAmizade;
-    }
-
-    public void setIdAmizade(int idAmizade) {
-        this.idAmizade = idAmizade;
-    }
-
-    public int getIdJogo() {
-        return idJogo;
-    }
-
-    public void setIdJogo(int idJogo) {
-        this.idJogo = idJogo;
-    }
-
-
-    public boolean validarDesafio() {
-        return dataDesafio != null && !dataDesafio.trim().isEmpty() &&
-                resultado != null && !resultado.trim().isEmpty() &&
-                (resultado == "Vitoria" || resultado == "Derrota") &&
-                (sts == 'A' || sts == 'I') &&
-                idAmizade > 0 &&
-                idJogo > 0;
-    }
-
-    public String getErrosValidacao() {
-        StringBuilder erros = new StringBuilder();
-
-        if (dataDesafio == null || dataDesafio.trim().isEmpty()) erros.append("Data do desafio não pode estar vazia. ");
-        if (resultado == null || resultado.trim().isEmpty()) erros.append("Resultado não pode ser vazio. ");
-        if (resultado != "Vitoria" && resultado != "Derrota") erros.append("Resultado deve ser 'Vitoria' ou 'Derrota'. ");
-        if (sts != 'A' && sts != 'I') erros.append("Status deve ser 'A' (ativo) ou 'I' (inativo). ");
-        if (idAmizade <= 0) erros.append("Id da amizade deve ser maior que zero. ");
-        if (idJogo <= 0) erros.append("Id do jogo deve ser maior que zero. ");
-
-        return erros.toString().trim();
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public int getDesafianteId() { return desafianteId; }
+    public void setDesafianteId(int desafianteId) { this.desafianteId = desafianteId; }
+    public int getDesafiadoId() { return desafiadoId; }
+    public void setDesafiadoId(int desafiadoId) { this.desafiadoId = desafiadoId; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    public LocalDateTime getDataHora() { return dataHora; }
+    public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
 }
