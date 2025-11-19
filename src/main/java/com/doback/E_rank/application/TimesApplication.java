@@ -1,3 +1,4 @@
+// E-rank/src/main/java/com/doback/E_rank/application/TimesApplication.java
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.dto.CreateTeamDTO;
@@ -47,9 +48,28 @@ public class TimesApplication {
         timesRepository.removeTimes(id);
     }
 
-    public void atualizarTimes(int id, TimesModel timesModel) {
-        validar(timesModel);
-        timesRepository.updateTimes(id, timesModel);
+    // --- ALTERAÇÃO AQUI: Lógica de Merge para Atualização Segura ---
+    public void atualizarTimes(int id, TimesModel dadosAtualizados) {
+        // 1. Busca o time existente
+        TimesModel timeExistente = timesRepository.searchByCode(id);
+        if (timeExistente == null) {
+            throw new ResourceNotFoundException("Time não encontrado com ID: " + id);
+        }
+
+        // 2. Atualiza apenas os campos permitidos (Nome e Descrição)
+        // Mantém o ID, Dono, Temporada e Status originais
+        if (dadosAtualizados.getNome() != null) {
+            timeExistente.setNome(dadosAtualizados.getNome());
+        }
+        if (dadosAtualizados.getDescricao() != null) {
+            timeExistente.setDescricao(dadosAtualizados.getDescricao());
+        }
+
+        // 3. Valida o objeto completo (agora com os dados mesclados)
+        validar(timeExistente);
+
+        // 4. Persiste
+        timesRepository.updateTimes(id, timeExistente);
     }
 
     @Transactional

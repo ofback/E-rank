@@ -1,9 +1,11 @@
+// E-rank/src/main/java/com/doback/E_rank/facade/TimesFacade.java
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.TimesApplication;
 import com.doback.E_rank.dto.CreateTeamDTO;
 import com.doback.E_rank.dto.MyTeamDTO;
 import com.doback.E_rank.dto.TeamMemberDTO;
+import com.doback.E_rank.dto.UpdateTeamDTO; // Import do novo DTO
 import com.doback.E_rank.infrastructure.models.TimesModel;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +31,12 @@ public class TimesFacade {
         timesApplication.excluirTime(id);
     }
 
-    public void atualizarTimes(int id, TimesModel timesModel) {
+    // --- ALTERAÇÃO AQUI: Recebe DTO e converte para Model parcial ---
+    public void atualizarTimes(int id, UpdateTeamDTO dto) {
+        TimesModel timesModel = new TimesModel();
+        timesModel.setNome(dto.getNome());
+        timesModel.setDescricao(dto.getDescricao());
+        // Note que não setamos idUsuario, temporada, etc.
         timesApplication.atualizarTimes(id, timesModel);
     }
 

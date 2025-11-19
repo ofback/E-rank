@@ -1,3 +1,4 @@
+// E-rank/src/main/java/com/doback/E_rank/controller/TimesController.java
 package com.doback.E_rank.controller;
 
 import com.doback.E_rank.application.TimesApplication;
@@ -54,10 +55,11 @@ public class TimesController {
         timesFacade.excluirTimes(id);
     }
 
+    // --- ALTERAÇÃO AQUI: Recebe UpdateTeamDTO ---
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void atualizarTimes(@PathVariable int id, @RequestBody TimesModel timesModel) {
-        timesFacade.atualizarTimes(id, timesModel);
+    public void atualizarTimes(@PathVariable int id, @RequestBody UpdateTeamDTO dto) {
+        timesFacade.atualizarTimes(id, dto);
     }
 
     // --- GESTÃO DE MEMBROS ---
