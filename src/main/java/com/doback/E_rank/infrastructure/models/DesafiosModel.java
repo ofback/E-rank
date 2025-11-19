@@ -1,103 +1,35 @@
+// E-rank/src/main/java/com/doback/E_rank/infrastructure/models/DesafiosModel.java
 package com.doback.E_rank.infrastructure.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import java.time.LocalDateTime;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Data
 @Entity
-@Table(name = "desafios")
+@Table(name = "TB_DESAFIOS")
 public class DesafiosModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "data_desafio")
-    private String dataDesafio;
+    @Column(name = "id_desafiante")
+    private int desafianteId;
+
+    @Column(name = "id_desafiado")
+    private int desafiadoId;
+
+    @Column(length = 1)
+    private String status; // Substitui 'sts'. Valores: P, A, R, C
+
+    @Column(name = "data_hora")
+    private LocalDateTime dataHora; // Substitui 'dataDesafio'
 
     @Column(name = "resultado")
-    private String resultado;
+    private String resultado; // Novo campo para armazenar o placar/resultado
 
-    @Column(name = "sts")
-    private char sts;
-
-    @OneToMany(mappedBy = "desafiosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<EstatisticasModel> estatisticasModels = new ArrayList<>();
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_amizade", referencedColumnName = "id", insertable = false, updatable = false)
-    private AmizadesModel amizadesModel;
-
-    @Column(name = "id_amizade")
-    private int idAmizade;
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_jogo", referencedColumnName = "id", insertable = false, updatable = false)
-    private JogosModel jogosModel;
-
-    @Column(name = "id_jogo")
-    private int idJogo;
-
-    public DesafiosModel(String dataDesafio, String resultado, char sts, AmizadesModel amizadesModel, JogosModel jogosModel) {
-        this.dataDesafio = dataDesafio;
-        this.resultado = resultado;
-        this.sts = sts;
-        this.amizadesModel = amizadesModel;
-        this.jogosModel = jogosModel;
-    }
-
-    public DesafiosModel() {
-    }
-
-
-    public String getDataDesafio() {
-        return dataDesafio;
-    }
-
-    public void setDataDesafio(String dataDesafio) {
-        this.dataDesafio = dataDesafio;
-    }
-
-    public String getResultado() {
-        return resultado;
-    }
-
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
-    }
-
-    public char getSts() {
-        return sts;
-    }
-
-    public void setSts(char sts) {
-        this.sts = sts;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIdAmizade() {
-        return idAmizade;
-    }
-
-    public void setIdAmizade(int idAmizade) {
-        this.idAmizade = idAmizade;
-    }
-
-    public int getIdJogo() {
-        return idJogo;
-    }
-
-    public void setIdJogo(int idJogo) {
-        this.idJogo = idJogo;
-    }
+    // Relacionamento (apenas leitura) para facilitar pegar o nome do desafiante
+    @ManyToOne
+    @JoinColumn(name = "id_desafiante", insertable = false, updatable = false)
+    private UsuariosModel desafiante;
 }
-
