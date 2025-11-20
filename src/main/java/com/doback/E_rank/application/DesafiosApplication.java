@@ -1,11 +1,14 @@
-// E-rank/src/main/java/com/doback/E_rank/application/DesafiosApplication.java
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.dto.CreateDesafioDTO;
 import com.doback.E_rank.dto.DesafioResponseDTO;
 import com.doback.E_rank.exceptions.ResourceNotFoundException;
+import com.doback.E_rank.infrastructure.models.AmizadesModel;
 import com.doback.E_rank.infrastructure.models.DesafiosModel;
+import com.doback.E_rank.infrastructure.models.JogosModel;
+import com.doback.E_rank.infrastructure.repository.jpa.AmizadesJpa;
 import com.doback.E_rank.infrastructure.repository.jpa.DesafiosJpa;
+import com.doback.E_rank.infrastructure.repository.jpa.JogosJpa;
 import com.doback.E_rank.infrastructure.repository.jpa.UsuariosJpa;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +23,14 @@ public class DesafiosApplication {
 
     private final DesafiosJpa desafiosJpa;
     private final UsuariosJpa usuariosJpa;
+    private final JogosJpa jogosJpa;
+    private final AmizadesJpa amizadesJpa;
 
-    public DesafiosApplication(DesafiosJpa desafiosJpa, UsuariosJpa usuariosJpa) {
+    public DesafiosApplication(DesafiosJpa desafiosJpa, UsuariosJpa usuariosJpa, JogosJpa jogosJpa, AmizadesJpa amizadesJpa) {
         this.desafiosJpa = desafiosJpa;
         this.usuariosJpa = usuariosJpa;
+        this.jogosJpa = jogosJpa;
+        this.amizadesJpa = amizadesJpa;
     }
 
     @Transactional
@@ -32,20 +39,37 @@ public class DesafiosApplication {
             throw new IllegalArgumentException("Você não pode desafiar a si mesmo.");
         }
 
-        if (!usuariosJpa.existsById(dto.getDesafiadoId())) {
-            throw new ResourceNotFoundException("Usuário desafiado não encontrado.");
-        }
+        JogosModel jogo = jogosJpa.findById(dto.getJogoId())
+                .orElseThrow(() -> new ResourceNotFoundException("Jogo não encontrado."));
+
+        AmizadesModel amizade = buscarAmizadeEntreUsuarios(desafianteId, dto.getDesafiadoId());
 
         DesafiosModel model = new DesafiosModel();
         model.setDesafianteId(desafianteId);
         model.setDesafiadoId(dto.getDesafiadoId());
-        model.setStatus("P"); // Pendente
+        model.setStatus("P");
         model.setDataHora(LocalDateTime.now());
+        model.setJogosModel(jogo);
+        model.setAmizadesModel(amizade);
 
         desafiosJpa.save(model);
     }
 
+    // CORREÇÃO: Lógica robusta para lidar com listas (duplicatas)
+    private AmizadesModel buscarAmizadeEntreUsuarios(int u1, int u2) {
+        // Tenta u1 -> u2
+        List<AmizadesModel> list1 = amizadesJpa.findByIdUsuario1AndIdUsuario2(u1, u2);
+        if (!list1.isEmpty()) return list1.get(0);
+
+        // Tenta u2 -> u1
+        List<AmizadesModel> list2 = amizadesJpa.findByIdUsuario1AndIdUsuario2(u2, u1);
+        if (!list2.isEmpty()) return list2.get(0);
+
+        throw new IllegalArgumentException("Vocês precisam ser amigos para criar um desafio.");
+    }
+
     public List<DesafioResponseDTO> listarPendentes(int userId) {
+        // Ajuste aqui se necessário para incluir o nome do Jogo no DTO
         return desafiosJpa.findByDesafiadoIdAndStatus(userId, "P").stream()
                 .map(d -> new DesafioResponseDTO(
                         d.getId(),

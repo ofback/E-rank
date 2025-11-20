@@ -78,7 +78,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void createGames() {
-        if (jogosRepository.estaVazio()) { // Usando seu método 'estaVazio'
+        if (jogosRepository.estaVazio()) {
             JogosModel cs = new JogosModel("Counter-Strike 2", "Jogo de tiro tático.", "FPS");
             JogosModel fortinite = new JogosModel("Fortinite", "Battle royale de construção", "Battle Royale");
             JogosModel valorant = new JogosModel("Valorant", "Jogo de tiro tático com heróis.", "FPS");

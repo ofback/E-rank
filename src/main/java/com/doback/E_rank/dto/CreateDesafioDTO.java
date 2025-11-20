@@ -7,5 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateDesafioDTO {
-    private int desafiadoId; // ID do amigo que será desafiado
+    private int desafiadoId;
+    private int jogoId; // NOVO: Qual jogo será disputado?
 }

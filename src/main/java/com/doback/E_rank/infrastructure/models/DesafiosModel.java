@@ -1,4 +1,3 @@
-// E-rank/src/main/java/com/doback/E_rank/infrastructure/models/DesafiosModel.java
 package com.doback.E_rank.infrastructure.models;
 
 import jakarta.persistence.*;
@@ -13,6 +12,8 @@ public class DesafiosModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    // --- CORREÇÃO 1: Tipos alterados de 'long' para 'int' ---
+    // Isso resolve o erro 'errno: 150' do MySQL
     @Column(name = "id_desafiante")
     private int desafianteId;
 
@@ -20,16 +21,26 @@ public class DesafiosModel {
     private int desafiadoId;
 
     @Column(length = 1)
-    private String status; // Substitui 'sts'. Valores: P, A, R, C
+    private String status;
 
     @Column(name = "data_hora")
-    private LocalDateTime dataHora; // Substitui 'dataDesafio'
+    private LocalDateTime dataHora;
 
     @Column(name = "resultado")
-    private String resultado; // Novo campo para armazenar o placar/resultado
+    private String resultado;
 
-    // Relacionamento (apenas leitura) para facilitar pegar o nome do desafiante
+    // --- CORREÇÃO 2: Relacionamentos recolocados ---
+    // Necessários para o mappedBy funcionar em AmizadesModel e JogosModel
+
     @ManyToOne
     @JoinColumn(name = "id_desafiante", insertable = false, updatable = false)
     private UsuariosModel desafiante;
+
+    @ManyToOne
+    @JoinColumn(name = "id_amizade")
+    private AmizadesModel amizadesModel;
+
+    @ManyToOne
+    @JoinColumn(name = "id_jogo")
+    private JogosModel jogosModel;
 }

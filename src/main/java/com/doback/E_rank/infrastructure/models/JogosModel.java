@@ -30,14 +30,17 @@ public class JogosModel {
     @OneToMany(mappedBy = "jogosModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<EstatisticasModel> estatisticasModels = new ArrayList<>();
 
+    // --- CONSTRUTOR NECESSÁRIO PARA O DATA INITIALIZER ---
     public JogosModel(String nome, String descricao, String genero) {
         this.nome = nome;
         this.descricao = descricao;
         this.genero = genero;
     }
 
+    // Construtor vazio obrigatório para o JPA
     public JogosModel() {}
 
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -70,4 +73,3 @@ public class JogosModel {
         this.id = id;
     }
 }
-
