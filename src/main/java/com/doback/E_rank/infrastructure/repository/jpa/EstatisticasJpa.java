@@ -6,9 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface EstatisticasJpa extends JpaRepository<EstatisticasModel, Integer> {
-    // Correção: findBy + JogosModel + Id + ...
-    List<EstatisticasModel> findByJogosModelIdAndStsProvacao(int jogoId, int stsProvacao);
 
-    // Correção: findBy + UsuariosModel + Id + ...
+    List<EstatisticasModel> findByJogosModelIdAndStsProvacao(int jogoId, int stsProvacao);
     List<EstatisticasModel> findByUsuariosModelIdAndStsProvacao(int usuarioId, int stsProvacao);
+
+    // --- NOVOS MÉTODOS PARA RF10 ---
+    // Verifica se ESTE usuário já registrou stats para ESTE desafio
+    boolean existsByDesafiosModelIdAndUsuariosModelId(int desafioId, int usuarioId);
+
+    // Conta quantos registros já existem para o desafio (0 ou 1)
+    long countByDesafiosModelId(int desafioId);
 }

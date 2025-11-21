@@ -6,10 +6,7 @@ import com.doback.E_rank.exceptions.ResourceNotFoundException;
 import com.doback.E_rank.infrastructure.models.AmizadesModel;
 import com.doback.E_rank.infrastructure.models.DesafiosModel;
 import com.doback.E_rank.infrastructure.models.JogosModel;
-import com.doback.E_rank.infrastructure.repository.jpa.AmizadesJpa;
-import com.doback.E_rank.infrastructure.repository.jpa.DesafiosJpa;
-import com.doback.E_rank.infrastructure.repository.jpa.JogosJpa;
-import com.doback.E_rank.infrastructure.repository.jpa.UsuariosJpa;
+import com.doback.E_rank.infrastructure.repository.jpa.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,12 +22,14 @@ public class DesafiosApplication {
     private final UsuariosJpa usuariosJpa;
     private final JogosJpa jogosJpa;
     private final AmizadesJpa amizadesJpa;
+    private final EstatisticasJpa estatisticasJpa;
 
-    public DesafiosApplication(DesafiosJpa desafiosJpa, UsuariosJpa usuariosJpa, JogosJpa jogosJpa, AmizadesJpa amizadesJpa) {
+    public DesafiosApplication(DesafiosJpa desafiosJpa, UsuariosJpa usuariosJpa, JogosJpa jogosJpa, AmizadesJpa amizadesJpa, EstatisticasJpa estatisticasJpa) {
         this.desafiosJpa = desafiosJpa;
         this.usuariosJpa = usuariosJpa;
         this.jogosJpa = jogosJpa;
         this.amizadesJpa = amizadesJpa;
+        this.estatisticasJpa = estatisticasJpa;
     }
 
     @Transactional
@@ -55,13 +54,10 @@ public class DesafiosApplication {
         desafiosJpa.save(model);
     }
 
-    // CORREÇÃO: Lógica robusta para lidar com listas (duplicatas)
     private AmizadesModel buscarAmizadeEntreUsuarios(int u1, int u2) {
-        // Tenta u1 -> u2
         List<AmizadesModel> list1 = amizadesJpa.findByIdUsuario1AndIdUsuario2(u1, u2);
         if (!list1.isEmpty()) return list1.get(0);
 
-        // Tenta u2 -> u1
         List<AmizadesModel> list2 = amizadesJpa.findByIdUsuario1AndIdUsuario2(u2, u1);
         if (!list2.isEmpty()) return list2.get(0);
 
@@ -69,7 +65,6 @@ public class DesafiosApplication {
     }
 
     public List<DesafioResponseDTO> listarPendentes(int userId) {
-        // Ajuste aqui se necessário para incluir o nome do Jogo no DTO
         return desafiosJpa.findByDesafiadoIdAndStatus(userId, "P").stream()
                 .map(d -> new DesafioResponseDTO(
                         d.getId(),
@@ -77,6 +72,34 @@ public class DesafiosApplication {
                         d.getStatus(),
                         d.getDataHora().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
                 ))
+                .collect(Collectors.toList());
+    }
+
+    // --- ALTERAÇÃO PRINCIPAL AQUI ---
+    @Transactional(readOnly = true) // Adicionado para garantir acesso aos dados
+    public List<DesafioResponseDTO> listarAceitos(int userId) {
+        return desafiosJpa.findAceitosPorUsuario(userId).stream()
+                .map(d -> {
+                    // Verifica se EU já registrei o resultado para este desafio
+                    boolean jaRegistrei = estatisticasJpa.existsByDesafiosModelIdAndUsuariosModelId(d.getId(), userId);
+
+                    // Define o status que o Frontend vai ver
+                    String statusVisual;
+                    if (jaRegistrei) {
+                        statusVisual = "AGUARDANDO"; // Eu já fiz minha parte, mostre msg de espera
+                    } else {
+                        statusVisual = "REGISTRAR";  // Eu ainda não fiz, mostre botão
+                    }
+
+                    return new DesafioResponseDTO(
+                            d.getId(),
+                            (d.getDesafianteId() == userId)
+                                    ? "Oponente (ID " + d.getDesafiadoId() + ")"
+                                    : d.getDesafiante().getNickname(),
+                            statusVisual, // Passamos o status calculado
+                            d.getDataHora().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                    );
+                })
                 .collect(Collectors.toList());
     }
 
@@ -95,17 +118,5 @@ public class DesafiosApplication {
 
         desafio.setStatus(aceitar ? "A" : "R");
         desafiosJpa.save(desafio);
-    }
-
-    public List<DesafioResponseDTO> listarAceitos(int userId) {
-        return desafiosJpa.findAceitosPorUsuario(userId).stream()
-                .map(d -> new DesafioResponseDTO(
-                        d.getId(),
-                        // Lógica para mostrar o nome do Oponente (se sou eu quem desafiou, mostro o outro)
-                        (d.getDesafianteId() == userId) ? "VS: Oponente (ID " + d.getDesafiadoId() + ")" : d.getDesafiante().getNickname(),
-                        d.getStatus(),
-                        d.getDataHora().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
-                ))
-                .collect(Collectors.toList());
     }
 }
