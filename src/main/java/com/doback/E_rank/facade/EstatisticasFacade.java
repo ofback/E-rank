@@ -1,6 +1,7 @@
 package com.doback.E_rank.facade;
 
 import com.doback.E_rank.application.EstatisticasApplication;
+import com.doback.E_rank.dto.CreateEstatisticaDTO;
 import com.doback.E_rank.infrastructure.models.EstatisticasModel;
 import org.springframework.stereotype.Component;
 
@@ -8,29 +9,15 @@ import java.util.List;
 
 @Component
 public class EstatisticasFacade {
-    private final EstatisticasApplication estatisticaApplication;
 
-    public EstatisticasFacade(EstatisticasApplication estatisticaApplication) {
-        this.estatisticaApplication = estatisticaApplication;
+    private final EstatisticasApplication estatisticasApplication;
+
+    public EstatisticasFacade(EstatisticasApplication estatisticasApplication) {
+        this.estatisticasApplication = estatisticasApplication;
     }
 
-    public List<EstatisticasModel> listarEstatisticas() {
-        return estatisticaApplication.obterTodas();
-    }
-
-    public EstatisticasModel buscarEstatisticaPorId(int id) {
-        return estatisticaApplication.obterPorId(id);
-    }
-
-    public void salvarEstatistica(EstatisticasModel estatistica) {
-        estatisticaApplication.criar(estatistica);
-    }
-
-    public void excluirEstatistica(int id) {
-        estatisticaApplication.excluir(id);
-    }
-
-    public void atualizarEstatistica(int id, EstatisticasModel estatistica) {
-        estatisticaApplication.atualizar(id, estatistica);
+    public void registrar(CreateEstatisticaDTO dto, int usuarioId) {
+        // --- CORREÇÃO AQUI: 'estatisticasApplication' (variável) e não 'EstatisticasApplication' (classe) ---
+        estatisticasApplication.registrarEstatistica(dto, usuarioId);
     }
 }

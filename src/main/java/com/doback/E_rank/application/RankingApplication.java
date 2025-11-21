@@ -34,7 +34,10 @@ public class RankingApplication {
         List<RankingDTO> ranking = new ArrayList<>();
 
         for (EstatisticasModel est : estatisticasAprovadas) {
-            UsuariosModel usuario = usuariosRepository.searchByCode((long) est.getIdUsuario());
+            // CORREÇÃO 1: Acessa o ID através do objeto relacionado (getUsuariosModel().getId())
+            // CORREÇÃO 2: Removido cast (long) pois o ID é int
+            UsuariosModel usuario = usuariosRepository.searchByCode(est.getUsuariosModel().getId());
+
             if (usuario != null) {
                 // Fórmula de pontuação simples para o MVP
                 int pontuacao = (est.getVitorias() * 10) + (est.getKills() * 2) - (est.getDerrotas() * 5);
@@ -66,7 +69,9 @@ public class RankingApplication {
      * Gera os dados para a "carta" de um jogador individual com estilo de jogo.
      */
     public PlayerCardDTO getPlayerCard(int userId) {
-        UsuariosModel usuario = usuariosRepository.searchByCode((long) userId);
+        // CORREÇÃO 3: Removido cast (long)
+        UsuariosModel usuario = usuariosRepository.searchByCode(userId);
+
         if (usuario == null) {
             throw new IllegalArgumentException("Usuário com ID " + userId + " não encontrado.");
         }
@@ -121,7 +126,9 @@ public class RankingApplication {
     }
 
     private ComparacaoDTO getDadosAgregadosDoUsuario(int usuarioId) {
-        UsuariosModel usuario = usuariosRepository.searchByCode((long) usuarioId);
+        // CORREÇÃO 4: Removido cast (long)
+        UsuariosModel usuario = usuariosRepository.searchByCode(usuarioId);
+
         if (usuario == null) {
             throw new IllegalArgumentException("Usuário com ID " + usuarioId + " não encontrado.");
         }
@@ -145,4 +152,3 @@ public class RankingApplication {
         return dto;
     }
 }
-

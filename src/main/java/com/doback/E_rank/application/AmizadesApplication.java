@@ -87,7 +87,7 @@ public class AmizadesApplication {
         List<AmizadesModel> amizades = amizadesJpa.findByIdUsuario1AndStatusOrIdUsuario2AndStatus(idUsuarioLogado, 'A', idUsuarioLogado, 'A');
         return amizades.stream().map(amizade -> {
             int amigoId = (amizade.getIdUsuario1() == idUsuarioLogado) ? amizade.getIdUsuario2() : amizade.getIdUsuario1();
-            UsuariosModel amigo = usuariosRepository.searchByCode((long) amigoId);
+            UsuariosModel amigo = usuariosRepository.searchByCode((int) amigoId);
             // Adicionado um null check para segurança
             if (amigo == null) return null;
             return new FriendDTO(amizade.getId(), amigoId, amigo.getNickname());
@@ -97,7 +97,7 @@ public class AmizadesApplication {
     public List<PendingRequestDTO> listarConvitesPendentes(int idUsuarioLogado) {
         List<AmizadesModel> convites = amizadesJpa.findByIdUsuario2AndStatus(idUsuarioLogado, 'P');
         return convites.stream().map(convite -> {
-            UsuariosModel remetente = usuariosRepository.searchByCode((long) convite.getIdUsuario1());
+            UsuariosModel remetente = usuariosRepository.searchByCode((int) convite.getIdUsuario1());
             // Adicionado um null check para segurança
             if (remetente == null) return null;
             return new PendingRequestDTO(convite.getId(), remetente.getId(), remetente.getNickname(), convite.getDataSolicitacao());

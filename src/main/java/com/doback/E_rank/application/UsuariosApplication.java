@@ -15,7 +15,6 @@ import java.util.Set;
 @Service
 public class UsuariosApplication {
 
-    // Novas dependências injetadas
     private final UsuariosRepository usuarioRepository;
     private final PapelRepository papelRepository;
     private final PasswordEncoder passwordEncoder;
@@ -30,12 +29,62 @@ public class UsuariosApplication {
         return usuarioRepository.buscar();
     }
 
-    public UsuariosModel obterUsuarioPorId(long id) {
+    public UsuariosModel obterUsuarioPorId(int id) {
         return usuarioRepository.searchByCode(id);
     }
 
     public void criarUsuario(UsuariosModel usuariosModel) {
-        // --- 1. SUA LÓGICA DE VALIDAÇÃO (INTACTA) ---
+        // 1. Validação das Regras de Negócio (Extraído para método privado)
+        validarRegrasDeNegocio(usuariosModel);
+
+        // 2. Lógica de Segurança
+        String senhaCriptografada = passwordEncoder.encode(usuariosModel.getSenha());
+        usuariosModel.setSenha(senhaCriptografada);
+
+        PapelModel userRole = papelRepository.findByNome("ROLE_USER");
+        if (userRole == null) {
+            throw new RuntimeException("Erro crítico: Papel 'ROLE_USER' não encontrado no banco de dados.");
+        }
+
+        usuariosModel.setPapeis(Set.of(userRole));
+        usuariosModel.setSts('A');
+
+        // 3. Persistência
+        usuarioRepository.addUsuarios(usuariosModel);
+    }
+
+    public void excluirUsuario(int id) {
+        usuarioRepository.removeUsuarios(id);
+    }
+
+    public void atualizarUsuarios(int id, UsuariosModel usuariosModel) {
+        // CORREÇÃO: Removido o cast (int) redundante
+        usuarioRepository.updateUsuarios(id, usuariosModel);
+    }
+
+    public UsuariosModel obterUsuarioPorEmail(String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o email: " + email));
+    }
+
+    public void atualizarPerfil(String email, UpdateProfileDTO profileDTO) {
+        UsuariosModel usuarioExistente = obterUsuarioPorEmail(email);
+
+        usuarioExistente.setNickname(profileDTO.getNickname());
+        usuarioExistente.setBiografia(profileDTO.getBiografia());
+
+        // CORREÇÃO: Removido o cast (int) redundante
+        usuarioRepository.updateUsuarios(usuarioExistente.getId(), usuarioExistente);
+    }
+
+    public List<UsuariosModel> obterUsuariosPorNickname(String nickname) {
+        return usuarioRepository.findByNickname(nickname);
+    }
+
+    // --- MÉTODOS PRIVADOS ---
+
+    private void validarRegrasDeNegocio(UsuariosModel usuariosModel) {
+        // Converte para a Entidade de Domínio para validar
         Usuarios usuarioEntidade = new Usuarios(
                 usuariosModel.getNome(),
                 usuariosModel.getCpf(),
@@ -60,56 +109,5 @@ public class UsuariosApplication {
         if (usuarioRepository.findByEmail(usuariosModel.getEmail()).isPresent()) {
             throw new IllegalStateException("Erro: Email já cadastrado.");
         }
-
-        // --- 2. NOSSA LÓGICA DE SEGURANÇA (APLICADA APÓS VALIDAÇÕES) ---
-
-        // Criptografa a senha do usuário
-        String senhaCriptografada = passwordEncoder.encode(usuariosModel.getSenha());
-        usuariosModel.setSenha(senhaCriptografada);
-
-        // Busca o papel padrão 'ROLE_USER'
-        PapelModel userRole = papelRepository.findByNome("ROLE_USER");
-        if (userRole == null) {
-            throw new RuntimeException("Erro crítico: Papel 'ROLE_USER' não encontrado no banco de dados.");
-        }
-
-        // Associa o papel ao usuário
-        usuariosModel.setPapeis(Set.of(userRole));
-
-        // Define o status do usuário como 'Ativo'
-        usuariosModel.setSts('A');
-
-        // --- 3. PERSISTÊNCIA ---
-        // Salva o objeto 'usuariosModel' que agora contém a senha criptografada e o papel.
-        usuarioRepository.addUsuarios(usuariosModel);
-    }
-
-    public void excluirUsuario(long id) {
-        usuarioRepository.removeUsuarios(id);
-    }
-
-    public void atualizarUsuarios(int id, UsuariosModel usuariosModel) {
-        // Lembre-se que se a atualização permitir trocar a senha,
-        // a nova senha também precisará ser criptografada aqui.
-        usuarioRepository.updateUsuarios((long) id, usuariosModel);
-    }
-
-    public UsuariosModel obterUsuarioPorEmail(String email) {
-        return usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o email: " + email));
-    }
-    public void atualizarPerfil(String email, UpdateProfileDTO profileDTO) {
-        UsuariosModel usuarioExistente = obterUsuarioPorEmail(email); // Reutiliza o método que já temos
-
-        // Atualiza apenas os campos permitidos
-        usuarioExistente.setNickname(profileDTO.getNickname());
-        usuarioExistente.setBiografia(profileDTO.getBiografia());
-
-        // Salva as alterações
-        usuarioRepository.updateUsuarios( (long) usuarioExistente.getId(), usuarioExistente);
-    }
-
-    public List<UsuariosModel> obterUsuariosPorNickname(String nickname) {
-        return usuarioRepository.findByNickname(nickname);
     }
 }

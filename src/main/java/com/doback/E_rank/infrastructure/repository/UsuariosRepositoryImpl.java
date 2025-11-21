@@ -19,8 +19,8 @@ public class UsuariosRepositoryImpl implements UsuariosRepository {
     }
 
     @Override
-    public UsuariosModel searchByCode(Long id) {
-        return this.usuariosJpa.findById(id).orElse(null);  // Modificado para Long
+    public UsuariosModel searchByCode(int id) {
+        return this.usuariosJpa.findById(id).orElse(null);
     }
 
     @Override
@@ -34,12 +34,12 @@ public class UsuariosRepositoryImpl implements UsuariosRepository {
     }
 
     @Override
-    public void removeUsuarios(Long id) {
-        this.usuariosJpa.deleteById(id);  // Modificado para Long
+    public void removeUsuarios(int id) {
+        this.usuariosJpa.deleteById(id);
     }
 
     @Override
-    public void updateUsuarios(Long id, UsuariosModel usuariosModel) {
+    public void updateUsuarios(int id, UsuariosModel usuariosModel) {
         UsuariosModel usuariosModelInDb = this.usuariosJpa.findById(id).orElse(null);
         if (usuariosModelInDb != null) {
             usuariosModelInDb.setSts(usuariosModel.getSts());
