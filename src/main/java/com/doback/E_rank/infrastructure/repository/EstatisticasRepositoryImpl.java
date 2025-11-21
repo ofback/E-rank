@@ -1,4 +1,3 @@
-// E-rank/src/main/java/com/doback/E_rank/infrastructure/repository/EstatisticasRepositoryImpl.java
 package com.doback.E_rank.infrastructure.repository;
 
 import com.doback.E_rank.infrastructure.models.EstatisticasModel;
@@ -21,6 +20,7 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
     @Override
     public EstatisticasModel searchByCode(int id) {
+        // .get() lança exceção se não achar. .orElse(null) é mais seguro se preferir tratar null depois.
         return this.estatisticasJpa.findById(id).orElse(null);
     }
 
@@ -41,7 +41,6 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
     @Override
     public void updateEstatisticas(int id, EstatisticasModel novaEstatistica) {
-        // Uso de orElse(null) evita exceção imediata se não achar, ou pode usar orElseThrow
         EstatisticasModel estatisticaInDb = this.estatisticasJpa.findById(id).orElse(null);
 
         if (estatisticaInDb != null) {
@@ -65,13 +64,13 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
     @Override
     public List<EstatisticasModel> findAprovadasPorJogo(int jogoId) {
-        // Chama o novo nome do método corrigido na JPA
-        return estatisticasJpa.findByJogosModelIdAndStsProvacao(jogoId, 1);
+        // CHAMADA CORRIGIDA
+        return estatisticasJpa.findByJogosModelIdAndStsProvacao(jogoId, 1); // 1 = Aprovado
     }
 
     @Override
     public List<EstatisticasModel> findAprovadasPorUsuario(int usuarioId) {
-        // Chama o novo nome do método corrigido na JPA
-        return estatisticasJpa.findByUsuariosModelIdAndStsProvacao(usuarioId, 1);
+        // CHAMADA CORRIGIDA
+        return estatisticasJpa.findByUsuariosModelIdAndStsProvacao(usuarioId, 1); // 1 = Aprovado
     }
 }

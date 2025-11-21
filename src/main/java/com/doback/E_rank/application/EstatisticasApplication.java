@@ -26,39 +26,48 @@ public class EstatisticasApplication {
 
     @Transactional
     public void registrarEstatistica(CreateEstatisticaDTO dto, int usuarioId) {
-        // 1. Validar Desafio
+        // 1. Busca o desafio
         DesafiosModel desafio = desafiosJpa.findById(dto.getDesafioId())
                 .orElseThrow(() -> new ResourceNotFoundException("Desafio não encontrado."));
 
-        if (!"A".equals(desafio.getStatus())) {
-            throw new IllegalStateException("O desafio não está ativo (Status deve ser 'A').");
+        // 2. Validação de Status (Aceita 'A' ou 'W')
+        if (!"A".equals(desafio.getStatus()) && !"W".equals(desafio.getStatus())) {
+            throw new IllegalStateException("O desafio não está ativo para registro.");
         }
 
-        if (desafio.getDesafianteId() != usuarioId && desafio.getDesafiadoId() != usuarioId) {
-            throw new IllegalArgumentException("Você não faz parte deste desafio.");
+        // 3. Verifica se este usuário JÁ registrou
+        if (estatisticasJpa.existsByDesafiosModelIdAndUsuariosModelId(desafio.getId(), usuarioId)) {
+            throw new IllegalArgumentException("Você já registrou o resultado para esta partida.");
         }
 
+        // 4. Salva a estatística do usuário
         UsuariosModel usuario = usuariosJpa.findById(usuarioId).orElseThrow();
-
-        // 2. Salvar Estatísticas
         EstatisticasModel stats = new EstatisticasModel();
         stats.setUsuariosModel(usuario);
         stats.setJogosModel(desafio.getJogosModel());
         stats.setDesafiosModel(desafio);
 
-        // Preenche dados do DTO
         stats.setPontos(dto.getPontos());
         stats.setResultadoVitoria(dto.isVitoria());
         stats.setKills(dto.getKills());
         stats.setAssistencias(dto.getAssistencias());
         stats.setHeadshots(dto.getHeadshots());
 
-        // --- CORREÇÃO AQUI: 'estatisticasJpa' (variável) e não 'EstatisticasJpa' (classe) ---
         estatisticasJpa.save(stats);
 
-        // 3. Atualizar Desafio para 'C' (Concluído/Aguardando Validação)
-        desafio.setStatus("C");
-        desafio.setResultado(dto.isVitoria() ? "Vitória declarada por " + usuario.getNickname() : "Derrota declarada por " + usuario.getNickname());
+        // 5. Lógica de Status do Desafio
+        long registrosExistentes = estatisticasJpa.countByDesafiosModelId(desafio.getId());
+
+        if (registrosExistentes >= 2) {
+            // Ambos registraram -> Finaliza ('C')
+            desafio.setStatus("C");
+            desafio.setResultado("Concluído por ambos");
+        } else {
+            // Apenas um registrou -> Aguarda o outro ('W')
+            desafio.setStatus("W");
+            desafio.setResultado("Aguardando confirmação do oponente");
+        }
+
         desafiosJpa.save(desafio);
     }
 }
