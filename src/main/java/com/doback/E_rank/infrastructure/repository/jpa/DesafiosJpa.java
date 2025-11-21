@@ -3,9 +3,15 @@ package com.doback.E_rank.infrastructure.repository.jpa;
 
 import com.doback.E_rank.infrastructure.models.DesafiosModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
 public interface DesafiosJpa extends JpaRepository<DesafiosModel, Integer> {
     // Busca desafios pendentes recebidos pelo usuário
     List<DesafiosModel> findByDesafiadoIdAndStatus(int desafiadoId, String status);
+
+    @Query("SELECT d FROM DesafiosModel d WHERE (d.desafianteId = :userId OR d.desafiadoId = :userId) AND d.status = 'A'")
+    List<DesafiosModel> findAceitosPorUsuario(@Param("userId") int userId);
 }

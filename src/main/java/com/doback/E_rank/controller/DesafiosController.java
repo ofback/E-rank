@@ -36,14 +36,18 @@ public class DesafiosController {
         return desafiosFacade.listarPendentes(getUsuarioLogadoId());
     }
 
+    // --- NOVO ENDPOINT RF09 ---
+    @GetMapping("/aceitos")
+    public List<DesafioResponseDTO> listarAceitos() {
+        return desafiosFacade.listarAceitos(getUsuarioLogadoId());
+    }
+
     @PatchMapping("/{id}/responder")
     public ResponseEntity<Void> responder(@PathVariable int id, @RequestBody Map<String, Boolean> body) {
-        // CORREÇÃO: Verificação de nulidade para evitar erro 500
         Boolean aceitar = body.get("aceitar");
         if (aceitar == null) {
             throw new IllegalArgumentException("O campo 'aceitar' é obrigatório.");
         }
-
         desafiosFacade.responder(id, getUsuarioLogadoId(), aceitar);
         return ResponseEntity.ok().build();
     }
@@ -51,7 +55,6 @@ public class DesafiosController {
     private int getUsuarioLogadoId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
-        // Garanta que o UsuariosFacade tenha o método buscarUsuarioPorEmail
         return usuarioFacade.buscarUsuarioPorEmail(email).getId();
     }
 }

@@ -27,4 +27,7 @@ public class DesafiosFacade {
     public void responder(int desafioId, int userId, boolean aceitar) {
         desafiosApplication.responderDesafio(desafioId, userId, aceitar);
     }
+    public List<DesafioResponseDTO> listarAceitos(int userId) {
+        return desafiosApplication.listarAceitos(userId);
+    }
 }

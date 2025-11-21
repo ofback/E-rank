@@ -1,46 +1,31 @@
 package com.doback.E_rank.controller;
 
-import com.doback.E_rank.infrastructure.models.EstatisticasModel;
+import com.doback.E_rank.dto.CreateEstatisticaDTO;
 import com.doback.E_rank.facade.EstatisticasFacade;
+import com.doback.E_rank.facade.UsuariosFacade;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/estatisticas")
 public class EstatisticasController {
-    private final EstatisticasFacade estatisticaFacade;
 
-    public EstatisticasController(EstatisticasFacade estatisticaFacade) {
-        this.estatisticaFacade = estatisticaFacade;
-    }
+    private final EstatisticasFacade estatisticasFacade;
+    private final UsuariosFacade usuarioFacade;
 
-    @GetMapping
-    public List<EstatisticasModel> listarEstatisticas() {
-        return estatisticaFacade.listarEstatisticas();
-    }
-
-    @GetMapping("/{id}")
-    public EstatisticasModel obterEstatistica(@PathVariable int id) {
-        return estatisticaFacade.buscarEstatisticaPorId(id);
+    public EstatisticasController(EstatisticasFacade estatisticasFacade, UsuariosFacade usuarioFacade) {
+        this.estatisticasFacade = estatisticasFacade;
+        this.usuarioFacade = usuarioFacade;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void criarEstatistica(@RequestBody EstatisticasModel estatistica) {
-        estatisticaFacade.salvarEstatistica(estatistica);
-    }
+    public void registrar(@RequestBody CreateEstatisticaDTO dto) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int userId = usuarioFacade.buscarUsuarioPorEmail(auth.getName()).getId();
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirEstatistica(@PathVariable int id) {
-        estatisticaFacade.excluirEstatistica(id);
-    }
-
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void atualizarEstatistica(@PathVariable int id, @RequestBody EstatisticasModel estatistica) {
-        estatisticaFacade.atualizarEstatistica(id, estatistica);
+        estatisticasFacade.registrar(dto, userId);
     }
 }

@@ -1,3 +1,4 @@
+// E-rank/src/main/java/com/doback/E_rank/infrastructure/repository/EstatisticasRepositoryImpl.java
 package com.doback.E_rank.infrastructure.repository;
 
 import com.doback.E_rank.infrastructure.models.EstatisticasModel;
@@ -20,7 +21,7 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
     @Override
     public EstatisticasModel searchByCode(int id) {
-        return this.estatisticasJpa.findById(id).get();
+        return this.estatisticasJpa.findById(id).orElse(null);
     }
 
     @Override
@@ -40,18 +41,21 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
     @Override
     public void updateEstatisticas(int id, EstatisticasModel novaEstatistica) {
-        EstatisticasModel estatisticaInDb = this.estatisticasJpa.findById(id).get();
+        // Uso de orElse(null) evita exceção imediata se não achar, ou pode usar orElseThrow
+        EstatisticasModel estatisticaInDb = this.estatisticasJpa.findById(id).orElse(null);
 
-        estatisticaInDb.setKills(novaEstatistica.getKills());
-        estatisticaInDb.setAssistencias(novaEstatistica.getAssistencias());
-        estatisticaInDb.setQtdPartidas(novaEstatistica.getQtdPartidas());
-        estatisticaInDb.setStsProvacao(novaEstatistica.getStsProvacao());
-        estatisticaInDb.setVitorias(novaEstatistica.getVitorias());
-        estatisticaInDb.setDerrotas(novaEstatistica.getDerrotas());
-        estatisticaInDb.setRecordKills(novaEstatistica.getRecordKills());
-        estatisticaInDb.setHeadshots(novaEstatistica.getHeadshots());
+        if (estatisticaInDb != null) {
+            estatisticaInDb.setKills(novaEstatistica.getKills());
+            estatisticaInDb.setAssistencias(novaEstatistica.getAssistencias());
+            estatisticaInDb.setQtdPartidas(novaEstatistica.getQtdPartidas());
+            estatisticaInDb.setStsProvacao(novaEstatistica.getStsProvacao());
+            estatisticaInDb.setVitorias(novaEstatistica.getVitorias());
+            estatisticaInDb.setDerrotas(novaEstatistica.getDerrotas());
+            estatisticaInDb.setRecordKills(novaEstatistica.getRecordKills());
+            estatisticaInDb.setHeadshots(novaEstatistica.getHeadshots());
 
-        this.estatisticasJpa.save(estatisticaInDb);
+            this.estatisticasJpa.save(estatisticaInDb);
+        }
     }
 
     @Override
@@ -61,11 +65,13 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
     @Override
     public List<EstatisticasModel> findAprovadasPorJogo(int jogoId) {
-        return estatisticasJpa.findByIdJogoAndStsProvacao(jogoId, 1); // 1 = Aprovado
+        // Chama o novo nome do método corrigido na JPA
+        return estatisticasJpa.findByJogosModelIdAndStsProvacao(jogoId, 1);
     }
 
     @Override
     public List<EstatisticasModel> findAprovadasPorUsuario(int usuarioId) {
-        return estatisticasJpa.findByIdUsuarioAndStsProvacao(usuarioId, 1); // 1 = Aprovado
+        // Chama o novo nome do método corrigido na JPA
+        return estatisticasJpa.findByUsuariosModelIdAndStsProvacao(usuarioId, 1);
     }
 }

@@ -96,4 +96,16 @@ public class DesafiosApplication {
         desafio.setStatus(aceitar ? "A" : "R");
         desafiosJpa.save(desafio);
     }
+
+    public List<DesafioResponseDTO> listarAceitos(int userId) {
+        return desafiosJpa.findAceitosPorUsuario(userId).stream()
+                .map(d -> new DesafioResponseDTO(
+                        d.getId(),
+                        // Lógica para mostrar o nome do Oponente (se sou eu quem desafiou, mostro o outro)
+                        (d.getDesafianteId() == userId) ? "VS: Oponente (ID " + d.getDesafiadoId() + ")" : d.getDesafiante().getNickname(),
+                        d.getStatus(),
+                        d.getDataHora().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                ))
+                .collect(Collectors.toList());
+    }
 }
