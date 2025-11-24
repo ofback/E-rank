@@ -5,7 +5,7 @@ import com.doback.E_rank.dto.PlayerCardDTO;
 import com.doback.E_rank.dto.RankingDTO;
 import com.doback.E_rank.infrastructure.models.EstatisticasModel;
 import com.doback.E_rank.infrastructure.models.UsuariosModel;
-import com.doback.E_rank.infrastructure.repository.jpa.EstatisticasJpa; // Usando a interface JPA direta para Page
+import com.doback.E_rank.infrastructure.repository.jpa.EstatisticasJpa;
 import com.doback.E_rank.interfaces.UsuariosRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,7 +35,6 @@ public class RankingApplication {
         Pageable pageable = PageRequest.of(page, size);
         Page<RankingDTO> pagina = estatisticasRepository.buscarRankingGlobal(pageable);
 
-        // Calcula a posição correta baseada na página (Ex: Pagina 1, size 20 -> começa em 21)
         int startRank = (int) pageable.getOffset() + 1;
         int index = 0;
         for (RankingDTO dto : pagina.getContent()) {
@@ -46,7 +45,6 @@ public class RankingApplication {
     }
 
     public List<RankingDTO> getRankingPorJogo(int jogoId) {
-        // Nota: O método findByJogosModelIdAndStsProvacao existe na Interface JPA injetada
         List<EstatisticasModel> estatisticasAprovadas = estatisticasRepository.findByJogosModelIdAndStsProvacao(jogoId, 1);
 
         List<RankingDTO> ranking = new ArrayList<>();
@@ -55,7 +53,6 @@ public class RankingApplication {
             UsuariosModel usuario = usuariosRepository.searchByCode(est.getUsuariosModel().getId());
 
             if (usuario != null) {
-                // Casting para long conforme novo DTO
                 long pontuacao = (est.getVitorias() * 10L) + (est.getKills() * 2L) - (est.getDerrotas() * 5L);
                 ranking.add(new RankingDTO(0, usuario.getNickname(), pontuacao, (long)est.getVitorias(), (long)est.getKills()));
             }
@@ -83,9 +80,12 @@ public class RankingApplication {
             throw new IllegalArgumentException("Usuário com ID " + userId + " não encontrado.");
         }
 
-        // Ajuste: usando JPA direto ou precisaria expor no repositorio de dominio
         List<EstatisticasModel> estatisticas = estatisticasRepository.findByUsuariosModelIdAndStsProvacao(userId, 1);
-        PlayerCardDTO card = new PlayerCardDTO(usuario.getNickname(), usuario.getNome());
+
+        // Garante que usa o construtor ou setters corretamente
+        PlayerCardDTO card = new PlayerCardDTO();
+        card.setNickname(usuario.getNickname());
+        card.setNome(usuario.getNome());
 
         long totalPartidas = estatisticas.stream().mapToLong(EstatisticasModel::getQtdPartidas).sum();
         long totalVitorias = estatisticas.stream().mapToLong(EstatisticasModel::getVitorias).sum();
@@ -94,6 +94,11 @@ public class RankingApplication {
         long totalAssistencias = estatisticas.stream().mapToLong(EstatisticasModel::getAssistencias).sum();
         long totalHeadshots = estatisticas.stream().mapToLong(EstatisticasModel::getHeadshots).sum();
         long totalDeaths = totalDerrotas == 0 ? 1 : totalDerrotas;
+
+        long recordKills = estatisticas.stream()
+                .mapToLong(EstatisticasModel::getKills)
+                .max()
+                .orElse(0);
 
         double kdRatio = (double) totalKills / totalDeaths;
         double vitoriaRatio = totalPartidas > 0 ? ((double) totalVitorias / totalPartidas) * 100 : 0;
@@ -120,6 +125,7 @@ public class RankingApplication {
         card.setKills(totalKills);
         card.setAssistencias(totalAssistencias);
         card.setHeadshots(totalHeadshots);
+        card.setRecordKills(recordKills);
         card.setKdRatio(Math.round(kdRatio * 100.0) / 100.0);
         card.setPartidasJogadas(totalPartidas);
         card.setOverallRating(overallRating);
