@@ -5,8 +5,11 @@ import com.doback.E_rank.dto.PlayerCardDTO;
 import com.doback.E_rank.dto.RankingDTO;
 import com.doback.E_rank.infrastructure.models.EstatisticasModel;
 import com.doback.E_rank.infrastructure.models.UsuariosModel;
-import com.doback.E_rank.interfaces.EstatisticasRepository;
+import com.doback.E_rank.infrastructure.repository.jpa.EstatisticasJpa; // Usando a interface JPA direta para Page
 import com.doback.E_rank.interfaces.UsuariosRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,38 +20,49 @@ import java.util.stream.Collectors;
 @Service
 public class RankingApplication {
 
-    private final EstatisticasRepository estatisticasRepository;
+    private final EstatisticasJpa estatisticasRepository;
     private final UsuariosRepository usuariosRepository;
 
-    public RankingApplication(EstatisticasRepository estatisticasRepository, UsuariosRepository usuariosRepository) {
+    public RankingApplication(EstatisticasJpa estatisticasRepository, UsuariosRepository usuariosRepository) {
         this.estatisticasRepository = estatisticasRepository;
         this.usuariosRepository = usuariosRepository;
     }
 
     /**
-     * Lógica para o RF16: Gera um ranking para um jogo específico.
+     * RF16: Ranking Global Paginado
      */
+    public Page<RankingDTO> getRankingGlobal(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<RankingDTO> pagina = estatisticasRepository.buscarRankingGlobal(pageable);
+
+        // Calcula a posição correta baseada na página (Ex: Pagina 1, size 20 -> começa em 21)
+        int startRank = (int) pageable.getOffset() + 1;
+        int index = 0;
+        for (RankingDTO dto : pagina.getContent()) {
+            dto.setPosicao(startRank + index);
+            index++;
+        }
+        return pagina;
+    }
+
     public List<RankingDTO> getRankingPorJogo(int jogoId) {
-        List<EstatisticasModel> estatisticasAprovadas = estatisticasRepository.findAprovadasPorJogo(jogoId);
+        // Nota: O método findByJogosModelIdAndStsProvacao existe na Interface JPA injetada
+        List<EstatisticasModel> estatisticasAprovadas = estatisticasRepository.findByJogosModelIdAndStsProvacao(jogoId, 1);
 
         List<RankingDTO> ranking = new ArrayList<>();
 
         for (EstatisticasModel est : estatisticasAprovadas) {
-            // CORREÇÃO 1: Acessa o ID através do objeto relacionado (getUsuariosModel().getId())
-            // CORREÇÃO 2: Removido cast (long) pois o ID é int
             UsuariosModel usuario = usuariosRepository.searchByCode(est.getUsuariosModel().getId());
 
             if (usuario != null) {
-                // Fórmula de pontuação simples para o MVP
-                int pontuacao = (est.getVitorias() * 10) + (est.getKills() * 2) - (est.getDerrotas() * 5);
-                ranking.add(new RankingDTO(0, usuario.getNickname(), pontuacao, est.getVitorias(), est.getKills()));
+                // Casting para long conforme novo DTO
+                long pontuacao = (est.getVitorias() * 10L) + (est.getKills() * 2L) - (est.getDerrotas() * 5L);
+                ranking.add(new RankingDTO(0, usuario.getNickname(), pontuacao, (long)est.getVitorias(), (long)est.getKills()));
             }
         }
 
-        // Ordena o ranking pela pontuação, do maior para o menor
-        ranking.sort(Comparator.comparingInt(RankingDTO::getPontuacao).reversed());
+        ranking.sort(Comparator.comparingLong(RankingDTO::getPontuacao).reversed());
 
-        // Atribui a posição correta após a ordenação
         for (int i = 0; i < ranking.size(); i++) {
             ranking.get(i).setPosicao(i + 1);
         }
@@ -56,46 +70,37 @@ public class RankingApplication {
         return ranking;
     }
 
-    /**
-     * Lógica para o RF17: Compara o desempenho de múltiplos jogadores.
-     */
     public List<ComparacaoDTO> compararJogadores(List<Integer> userIds) {
         return userIds.stream()
                 .map(this::getDadosAgregadosDoUsuario)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Gera os dados para a "carta" de um jogador individual com estilo de jogo.
-     */
     public PlayerCardDTO getPlayerCard(int userId) {
-        // CORREÇÃO 3: Removido cast (long)
         UsuariosModel usuario = usuariosRepository.searchByCode(userId);
 
         if (usuario == null) {
             throw new IllegalArgumentException("Usuário com ID " + userId + " não encontrado.");
         }
 
-        List<EstatisticasModel> estatisticas = estatisticasRepository.findAprovadasPorUsuario(userId);
+        // Ajuste: usando JPA direto ou precisaria expor no repositorio de dominio
+        List<EstatisticasModel> estatisticas = estatisticasRepository.findByUsuariosModelIdAndStsProvacao(userId, 1);
         PlayerCardDTO card = new PlayerCardDTO(usuario.getNickname(), usuario.getNome());
 
-        // 1. Agrega todos os dados do jogador
         long totalPartidas = estatisticas.stream().mapToLong(EstatisticasModel::getQtdPartidas).sum();
         long totalVitorias = estatisticas.stream().mapToLong(EstatisticasModel::getVitorias).sum();
         long totalDerrotas = estatisticas.stream().mapToLong(EstatisticasModel::getDerrotas).sum();
         long totalKills = estatisticas.stream().mapToLong(EstatisticasModel::getKills).sum();
         long totalAssistencias = estatisticas.stream().mapToLong(EstatisticasModel::getAssistencias).sum();
         long totalHeadshots = estatisticas.stream().mapToLong(EstatisticasModel::getHeadshots).sum();
-        long totalDeaths = totalDerrotas == 0 ? 1 : totalDerrotas; // Evita divisão por zero no K/D
+        long totalDeaths = totalDerrotas == 0 ? 1 : totalDerrotas;
 
-        // 2. Calcula as métricas de performance
         double kdRatio = (double) totalKills / totalDeaths;
         double vitoriaRatio = totalPartidas > 0 ? ((double) totalVitorias / totalPartidas) * 100 : 0;
         double headshotRatio = totalKills > 0 ? ((double) totalHeadshots / totalKills) * 100 : 0;
         double killsPorPartida = totalPartidas > 0 ? (double) totalKills / totalPartidas : 0;
         double assistenciasPorPartida = totalPartidas > 0 ? (double) totalAssistencias / totalPartidas : 0;
 
-        // 3. Define o Estilo de Jogo com base nas métricas
         String estiloDeJogo;
         if (headshotRatio > 40 && killsPorPartida > 15) {
             estiloDeJogo = "Aim God";
@@ -107,11 +112,9 @@ public class RankingApplication {
             estiloDeJogo = "Versátil";
         }
 
-        // 4. Calcula o Overall Rating (0-99) com a nova fórmula
         double overallScore = (vitoriaRatio * 0.5) + (kdRatio * 10) + (headshotRatio * 0.15) + (killsPorPartida * 1.5);
-        int overallRating = Math.max(40, Math.min(99, (int) overallScore)); // Garante que o rating fique entre 40 e 99
+        int overallRating = Math.max(40, Math.min(99, (int) overallScore));
 
-        // 5. Preenche o DTO com todos os dados
         card.setVitorias(totalVitorias);
         card.setDerrotas(totalDerrotas);
         card.setKills(totalKills);
@@ -126,14 +129,13 @@ public class RankingApplication {
     }
 
     private ComparacaoDTO getDadosAgregadosDoUsuario(int usuarioId) {
-        // CORREÇÃO 4: Removido cast (long)
         UsuariosModel usuario = usuariosRepository.searchByCode(usuarioId);
 
         if (usuario == null) {
             throw new IllegalArgumentException("Usuário com ID " + usuarioId + " não encontrado.");
         }
 
-        List<EstatisticasModel> estatisticas = estatisticasRepository.findAprovadasPorUsuario(usuarioId);
+        List<EstatisticasModel> estatisticas = estatisticasRepository.findByUsuariosModelIdAndStsProvacao(usuarioId, 1);
         ComparacaoDTO dto = new ComparacaoDTO(usuario.getNickname());
 
         dto.setTotalPartidas(estatisticas.stream().mapToLong(EstatisticasModel::getQtdPartidas).sum());
@@ -144,7 +146,7 @@ public class RankingApplication {
 
         long totalDeaths = dto.getTotalDerrotas();
         if (totalDeaths == 0) {
-            dto.setKdRatio(dto.getTotalKills());
+            dto.setKdRatio((double) dto.getTotalKills());
         } else {
             dto.setKdRatio((double) dto.getTotalKills() / totalDeaths);
         }

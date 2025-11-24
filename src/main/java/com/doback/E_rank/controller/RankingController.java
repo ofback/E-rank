@@ -4,6 +4,8 @@ import com.doback.E_rank.dto.ComparacaoDTO;
 import com.doback.E_rank.dto.PlayerCardDTO;
 import com.doback.E_rank.dto.RankingDTO;
 import com.doback.E_rank.facade.RankingFacade;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,13 @@ public class RankingController {
 
     public RankingController(RankingFacade rankingFacade) {
         this.rankingFacade = rankingFacade;
+    }
+
+    @GetMapping("/global")
+    public ResponseEntity<Page<RankingDTO>> getRankingGlobal(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        return ResponseEntity.ok(rankingFacade.getRankingGlobal(page, size));
     }
 
     @GetMapping("/jogo/{jogoId}")
@@ -36,4 +45,3 @@ public class RankingController {
         return rankingFacade.getPlayerCard(userId);
     }
 }
-
