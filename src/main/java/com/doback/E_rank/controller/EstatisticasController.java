@@ -1,9 +1,10 @@
 package com.doback.E_rank.controller;
 
 import com.doback.E_rank.dto.CreateEstatisticaDTO;
+import com.doback.E_rank.dto.EstatisticasConsolidadasDTO;
 import com.doback.E_rank.dto.PlayerCardDTO;
 import com.doback.E_rank.facade.EstatisticasFacade;
-import com.doback.E_rank.facade.RankingFacade; // Import adicionado
+import com.doback.E_rank.facade.RankingFacade;
 import com.doback.E_rank.facade.UsuariosFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,8 @@ public class EstatisticasController {
 
     private final EstatisticasFacade estatisticasFacade;
     private final UsuariosFacade usuarioFacade;
-    private final RankingFacade rankingFacade; // Campo adicionado
+    private final RankingFacade rankingFacade;
 
-    // Construtor atualizado recebendo RankingFacade
     public EstatisticasController(EstatisticasFacade estatisticasFacade,
                                   UsuariosFacade usuarioFacade,
                                   RankingFacade rankingFacade) {
@@ -40,9 +40,21 @@ public class EstatisticasController {
     @GetMapping("/me/card")
     public ResponseEntity<PlayerCardDTO> getMyCard() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // Busca o ID do usuário logado
         int userId = usuarioFacade.buscarUsuarioPorEmail(auth.getName()).getId();
-        // Reutiliza a lógica do RankingFacade
         return ResponseEntity.ok(rankingFacade.getPlayerCard(userId));
+    }
+
+    // --- NOVOS ENDPOINTS (RF11) ---
+
+    @GetMapping("/{usuarioId}/consolidado")
+    public ResponseEntity<EstatisticasConsolidadasDTO> getEstatisticasConsolidadas(@PathVariable int usuarioId) {
+        return ResponseEntity.ok(estatisticasFacade.getConsolidado(usuarioId));
+    }
+
+    @GetMapping("/me/consolidado")
+    public ResponseEntity<EstatisticasConsolidadasDTO> getMyEstatisticasConsolidadas() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int userId = usuarioFacade.buscarUsuarioPorEmail(auth.getName()).getId();
+        return ResponseEntity.ok(estatisticasFacade.getConsolidado(userId));
     }
 }

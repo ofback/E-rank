@@ -1,6 +1,7 @@
 package com.doback.E_rank.application;
 
 import com.doback.E_rank.dto.CreateEstatisticaDTO;
+import com.doback.E_rank.dto.EstatisticasConsolidadasDTO;
 import com.doback.E_rank.exceptions.ResourceNotFoundException;
 import com.doback.E_rank.infrastructure.models.DesafiosModel;
 import com.doback.E_rank.infrastructure.models.EstatisticasModel;
@@ -22,6 +23,24 @@ public class EstatisticasApplication {
         this.estatisticasJpa = estatisticasJpa;
         this.desafiosJpa = desafiosJpa;
         this.usuariosJpa = usuariosJpa;
+    }
+
+    @Transactional(readOnly = true)
+    public EstatisticasConsolidadasDTO getConsolidado(int usuarioId) {
+        // Busca os dados agregados
+        EstatisticasConsolidadasDTO stats = estatisticasJpa.buscarConsolidadoPorUsuario(usuarioId);
+
+        // Se o usuário existe mas nunca jogou, o COUNT(e) será 0, mas precisamos garantir que o nickname venha correto.
+        // O JPQL com JOIN pode retornar null se não houver match no lado 'EstatisticasModel'.
+        if (stats == null || stats.getTotalPartidas() == 0) {
+            UsuariosModel usuario = usuariosJpa.findById(usuarioId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
+
+            // Retorna DTO zerado com o nome correto
+            return new EstatisticasConsolidadasDTO(usuario.getNickname(), 0, 0, 0, 0, 0, 0);
+        }
+
+        return stats;
     }
 
     @Transactional
@@ -52,6 +71,7 @@ public class EstatisticasApplication {
         stats.setKills(dto.getKills());
         stats.setAssistencias(dto.getAssistencias());
         stats.setHeadshots(dto.getHeadshots());
+        stats.setStsProvacao(1); // Assume validado por padrão ou pendente (0) dependendo da regra
 
         estatisticasJpa.save(stats);
 
