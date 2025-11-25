@@ -13,12 +13,12 @@ public interface EstatisticasJpa extends JpaRepository<EstatisticasModel, Intege
     List<EstatisticasModel> findByJogosModelIdAndStsProvacao(int jogoId, int stsProvacao);
     List<EstatisticasModel> findByUsuariosModelIdAndStsProvacao(int usuarioId, int stsProvacao);
 
-    // Métodos RF10
     boolean existsByDesafiosModelIdAndUsuariosModelId(int desafioId, int usuarioId);
     long countByDesafiosModelId(int desafioId);
 
-    // --- NOVO MÉTODO PARA RF16 (Ranking Global Paginado) ---
-    // Calcula: (Vitórias*10) + (Kills*2) - (Derrotas*3). Ajuste os pesos conforme sua regra.
+
+    List<EstatisticasModel> findByDesafiosModelId(int desafioId);
+
     @Query("SELECT new com.doback.E_rank.dto.RankingDTO(" +
             "u.nickname, " +
             "SUM((e.vitorias * 10) + (e.kills * 2) - (e.derrotas * 3)), " +
@@ -26,8 +26,8 @@ public interface EstatisticasJpa extends JpaRepository<EstatisticasModel, Intege
             "SUM(e.kills)) " +
             "FROM EstatisticasModel e " +
             "JOIN e.usuariosModel u " +
-            "WHERE e.stsProvacao = 1 " + // Apenas estatísticas validadas
+            "WHERE e.stsProvacao = 1 " +
             "GROUP BY u.id, u.nickname " +
-            "ORDER BY 2 DESC") // Ordena pela pontuação (2º parametro do construtor)
+            "ORDER BY 2 DESC")
     Page<RankingDTO> buscarRankingGlobal(Pageable pageable);
 }

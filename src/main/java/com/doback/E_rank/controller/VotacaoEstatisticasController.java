@@ -1,46 +1,40 @@
 package com.doback.E_rank.controller;
-import com.doback.E_rank.infrastructure.models.VotacaoEstatisticasModel;
-import com.doback.E_rank.facade.VotacaoEstatisticasFacade;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+import com.doback.E_rank.facade.UsuariosFacade;
+import com.doback.E_rank.facade.VotacaoEstatisticasFacade;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
-@RequestMapping("/votacaoEstatisticas")
-
+@RequestMapping("/votacao")
 public class VotacaoEstatisticasController {
-    private final VotacaoEstatisticasFacade votacaoEstatisticasFacade;
 
-    public VotacaoEstatisticasController(VotacaoEstatisticasFacade votacaoEstatisticasFacade) {
-        this.votacaoEstatisticasFacade = votacaoEstatisticasFacade;
+    private final VotacaoEstatisticasFacade votacaoFacade;
+    private final UsuariosFacade usuarioFacade;
+
+    public VotacaoEstatisticasController(VotacaoEstatisticasFacade votacaoFacade, UsuariosFacade usuarioFacade) {
+        this.votacaoFacade = votacaoFacade;
+        this.usuarioFacade = usuarioFacade;
     }
 
-    @GetMapping
-    public List<VotacaoEstatisticasModel> listaVotacaoEstatisticas() {
-        return votacaoEstatisticasFacade.listarVotacaoEstatisticas();
-    }
+    // Endpoint: POST /votacao/desafio/{id}/validar
+    @PostMapping("/desafio/{id}/validar")
+    public ResponseEntity<Void> validarDesafio(
+            @PathVariable("id") int desafioId,
+            @RequestBody Map<String, Object> payload) {
 
-    @GetMapping("/{id}")
-    public VotacaoEstatisticasModel obterVotacaoEstatisticas(@PathVariable int id) {
-        return votacaoEstatisticasFacade.buscarVotacaoEstatisticasPorId(id);
-    }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int usuarioId = usuarioFacade.buscarUsuarioPorEmail(auth.getName()).getId();
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void criarVotacaoEstatisticas(@RequestBody VotacaoEstatisticasModel votacaoEstatisticasModel) {
-        votacaoEstatisticasFacade.salvarVotacaoEstatisticas(votacaoEstatisticasModel);
-    }
+        boolean aprovado = (boolean) payload.get("aprovado");
+        String motivo = (String) payload.getOrDefault("motivo", "");
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirVotacaoEstatisticas(@PathVariable int id) {
-        votacaoEstatisticasFacade.excluirVotacaoEstatisticas(id);
-    }
+        votacaoFacade.validarResultado(desafioId, usuarioId, aprovado, motivo);
 
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void atualizarVotacaoEstatisticas(@PathVariable int id, @RequestBody VotacaoEstatisticasModel votacaoEstatisticasModel) {
-        votacaoEstatisticasFacade.atualizarVotacaoEstatisticas(id, votacaoEstatisticasModel);
+        return ResponseEntity.ok().build();
     }
 }
