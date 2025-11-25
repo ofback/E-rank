@@ -21,6 +21,10 @@ public class RankingFacade {
         return rankingApplication.getRankingGlobal(page, size);
     }
 
+    public Page<RankingDTO> getRankingAmigos(int usuarioId, int page, int size) {
+        return rankingApplication.getRankingAmigos(usuarioId, page, size);
+    }
+
     public List<RankingDTO> getRankingPorJogo(int jogoId) {
         return rankingApplication.getRankingPorJogo(jogoId);
     }

@@ -1,7 +1,15 @@
 package com.doback.E_rank.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ComparacaoDTO {
     private String nickname;
+    private String nome; // Adicionado para corrigir o erro 'Cannot resolve method getNome'
     private long totalPartidas;
     private long totalVitorias;
     private long totalDerrotas;
@@ -9,8 +17,10 @@ public class ComparacaoDTO {
     private long totalAssistencias;
     private double kdRatio;
 
-    public ComparacaoDTO(String nickname) {
+    // Construtor parcial para conveniência
+    public ComparacaoDTO(String nickname, String nome) {
         this.nickname = nickname;
+        this.nome = nome;
     }
 
     // Getters e Setters
