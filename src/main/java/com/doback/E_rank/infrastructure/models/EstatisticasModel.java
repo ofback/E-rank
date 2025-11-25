@@ -1,4 +1,3 @@
-// E-rank/src/main/java/com/doback/E_rank/infrastructure/models/EstatisticasModel.java
 package com.doback.E_rank.infrastructure.models;
 
 import jakarta.persistence.*;
@@ -16,41 +15,38 @@ public class EstatisticasModel {
     @Column(name = "id")
     private int id;
 
-    // --- Campos da Partida (RF09) ---
-
     @Column(name = "vitoria_booleana")
-    private boolean resultadoVitoria; // true = vitoria, false = derrota
+    private boolean resultadoVitoria;
+
+    // --- ALTERAÇÃO CRÍTICA: 'int' -> 'Integer' ---
+    // Isso permite que o Hibernate leia 'NULL' do banco sem dar Crash (Erro 400).
 
     @Column(name = "pontos_partida")
-    private int pontos; // Pontuação desta partida específica
+    private Integer pontos;
 
-    // --- Campos Específicos (FPS/Geral) ---
     @Column(name = "kills")
-    private int kills;
+    private Integer kills;
 
     @Column(name = "assistencias")
-    private int assistencias;
+    private Integer assistencias;
 
     @Column(name = "headshots")
-    private int headshots;
+    private Integer headshots;
 
-    // Estes campos abaixo parecem ser de "Acumulado", 
-    // mas vamos mantê-los para não quebrar seu banco, 
-    // embora para uma partida única eles não façam tanto sentido.
     @Column(name = "qts_partidas")
-    private int qtdPartidas;
+    private Integer qtdPartidas;
 
     @Column(name = "sts_provacao")
-    private int stsProvacao;
+    private Integer stsProvacao;
 
     @Column(name = "vitorias")
-    private int vitorias; // Contador acumulado?
+    private Integer vitorias;
 
     @Column(name = "derrotas")
-    private int derrotas; // Contador acumulado?
+    private Integer derrotas;
 
     @Column(name = "recordKills")
-    private int recordKills;
+    private Integer recordKills;
 
     // --- RELACIONAMENTOS ---
 
@@ -65,9 +61,48 @@ public class EstatisticasModel {
     @JoinColumn(name = "id_jogo", referencedColumnName = "id")
     private JogosModel jogosModel;
 
-    // --- NOVO RELACIONAMENTO (CRÍTICO PARA RF09) ---
-    // Vincula esta estatística ao desafio que a originou
     @OneToOne
     @JoinColumn(name = "id_desafio")
     private DesafiosModel desafiosModel;
+
+    // --- GETTERS SEGUROS (BLINDAGEM) ---
+    // O Lombok gera getters que retornam Integer (que pode ser null).
+    // Sobrescrevemos para garantir que retornem sempre um número (0 se for null).
+    // Isso impede NullPointerException no RankingApplication e EstatisticasApplication.
+
+    public int getPontos() {
+        return pontos != null ? pontos : 0;
+    }
+
+    public int getKills() {
+        return kills != null ? kills : 0;
+    }
+
+    public int getAssistencias() {
+        return assistencias != null ? assistencias : 0;
+    }
+
+    public int getHeadshots() {
+        return headshots != null ? headshots : 0;
+    }
+
+    public int getQtdPartidas() {
+        return qtdPartidas != null ? qtdPartidas : 0;
+    }
+
+    public int getStsProvacao() {
+        return stsProvacao != null ? stsProvacao : 0;
+    }
+
+    public int getVitorias() {
+        return vitorias != null ? vitorias : 0;
+    }
+
+    public int getDerrotas() {
+        return derrotas != null ? derrotas : 0;
+    }
+
+    public int getRecordKills() {
+        return recordKills != null ? recordKills : 0;
+    }
 }
