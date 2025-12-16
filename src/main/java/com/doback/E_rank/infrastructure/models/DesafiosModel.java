@@ -12,8 +12,6 @@ public class DesafiosModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    // --- CORREÇÃO 1: Tipos alterados de 'long' para 'int' ---
-    // Isso resolve o erro 'errno: 150' do MySQL
     @Column(name = "id_desafiante")
     private int desafianteId;
 
@@ -28,9 +26,6 @@ public class DesafiosModel {
 
     @Column(name = "resultado")
     private String resultado;
-
-    // --- CORREÇÃO 2: Relacionamentos recolocados ---
-    // Necessários para o mappedBy funcionar em AmizadesModel e JogosModel
 
     @ManyToOne
     @JoinColumn(name = "id_desafiante", insertable = false, updatable = false)

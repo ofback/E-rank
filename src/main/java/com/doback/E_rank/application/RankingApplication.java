@@ -39,10 +39,8 @@ public class RankingApplication {
     public Page<RankingDTO> getRankingAmigos(int usuarioId, int page, int size) {
         if (page < 0) page = 0;
 
-        // 1. Busca amizades ativas
         List<AmizadesModel> amizades = amizadesJpa.findByIdUsuario1AndStatusOrIdUsuario2AndStatus(usuarioId, 'A', usuarioId, 'A');
 
-        // 2. Cria lista de IDs
         List<Integer> idsParaRanking = new ArrayList<>();
         idsParaRanking.add(usuarioId);
 
@@ -54,12 +52,10 @@ public class RankingApplication {
             }
         }
 
-        // 3. Busca ranking filtrado
         return estatisticasRepository.buscarRankingPorIds(idsParaRanking, PageRequest.of(page, size));
     }
 
     public List<RankingDTO> getRankingPorJogo(int jogoId) {
-        // Placeholder simples para evitar erro, caso precise expandir depois
         return new ArrayList<>();
     }
 
@@ -77,23 +73,16 @@ public class RankingApplication {
         PlayerCardDTO card = new PlayerCardDTO();
         card.setNickname(dados.getNickname());
         card.setNome(dados.getNome());
-
-        // CORREÇÃO: Usando os setters corretos definidos no PlayerCardDTO
-        // O DTO usa nomes diretos (vitorias, derrotas, kills) e não 'setTotalX'
         card.setPartidasJogadas(dados.getTotalPartidas());
         card.setVitorias(dados.getTotalVitorias());
         card.setDerrotas(dados.getTotalDerrotas());
         card.setKills(dados.getTotalKills());
         card.setAssistencias(dados.getTotalAssistencias());
-
-        // Cálculos de Rating e Estilo
         card.setKdRatio(dados.getKdRatio());
 
-        // Exemplo simples de cálculo de Overall (Soma ponderada)
         long score = (dados.getTotalVitorias() * 10) + (dados.getTotalKills() * 2);
-        card.setOverallRating((int) Math.min(score, 9999)); // Limite seguro
+        card.setOverallRating((int) Math.min(score, 9999));
 
-        // Lógica simples para estilo de jogo
         if (dados.getTotalKills() > dados.getTotalAssistencias() * 2) {
             card.setEstiloDeJogo("Agressivo");
         } else if (dados.getTotalAssistencias() > dados.getTotalKills()) {
@@ -105,14 +94,12 @@ public class RankingApplication {
         return card;
     }
 
-    // --- MÉTODO AUXILIAR QUE ESTAVA FALTANDO ---
     private ComparacaoDTO getDadosAgregadosDoUsuario(int usuarioId) {
         UsuariosModel user = usuariosRepository.searchByCode(usuarioId);
         if (user == null) {
             throw new IllegalArgumentException("Usuário não encontrado: " + usuarioId);
         }
 
-        // Busca estatísticas aprovadas (stsProvacao = 1)
         List<EstatisticasModel> stats = estatisticasRepository.findByUsuariosModelIdAndStsProvacao(usuarioId, 1);
 
         long vitorias = stats.stream().filter(EstatisticasModel::isResultadoVitoria).count();
@@ -122,14 +109,13 @@ public class RankingApplication {
 
         ComparacaoDTO dto = new ComparacaoDTO();
         dto.setNickname(user.getNickname());
-        dto.setNome(user.getNome()); // Agora existe no DTO
+        dto.setNome(user.getNome());
         dto.setTotalPartidas(stats.size());
         dto.setTotalVitorias(vitorias);
         dto.setTotalDerrotas(derrotas);
         dto.setTotalKills(kills);
         dto.setTotalAssistencias(assistencias);
 
-        // Cálculo seguro de K/D
         double kd = (derrotas == 0) ? kills : (double) kills / derrotas;
         dto.setKdRatio(Math.round(kd * 100.0) / 100.0);
 

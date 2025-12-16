@@ -17,7 +17,6 @@ public class AmizadesFacade {
         this.amizadeApplication = amizadeApplication;
     }
 
-    // --- Métodos que não mudam ---
     public List<AmizadesModel> listarAmizades() {
         return amizadeApplication.obterTodasAmizades();
     }

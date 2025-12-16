@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor // Cria um construtor com todos os campos
+@AllArgsConstructor
 public class FriendDTO {
     private int friendshipId;
     private int userId;

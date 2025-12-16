@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 
 public class Desafios {
     private int id;
-    private int desafianteId; // Quem enviou
-    private int desafiadoId;  // Quem recebeu
-    private String status;    // P (Pendente), A (Aceito), R (Recusado), C (Concluido)
+    private int desafianteId;
+    private int desafiadoId;
+    private String status;
     private LocalDateTime dataHora;
 
     public Desafios() {}
@@ -19,7 +19,7 @@ public class Desafios {
         this.dataHora = dataHora;
     }
 
-    // Getters e Setters
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public int getDesafianteId() { return desafianteId; }

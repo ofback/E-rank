@@ -25,8 +25,6 @@ public class RankingController {
         this.usuariosFacade = usuariosFacade;
     }
 
-    // Endpoint unificado com filtro
-    // Exemplo de chamada: GET /rankings?tipo=AMIGOS&page=0&size=10
     @GetMapping
     public ResponseEntity<Page<RankingDTO>> getRanking(
             @RequestParam(defaultValue = "0") int page,
@@ -35,18 +33,14 @@ public class RankingController {
     ) {
         if ("AMIGOS".equalsIgnoreCase(tipo)) {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            // Busca o ID do usuário logado usando o e-mail do token
             int userId = usuariosFacade.buscarUsuarioPorEmail(auth.getName()).getId();
 
             return ResponseEntity.ok(rankingFacade.getRankingAmigos(userId, page, size));
         }
 
-        // Padrão: Retorna Ranking Global
         return ResponseEntity.ok(rankingFacade.getRankingGlobal(page, size));
     }
 
-    // Mantido para compatibilidade se o front-end antigo usar /global explicitamente,
-    // mas redireciona para a lógica padrão.
     @GetMapping("/global")
     public ResponseEntity<Page<RankingDTO>> getRankingGlobal(
             @RequestParam(defaultValue = "0") int page,

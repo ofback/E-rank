@@ -18,9 +18,6 @@ public class EstatisticasModel {
     @Column(name = "vitoria_booleana")
     private boolean resultadoVitoria;
 
-    // --- ALTERAÇÃO CRÍTICA: 'int' -> 'Integer' ---
-    // Isso permite que o Hibernate leia 'NULL' do banco sem dar Crash (Erro 400).
-
     @Column(name = "pontos_partida")
     private Integer pontos;
 
@@ -48,7 +45,6 @@ public class EstatisticasModel {
     @Column(name = "recordKills")
     private Integer recordKills;
 
-    // --- RELACIONAMENTOS ---
 
     @OneToMany(mappedBy = "estatisticasModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<VotacaoEstatisticasModel> votacaoEstatisticaModels = new ArrayList<>();
@@ -65,10 +61,6 @@ public class EstatisticasModel {
     @JoinColumn(name = "id_desafio")
     private DesafiosModel desafiosModel;
 
-    // --- GETTERS SEGUROS (BLINDAGEM) ---
-    // O Lombok gera getters que retornam Integer (que pode ser null).
-    // Sobrescrevemos para garantir que retornem sempre um número (0 se for null).
-    // Isso impede NullPointerException no RankingApplication e EstatisticasApplication.
 
     public int getPontos() {
         return pontos != null ? pontos : 0;

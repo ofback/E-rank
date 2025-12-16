@@ -9,11 +9,11 @@ public class CreateUsuarioDTO {
     private String cpf;
     private String dataNascimento;
 
-    // Construtor Vazio (Necessário para o Spring criar o objeto a partir do JSON)
+
     public CreateUsuarioDTO() {
     }
 
-    // Construtor Completo (Opcional, mas útil para testes)
+
     public CreateUsuarioDTO(String nome, String nickname, String email, String senha, String cpf, String dataNascimento) {
         this.nome = nome;
         this.nickname = nickname;
@@ -23,8 +23,7 @@ public class CreateUsuarioDTO {
         this.dataNascimento = dataNascimento;
     }
 
-    // --- GETTERS (Leitura) ---
-    // Estes são os métodos que o Facade está procurando ("Cannot resolve method...")
+
 
     public String getNome() {
         return nome;
@@ -50,8 +49,7 @@ public class CreateUsuarioDTO {
         return dataNascimento;
     }
 
-    // --- SETTERS (Escrita) ---
-    // Necessários para o Spring preencher os dados quando recebe o JSON
+
 
     public void setNome(String nome) {
         this.nome = nome;

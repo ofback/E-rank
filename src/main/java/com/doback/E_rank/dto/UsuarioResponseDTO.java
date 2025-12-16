@@ -10,11 +10,9 @@ public class UsuarioResponseDTO {
     private String biografia;
     private Date dataCriacao;
 
-    // Construtor vazio (Obrigatório para frameworks)
     public UsuarioResponseDTO() {
     }
 
-    // Construtor completo (Usado no Facade)
     public UsuarioResponseDTO(int id, String nome, String nickname, String email, String biografia, Date dataCriacao) {
         this.id = id;
         this.nome = nome;
@@ -24,7 +22,6 @@ public class UsuarioResponseDTO {
         this.dataCriacao = dataCriacao;
     }
 
-    // --- GETTERS (Resolvem o erro "Cannot resolve method getId") ---
 
     public int getId() {
         return id;
@@ -50,7 +47,7 @@ public class UsuarioResponseDTO {
         return dataCriacao;
     }
 
-    // --- SETTERS (Para flexibilidade) ---
+
 
     public void setId(int id) {
         this.id = id;

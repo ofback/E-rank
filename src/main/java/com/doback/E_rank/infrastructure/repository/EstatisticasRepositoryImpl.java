@@ -20,7 +20,6 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
     @Override
     public EstatisticasModel searchByCode(int id) {
-        // .get() lança exceção se não achar. .orElse(null) é mais seguro se preferir tratar null depois.
         return this.estatisticasJpa.findById(id).orElse(null);
     }
 
@@ -64,13 +63,11 @@ public class EstatisticasRepositoryImpl implements EstatisticasRepository {
 
     @Override
     public List<EstatisticasModel> findAprovadasPorJogo(int jogoId) {
-        // CHAMADA CORRIGIDA
-        return estatisticasJpa.findByJogosModelIdAndStsProvacao(jogoId, 1); // 1 = Aprovado
+        return estatisticasJpa.findByJogosModelIdAndStsProvacao(jogoId, 1);
     }
 
     @Override
     public List<EstatisticasModel> findAprovadasPorUsuario(int usuarioId) {
-        // CHAMADA CORRIGIDA
-        return estatisticasJpa.findByUsuariosModelIdAndStsProvacao(usuarioId, 1); // 1 = Aprovado
+        return estatisticasJpa.findByUsuariosModelIdAndStsProvacao(usuarioId, 1);
     }
 }

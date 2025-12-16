@@ -44,8 +44,6 @@ public class EstatisticasController {
         return ResponseEntity.ok(rankingFacade.getPlayerCard(userId));
     }
 
-    // --- NOVOS ENDPOINTS (RF11) ---
-
     @GetMapping("/{usuarioId}/consolidado")
     public ResponseEntity<EstatisticasConsolidadasDTO> getEstatisticasConsolidadas(@PathVariable int usuarioId) {
         return ResponseEntity.ok(estatisticasFacade.getConsolidado(usuarioId));

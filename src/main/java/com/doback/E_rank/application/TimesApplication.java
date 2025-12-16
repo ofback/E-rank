@@ -48,16 +48,12 @@ public class TimesApplication {
         timesRepository.removeTimes(id);
     }
 
-    // --- ALTERAÇÃO AQUI: Lógica de Merge para Atualização Segura ---
     public void atualizarTimes(int id, TimesModel dadosAtualizados) {
-        // 1. Busca o time existente
         TimesModel timeExistente = timesRepository.searchByCode(id);
         if (timeExistente == null) {
             throw new ResourceNotFoundException("Time não encontrado com ID: " + id);
         }
 
-        // 2. Atualiza apenas os campos permitidos (Nome e Descrição)
-        // Mantém o ID, Dono, Temporada e Status originais
         if (dadosAtualizados.getNome() != null) {
             timeExistente.setNome(dadosAtualizados.getNome());
         }
@@ -65,10 +61,8 @@ public class TimesApplication {
             timeExistente.setDescricao(dadosAtualizados.getDescricao());
         }
 
-        // 3. Valida o objeto completo (agora com os dados mesclados)
         validar(timeExistente);
 
-        // 4. Persiste
         timesRepository.updateTimes(id, timeExistente);
     }
 
@@ -89,7 +83,6 @@ public class TimesApplication {
 
         String dataEntrada = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        // Criador entra como DONO e ATIVO
         RegistroTimesModel creatorRegistration = new RegistroTimesModel();
         creatorRegistration.setIdTimes(timesModel.getId());
         creatorRegistration.setIdUsuarios(creatorId);
@@ -98,14 +91,13 @@ public class TimesApplication {
         creatorRegistration.setData_entrada(dataEntrada);
         registroTimesRepository.addRegistroTimes(creatorRegistration);
 
-        // Convidados entram como MEMBRO e PENDENTE
         if (teamDTO.getMemberIds() != null) {
             for (Integer memberId : teamDTO.getMemberIds()) {
                 RegistroTimesModel memberInvitation = new RegistroTimesModel();
                 memberInvitation.setIdTimes(timesModel.getId());
                 memberInvitation.setIdUsuarios(memberId);
                 memberInvitation.setCargo("Membro");
-                memberInvitation.setStatus("P"); // Pendente
+                memberInvitation.setStatus("P");
                 memberInvitation.setData_entrada(dataEntrada);
                 registroTimesRepository.addRegistroTimes(memberInvitation);
             }
@@ -125,8 +117,6 @@ public class TimesApplication {
                 ))
                 .collect(Collectors.toList());
     }
-
-    // --- MÉTODOS RF08 (Gerenciamento) ---
 
     public List<TeamMemberDTO> listarMembros(int timeId) {
         return registroTimesJpa.findByIdTimes(timeId).stream()
@@ -150,7 +140,7 @@ public class TimesApplication {
         novoMembro.setIdTimes(timeId);
         novoMembro.setIdUsuarios(usuarioId);
         novoMembro.setCargo("Membro");
-        novoMembro.setStatus("P"); // Entra como Pendente ao ser adicionado
+        novoMembro.setStatus("P");
         novoMembro.setData_entrada(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 
         registroTimesRepository.addRegistroTimes(novoMembro);
@@ -162,7 +152,6 @@ public class TimesApplication {
                 .orElseThrow(() -> new ResourceNotFoundException("Convite não encontrado."));
 
         if (!"P".equals(convite.getStatus())) {
-            // Se já for Ativo, apenas ignora ou retorna erro. Vamos permitir idempotência.
             if ("A".equals(convite.getStatus()) && aceitar) return;
             throw new IllegalStateException("Este registro não está pendente.");
         }
@@ -203,7 +192,6 @@ public class TimesApplication {
         RegistroTimesModel target = registroTimesJpa.findByIdTimesAndIdUsuarios(timeId, targetUserId)
                 .orElseThrow(() -> new ResourceNotFoundException("Membro alvo não encontrado."));
 
-        // Sair por conta própria
         if (requesterId == targetUserId) {
             if ("Dono".equalsIgnoreCase(target.getCargo())) {
                 throw new IllegalStateException("O Dono não pode sair. Transfira a liderança ou delete o time.");
@@ -212,7 +200,6 @@ public class TimesApplication {
             return;
         }
 
-        // Expulsão
         boolean isRequesterBoss = "Dono".equalsIgnoreCase(requester.getCargo()) || "ViceLider".equalsIgnoreCase(requester.getCargo());
 
         if (!isRequesterBoss) {

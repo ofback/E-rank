@@ -55,14 +55,11 @@ public class TimesController {
         timesFacade.excluirTimes(id);
     }
 
-    // --- ALTERAÇÃO AQUI: Recebe UpdateTeamDTO ---
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void atualizarTimes(@PathVariable int id, @RequestBody UpdateTeamDTO dto) {
         timesFacade.atualizarTimes(id, dto);
     }
-
-    // --- GESTÃO DE MEMBROS ---
 
     @GetMapping("/{id}/members")
     public ResponseEntity<List<TeamMemberDTO>> listarMembros(@PathVariable int id) {
@@ -75,14 +72,12 @@ public class TimesController {
         return ResponseEntity.ok().build();
     }
 
-    // Aceitar Convite
     @PostMapping("/{id}/invites/accept")
     public ResponseEntity<Void> aceitarConvite(@PathVariable int id) {
         timesFacade.responderConvite(id, getUsuarioLogadoId(), true);
         return ResponseEntity.ok().build();
     }
 
-    // Recusar Convite
     @PostMapping("/{id}/invites/decline")
     public ResponseEntity<Void> recusarConvite(@PathVariable int id) {
         timesFacade.responderConvite(id, getUsuarioLogadoId(), false);

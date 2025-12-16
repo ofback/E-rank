@@ -9,5 +9,5 @@ import java.util.List;
 public class CreateTeamDTO {
     private String nome;
     private String descricao;
-    private List<Integer> memberIds; // Lista de IDs dos amigos a serem convidados
+    private List<Integer> memberIds;
 }

@@ -19,7 +19,6 @@ public class UsuariosFacade {
         this.usuarioApplication = usuarioApplication;
     }
 
-    // --- CONVERSOR DE SEGURANÇA (MODEL -> DTO) ---
     private UsuarioResponseDTO toDTO(UsuariosModel model) {
         return new UsuarioResponseDTO(
                 model.getId(),
@@ -51,11 +50,9 @@ public class UsuariosFacade {
                 .collect(Collectors.toList());
     }
 
-    // --- CRIAÇÃO SEGURA (DTO -> MODEL) ---
     public void salvarUsuario(CreateUsuarioDTO dto) {
         UsuariosModel model = new UsuariosModel();
 
-        // Mapeia apenas o que vem do cadastro seguro
         model.setNome(dto.getNome());
         model.setNickname(dto.getNickname());
         model.setEmail(dto.getEmail());
@@ -63,7 +60,6 @@ public class UsuariosFacade {
         model.setCpf(dto.getCpf());
         model.setDataNascimento(dto.getDataNascimento());
 
-        // Define valores de sistema (que o usuário não pode manipular)
         model.setSts('A');
         model.setDataCriacao(new Date());
 

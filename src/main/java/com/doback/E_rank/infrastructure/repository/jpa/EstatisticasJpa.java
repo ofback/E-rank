@@ -21,7 +21,6 @@ public interface EstatisticasJpa extends JpaRepository<EstatisticasModel, Intege
 
     List<EstatisticasModel> findByDesafiosModelId(int desafioId);
 
-    // --- QUERY RANKING GLOBAL ---
     @Query("SELECT new com.doback.E_rank.dto.RankingDTO(" +
             "u.nickname, " +
             "SUM(CASE WHEN e.resultadoVitoria = true THEN 10 ELSE -3 END + (e.kills * 2)), " +
@@ -34,7 +33,6 @@ public interface EstatisticasJpa extends JpaRepository<EstatisticasModel, Intege
             "ORDER BY 2 DESC")
     Page<RankingDTO> buscarRankingGlobal(Pageable pageable);
 
-    // --- NOVA QUERY: RANKING POR LISTA DE IDS (AMIGOS) ---
     @Query("SELECT new com.doback.E_rank.dto.RankingDTO(" +
             "u.nickname, " +
             "SUM(CASE WHEN e.resultadoVitoria = true THEN 10 ELSE -3 END + (e.kills * 2)), " +
@@ -43,12 +41,11 @@ public interface EstatisticasJpa extends JpaRepository<EstatisticasModel, Intege
             "FROM EstatisticasModel e " +
             "JOIN e.usuariosModel u " +
             "WHERE e.stsProvacao = 1 " +
-            "AND u.id IN :ids " + // Filtro principal
+            "AND u.id IN :ids " +
             "GROUP BY u.id, u.nickname " +
             "ORDER BY 2 DESC")
     Page<RankingDTO> buscarRankingPorIds(@Param("ids") List<Integer> ids, Pageable pageable);
 
-    // --- QUERY ESTATÍSTICAS CONSOLIDADAS ---
     @Query("SELECT new com.doback.E_rank.dto.EstatisticasConsolidadasDTO(" +
             "u.nickname, " +
             "COUNT(e), " +

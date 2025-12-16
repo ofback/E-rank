@@ -30,7 +30,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // Injeções para os novos filtros
     private final JwtTokenUtil jwtTokenUtil;
 
 
@@ -64,7 +63,6 @@ public class SecurityConfig {
         return jdbcUserDetailsManager;
     }
 
-    // Bean OBRIGATÓRIO para o filtro de autenticação
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
@@ -73,37 +71,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager, UserDetailsManager userDetailsManager, UsuariosJpa usuariosJpa) throws Exception {
 
-        // 1. Desabilitar CSRF (comum em APIs stateless)
         http.csrf(csrf -> csrf.disable());
 
         http.httpBasic(basic -> basic.disable());
 
-        // 2. HABILITAR CORS (Esta é a única linha necessária)
         http.cors(Customizer.withDefaults());
 
-        // 3. Definir a política de sessão como STATELESS (não guardar estado)
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // 4. Configurar as permissões de rotas (authorizeHttpRequests)
         http.authorizeHttpRequests(configurer ->
                 configurer
-                        // Permite TODAS as requisições 'OPTIONS' (preflight de CORS)
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                        // Permite cadastro e login sem autenticação
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-
-                        // Protege as rotas de admin
                         .requestMatchers("/temporadas/**").hasRole("ADMIN")
-
-                        // --- CORREÇÃO AQUI ---
-                        // Permite que usuários LOGADOS (não apenas admins) busquem outros usuários.
                         .requestMatchers(HttpMethod.GET, "/usuarios").authenticated()
-
                         .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
-
-                        // Exige autenticação para todo o resto
                         .requestMatchers(HttpMethod.GET, "/usuarios/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/usuarios/**").authenticated()
                         .requestMatchers("/times/**").authenticated()
@@ -114,34 +97,24 @@ public class SecurityConfig {
                         .requestMatchers("/rankings/**").authenticated()
                         .anyRequest().authenticated()
         );
-
-        // 5. Adicionar os filtros JWT
-        // Adiciona o filtro de autenticação (só para /login)
         http.addFilter(new JwtAuthenticationFilter(authenticationManager, jwtTokenUtil, usuariosJpa));
-
-        // Adiciona o filtro de autorização (para todas as other rotas)
         http.addFilterBefore(new JwtAuthorizationFilter(jwtTokenUtil, userDetailsManager), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // 6. MANTER APENAS UMA DEFINIÇÃO DO BEAN DE CORS
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Mantive sua configuração de CORS que já funcionava
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:56358", "http://localhost:12345", "*"));
 
-
-        // Permite os métodos HTTP mais comuns
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"));
 
-        // Permite todos os cabeçalhos (importante para o "Authorization" do JWT)
         configuration.setAllowedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // Aplica para todas as rotas
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }

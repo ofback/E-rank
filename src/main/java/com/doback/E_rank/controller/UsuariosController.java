@@ -46,7 +46,6 @@ public class UsuariosController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void criarUsuario(@RequestBody CreateUsuarioDTO usuarioDTO) {
-        // Recebe DTO Seguro
         usuarioFacade.salvarUsuario(usuarioDTO);
     }
 

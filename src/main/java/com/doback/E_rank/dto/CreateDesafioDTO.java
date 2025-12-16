@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 public class CreateDesafioDTO {
     private int desafiadoId;
-    private int jogoId; // NOVO: Qual jogo será disputado?
+    private int jogoId;
 }

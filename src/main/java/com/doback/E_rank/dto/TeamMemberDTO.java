@@ -5,7 +5,7 @@ public class TeamMemberDTO {
     private String nickname;
     private String cargo;
     private String dataEntrada;
-    private String status; // Novo campo: 'A' (Ativo) ou 'P' (Pendente)
+    private String status;
 
     public TeamMemberDTO(int userId, String nickname, String cargo, String dataEntrada, String status) {
         this.userId = userId;

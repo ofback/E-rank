@@ -20,7 +20,6 @@ public class AmizadesModel {
     @Column(name = "data_solicitacao")
     private String dataSolicitacao;
 
-    // --- CORREÇÃO: Agora funciona pois DesafiosModel tem o campo 'amizadesModel' ---
     @OneToMany(mappedBy = "amizadesModel", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<DesafiosModel> desafiosModels = new ArrayList<>();
 
@@ -40,7 +39,6 @@ public class AmizadesModel {
 
     public AmizadesModel() {}
 
-    // Getters e Setters (inclua para a nova lista se necessário, mas o Lombok ou manual abaixo resolve)
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public char getStatus() { return status; }

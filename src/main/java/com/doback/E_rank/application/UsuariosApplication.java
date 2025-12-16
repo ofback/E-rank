@@ -34,10 +34,8 @@ public class UsuariosApplication {
     }
 
     public void criarUsuario(UsuariosModel usuariosModel) {
-        // 1. Validação das Regras de Negócio (Extraído para método privado)
         validarRegrasDeNegocio(usuariosModel);
 
-        // 2. Lógica de Segurança
         String senhaCriptografada = passwordEncoder.encode(usuariosModel.getSenha());
         usuariosModel.setSenha(senhaCriptografada);
 
@@ -49,7 +47,6 @@ public class UsuariosApplication {
         usuariosModel.setPapeis(Set.of(userRole));
         usuariosModel.setSts('A');
 
-        // 3. Persistência
         usuarioRepository.addUsuarios(usuariosModel);
     }
 
@@ -58,7 +55,6 @@ public class UsuariosApplication {
     }
 
     public void atualizarUsuarios(int id, UsuariosModel usuariosModel) {
-        // CORREÇÃO: Removido o cast (int) redundante
         usuarioRepository.updateUsuarios(id, usuariosModel);
     }
 
@@ -73,7 +69,6 @@ public class UsuariosApplication {
         usuarioExistente.setNickname(profileDTO.getNickname());
         usuarioExistente.setBiografia(profileDTO.getBiografia());
 
-        // CORREÇÃO: Removido o cast (int) redundante
         usuarioRepository.updateUsuarios(usuarioExistente.getId(), usuarioExistente);
     }
 
@@ -81,10 +76,7 @@ public class UsuariosApplication {
         return usuarioRepository.findByNickname(nickname);
     }
 
-    // --- MÉTODOS PRIVADOS ---
-
     private void validarRegrasDeNegocio(UsuariosModel usuariosModel) {
-        // Converte para a Entidade de Domínio para validar
         Usuarios usuarioEntidade = new Usuarios(
                 usuariosModel.getNome(),
                 usuariosModel.getCpf(),

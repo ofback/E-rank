@@ -7,11 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateEstatisticaDTO {
-    private int desafioId;   // Qual desafio foi jogado?
-    private boolean vitoria; // Ganhei? (true/false)
-    private int pontos;      // Placar ou pontuação geral
+    private int desafioId;
+    private boolean vitoria;
+    private int pontos;
 
-    // Dados específicos (Kills, Assistências) em formato flexível ou campos opcionais
+
     private int kills;
     private int deaths;
     private int assistencias;

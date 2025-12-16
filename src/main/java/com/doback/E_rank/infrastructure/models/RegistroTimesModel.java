@@ -3,11 +3,11 @@ package com.doback.E_rank.infrastructure.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "registro_time") // Corrigido para corresponder ao seu DER
+@Table(name = "registro_time")
 public class RegistroTimesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_registro_time") // Corrigido para corresponder ao seu DER
+    @Column(name = "id_registro_time")
     private int id;
 
     @Column(name = "cargo")
@@ -20,23 +20,22 @@ public class RegistroTimesModel {
     private String data_entrada;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Times_id_time", referencedColumnName = "id", insertable = false, updatable = false) // Corrigido
+    @JoinColumn(name = "Times_id_time", referencedColumnName = "id", insertable = false, updatable = false)
     private TimesModel timesModel;
 
-    @Column(name = "Times_id_time") // Corrigido
+    @Column(name = "Times_id_time")
     private int idTimes;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Usuarios_id_usuario", referencedColumnName = "id", insertable = false, updatable = false) // Corrigido
+    @JoinColumn(name = "Usuarios_id_usuario", referencedColumnName = "id", insertable = false, updatable = false)
     private UsuariosModel usuariosModel;
 
-    @Column(name = "Usuarios_id_usuario") // Corrigido
+    @Column(name = "Usuarios_id_usuario")
     private int idUsuarios;
 
     public RegistroTimesModel() {
     }
 
-    // --- GETTERS E SETTERS COMPLETOS ---
 
     public int getId() {
         return id;

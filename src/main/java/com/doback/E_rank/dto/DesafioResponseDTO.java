@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DesafioResponseDTO {
     private int id;
-    private String desafianteNome; // Nome de quem desafiou
+    private String desafianteNome;
     private String status;
     private String dataHora;
 }

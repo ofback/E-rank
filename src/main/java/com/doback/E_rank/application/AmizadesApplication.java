@@ -40,7 +40,7 @@ public class AmizadesApplication {
         AmizadesModel amizadesModel = new AmizadesModel();
         amizadesModel.setIdUsuario1(idRemetente);
         amizadesModel.setIdUsuario2(idDestinatario);
-        amizadesModel.setStatus('P'); // 'P' de Pendente
+        amizadesModel.setStatus('P');
         amizadesModel.setDataSolicitacao(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
         validar(amizadesModel);
         amizadeRepository.addAmizades(amizadesModel);
@@ -55,7 +55,6 @@ public class AmizadesApplication {
             throw new IllegalArgumentException("Amizade não encontrada.");
         }
 
-        // REGRA DE SEGURANÇA: Apenas um dos dois usuários envolvidos pode excluir.
         if (amizade.getIdUsuario1() != idUsuarioLogado && amizade.getIdUsuario2() != idUsuarioLogado) {
             throw new IllegalStateException("Acesso negado. Você não tem permissão para remover esta amizade.");
         }
@@ -69,15 +68,13 @@ public class AmizadesApplication {
             throw new IllegalArgumentException("Amizade não encontrada.");
         }
 
-        // REGRA DE SEGURANÇA: Apenas o destinatário do convite pode aceitá-lo.
         if (amizade.getIdUsuario2() != idUsuarioLogado) {
             throw new IllegalStateException("Acesso negado. Você não pode aceitar este convite.");
         }
 
-        amizade.setStatus('A'); // Muda o status para Aceito
+        amizade.setStatus('A');
         amizadeRepository.updateAmizades(idAmizade, amizade);
 
-        // Notifica o usuário que enviou o convite
         String mensagem = "Seu pedido de amizade foi aceito!";
         String destinatario = "usuario_id:" + amizade.getIdUsuario1();
         notificacaoApplication.enviarNotificacao("sistema", mensagem, destinatario);
@@ -88,7 +85,6 @@ public class AmizadesApplication {
         return amizades.stream().map(amizade -> {
             int amigoId = (amizade.getIdUsuario1() == idUsuarioLogado) ? amizade.getIdUsuario2() : amizade.getIdUsuario1();
             UsuariosModel amigo = usuariosRepository.searchByCode((int) amigoId);
-            // Adicionado um null check para segurança
             if (amigo == null) return null;
             return new FriendDTO(amizade.getId(), amigoId, amigo.getNickname());
         }).filter(java.util.Objects::nonNull).collect(Collectors.toList());
@@ -98,7 +94,6 @@ public class AmizadesApplication {
         List<AmizadesModel> convites = amizadesJpa.findByIdUsuario2AndStatus(idUsuarioLogado, 'P');
         return convites.stream().map(convite -> {
             UsuariosModel remetente = usuariosRepository.searchByCode((int) convite.getIdUsuario1());
-            // Adicionado um null check para segurança
             if (remetente == null) return null;
             return new PendingRequestDTO(convite.getId(), remetente.getId(), remetente.getNickname(), convite.getDataSolicitacao());
         }).filter(java.util.Objects::nonNull).collect(Collectors.toList());

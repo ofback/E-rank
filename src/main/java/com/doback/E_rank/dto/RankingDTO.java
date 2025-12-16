@@ -3,11 +3,11 @@ package com.doback.E_rank.dto;
 public class RankingDTO {
     private int posicao;
     private String nickname;
-    private Long pontuacao; // Alterado para Long (Soma do banco)
-    private Long vitorias;  // Alterado para Long
-    private Long kills;     // Alterado para Long
+    private Long pontuacao;
+    private Long vitorias;
+    private Long kills;
 
-    // Construtor original (mantido para compatibilidade, com ajuste de tipos)
+
     public RankingDTO(int posicao, String nickname, Long pontuacao, Long vitorias, Long kills) {
         this.posicao = posicao;
         this.nickname = nickname;
@@ -16,14 +16,13 @@ public class RankingDTO {
         this.kills = kills;
     }
 
-    // --- NOVO CONSTRUTOR PARA A QUERY JPQL (RF16) ---
-    // A ordem dos parâmetros deve bater com o SELECT new ... na Query
+
     public RankingDTO(String nickname, Long pontuacao, Long vitorias, Long kills) {
         this.nickname = nickname;
         this.pontuacao = pontuacao != null ? pontuacao : 0L;
         this.vitorias = vitorias != null ? vitorias : 0L;
         this.kills = kills != null ? kills : 0L;
-        this.posicao = 0; // Será calculado na Application
+        this.posicao = 0;
     }
 
     public int getPosicao() {

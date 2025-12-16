@@ -36,7 +36,6 @@ public class DesafiosController {
         return desafiosFacade.listarPendentes(getUsuarioLogadoId());
     }
 
-    // --- NOVO ENDPOINT RF09 ---
     @GetMapping("/aceitos")
     public List<DesafioResponseDTO> listarAceitos() {
         return desafiosFacade.listarAceitos(getUsuarioLogadoId());

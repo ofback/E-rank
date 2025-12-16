@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ComparacaoDTO {
     private String nickname;
-    private String nome; // Adicionado para corrigir o erro 'Cannot resolve method getNome'
+    private String nome;
     private long totalPartidas;
     private long totalVitorias;
     private long totalDerrotas;
@@ -17,13 +17,11 @@ public class ComparacaoDTO {
     private long totalAssistencias;
     private double kdRatio;
 
-    // Construtor parcial para conveniência
     public ComparacaoDTO(String nickname, String nome) {
         this.nickname = nickname;
         this.nome = nome;
     }
 
-    // Getters e Setters
     public String getNickname() { return nickname; }
     public void setNickname(String nickname) { this.nickname = nickname; }
     public long getTotalPartidas() { return totalPartidas; }

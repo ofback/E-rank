@@ -21,7 +21,6 @@ public class VotacaoEstatisticasController {
         this.usuarioFacade = usuarioFacade;
     }
 
-    // Endpoint: POST /votacao/desafio/{id}/validar
     @PostMapping("/desafio/{id}/validar")
     public ResponseEntity<Void> validarDesafio(
             @PathVariable("id") int desafioId,

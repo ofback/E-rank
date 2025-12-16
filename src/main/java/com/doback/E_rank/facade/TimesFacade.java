@@ -31,12 +31,10 @@ public class TimesFacade {
         timesApplication.excluirTime(id);
     }
 
-    // --- ALTERAÇÃO AQUI: Recebe DTO e converte para Model parcial ---
     public void atualizarTimes(int id, UpdateTeamDTO dto) {
         TimesModel timesModel = new TimesModel();
         timesModel.setNome(dto.getNome());
         timesModel.setDescricao(dto.getDescricao());
-        // Note que não setamos idUsuario, temporada, etc.
         timesApplication.atualizarTimes(id, timesModel);
     }
 
@@ -48,7 +46,6 @@ public class TimesFacade {
         return timesApplication.obterTimesDoUsuario(userId);
     }
 
-    // --- RF08 ---
     public List<TeamMemberDTO> listarMembros(int timeId) {
         return timesApplication.listarMembros(timeId);
     }

@@ -10,10 +10,7 @@ import java.util.Optional;
 public interface RegistroTimesJpa extends JpaRepository<RegistroTimesModel, Integer> {
 
     List<RegistroTimesModel> findByIdUsuarios(int userId);
-
-    // --- NOVO: Busca membros de um time específico ---
     List<RegistroTimesModel> findByIdTimes(int idTimes);
-    // -------------------------------------------------
 
     Optional<RegistroTimesModel> findByIdTimesAndIdUsuarios(int idTimes, int idUsuarios);
 

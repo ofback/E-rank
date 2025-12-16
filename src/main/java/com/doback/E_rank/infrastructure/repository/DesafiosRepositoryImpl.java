@@ -1,4 +1,3 @@
-// E-rank/src/main/java/com/doback/E_rank/infrastructure/repository/DesafiosRepositoryImpl.java
 package com.doback.E_rank.infrastructure.repository;
 
 import com.doback.E_rank.infrastructure.models.DesafiosModel;
@@ -20,7 +19,7 @@ public class DesafiosRepositoryImpl implements DesafiosRepository {
 
     @Override
     public DesafiosModel searchByCode(int code) {
-        return this.desafiosJpa.findById(code).orElse(null); // Uso de orElse para evitar erro se não achar
+        return this.desafiosJpa.findById(code).orElse(null);
     }
 
     @Override
@@ -40,14 +39,11 @@ public class DesafiosRepositoryImpl implements DesafiosRepository {
 
     @Override
     public void updateDesafios(int code, DesafiosModel desafiosModel) {
-        // Busca o objeto no banco
         DesafiosModel desafiosModelInDb = this.desafiosJpa.findById(code)
                 .orElseThrow(() -> new RuntimeException("Desafio não encontrado para atualização"));
-
-        // CORREÇÃO: Usando os nomes corretos dos Getters/Setters do Model atualizado
-        desafiosModelInDb.setDataHora(desafiosModel.getDataHora()); // Era setDataDesafio
+        desafiosModelInDb.setDataHora(desafiosModel.getDataHora());
         desafiosModelInDb.setResultado(desafiosModel.getResultado());
-        desafiosModelInDb.setStatus(desafiosModel.getStatus());     // Era setSts
+        desafiosModelInDb.setStatus(desafiosModel.getStatus());
 
         this.desafiosJpa.save(desafiosModelInDb);
     }

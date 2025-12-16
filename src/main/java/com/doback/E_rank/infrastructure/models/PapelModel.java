@@ -11,14 +11,13 @@ public class PapelModel implements GrantedAuthority{
     private int id;
 
     @Column(nullable = false, unique = true)
-    private String nome; // Ex: ROLE_USUARIO, ROLE_ADMIN
+    private String nome;
 
     @Override
     public String getAuthority() {
         return this.nome;
     }
 
-    // Getters e Setters
     public int getId() {
         return id;
     }

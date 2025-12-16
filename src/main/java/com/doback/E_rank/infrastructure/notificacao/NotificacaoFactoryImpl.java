@@ -4,12 +4,11 @@ import com.doback.E_rank.interfaces.Notificacao;
 import com.doback.E_rank.interfaces.NotificacaoFactory;
 import org.springframework.stereotype.Component;
 
-@Component // A fábrica é um bean gerenciado pelo Spring!
+@Component
 public class NotificacaoFactoryImpl implements NotificacaoFactory {
 
     @Override
     public Notificacao criarNotificacao(String tipo) {
-        // A lógica de criação explícita que demonstra o padrão Factory Method
         switch (tipo.toLowerCase()) {
             case "email":
                 return new NotificacaoEmail();

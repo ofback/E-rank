@@ -22,14 +22,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
-    private final UsuariosJpa usuariosJpa; // Para buscar o usuário completo
+    private final UsuariosJpa usuariosJpa;
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UsuariosJpa usuariosJpa) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.usuariosJpa = usuariosJpa;
 
-        // Define a URL que este filtro irá interceptar
         setFilterProcessesUrl("/login");
     }
 
@@ -37,11 +36,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
-            // 1. Lê o JSON do corpo da requisição
             LoginRequestDTO creds = new ObjectMapper()
                     .readValue(request.getInputStream(), LoginRequestDTO.class);
 
-            // 2. Cria o objeto de autenticação do Spring
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             creds.getEmail(),
@@ -58,19 +55,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-
-        // 1. Gera o Token
         String token = jwtTokenUtil.generateToken(authResult);
-
-        // 2. Busca o usuário completo no banco (necessário para o DTO de resposta)
         String email = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername();
         UsuariosModel usuario = usuariosJpa.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado após autenticação"));
-
-        // 3. Cria o DTO de resposta (Token + Usuário)
         LoginResponseDTO loginResponse = new LoginResponseDTO(token, usuario);
 
-        // 4. Escreve a resposta JSON para o Flutter
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new ObjectMapper().writeValueAsString(loginResponse));
@@ -81,7 +71,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void unsuccessfulAuthentication(HttpServletRequest request,
                                               HttpServletResponse response,
                                               AuthenticationException failed) throws IOException, ServletException {
-        // Retorna 401 (Unauthorized) com uma mensagem de erro
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

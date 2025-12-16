@@ -31,7 +31,7 @@ public class JwtTokenUtil {
         Date expiryDate = new Date(now.getTime() + expiration);
 
         return Jwts.builder()
-                .setSubject(userDetails.getUsername()) // Salva o e-mail no token
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(getKey(), SignatureAlgorithm.HS512)
@@ -56,7 +56,6 @@ public class JwtTokenUtil {
                     .parseClaimsJws(token);
             return true;
         } catch (Exception ex) {
-            // Logger.error("Token JWT inválido: {}", ex.getMessage());
         }
         return false;
     }

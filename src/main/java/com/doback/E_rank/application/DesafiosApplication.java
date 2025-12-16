@@ -75,20 +75,17 @@ public class DesafiosApplication {
                 .collect(Collectors.toList());
     }
 
-    // --- ALTERAÇÃO PRINCIPAL AQUI ---
-    @Transactional(readOnly = true) // Adicionado para garantir acesso aos dados
+    @Transactional(readOnly = true)
     public List<DesafioResponseDTO> listarAceitos(int userId) {
         return desafiosJpa.findAceitosPorUsuario(userId).stream()
                 .map(d -> {
-                    // Verifica se EU já registrei o resultado para este desafio
                     boolean jaRegistrei = estatisticasJpa.existsByDesafiosModelIdAndUsuariosModelId(d.getId(), userId);
 
-                    // Define o status que o Frontend vai ver
                     String statusVisual;
                     if (jaRegistrei) {
-                        statusVisual = "AGUARDANDO"; // Eu já fiz minha parte, mostre msg de espera
+                        statusVisual = "AGUARDANDO";
                     } else {
-                        statusVisual = "REGISTRAR";  // Eu ainda não fiz, mostre botão
+                        statusVisual = "REGISTRAR";
                     }
 
                     return new DesafioResponseDTO(
@@ -96,7 +93,7 @@ public class DesafiosApplication {
                             (d.getDesafianteId() == userId)
                                     ? "Oponente (ID " + d.getDesafiadoId() + ")"
                                     : d.getDesafiante().getNickname(),
-                            statusVisual, // Passamos o status calculado
+                            statusVisual,
                             d.getDataHora().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
                     );
                 })

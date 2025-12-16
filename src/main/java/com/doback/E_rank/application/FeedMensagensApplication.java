@@ -39,7 +39,6 @@ public class FeedMensagensApplication {
     }
 
     public void atualizarFeedMensagens(int id, FeedMensagensModel model) {
-        /*FeedMensagensModel existente = obterFeedMensagensPorId(id);*/
         validar(model);
         feedMensagensRepository.updateFeedMensagens(id, model);
     }

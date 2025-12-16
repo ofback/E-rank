@@ -67,7 +67,6 @@ public class Amizades {
         return  idUsuario1 > 0 &&
                 idUsuario2 > 0 &&
                 idUsuario1 != idUsuario2 &&
-                // --- CORREÇÃO AQUI: Permitir status 'P' (Pendente) ---
                 (status == 'A' || status == 'I' || status == 'P') &&
                 dataSolicitacao != null && !dataSolicitacao.trim().isEmpty();
     }
@@ -87,7 +86,6 @@ public class Amizades {
             erros.append("Solicitante e receptor não podem ser o mesmo usuário. ");
         }
 
-        // --- CORREÇÃO AQUI: Permitir status 'P' (Pendente) ---
         if (status != 'A' && status != 'I' && status != 'P') {
             erros.append("Status deve ser 'A' (ativo), 'I' (inativo) ou 'P' (pendente). ");
         }

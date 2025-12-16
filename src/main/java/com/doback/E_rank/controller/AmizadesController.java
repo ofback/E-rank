@@ -27,7 +27,6 @@ public class AmizadesController {
         this.usuarioFacade = usuarioFacade;
     }
 
-    // --- Endpoints que não mudam ---
     @GetMapping("/{id}")
     public AmizadesModel obterAmizade(@PathVariable int id) {
         return amizadeFacade.buscarAmizadePorId(id);
@@ -42,7 +41,6 @@ public class AmizadesController {
         amizadeFacade.salvarAmizade(remetente.getId(), friendRequest.getIdUsuario2());
     }
 
-    // --- Endpoints Atualizados ---
     @GetMapping("/meus-amigos")
     public List<FriendDTO> getMeusAmigos() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

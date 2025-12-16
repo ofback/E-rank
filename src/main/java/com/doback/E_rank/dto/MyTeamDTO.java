@@ -13,7 +13,6 @@ public class MyTeamDTO {
         this.status = status;
     }
 
-    // --- GETTERS (Essenciais para o JSON aparecer no Flutter) ---
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

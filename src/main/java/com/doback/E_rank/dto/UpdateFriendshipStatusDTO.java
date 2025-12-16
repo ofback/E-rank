@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateFriendshipStatusDTO {
-    private char status; // Ex: 'A' para Aceito
+    private char status;
 }

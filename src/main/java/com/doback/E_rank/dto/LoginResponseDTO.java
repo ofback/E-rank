@@ -10,5 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginResponseDTO {
     private String token;
-    private UsuariosModel usuario; // O seu auth_service.dart espera por um objeto 'usuario'
+    private UsuariosModel usuario;
 }
