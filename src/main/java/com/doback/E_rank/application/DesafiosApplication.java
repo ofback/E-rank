@@ -80,7 +80,6 @@ public class DesafiosApplication {
         return desafiosJpa.findAceitosPorUsuario(userId).stream()
                 .map(d -> {
                     boolean jaRegistrei = estatisticasJpa.existsByDesafiosModelIdAndUsuariosModelId(d.getId(), userId);
-
                     String statusVisual;
                     if (jaRegistrei) {
                         statusVisual = "AGUARDANDO";
