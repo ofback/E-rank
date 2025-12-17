@@ -57,7 +57,7 @@ public class EstatisticasModel {
     @JoinColumn(name = "id_jogo", referencedColumnName = "id")
     private JogosModel jogosModel;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_desafio")
     private DesafiosModel desafiosModel;
 
