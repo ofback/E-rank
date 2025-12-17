@@ -32,6 +32,10 @@ public class DesafiosModel {
     private UsuariosModel desafiante;
 
     @ManyToOne
+    @JoinColumn(name = "id_desafiado", insertable = false, updatable = false)
+    private UsuariosModel desafiado;
+
+    @ManyToOne
     @JoinColumn(name = "id_amizade")
     private AmizadesModel amizadesModel;
 
