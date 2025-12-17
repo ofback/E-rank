@@ -43,12 +43,8 @@ public class EstatisticasApplication {
         DesafiosModel desafio = desafiosJpa.findById(dto.getDesafioId())
                 .orElseThrow(() -> new ResourceNotFoundException("Desafio não encontrado."));
 
-        if (desafio.getDesafianteId() != usuarioId && desafio.getDesafiadoId() != usuarioId) {
-            throw new IllegalStateException("Usuário não faz parte deste desafio.");
-        }
-
         if (!"A".equals(desafio.getStatus()) && !"W".equals(desafio.getStatus())) {
-            throw new IllegalStateException("O desafio não está ativo para registro (Status: " + desafio.getStatus() + ").");
+            throw new IllegalStateException("O desafio não está ativo para registro (Status atual: " + desafio.getStatus() + ").");
         }
 
         if (estatisticasJpa.existsByDesafiosModelIdAndUsuariosModelId(desafio.getId(), usuarioId)) {
@@ -56,7 +52,7 @@ public class EstatisticasApplication {
         }
 
         UsuariosModel usuario = usuariosJpa.findById(usuarioId)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado (ID: " + usuarioId + ")"));
 
         EstatisticasModel stats = new EstatisticasModel();
         stats.setUsuariosModel(usuario);
@@ -70,7 +66,7 @@ public class EstatisticasApplication {
         stats.setHeadshots(dto.getHeadshots());
         stats.setStsProvacao(1);
 
-        estatisticasJpa.save(stats);
+        estatisticasJpa.saveAndFlush(stats);
 
         long registrosExistentes = estatisticasJpa.countByDesafiosModelId(desafio.getId());
 
