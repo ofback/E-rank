@@ -42,19 +42,30 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
             if (jwtTokenUtil.validateToken(token)) {
                 String username = jwtTokenUtil.getUsernameFromToken(token);
+
+                // Tenta carregar o usuário. Se falhar (ex: usuário deletado ou erro de banco), captura.
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | IllegalArgumentException e) {
-            System.err.println("Erro na validação do JWT: " + e.getMessage());
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setContentType("application/json");
-            response.getWriter().write("{\"error\": \"Token JWT inválido ou expirado.\"}");
+            responderErro(response, "Token JWT inválido ou expirado.");
+            return;
+        } catch (Exception e) {
+            // Captura UsernameNotFoundException ou erros de conexão
+            System.err.println("Erro na autenticação do usuário: " + e.getMessage());
+            responderErro(response, "Falha na autenticação do usuário.");
             return;
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private void responderErro(HttpServletResponse response, String mensagem) throws IOException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"error\": \"" + mensagem + "\"}");
     }
 }
